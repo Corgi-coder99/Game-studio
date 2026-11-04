@@ -59,3 +59,7 @@ V3 tương thích định dạng LocalStorage v2, dùng khóa thien-menh-kingdom
 ## Hình ảnh và giới hạn
 
 Thành phố toàn màn hình với HUD nổi, bảng công trình đóng/mở theo thao tác, đường phố, tường thành, cây, đài phun nước và dân cư di chuyển. Atlas chân dung 4×2, atlas công trình trong suốt 3×2, atlas nhân vật toàn thân 4×2 và nền Hổ Lao Quan. Sân đấu riêng hiển thị tướng toàn thân, binh lính, projectile, số sát thương/hồi máu, HP, nộ và 8 hiệu ứng chiêu. Tốc độ ×1/×2, tạm dừng, báo cáo và kết quả trận có thưởng thực. Bộ dựng nhúng cả bốn PNG và mã thành một HTML, không tải qua mạng lúc chơi. Sprite tĩnh được biến đổi/bob/lunge, chưa có animation sheet nhiều khung. Chưa có âm thanh, tài khoản, PvP, liên minh hay server MMO.
+
+## V4: phát triển nhân vật
+
+Đặc tả đang áp dụng: [Hệ thống v4](character-system-v4.md), [56 nhân vật](characters.md). Đội hình 9 ô thay thế giới hạn 4 tướng. Tám phẩm cấp theo yêu cầu, sáu vai trò kết hợp, cấp nhân vật/trang bị/kỹ năng và tài nguyên mana hoặc nộ. Giới hạn hiệu ứng được thực thi trong mô phỏng, không chỉ hiển thị trong mô tả.

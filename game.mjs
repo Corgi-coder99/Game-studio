@@ -1,13 +1,6 @@
-export const heroes = [
-  { id: 'wukong', name: 'Tôn Ngộ Không', title: 'Tề Thiên Đại Thánh', faction: 'Tây Du', element: 'Hỏa', rarity: 'SSR', hp: 118, atk: 32, glyph: '猴', color: '#ec9860' },
-  { id: 'guanyu', name: 'Quan Vũ', title: 'Võ Thánh', faction: 'Tam Quốc', element: 'Mộc', rarity: 'SSR', hp: 145, atk: 26, glyph: '義', color: '#7fb49a' },
-  { id: 'nezha', name: 'Na Tra', title: 'Tam Thái Tử', faction: 'Phong Thần', element: 'Hỏa', rarity: 'SR', hp: 105, atk: 27, glyph: '蓮', color: '#e8939f' },
-  { id: 'zhugeliang', name: 'Gia Cát Lượng', title: 'Ngọa Long', faction: 'Tam Quốc', element: 'Thủy', rarity: 'SR', hp: 100, atk: 28, glyph: '龍', color: '#93b8db' },
-  { id: 'erlang', name: 'Dương Tiễn', title: 'Nhị Lang Thần', faction: 'Phong Thần', element: 'Thủy', rarity: 'SR', hp: 120, atk: 24, glyph: '眼', color: '#b2a1d7' },
-  { id: 'zhaoyun', name: 'Triệu Vân', title: 'Thường Sơn Tử Long', faction: 'Tam Quốc', element: 'Mộc', rarity: 'R', hp: 108, atk: 22, glyph: '槍', color: '#b7c8c3' },
-  { id: 'bajie', name: 'Trư Bát Giới', title: 'Thiên Bồng Nguyên Soái', faction: 'Tây Du', element: 'Thủy', rarity: 'R', hp: 150, atk: 16, glyph: '豬', color: '#c5a58a' },
-  { id: 'diaochan', name: 'Điêu Thuyền', title: 'Bế Nguyệt', faction: 'Tam Quốc', element: 'Mộc', rarity: 'R', hp: 95, atk: 25, glyph: '月', color: '#cfacd1' },
-];
+import { characterRoster } from './characters.mjs';
+
+export const heroes = characterRoster;
 
 export function initialState() {
   return { version: 1, coins: 1800, pity: 0, pulls: 0, wins: 0, owned: ['zhaoyun', 'bajie', 'diaochan', 'nezha', 'zhugeliang'], team: ['zhaoyun', 'bajie', 'diaochan', 'nezha', 'zhugeliang'], overrides: {} };

@@ -1,4 +1,4 @@
-THIÊN MỆNH — PIXEL KINGDOM v3 — OFFLINE CHO WINDOWS
+THIÊN MỆNH — PIXEL KINGDOM v4 — OFFLINE CHO WINDOWS
 
 TRƯỚC TIÊN
 Nhấp chuột phải tệp ZIP → Extract All… / Giải nén tất cả.
@@ -34,11 +34,11 @@ Cách mở HTML và cách chạy Python có vùng lưu riêng. Dùng xuất/nh�
 khi đổi cách chạy, đổi trình duyệt, đổi cổng hoặc chuyển máy.
 Không dùng InPrivate / Incognito nếu muốn giữ tiến độ lâu dài.
 
-NỘI DUNG BẢN THỬ v3
+NỘI DUNG BẢN THỬ v4
 Thành phố pixel toàn màn hình, HUD và các nút nổi; chọn công trình để mở bảng.
 6 loại công trình, 4 doanh trại, sản xuất tài nguyên, nâng cấp cấp 1–5 có thời gian,
 huấn luyện quân, 3 trại địch và 3 điểm thu thập trên bản đồ thế giới.
-Đội 4 tướng (2 trước / 2 sau), 8 kỹ năng riêng, 4 liên kết điển tích, 3 linh long.
+56 tướng, đội hình 3×3, 5 ô trang bị, cấp độ và 8 liên kết điển tích, 3 linh long.
 Bốn binh chủng Thuẫn/Thương/Cung/Kỵ có quân số và khắc chế riêng.
 Công vật lý/phép, giáp/kháng phép, bạo kích và báo cáo sát thương.
 Nâng cấp cần thời gian; tăng tốc công trình tốn 50 linh ngọc mô phỏng.

@@ -13,8 +13,8 @@ export const citySites = [
 ];
 export function mountMap(canvas, read, select) {
   const ctx = canvas.getContext('2d',{alpha:false}), camera = { x: 0, y: 0, zoom: 1 }, hits = [];
-  const cityArt = new Image(), fighterArt = new Image(), backdrop = new Image();
-  cityArt.src = '/assets/city-pixel.png'; fighterArt.src = '/assets/battle-units-pixel.png'; backdrop.src = '/assets/hulao-pixel.png';
+  const cityArt=new Image(),fighterArt=new Image(),fighterA=new Image(),fighterB=new Image(),backdrop=new Image();
+  fighterA.src='/assets/roster-a-pixel.png';fighterB.src='/assets/roster-b-pixel.png';cityArt.src = '/assets/city-pixel.png'; fighterArt.src = '/assets/battle-units-pixel.png'; backdrop.src = '/assets/hulao-pixel.png';
   let dragging = null, moved = false, frame, disposed = false, lastFrame = -100;
   const resize = new ResizeObserver(() => { canvas.width = Math.round(canvas.clientWidth); canvas.height = Math.round(canvas.clientHeight); }); resize.observe(canvas);
   const iso = (x, y) => [(x - y) * 48, (x + y) * 24];
@@ -98,7 +98,8 @@ export function mountMap(canvas, read, select) {
     if(!state.battle)return;const b=state.battle;
     if(backdrop.complete&&backdrop.naturalWidth){const r=Math.max(w/backdrop.naturalWidth,h/backdrop.naturalHeight);ctx.drawImage(backdrop,(w-backdrop.naturalWidth*r)/2,(h-backdrop.naturalHeight*r)/2,backdrop.naturalWidth*r,backdrop.naturalHeight*r);}else rect(ctx,0,0,w,h,'#839b61');
     rect(ctx,0,0,w,h,'#152b3544');poly(ctx,[[0,h*.45],[w*.5,h*.30],[w,h*.45],[w,h],[0,h]],'#779251a8');
-    const position=u=>{const army=u.side==='ally'?b.allies:b.enemies,i=army.indexOf(u), front=i<2;return {x:w*(u.side==='ally'?(front ? .40 : .20):(front ? .60 : .80)),y:h*(i%2===0?.48:.69)};};
+    const position=u=>{const row=Math.floor(u.slot/3),col=u.slot%3;return{x:w*(u.side==='ally'?[.4,.25,.1][row]:[.6,.75,.9][row]),y:h*(.32+col*.15)};};
+    for(const side of ['ally','enemy'])for(let slot=0;slot<9;slot++){const p=position({side,slot}),r=Math.min(55,w*.035);poly(ctx,[[p.x-r,p.y+12],[p.x,p.y-r*.35],[p.x+r,p.y+12],[p.x,p.y+r*.6]],side==='ally'?'#9bd1b22b':'#edc29a22');}
     const fighters=[...b.allies,...b.enemies];
     for(const e of b.events){if(!seen.has(e.serial))seen.set(e.serial,time);}
     if(seen.size>250)for(const [id,t]of seen)if(time-t>4)seen.delete(id);
@@ -108,14 +109,16 @@ export function mountMap(canvas, read, select) {
       for(let i=0;i<count;i++)soldier(p.x-side*(30+Math.floor(i/3)*18),p.y+16+(i%3)*14,tint,type,time*5+i,Math.min(1.5,w/1000),side);
       const cast=b.events.findLast(e=>e.actor===u.id&&e.side===u.side&&time-(seen.get(e.serial)||0)<.7), age=cast?time-seen.get(cast.serial):1;
       const lunge=cast?.kind==='attack'?Math.sin(age/.7*Math.PI)*side*18:0;
-      const size=Math.min(155,Math.max(80,w*.1));
+      const size=Math.min(112,Math.max(60,w*.075));
       if(u.hp<=0)ctx.globalAlpha=.3;
       ctx.fillStyle=u.side==='ally'?'#61b8ed55':'#e7816555';ctx.beginPath();ctx.ellipse(p.x+lunge,p.y+17,size*.37,size*.13,0,0,Math.PI*2);ctx.fill();
-      if(fighterArt.complete&&fighterArt.naturalWidth){const i=Object.keys(skills).indexOf(u.id), sw=fighterArt.naturalWidth/4,sh=fighterArt.naturalHeight/2;ctx.save();ctx.translate(p.x+lunge,p.y-size*.55+Math.sin(time*2)*2);ctx.scale(side,1);ctx.drawImage(fighterArt,i%4*sw,Math.floor(i/4)*sh,sw,sh,-size/2,-size/2,size,size);ctx.restore();}
+      const globalIndex=Object.keys(skills).indexOf(u.id),art=globalIndex<8?fighterArt:globalIndex<32?fighterA:fighterB,cols=globalIndex<8?4:6,rows=globalIndex<8?2:4,index=globalIndex<8?globalIndex:(globalIndex-8)%24;if(art.complete&&art.naturalWidth){const sw=art.naturalWidth/cols,sh=art.naturalHeight/rows;ctx.save();ctx.translate(p.x+lunge,p.y-size*.55+Math.sin(time*2)*2);ctx.scale(side,1);ctx.drawImage(art,index%cols*sw,Math.floor(index/cols)*sh,sw,sh,-size/2,-size/2,size,size);ctx.restore();}
       ctx.globalAlpha=1;
       const width=Math.min(108,size);rect(ctx,p.x-width/2,p.y+28,width,8,'#263f39');rect(ctx,p.x-width/2+1,p.y+29,(width-2)*u.hp/u.maxHp,6,u.side==='ally'?'#82d798':'#ed9b85');
+      if(u.immune>0||u.invincible>0){ctx.strokeStyle=u.invincible>0?'#fff2b8':'#93dcf5';ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(p.x,p.y-30,size*.49,size*.62,0,0,Math.PI*2);ctx.stroke();}
       if(u.shield){ctx.strokeStyle='#9fd8ff';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(p.x,p.y-30,size*.43,size*.57,0,0,Math.PI*2);ctx.stroke();}
       ctx.font=`600 ${Math.max(10,Math.min(13,w/100))}px system-ui`;ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#172a29';ctx.strokeText(u.name,p.x,p.y+51);ctx.fillStyle='#fff4d6';ctx.fillText(u.name,p.x,p.y+51);ctx.textAlign='left';
+      rect(ctx,p.x-width/2,p.y+38,width,3,'#2d403b');rect(ctx,p.x-width/2,p.y+38,width*u.energy/100,3,u.resource==='mana'?'#8ccaf7':'#f1c76b');const status=(u.stun?'★ ':'')+(u.slow?'↓ ':'')+(u.manaLock?'M↓ ':'')+(u.immune>0?'⛨ ':'')+(u.invincible>0?'✧ ':'')+(u.revived?'↻':'');ctx.font='10px system-ui';ctx.fillStyle='#fff0bf';ctx.textAlign='center';ctx.fillText(status,p.x,p.y+66);ctx.textAlign='left';
       const old=hpBefore.get(u.key);if(old!==undefined&&old!==u.hp)floaters.push({x:p.x,y:p.y-size*.7,value:Math.round(u.hp-old),time});hpBefore.set(u.key,u.hp);
       if(u.burn)spell(p.x,p.y-20,'flame','#f48c44',(time%1)*.6,40);
     }
