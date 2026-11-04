@@ -1,4 +1,4 @@
-THIÊN MỆNH — GAME PIXEL 2D OFFLINE CHO WINDOWS
+THIÊN MỆNH — PIXEL KINGDOM v2 — OFFLINE CHO WINDOWS
 
 TRƯỚC TIÊN
 Nhấp chuột phải tệp ZIP → Extract All… / Giải nén tất cả.
@@ -6,6 +6,7 @@ Mở thư mục vừa giải nén. Đừng chạy game khi còn ở trong tệp 
 
 CÁCH 1 — KHÔNG CẦN CÀI GÌ
 Nhấp đúp CHOI-NGAY.bat.
+Tệp này sẽ tìm Edge hoặc Chrome để mở game, tránh mở nhầm trong VS Code.
 Hoặc nhấp đúp Thien-Menh.html và mở bằng Microsoft Edge / Google Chrome.
 Không cần Node.js, Python, Internet hay tài khoản để chơi theo cách này.
 
@@ -33,10 +34,22 @@ Cách mở HTML và cách chạy Python có vùng lưu riêng. Dùng xuất/nh�
 khi đổi cách chạy, đổi trình duyệt, đổi cổng hoặc chuyển máy.
 Không dùng InPrivate / Incognito nếu muốn giữ tiến độ lâu dài.
 
-NỘI DUNG BẢN THỬ
-8 nhân vật pixel 2D, đội 5 tướng, gacha bằng tiền mô phỏng, 1 ải chiến đấu,
-công cụ chỉnh HP/ATK. Ảnh đã nằm sẵn trong game. Chưa có hoạt ảnh ra đòn.
+NỘI DUNG BẢN THỬ v2
+Thành trì isometric pixel: 6 công trình, sản xuất tài nguyên, nâng cấp cấp 1–5,
+huấn luyện quân, 3 trại địch và 3 điểm thu thập trên bản đồ thế giới.
+Đội 4 tướng, 8 kỹ năng riêng, 4 liên kết theo điển tích, 3 linh long hỗ trợ.
+Quân hành quân và giao chiến tự động theo thời gian thực. Có thể tạm dừng,
+tắt tự dùng kỹ năng để tung chiêu thủ công. Vào Cách chơi trong game để đọc.
+Muốn thử mọi kỹ năng: Studio → Mở 8 tướng để thử nghiệm.
+Vào Anh hùng để thay đội hình và đọc kỹ năng/combo.
+Ảnh đã nằm sẵn trong game, có hiệu ứng chiêu và hành quân; chưa có sprite
+nhân vật toàn thân nhiều khung hình hay thế giới MMO nhiều người.
 Game không gọi AI khi chơi và không điều khiển Codex trực tiếp.
+
+LƯU Ý VỀ TIẾN ĐỘ
+Game chuyển bản lưu v1 sang v2, giữ tướng, tiền và chỉ số đã chỉnh.
+Đội đang hành quân tự thu hồi khi nạp lại trang/bản lưu; quân được hoàn về.
+Sản xuất vẫn tích lũy khi đóng game (tối đa 8 giờ), giao chiến thì không.
 
 KIỂM TRA PHIÊN BẢN PYTHON (KHÔNG BẮT BUỘC CHO CÁCH 1)
     py -3 --version

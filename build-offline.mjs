@@ -1,8 +1,8 @@
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 
 const root = new URL('./', import.meta.url);
-const [template, sourceCss, game, app] = await Promise.all(
-  ['index.html', 'style.css', 'game.mjs', 'app.mjs'].map(file => readFile(new URL(file, root), 'utf8')),
+const [template, sourceCss, game, kingdom, map, app] = await Promise.all(
+  ['index.html', 'style.css', 'game.mjs', 'kingdom.mjs', 'map.mjs', 'app.mjs'].map(file => readFile(new URL(file, root), 'utf8')),
 );
 let css = sourceCss + '\n' + await readFile(new URL('pixel.css', root), 'utf8');
 for (const asset of ['heroes-pixel.png', 'hulao-pixel.png']) {
@@ -10,10 +10,11 @@ for (const asset of ['heroes-pixel.png', 'hulao-pixel.png']) {
   css = css.replaceAll(`/assets/${asset}`, `data:image/png;base64,${bytes.toString('base64')}`);
 }
 // A single classic script works with file://, without module fetches or a server.
-const logic = game.replace(/^export /gm, '');
-const ui = app.replace(/^import \{[^\n]+\} from '\.\/game\.mjs';\r?\n/, '');
-if (ui === app) throw new Error('Game import changed: update the offline bundler.');
-const script = `${logic}\n${ui}`.replace(/<\/script/gi, '<\\/script');
+const combine = source => source.replace(/^import \{[^\n]+\} from '[^']+';\r?\n/gm, '').replace(/^export /gm, '');
+let script = [game, kingdom, map, app].map(combine).join('\n').replace(/<\/script/gi, '<\\/script');
+const cityPng = await readFile(new URL('assets/city-pixel.png', root));
+script = script.replaceAll('/assets/city-pixel.png', `data:image/png;base64,${cityPng.toString('base64')}`);
+if (/^import /m.test(script)) throw new Error('Unbundled import. Update offline builder.');
 const html = template
   .replace('<link rel="stylesheet" href="/pixel.css">', '')
   .replace('<link rel="stylesheet" href="/style.css">', () => `<style>${css}</style>`)
@@ -21,5 +22,5 @@ const html = template
 if (html.includes('src="/app.mjs"') || html.includes('href="/style.css"')) throw new Error('Offline template changed.');
 await mkdir(new URL('offline/', root), { recursive: true });
 await writeFile(new URL('offline/Thien-Menh.html', root), html);
-await writeFile(new URL('offline/HUONG-DAN.txt', root), `THIEN MENH - BAN THU NGHIEM OFFLINE CHO WINDOWS\r\n\r\n1. Giai nen toan bo tep ZIP (Extract All).\r\n2. Nhan dup Thien-Menh.html; mo bang Microsoft Edge hoac Google Chrome.\r\n3. Khong can Node.js, cai dat, tai khoan hay ket noi Internet.\r\n\r\nTien do duoc luu trong trinh duyet neu trinh duyet cho phep.\r\nVao Studio > Xuat ban luu JSON de sao luu truoc khi doi ten/di chuyen\r\ntep HTML, doi trinh duyet hoac xoa du lieu. Dung Nhap ban luu JSON\r\nde khoi phuc. Khong dung che do InPrivate/Incognito de luu lau dai.\r\n\r\nDay la ban choi thu: 8 nhan vat, 1 ai, gacha bang tien mo phong.\r\nStudio khong dieu khien Codex truc tiep va khong goi AI khi choi.\r\n`);
+await writeFile(new URL('offline/HUONG-DAN.txt', root), `THIEN MENH - BAN THU NGHIEM OFFLINE CHO WINDOWS\n\n1. Giai nen toan bo tep ZIP (Extract All).\n2. Nhan dup Thien-Menh.html; mo bang Microsoft Edge hoac Google Chrome.\n3. Khong can Node.js, cai dat, tai khoan hay ket noi Internet.\n\nTien do duoc luu trong trinh duyet neu trinh duyet cho phep.\nVao Studio > Xuat ban luu JSON de sao luu truoc khi doi ten/di chuyen\ntep HTML, doi trinh duyet hoac xoa du lieu. Dung Nhap ban luu JSON\nde khoi phuc. Khong dung che do InPrivate/Incognito de luu lau dai.\n\nDay la ban choi thu: Pixel Kingdom v2: xay thanh, 4 tuong, 8 ky nang, combo, linh long va PVE.\nStudio khong dieu khien Codex truc tiep va khong goi AI khi choi.\n`);
 console.log('Offline build: offline/Thien-Menh.html (self-contained; no Node.js needed to play)');

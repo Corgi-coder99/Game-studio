@@ -1,56 +1,57 @@
 # Game-studio
-Personal game studio
 
----
+Personal game studio · **Thiên Mệnh — Pixel Kingdom v2**
 
-# Thiên Mệnh · Codex Legend Studio
+Game chiến thuật pixel 2D tiếng Việt, chơi offline trên Windows. Lấy cảm hứng từ vòng chơi xây thành, đội 4 anh hùng nguyên tố và linh long hỗ trợ của Infinity Kingdom, với nhân vật và luật phối hợp riêng dựa trên Tam Quốc, Tây Du Ký, Phong Thần. Đây là prototype PvE độc lập, chưa có liên minh, PvP hoặc thế giới MMO.
 
-Bản đầu game gacha thẻ bài chiến thuật tiếng Việt, kèm công cụ chỉnh thẻ và quy trình phát triển dành cho Codex. Lấy cảm hứng về cách tổ chức công việc từ [Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios); đây là triển khai gọn độc lập, chưa tương đương toàn bộ agents, skills và hooks của dự án đó.
+![Thành trì pixel trong bản v2](docs/screenshots/kingdom-v2-city.png)
 
-## Chạy
+## Tải và chơi trên Windows
 
-### Tải bản thử cho Windows
+Mở [Thien-Menh-Kingdom-v2-Windows.zip](Thien-Menh-Kingdom-v2-Windows.zip) trên GitHub → **Download raw file** (biểu tượng tải xuống) → **Extract All… / Giải nén tất cả**.
 
-Mở tệp [Thien-Menh-Windows-Python.zip](Thien-Menh-Windows-Python.zip) trên GitHub, bấm **Download raw file** (biểu tượng tải xuống). Giải nén tất cả rồi nhấp đúp `CHOI-NGAY.bat`; nếu máy có Python 3, có thể dùng `CHAY-BANG-PYTHON.bat`. Bản này có đầy đủ hình pixel và không cần Internet khi chơi.
+- **Không cần cài gì:** nhấp đúp `CHOI-NGAY.bat`; trình khởi động tìm Microsoft Edge/Google Chrome để tránh mở HTML nhầm bằng VS Code. Hoặc kéo `Thien-Menh.html` vào trình duyệt.
+- **Dùng Python 3:** nhấp đúp `CHAY-BANG-PYTHON.bat` hoặc chạy `py -3 chay_game.py` / `python chay_game.py` trong thư mục giải nén. Không cần pip. Máy chủ chỉ chạy trên máy bạn, mặc định cổng 8765; Ctrl+C để dừng.
+- ZIP chứa sẵn hình ảnh và logic. Người chơi không cần Node.js, Internet, API key hoặc tài khoản.
 
-### Windows: chơi offline, không cài Node.js
+Vào **Cách chơi** trong game để đọc hướng dẫn. Bắt đầu bằng nâng Đại điện, nâng Doanh trại, rồi đưa đội đến trại Hoàng Cân trên Thế giới. Muốn thử đủ kỹ năng, chọn **Studio → Mở 8 tướng để thử nghiệm**.
 
-Gói `Thien-Menh-Windows-Python.zip` có cả hai cách: nhấp đúp `CHOI-NGAY.bat` để mở HTML trực tiếp, hoặc `CHAY-BANG-PYTHON.bat` để dùng Python 3 và tự mở trình duyệt. Có thể chạy thủ công `py -3 chay_game.py` hoặc `python chay_game.py`. Không cần thư viện Python bổ sung. Máy chủ Python chỉ lắng nghe trên máy cá nhân, mặc định cổng 8765; Ctrl+C để dừng.
+## Bản v2 có gì
 
-Chạy `python package-windows.py` sau khi build offline để tạo lại ZIP này. Bản lưu HTML và Python dùng vùng lưu trình duyệt riêng: xuất/nhập JSON để chuyển tiến độ giữa hai cách chạy.
+- Thành trì isometric pixel tương tác: 6 công trình, nâng cấp cấp 1–5, sản xuất lương/gỗ/đá, huấn luyện quân.
+- Bản đồ kéo/thu phóng: 3 trại PvE và 3 điểm tài nguyên; hành quân, thu thập và trở về.
+- Đội 4 tướng: xếp tiền phong, cộng hưởng nguyên tố, kỹ năng riêng cho cả 8 nhân vật.
+- 4 liên kết điển tích: buff toàn đội và đòn phối hợp thực sự trong chiến đấu.
+- Hỏa long gây sát thương, Thủy long hồi HP, Mộc long tạo khiên theo chu kỳ 10 giây.
+- Giao chiến tự động theo từng giây, nộ khí, tự/thủ công dùng chiêu, tạm dừng, rút quân; hiệu ứng kỹ năng riêng trên bản đồ và giao diện.
+- Gacha mô phỏng, bảo hiểm SSR, chỉnh HP/ATK, xuất/nhập bản lưu.
 
-Giải nén `Thien-Menh-Windows-Offline.zip`, rồi nhấp đúp `Thien-Menh.html` bên trong. Mở bằng Microsoft Edge hoặc Google Chrome. Tệp này chứa sẵn toàn bộ giao diện và logic, không cần Internet hoặc máy chủ.
+Chi tiết chỉ số và giới hạn nằm trong [thiết kế](docs/game-design.md). Chân dung và công trình là ảnh pixel tĩnh; có hiệu ứng chiêu/hành quân, chưa có sprite nhân vật toàn thân nhiều khung hình.
 
-Tiến độ phụ thuộc trình duyệt và đường dẫn tệp. Vào **Studio → Xuất bản lưu JSON** để sao lưu trước khi chuyển tệp, đổi trình duyệt hoặc xóa dữ liệu. Nhập lại JSON để khôi phục; tránh chế độ InPrivate/Incognito nếu muốn giữ tiến độ.
+## Tiến độ
 
-### Phát triển mã nguồn
+Game lưu trên trình duyệt mỗi 5 giây. Vào **Studio → Xuất bản lưu JSON** trước khi đổi máy, đổi trình duyệt, đổi cách chạy hoặc cổng Python. HTML trực tiếp và máy chủ Python có vùng lưu riêng; dùng nhập JSON để chuyển tiến độ.
 
-Cần Node.js 22 trở lên. Không có thư viện cần cài, không cần API key.
+Bản lưu v1 được chuyển sang v2, giữ tướng, linh ngọc và chỉ số chỉnh tay; đội cũ lấy 4 tướng đầu. Bản lưu v2 thu hồi đạo quân đang đi và trả quân về thành khi tải lại; trận đang chạy không được lưu. Sản xuất tài nguyên tích lũy tối đa 8 giờ khi đóng game. Không dùng InPrivate/Incognito để giữ tiến độ lâu dài.
+
+## Phát triển cùng Codex
+
+Node.js 22+, không cần cài thư viện:
 
 ```sh
-cd /workspace/Game-studio
 npm test
 npm run dev
 ```
 
-Máy chủ dùng cổng 3000, có thể đổi bằng biến `PORT`. Mở bằng trình duyệt trên máy chạy ứng dụng hoặc cơ chế chuyển tiếp cổng của môi trường phát triển. Không triển khai công khai trong bước này.
+Máy chủ phát triển dùng cổng 3000. `game.mjs` giữ roster/gacha và logic v1 để tương thích; `kingdom.mjs` xử lý gameplay v2; `map.mjs` vẽ bản đồ; `app.mjs` xử lý giao diện. Đọc [AGENTS.md](AGENTS.md) trước khi sửa.
 
-Ảnh PNG gốc nằm trong `assets/`, CSS pixel trong `pixel.css`. Bản offline nhúng ảnh trực tiếp để không cần tệp ảnh đi kèm.
+Tạo lại gói Windows sau khi sửa:
 
-`npm run build:offline` tạo lại `offline/Thien-Menh.html` và hướng dẫn. Chỉ người phát triển cần Node.js để tạo bản này; người chơi không cần. Kiểm tra bản tạo bằng cách mở trực tiếp tệp HTML, không qua máy chủ.
+```sh
+npm run build:offline
+python package-windows.py
+```
 
-## Có gì
+Lệnh đầu nhúng toàn bộ mã và 3 PNG vào HTML độc lập. Lệnh sau tạo ZIP Windows/Python mới và cập nhật ZIP tương thích `Thien-Menh-Windows-Python.zip`. Python chơi game dùng hoàn toàn thư viện chuẩn. `.bat` chỉ được kiểm tra nội dung trên Linux; cần thử thực tế trên Windows.
 
-- 8 anh hùng, bộ sưu tập, lọc phe và đội 5 tướng.
-- Gacha 1/10 lượt, bảo hiểm SSR, hoàn tiền thẻ trùng; toàn bộ là tiền mô phỏng.
-- Một trận chiến theo lượt có chọn mục tiêu, hệ khắc chế, tuyệt kỹ và thưởng kết thúc trận.
-- Studio chỉnh HP/ATK, xuất/nhập bản lưu, khôi phục dữ liệu và sao chép yêu cầu cho Codex.
-- Lưu cục bộ trên trình duyệt; giao diện đáp ứng màn hình nhỏ.
-
-Đọc [thiết kế](docs/game-design.md) để biết luật cụ thể. Codex đọc [AGENTS.md](AGENTS.md) và làm việc trực tiếp trong kho: giao diện Studio hiện không khởi chạy Codex hoặc agent.
-
-## Chi phí và giới hạn
-
-Game không gọi AI và không dùng dịch vụ trả phí. Có thể chạy trên máy cá nhân hoặc triển khai các tệp frontend lên dịch vụ static hosting phù hợp. Phí sử dụng Codex và hosting nếu có phụ thuộc nhà cung cấp và mức sử dụng, không được bao gồm hay bảo đảm miễn phí bởi dự án này.
-
-Đây là prototype có chân dung pixel 2D và nền Hổ Lao Quan tạo bằng AI; chưa có hoạt ảnh nhân vật, âm thanh, tài khoản, PvP, thanh toán hay chống gian lận. Các bản lưu JSON là dữ liệu thử nghiệm do người chơi sửa được; không dùng cho nền kinh tế tiền thật.
+Game không gọi AI khi chơi và không cần dịch vụ trả phí. Chi phí Codex/hosting nếu có tùy gói của bạn. Studio hỗ trợ Codex bằng hướng dẫn trong kho, chưa khởi chạy/điều phối Codex từ trình duyệt. Quy trình studio gọn lấy cảm hứng từ [Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios), không chuyển nguyên bộ agent/hook riêng của Claude.

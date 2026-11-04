@@ -1,6 +1,7 @@
 """Package the generated HTML and Windows/Python launchers without dependencies."""
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
+from shutil import copyfile
 
 root = Path(__file__).resolve().parent
 game = root / 'offline' / 'Thien-Menh.html'
@@ -19,3 +20,6 @@ with ZipFile(archive) as bundle:
     if bundle.testzip() is not None:
         raise SystemExit('Archive integrity check failed.')
 print('{} ({:.1f} MB)'.format(archive.name, archive.stat().st_size / 1024 / 1024))
+versioned = root / 'Thien-Menh-Kingdom-v2-Windows.zip'
+copyfile(archive, versioned)
+print('Also saved: ' + versioned.name)

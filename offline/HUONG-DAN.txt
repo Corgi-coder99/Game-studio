@@ -9,5 +9,5 @@ Vao Studio > Xuat ban luu JSON de sao luu truoc khi doi ten/di chuyen
 tep HTML, doi trinh duyet hoac xoa du lieu. Dung Nhap ban luu JSON
 de khoi phuc. Khong dung che do InPrivate/Incognito de luu lau dai.
 
-Day la ban choi thu: 8 nhan vat, 1 ai, gacha bang tien mo phong.
+Day la ban choi thu: Pixel Kingdom v2: xay thanh, 4 tuong, 8 ky nang, combo, linh long va PVE.
 Studio khong dieu khien Codex truc tiep va khong goi AI khi choi.

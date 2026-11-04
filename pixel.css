@@ -1,18 +1,3 @@
-/* Shared 4×2 portrait atlas: Wukong, Guan Yu, Nezha, Zhuge Liang;
-   Erlang Shen, Zhao Yun, Zhu Bajie, Diao Chan. No external image requests. */
-.pixel-portrait,.team-sprite{background-image:url('/assets/heroes-pixel.png');background-size:400% 200%;background-position:var(--sprite-x) var(--sprite-y);image-rendering:pixelated;background-repeat:no-repeat}
-.portrait.pixel-portrait{height:auto;aspect-ratio:1/1;margin-top:9px;border:2px solid #92816c;border-radius:2px;box-shadow:inset 0 0 0 2px #171e2877;background-color:#232836}
-.portrait-seal{top:auto;bottom:8px;right:6px;writing-mode:horizontal-tb;padding:4px 6px;background:#101b24d9;color:#f2dfb8;opacity:1;font:9px ui-sans-serif,system-ui;letter-spacing:1px;border:1px solid #b4975b88}
-.hero-card{border-radius:3px;border-color:#b8b79b;box-shadow:0 3px 0 #d7d7c8}
-.hero-card:has(.SSR){border-color:#b89b51;box-shadow:0 3px 0 #a48a4944}
-.hero-card:has(.SR){border-color:#aa94b4}
-.locked{opacity:.8}.locked .pixel-portrait{filter:saturate(.65) brightness(.8)}
-.team-slots .team-sprite{display:block;width:37px;height:46px;border:1px solid #8c8669;border-radius:2px}
-.banner{background-image:linear-gradient(90deg,#111f30f5 0%,#142336e6 35%,#16243a22 85%),url('/assets/hulao-pixel.png');background-size:cover;background-position:center;image-rendering:pixelated;border:2px solid #9f8f60;box-shadow:0 4px 0 #d2d3c0;border-radius:3px;min-height:300px}
-.banner-art{display:none}.banner:after{display:none}.banner-tag{color:#ffdf95;text-shadow:0 2px 2px #151e2a}.banner .eyebrow{color:#d7bc7d}.banner p{color:#c9cfc5}.banner h2{color:#f3e6c4}
-.summon-stage{background-image:linear-gradient(#141d32d9,#1d2745e8),url('/assets/hulao-pixel.png');background-size:cover;background-position:center;border:2px solid #a28b50;border-radius:3px}
-.arena{padding:20px;background-image:linear-gradient(#172337ba,#172337d9),url('/assets/hulao-pixel.png');background-position:center;background-size:cover;image-rendering:pixelated;border:2px solid #9b8859;border-radius:3px;margin-top:15px}
-.arena>.eyebrow{color:#d2c7a5}.arena .battle-divider{color:#ddc696}.battle-grid .hero-card{background:#eeeee3ed}.battle-grid .pixel-portrait{height:auto;aspect-ratio:1/1}.battle-grid .portrait-seal{display:none}
-.active{outline:3px solid #edc768;box-shadow:0 0 18px #edc76855}.dead .pixel-portrait{filter:grayscale(1)}
-.editor-preview .pixel-portrait{height:auto;aspect-ratio:1/1}.primary,.light,.filters,.team-panel,.team-slots button{border-radius:3px}
-@media(max-width:760px){.banner{min-height:300px;background-position:60% center}.arena{padding:10px}.battle-grid .pixel-portrait{height:auto;aspect-ratio:1/1}.portrait-seal{font-size:8px;padding:3px}.team-slots .team-sprite{width:30px;height:38px}}
+/* Atlas order follows heroes in game.mjs. Embedded by the offline builder. */
+.hero-art{background-image:url('/assets/heroes-pixel.png')}
+.location-art,.summon-stage{background-image:url('/assets/hulao-pixel.png');background-size:cover;background-position:center}
