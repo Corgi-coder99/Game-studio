@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { heroes, initialState } from './game.mjs';
-import { skills, kingdomInitial, activeBonds, elementalResonance, upgradeStructure, trainTroops, economyTick, dispatchMarch, createSkirmish, castCommander, combatTick, worldTick, recallMarch, durableSave, validKingdomState, migrateKingdom } from './kingdom.mjs';
+import { skills, kingdomInitial, activeBonds, elementalResonance, upgradeStructure, startConstruction, accelerateConstruction, trainTroops, economyTick, dispatchMarch, createSkirmish, castCommander, combatTick, worldTick, recallMarch, durableSave, validKingdomState, migrateKingdom, calculateDamage, formationTarget } from './kingdom.mjs';
 
 const allHeroes = heroes.map(h => h.id);
 function fixture(team = ['zhaoyun', 'bajie', 'nezha', 'zhugeliang']) {
@@ -101,7 +101,7 @@ test('manual mode holds skills; invalid cast, death and combat completion are gu
   assert.throws(() => castCommander(b, b.allies[0].key));
   const next = combatTick(b, 3, false);
   assert.ok(next.allies.some(u => u.energy === 100));
-  assert.ok(!next.events.some(e => e.side === 'ally' && e.actor));
+  assert.ok(!next.events.some(e => e.side === 'ally' && e.actor && e.kind !== 'attack'));
   const dead = structuredClone(b); dead.allies[0].hp = 0; dead.allies[0].energy = 100;
   assert.throws(() => castCommander(dead, dead.allies[0].key));
 });
@@ -125,4 +125,65 @@ test('full real-time expedition settles rewards once and returns survivors', () 
   for (let i = 0; i < 10; i++) next = worldTick(next, 1);
   assert.equal(next.coins, s.coins + 200);
   assert.ok(validKingdomState(durableSave(next)));
+});
+
+test('construction reserves costs once, finishes on schedule and supports paid speedup', () => {
+  const s = kingdomInitial(100000), started = startConstruction(s, 'hall', 100000);
+  assert.equal(started.levels.hall, 1); assert.equal(started.construction.target, 2);
+  assert.equal(started.resources.wood, s.resources.wood - 160);
+  assert.throws(() => startConstruction(started, 'hall', 101000));
+  assert.equal(economyTick(started, 111000).levels.hall, 1);
+  const completed = economyTick(started, 112000);
+  assert.equal(completed.levels.hall, 2); assert.equal(completed.construction, null);
+  assert.equal(economyTick(completed, 120000).levels.hall, 2);
+  const rushed = accelerateConstruction(started);
+  assert.equal(rushed.levels.hall, 2); assert.equal(rushed.coins, s.coins - 50);
+  assert.throws(() => accelerateConstruction({ ...started, coins: 49 }));
+});
+test('typed training, departure, return and save recall conserve the correct regiment', () => {
+  const s = kingdomInitial(100000); s.troopType = 'bow';
+  assert.throws(() => dispatchMarch(s, 'grain'));
+  const trained = economyTick(trainTroops(s, 100000, 'bow'), 112000);
+  assert.equal(trained.regiments.bow, 60); assert.equal(trained.troops, 200);
+  let next = dispatchMarch(trained, 'grain');
+  assert.equal(next.regiments.bow, 0); assert.equal(next.regiments.shield, s.regiments.shield);
+  const recalledSave = durableSave(next); assert.equal(recalledSave.regiments.bow, 60); assert.ok(validKingdomState(recalledSave));
+  for (let i = 0; i < 50; i++) next = worldTick(next, 1);
+  assert.equal(next.regiments.bow, 60); assert.equal(next.troops, 200);
+});
+test('old v2 saves gain safe regiment defaults and invalid new fields are rejected', () => {
+  const s = kingdomInitial(); delete s.regiments; delete s.troopType; delete s.construction;
+  const updated = migrateKingdom(s);
+  assert.equal(updated.regiments.shield, 180); assert.equal(updated.troopType, 'shield'); assert.equal(updated.construction, null);
+  assert.equal(validKingdomState({ ...updated, troopType: '__proto__' }), false);
+  assert.equal(validKingdomState({ ...updated, regiments: { shield: 999, spear: 0, bow: 0, cavalry: 0 } }), false);
+  assert.equal(validKingdomState({ ...updated, construction: { id: 'farm', target: 2, endsAt: Date.now() + 10000 } }), false);
+});
+test('two front-line units protect back-line units until both fronts fall', () => {
+  const units = [{ hp: 10 }, { hp: 10 }, { hp: 10 }, { hp: 10 }];
+  assert.equal(formationTarget(units, 0), units[0]); assert.equal(formationTarget(units, 1), units[1]);
+  units[0].hp = 0; assert.equal(formationTarget(units, 0), units[1]);
+  units[1].hp = 0; assert.equal(formationTarget(units, 0), units[2]); assert.equal(formationTarget(units, 1), units[3]);
+  const battle = createSkirmish(kingdomInitial(), 'camp3'), next = combatTick(battle, 1, false);
+  assert.ok(next.allies[0].hp < battle.allies[0].hp); assert.ok(next.allies[1].hp < battle.allies[1].hp);
+  assert.equal(next.allies[2].hp, battle.allies[2].hp); assert.equal(next.allies[3].hp, battle.allies[3].hp);
+});
+test('physical and magical damage use separate defenses with explicit critical and elemental factors', () => {
+  const actor = { atk: 100, physicalAtk: 100, magicAtk: 150, element: 'Hỏa' };
+  const target = { armor: 100, resist: 50, element: 'Mộc' };
+  assert.equal(calculateDamage(actor, target, 1).amount, 63);
+  assert.equal(calculateDamage(actor, target, 1, { type: 'magic' }).amount, 125);
+  assert.equal(calculateDamage(actor, target, 1, { type: 'magic', critical: true }).amount, 188);
+  assert.equal(calculateDamage(actor, { ...target, exposed: 1 }, 1).amount, 71);
+  assert.equal(calculateDamage(actor, { ...target, exposed: 1 }, 1, { type: 'magic' }).amount, 125);
+  assert.ok(calculateDamage({ ...actor, hp: 10, maxHp: 100 }, target, 1).amount < 63);
+});
+test('shield absorption and damage reports reflect actual HP loss; critical sequence is reproducible', () => {
+  const b = skillBattle('wukong'); for (const u of b.enemies) u.shield = 500;
+  const next = castCommander(b, b.allies.find(u => u.id === 'wukong').key);
+  assert.ok(next.damageStats.absorbed > 0); assert.ok(next.enemies.every(u => u.hp === 2000));
+  assert.equal(next.damageStats.physical, 0);
+  const normal = createSkirmish(kingdomInitial(), 'camp1');
+  assert.deepEqual(combatTick(normal, 5), combatTick(normal, 5));
+  assert.ok(combatTick(normal, 5).damageStats.physical > 0);
 });

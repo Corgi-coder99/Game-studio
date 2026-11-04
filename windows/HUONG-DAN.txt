@@ -1,4 +1,4 @@
-THIÊN MỆNH — PIXEL KINGDOM v2 — OFFLINE CHO WINDOWS
+THIÊN MỆNH — PIXEL KINGDOM v3 — OFFLINE CHO WINDOWS
 
 TRƯỚC TIÊN
 Nhấp chuột phải tệp ZIP → Extract All… / Giải nén tất cả.
@@ -34,16 +34,20 @@ Cách mở HTML và cách chạy Python có vùng lưu riêng. Dùng xuất/nh�
 khi đổi cách chạy, đổi trình duyệt, đổi cổng hoặc chuyển máy.
 Không dùng InPrivate / Incognito nếu muốn giữ tiến độ lâu dài.
 
-NỘI DUNG BẢN THỬ v2
-Thành trì isometric pixel: 6 công trình, sản xuất tài nguyên, nâng cấp cấp 1–5,
+NỘI DUNG BẢN THỬ v3
+Thành phố pixel toàn màn hình, HUD và các nút nổi; chọn công trình để mở bảng.
+6 loại công trình, 4 doanh trại, sản xuất tài nguyên, nâng cấp cấp 1–5 có thời gian,
 huấn luyện quân, 3 trại địch và 3 điểm thu thập trên bản đồ thế giới.
-Đội 4 tướng, 8 kỹ năng riêng, 4 liên kết theo điển tích, 3 linh long hỗ trợ.
+Đội 4 tướng (2 trước / 2 sau), 8 kỹ năng riêng, 4 liên kết điển tích, 3 linh long.
+Bốn binh chủng Thuẫn/Thương/Cung/Kỵ có quân số và khắc chế riêng.
+Công vật lý/phép, giáp/kháng phép, bạo kích và báo cáo sát thương.
+Nâng cấp cần thời gian; tăng tốc công trình tốn 50 linh ngọc mô phỏng.
 Quân hành quân và giao chiến tự động theo thời gian thực. Có thể tạm dừng,
 tắt tự dùng kỹ năng để tung chiêu thủ công. Vào Cách chơi trong game để đọc.
 Muốn thử mọi kỹ năng: Studio → Mở 8 tướng để thử nghiệm.
 Vào Anh hùng để thay đội hình và đọc kỹ năng/combo.
-Ảnh đã nằm sẵn trong game, có hiệu ứng chiêu và hành quân; chưa có sprite
-nhân vật toàn thân nhiều khung hình hay thế giới MMO nhiều người.
+Ảnh đã nằm sẵn trong game, có hiệu ứng chiêu và hành quân; có sprite toàn thân và chuyển động/hiệu ứng canvas, chưa có hoạt ảnh nhiều khung
+hoặc thế giới MMO nhiều người.
 Game không gọi AI khi chơi và không điều khiển Codex trực tiếp.
 
 LƯU Ý VỀ TIẾN ĐỘ

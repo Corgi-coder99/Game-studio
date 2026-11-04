@@ -1,22 +1,22 @@
-# Thiên Mệnh — Pixel Kingdom v2
+# Thiên Mệnh — Pixel Kingdom v3
 
 Mục tiêu: prototype PvE offline có vòng lặp xây thành → sản xuất → huấn luyện → lập đội 4 tướng → hành quân/thu thập/đánh trại → nhận thưởng. Infinity Kingdom là tham chiếu thể loại, không sao chép giao diện hay tài sản của họ. Hình ảnh nhân vật và công trình riêng, dựa trên huyền thoại Trung Hoa.
 
 ## Thành trì và thế giới
 
-6 công trình cấp 1–5: Đại điện, Nông trang, Xưởng gỗ, Mỏ đá, Doanh trại, Điện linh long. Công trình khác không cao hơn Đại điện. Giá nâng từ cấp L: 100L lương, 160L gỗ, 90L đá; nâng tức thì trong prototype.
+6 công trình cấp 1–5: Đại điện, Nông trang, Xưởng gỗ, Mỏ đá, Doanh trại, Điện linh long. Công trình khác không cao hơn Đại điện. Giá nâng từ cấp L: 100L lương, 160L gỗ, 90L đá; cần 8 + 4L giây, một thợ xây tại một thời điểm. Có thể hoàn tất ngay với 50 linh ngọc mô phỏng; chi phí tài nguyên trừ một lần lúc bắt đầu. Cấp và hiệu quả công trình chỉ tăng khi hoàn tất.
 
-Nông trang và Xưởng gỗ sản xuất 2 × cấp/giây; Mỏ đá 1 × cấp/giây. Mỗi loại chứa tối đa 999.999. Thu nhập tính theo thời gian thực, tối đa 8 giờ vắng mặt. Huấn luyện 20 quân tốn 160 lương và 80 gỗ, mất 14 − 2 × cấp doanh trại giây (tối thiểu 4 giây). Một lượt huấn luyện tại một thời điểm. Tối đa 1.000 quân trong thành.
+Nông trang và Xưởng gỗ sản xuất 2 × cấp/giây; Mỏ đá 1 × cấp/giây. Mỗi loại chứa tối đa 999.999. Thu nhập tính theo thời gian thực, tối đa 8 giờ vắng mặt. Huấn luyện 20 quân tốn 160 lương và 80 gỗ, mất 14 − 2 × cấp doanh trại giây (tối thiểu 4 giây). Một lượt huấn luyện tại một thời điểm, chọn riêng Thuẫn/Thương/Cung/Kỵ. Mỗi loại có kho riêng, tổng tối đa 1.000 quân trong thành. Ban đầu lần lượt có 80/40/40/20 quân. Bốn khu doanh trại dùng chung cấp nâng cấp và hàng đợi.
 
-Thế giới gồm thành nhà, 3 trại địch tăng độ khó, 3 điểm thu thập lương/gỗ/đá. Có một đạo quân, cần đủ 4 tướng và 60 quân. Hành quân mất 6 + 2 × cấp địa điểm giây; thu thập 20 giây nhận 500 tài nguyên; trở về 6 giây. Đang hành quân thì khóa đổi đội, linh long và chỉ số sandbox. Quân không bị trừ lại khi đang trở về. Rút trong giao chiến hao 10% quân đang mang theo, không nhận thưởng.
+Thế giới gồm thành nhà, 3 trại địch tăng độ khó, 3 điểm thu thập lương/gỗ/đá. Có một đạo quân, cần đủ 4 tướng và 60 quân cùng binh chủng đang chọn. Hành quân mất 6 + 2 × cấp địa điểm giây; thu thập 20 giây nhận 500 tài nguyên; trở về 6 giây. Đang hành quân thì khóa đổi đội, linh long và chỉ số sandbox. Quân không bị trừ lại khi đang trở về. Rút trong giao chiến hao 10% quân đang mang theo, không nhận thưởng.
 
 Đánh thắng trại: lần đầu nhận 200 × cấp linh ngọc, chơi lại nhận 60 × cấp; mỗi lần thắng nhận 150 × cấp lương và 100 × cấp gỗ, hao 20% quân; thua hao 50%. Anh hùng không mất vĩnh viễn. Trại có đội hình tướng đối thủ dùng lại roster để thử chiến thuật, không phải chiến dịch lịch sử chính xác.
 
 ## Đội hình và nhịp chiến đấu
 
-Đúng 4 tướng khác nhau, vị trí đầu tiên nhận đòn thường trước. HP trong trận = HP gốc × 2 × (1 + 0,05 × cấp doanh trại), rồi áp dụng buff đội hình; ATK = ATK gốc × cùng hệ số doanh trại, rồi áp dụng buff. Bản thử dùng chung hệ số cho HP và ATK. Địch có hệ số 0,6 + 0,25 × cấp trại.
+Đúng 4 tướng khác nhau: hai vị trí đầu là tiền tuyến, hai vị trí sau là hậu tuyến. Có thể kéo thả đổi vị trí hoặc dùng nút đưa lên đầu. Đòn thường nhắm tiền phong cùng cột, rồi tiền phong còn lại, sau cùng mới đến hậu tuyến. HP trong trận = HP gốc × 2 × (1 + 0,05 × cấp doanh trại), rồi áp dụng buff đội hình; ATK = ATK gốc × cùng hệ số doanh trại, rồi áp dụng buff. Bản thử dùng chung hệ số cho HP và ATK. Địch có hệ số 0,6 + 0,25 × cấp trại.
 
-Mỗi giây, các tướng sống hành động theo thứ tự đội ta rồi đội địch. Đòn thường 55% ATK, +20 nộ, ban đầu 40 nộ. Đủ 100 nộ dùng kỹ năng và về 0 nộ. Có thể bật tự dùng hoặc bấm thủ công cho đội ta; địch luôn tự dùng. Tướng bị mê hoặc mất lượt kế tiếp. Hỏa khắc Mộc, Mộc khắc Thủy, Thủy khắc Hỏa: sát thương ×1,25. Trận tối đa 180 giây, hết thời gian tính thua. Nút tạm dừng ngừng hành quân/giao chiến, không ngừng kinh tế. Vòng mô phỏng giới hạn phần bù thời gian để giao chiến không chạy hàng giờ sau khi tab bị treo.
+Mỗi giây, các tướng sống hành động theo thứ tự đội ta rồi đội địch. Đòn thường 55% vật công, +20 nộ, ban đầu 40 nộ (Kỵ binh +15). Kỹ năng dùng công vật lý hoặc pháp công theo hồ sơ tướng; có giáp/kháng phép, bạo kích và hệ số lực lượng theo HP. Công thức và ví dụ ở damage-model.md. Đủ 100 nộ dùng kỹ năng và về 0 nộ. Có thể bật tự dùng hoặc bấm thủ công cho đội ta; địch luôn tự dùng. Tướng bị mê hoặc mất lượt kế tiếp. Hỏa khắc Mộc, Mộc khắc Thủy, Thủy khắc Hỏa: sát thương ×1,25. Trận tối đa 180 giây, hết thời gian tính thua. Nút tạm dừng ngừng hành quân/giao chiến, không ngừng kinh tế. Vòng mô phỏng giới hạn phần bù thời gian để giao chiến không chạy hàng giờ sau khi tab bị treo.
 
 Ba tướng cùng hệ: +10% HP và ATK toàn đội. Hàm hỗ trợ 4 tướng cùng hệ +18% cho roster mở rộng; roster hiện tại chưa có 4 tướng cùng hệ.
 
@@ -25,7 +25,7 @@ Ba tướng cùng hệ: +10% HP và ATK toàn đội. Hàm hỗ trợ 4 tướng
 | Tướng | Kỹ năng | Cơ chế | Hình hiệu ứng |
 |---|---|---|---|
 | Tôn Ngộ Không | Đại Náo Thiên Cung | Toàn địch 130% ATK, thêm 100% lên mục tiêu yếu nhất | Ba phân thân/gậy vàng |
-| Quan Vũ | Thanh Long Yển Nguyệt | Tiền phong địch 230%, mục tiêu chịu thêm 25% sát thương trong 4s | Sóng đao xanh lục |
+| Quan Vũ | Thanh Long Yển Nguyệt | Tiền phong địch 230%, giảm 25% giáp vật lý mục tiêu trong 4s | Sóng đao xanh lục |
 | Na Tra | Hỏa Luân Liên Kích | Toàn địch 110%, thiêu đốt 15 HP/s × 3s | Vòng lửa và tàn lửa đỏ |
 | Gia Cát Lượng | Bát Trận Đồ | Toàn đội hồi 24% HP tối đa, khiên 30, +20% ATK trong 4s | Trận đồ bát giác xanh lam |
 | Dương Tiễn | Thiên Nhãn Khai Quang | Địch yếu nhất 280%, đánh dấu chịu thêm 25% sát thương trong 4s | Tia thiên nhãn tím |
@@ -33,7 +33,7 @@ Ba tướng cùng hệ: +10% HP và ATK toàn đội. Hàm hỗ trợ 4 tướng
 | Trư Bát Giới | Thiên Bồng Hộ Trận | Toàn địch 80%, khiên 55 toàn đội, tự hồi 30% HP | Sóng chấn địa màu đất |
 | Điêu Thuyền | Bế Nguyệt Liên Hoàn | Toàn địch 90%, mê hoặc 1 lượt, hồi 35 HP cho đồng minh yếu nhất | Cánh hoa hồng |
 
-Khiên hấp thụ sát thương trước HP, thay bằng giá trị cao hơn, không cộng dồn. Hồi HP không hồi sinh tướng bị hạ. Sát thương thiêu đốt trừ HP trực tiếp. Các hiệu ứng kéo dài giảm thời gian ở đầu nhịp giây. Hai loại đánh dấu tăng sát thương có thể nhân với nhau. Hiệu ứng kỹ năng hiển thị trên bản đồ và tướng đang xuất chiêu sáng/nhích trong bảng giao chiến.
+Khiên hấp thụ sát thương trước HP, thay bằng giá trị cao hơn, không cộng dồn. Hồi HP không hồi sinh tướng bị hạ. Sát thương thiêu đốt trừ HP trực tiếp. Các hiệu ứng kéo dài giảm thời gian ở đầu nhịp giây. Phá giáp giảm giáp vật lý, Thiên Nhãn tăng sát thương nhận; hai hiệu ứng có thể cùng tồn tại. Hiệu ứng kỹ năng hiển thị trên bản đồ và tướng đang xuất chiêu sáng/nhích trong bảng giao chiến.
 
 ## Liên kết điển tích
 
@@ -54,8 +54,8 @@ Chọn Hỏa/Thủy/Mộc tại Điện linh long trước khi xuất chinh. Tí
 
 Giữ gacha v1: 100 linh ngọc/lượt, SSR 5%, SR 25%, R 70%, bảo hiểm lượt thứ 30 liên tục chưa SSR, thẻ trùng hoàn 25. Chỉ là tiền mô phỏng. Có nút mở cả 8 tướng trong Studio để kiểm thử tất cả combo mà không cần quay. Sửa HP gốc 50–300, ATK gốc 10–80; áp dụng cho đội ta từ trận mới.
 
-LocalStorage v2 dùng khóa thien-menh-kingdom-v2, đọc/migrate v1 từ khóa thien-menh-studio-v1 khi chưa có v2. Giữ tướng, tiền, lượt quay, chiến thắng và overrides; chọn 4 tướng đầu từ đội cũ. Xuất/nhập JSON kiểm tra kiểu, giới hạn, danh sách và phiên bản. Bản lưu chỉ giữ tiến độ lâu dài: thu hồi đạo quân đang đi, trả quân đang mang theo, bỏ trận tạm thời. Không nhân đôi tiền thưởng vì thưởng đã tính vào tiến độ lúc kết thúc trận. Đây là sandbox, không có chống chỉnh đồng hồ/chống gian lận.
+V3 tương thích định dạng LocalStorage v2, dùng khóa thien-menh-kingdom-v2, đọc/migrate v1 từ khóa thien-menh-studio-v1 khi chưa có v2. Bản v2 cũ được bổ sung construction=null, troopType=shield và chuyển tổng quân hiện có thành Thuẫn binh. Giữ tướng, tiền, lượt quay, chiến thắng và overrides; chọn 4 tướng đầu từ đội cũ. Xuất/nhập JSON kiểm tra kiểu, giới hạn, danh sách và phiên bản. Bản lưu chỉ giữ tiến độ lâu dài: thu hồi đạo quân đang đi, trả quân đang mang theo, bỏ trận tạm thời. Không nhân đôi tiền thưởng vì thưởng đã tính vào tiến độ lúc kết thúc trận. Đây là sandbox, không có chống chỉnh đồng hồ/chống gian lận.
 
 ## Hình ảnh và giới hạn
 
-Atlas chân dung 4×2, atlas công trình trong suốt 3×2, nền Hổ Lao Quan. Bản đồ, hành quân và 8 loại hiệu ứng vẽ bằng canvas 2D. Bộ dựng nhúng cả ba PNG và mã thành một HTML, không tải qua mạng lúc chơi. Chưa có full-body sprite animation, âm thanh, tài khoản, PvP, liên minh hay server MMO; có một lãnh địa và một khu bản đồ PvE.
+Thành phố toàn màn hình với HUD nổi, bảng công trình đóng/mở theo thao tác, đường phố, tường thành, cây, đài phun nước và dân cư di chuyển. Atlas chân dung 4×2, atlas công trình trong suốt 3×2, atlas nhân vật toàn thân 4×2 và nền Hổ Lao Quan. Sân đấu riêng hiển thị tướng toàn thân, binh lính, projectile, số sát thương/hồi máu, HP, nộ và 8 hiệu ứng chiêu. Tốc độ ×1/×2, tạm dừng, báo cáo và kết quả trận có thưởng thực. Bộ dựng nhúng cả bốn PNG và mã thành một HTML, không tải qua mạng lúc chơi. Sprite tĩnh được biến đổi/bob/lunge, chưa có animation sheet nhiều khung. Chưa có âm thanh, tài khoản, PvP, liên minh hay server MMO.

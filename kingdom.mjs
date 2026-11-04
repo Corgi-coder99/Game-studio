@@ -33,8 +33,39 @@ export const worldNodes = [
   { id: 'grove', name: 'Rừng trúc Thanh Vân', x: 16, y: 12, type: 'wood', level: 1 },
   { id: 'quarry', name: 'Mỏ đá Bạch Sơn', x: 8, y: 17, type: 'stone', level: 1 },
 ];
+export const troopTypes = {
+  shield: { name: 'Thuẫn binh', icon: '▣', color: '#79c2d1', beats: 'spear', text: '+12% HP · khắc Thương binh' },
+  spear: { name: 'Thương binh', icon: '⚑', color: '#b5d58a', beats: 'cavalry', text: '+5% ATK · khắc Kỵ binh' },
+  bow: { name: 'Cung binh', icon: '➶', color: '#d9b580', beats: 'shield', text: '+10% ATK · khắc Thuẫn binh' },
+  cavalry: { name: 'Kỵ binh', icon: '♞', color: '#baa8e5', beats: 'bow', text: '+15 nộ ban đầu · khắc Cung binh' },
+};
+export const combatProfiles = {
+  wukong: { kind: 'physical', armor: 28, resist: 20, crit: .12 },
+  guanyu: { kind: 'physical', armor: 35, resist: 24, crit: .08 },
+  nezha: { kind: 'magic', armor: 18, resist: 28, crit: .08 },
+  zhugeliang: { kind: 'magic', armor: 18, resist: 34, crit: .05 },
+  erlang: { kind: 'magic', armor: 26, resist: 30, crit: .1 },
+  zhaoyun: { kind: 'physical', armor: 30, resist: 22, crit: .1 },
+  bajie: { kind: 'physical', armor: 40, resist: 28, crit: .05 },
+  diaochan: { kind: 'magic', armor: 18, resist: 32, crit: .05 },
+};
+export function calculateDamage(actor, target, factor, options = {}) {
+  const type = options.type || 'physical';
+  const attack = type === 'magic' ? actor.magicAtk ?? actor.atk : actor.physicalAtk ?? actor.atk;
+  const rawDefense = type === 'magic' ? target.resist || 0 : (target.armor || 0) * (target.exposed > 0 ? .75 : 1);
+  const mitigation = 100 / (100 + Math.max(0, rawDefense));
+  const elemental = { Hỏa: 'Mộc', Mộc: 'Thủy', Thủy: 'Hỏa' }[actor.element] === target.element ? 1.25 : 1;
+  const strength = actor.maxHp ? .6 + .4 * Math.max(0, Math.min(1, actor.hp / actor.maxHp)) : 1;
+  const amount = Math.max(1, Math.round(attack * factor * mitigation * elemental * strength * (actor.boost > 0 ? 1.2 : 1) * (target.marked > 0 ? 1.25 : 1) * (options.armyBonus || 1) * (options.reduction || 1) * (options.critical ? 1.5 : 1)));
+  return { amount, type, mitigation, elemental, strength, defense: rawDefense, critical: Boolean(options.critical) };
+}
+function addReserves(s, type, amount) {
+  if (!s.regiments) s.regiments = { shield: s.troops, spear: 0, bow: 0, cavalry: 0 };
+  const count = Math.min(amount, 1000 - s.troops);
+  s.regiments[type] += count; s.troops += count;
+}
 export function kingdomInitial(now = Date.now()) {
-  return { version: 2, coins: 1800, pity: 0, pulls: 0, wins: 0, owned: ['zhaoyun', 'bajie', 'diaochan', 'nezha', 'zhugeliang'], team: ['zhaoyun', 'bajie', 'nezha', 'zhugeliang'], overrides: {}, resources: { food: 1800, wood: 1600, stone: 1000 }, levels: Object.fromEntries(structures.map(b => [b.id, 1])), troops: 180, training: null, march: null, battle: null, cleared: [], dragon: 'Hỏa', lastTick: now, autoSkill: true, paused: false };
+  return { version: 2, coins: 1800, pity: 0, pulls: 0, wins: 0, owned: ['zhaoyun', 'bajie', 'diaochan', 'nezha', 'zhugeliang'], team: ['zhaoyun', 'bajie', 'nezha', 'zhugeliang'], overrides: {}, resources: { food: 1800, wood: 1600, stone: 1000 }, levels: Object.fromEntries(structures.map(b => [b.id, 1])), troops: 180, regiments: { shield: 80, spear: 40, bow: 40, cavalry: 20 }, troopType: 'shield', construction: null, training: null, march: null, battle: null, cleared: [], dragon: 'Hỏa', lastTick: now, autoSkill: true, paused: false };
 }
 export function activeBonds(team) { return bonds.filter(b => b.ids.every(id => team.includes(id))); }
 export function elementalResonance(team) {
@@ -57,13 +88,28 @@ export function upgradeStructure(state, id) {
   next.levels[id]++;
   return next;
 }
-export function trainTroops(state, now = Date.now()) {
+export function startConstruction(state, id, now = Date.now()) {
+  if (state.construction) throw new Error('Một công trình đang nâng cấp. Chờ hoàn tất hoặc tăng tốc.');
+  const next = upgradeStructure(state, id);
+  const target = next.levels[id]; next.levels[id]--;
+  next.construction = { id, target, endsAt: now + (8 + state.levels[id] * 4) * 1000 };
+  return next;
+}
+export function accelerateConstruction(state) {
+  if (!state.construction) throw new Error('Không có công trình đang xây dựng.');
+  if (state.coins < 50) throw new Error('Cần 50 linh ngọc để hoàn tất ngay.');
+  const next = structuredClone(state); next.coins -= 50;
+  next.levels[next.construction.id] = next.construction.target; next.construction = null;
+  return next;
+}
+export function trainTroops(state, now = Date.now(), type = state.troopType || 'shield') {
+  if (!Object.hasOwn(troopTypes, type)) throw new Error('Binh chủng không hợp lệ.');
   if (state.training) throw new Error('Doanh trại đang huấn luyện.');
   if (state.troops > 980) throw new Error('Giới hạn 1.000 quân trong thành.');
   if (state.resources.food < 160 || state.resources.wood < 80) throw new Error('Cần 160 lương thực và 80 gỗ.');
   const next = structuredClone(state);
   next.resources.food -= 160; next.resources.wood -= 80;
-  next.training = { amount: 20, endsAt: now + Math.max(4000, 14000 - state.levels.barracks * 2000) };
+  next.training = { amount: 20, type, endsAt: now + Math.max(4000, 14000 - state.levels.barracks * 2000) };
   return next;
 }
 export function economyTick(state, now = Date.now()) {
@@ -71,7 +117,8 @@ export function economyTick(state, now = Date.now()) {
   const elapsed = Math.max(0, Math.min(28800, (now - state.lastTick) / 1000));
   next.lastTick = Math.max(state.lastTick, now);
   for (const [resource, building, rate] of [['food', 'farm', 2], ['wood', 'wood', 2], ['stone', 'stone', 1]]) next.resources[resource] = Math.min(999999, next.resources[resource] + elapsed * state.levels[building] * rate);
-  if (next.training && now >= next.training.endsAt) { next.troops = Math.min(1000, next.troops + next.training.amount); next.training = null; }
+  if (next.training && now >= next.training.endsAt) { addReserves(next, next.training.type || 'shield', next.training.amount); next.training = null; }
+  if (next.construction && now >= next.construction.endsAt) { next.levels[next.construction.id] = next.construction.target; next.construction = null; }
   return next;
 }
 export function dispatchMarch(state, nodeId) {
@@ -80,16 +127,21 @@ export function dispatchMarch(state, nodeId) {
   if (state.march) throw new Error('Một đội đang hành quân. Chờ đội trở về.');
   if (state.team.length !== 4) throw new Error('Chọn đúng 4 anh hùng trong đội viễn chinh.');
   if (state.troops < 60) throw new Error('Cần 60 quân để xuất chinh. Hãy huấn luyện thêm.');
+  const type = state.troopType || 'shield';
+  if (!Object.hasOwn(troopTypes, type)) throw new Error('Binh chủng không hợp lệ.');
+  if ((state.regiments?.[type] ?? state.troops) < 60) throw new Error(`Cần 60 ${troopTypes[type].name}. Chọn binh chủng khác hoặc huấn luyện thêm.`);
   const next = structuredClone(state);
+  if (!next.regiments) next.regiments = { shield: state.troops, spear: 0, bow: 0, cavalry: 0 };
+  next.regiments[type] -= 60;
   next.troops -= 60; next.battle = null;
-  next.march = { nodeId, units: 60, stage: 'marching', progress: 0, duration: 6 + node.level * 2, rewarded: false };
+  next.march = { nodeId, type, units: 60, stage: 'marching', progress: 0, duration: 6 + node.level * 2, rewarded: false };
   return next;
 }
 function makeUnit(id, side, index, scale, state) {
   const h = heroes.find(hero => hero.id === id);
   const data = { ...h, ...(side === 'ally' ? state.overrides[id] : {}) };
   const maxHp = Math.round(data.hp * 2 * scale);
-  return { id, key: `${side}-${index}`, side, name: h.name, element: h.element, maxHp, hp: maxHp, atk: Math.round(data.atk * scale), energy: 40, shield: 0, burn: 0, exposed: 0, marked: 0, stun: 0, boost: 0 };
+  return { id, key: `${side}-${index}`, side, name: h.name, element: h.element, maxHp, hp: maxHp, atk: Math.round(data.atk * scale), armor: combatProfiles[id].armor, resist: combatProfiles[id].resist, energy: 40, shield: 0, burn: 0, exposed: 0, marked: 0, stun: 0, boost: 0, damageDealt: 0 };
 }
 export function createSkirmish(state, nodeId) {
   const node = worldNodes.find(n => n.id === nodeId && n.type === 'camp');
@@ -100,8 +152,13 @@ export function createSkirmish(state, nodeId) {
   for (const unit of allies) {
     unit.atk = Math.round(unit.atk * (1 + (bondIds.includes('shu') ? .12 : 0) + resonance.bonus));
     unit.maxHp = Math.round(unit.maxHp * (1 + (bondIds.includes('pilgrimage') ? .15 : 0) + resonance.bonus)); unit.hp = unit.maxHp;
+    if (state.troopType === 'shield') { unit.maxHp = Math.round(unit.maxHp * 1.12); unit.hp = unit.maxHp; }
+    if (state.troopType === 'bow' || state.troopType === 'spear') unit.atk = Math.round(unit.atk * (state.troopType === 'bow' ? 1.1 : 1.05));
+    if (state.troopType === 'cavalry') unit.energy += 15;
   }
-  return { nodeId, allies, enemies: node.enemies.map((id, i) => makeUnit(id, 'enemy', i, .6 + node.level * .25, state)), bonds: bondIds, clock: 0, accumulator: 0, dragonEnergy: 0, winner: null, events: [], serial: 0, log: [`Đã giao chiến tại ${node.name}.`] };
+  const enemies = node.enemies.map((id, i) => makeUnit(id, 'enemy', i, .6 + node.level * .25, state));
+  for (const unit of [...allies, ...enemies]) { unit.physicalAtk = unit.atk; unit.magicAtk = Math.round(unit.atk * (combatProfiles[unit.id].kind === 'magic' ? 1.12 : .8)); }
+  return { nodeId, troopType: state.troopType || 'shield', enemyTroopType: ['spear', 'cavalry', 'bow'][node.level - 1], allies, enemies, bonds: bondIds, clock: 0, accumulator: 0, dragonEnergy: 0, winner: null, rng: node.level * 999 + state.team.join('').split('').reduce((n, c) => n + c.charCodeAt(0), 0), damageStats: { physical: 0, magic: 0, pure: 0, absorbed: 0, criticals: 0 }, events: [], serial: 0, log: [`Đã giao chiến tại ${node.name}.`] };
 }
 function emit(b, kind, actor, text, targets = []) {
   b.events.push({ serial: ++b.serial, at: b.clock, kind, actor: actor?.id || null, side: actor?.side || 'ally', text, targets });
@@ -109,14 +166,19 @@ function emit(b, kind, actor, text, targets = []) {
 }
 const living = units => units.filter(u => u.hp > 0);
 const weakest = units => living(units).sort((a, b) => a.hp / a.maxHp - b.hp / b.maxHp)[0];
-function hurt(b, actor, target, factor) {
+function hurt(b, actor, target, factor, type = combatProfiles[actor.id]?.kind || 'magic') {
   if (!target || target.hp <= 0) return;
-  const counter = { Hỏa: 'Mộc', Mộc: 'Thủy', Thủy: 'Hỏa' }[actor.element] === target.element ? 1.25 : 1;
-  const bonus = (actor.boost > 0 ? 1.2 : 1) * (target.exposed > 0 ? 1.25 : 1) * (target.marked > 0 ? 1.25 : 1);
   const defense = target.side === 'ally' && b.bonds.includes('generals') ? .9 : 1;
-  const damage = Math.max(1, Math.round(actor.atk * factor * counter * bonus * defense));
+  const armyType = actor.side === 'ally' ? b.troopType : b.enemyTroopType, foeType = actor.side === 'ally' ? b.enemyTroopType : b.troopType;
+  const armyBonus = actor.side && troopTypes[armyType]?.beats === foeType ? 1.2 : 1;
+  b.rng = (Math.imul(1664525, b.rng) + 1013904223) >>> 0;
+  const critical = b.rng / 4294967296 < (combatProfiles[actor.id]?.crit || 0);
+  const damage = calculateDamage(actor, target, factor, { type, armyBonus, reduction: defense, critical }).amount;
   const absorbed = Math.min(target.shield, damage); target.shield -= absorbed;
+  const actual = Math.min(target.hp, damage - absorbed);
   target.hp = Math.max(0, target.hp - damage + absorbed);
+  actor.damageDealt = (actor.damageDealt || 0) + actual;
+  b.damageStats[type] += actual; b.damageStats.absorbed += absorbed; if (critical) b.damageStats.criticals++;
 }
 function heal(target, amount) { if (target && target.hp > 0) target.hp = Math.min(target.maxHp, target.hp + Math.round(amount)); }
 function checkWinner(b) {
@@ -151,6 +213,10 @@ function castInPlace(b, key) {
   checkWinner(b); return true;
 }
 export function castCommander(battle, key) { const b = structuredClone(battle); if (!castInPlace(b, key)) throw new Error('Kỹ năng cần 100 nộ; tướng phải còn sống và không bị mê hoặc.'); return b; }
+export function formationTarget(units, column) {
+  const order = [column % 2, 1 - column % 2, 2 + column % 2, 3 - column % 2];
+  return order.map(i => units[i]).find(u => u && u.hp > 0);
+}
 export function combatTick(battle, delta, autoSkill = true, dragon = 'Hỏa', dragonLevel = 1) {
   const b = structuredClone(battle); if (b.winner) return b;
   b.accumulator += Math.max(0, Math.min(5, delta));
@@ -158,7 +224,7 @@ export function combatTick(battle, delta, autoSkill = true, dragon = 'Hỏa', dr
     b.accumulator--; b.clock++;
     for (const u of [...b.allies, ...b.enemies]) {
       if (u.hp <= 0) continue;
-      if (u.burn > 0) u.hp = Math.max(0, u.hp - 15);
+      if (u.burn > 0) { b.damageStats.pure += Math.min(15, u.hp); u.hp = Math.max(0, u.hp - 15); }
       for (const status of ['burn', 'exposed', 'marked', 'boost']) if (u[status] > 0) u[status]--;
     }
     checkWinner(b); if (b.winner) break;
@@ -166,7 +232,10 @@ export function combatTick(battle, delta, autoSkill = true, dragon = 'Hỏa', dr
       if (b.winner) break; if (u.hp <= 0) continue;
       if (u.stun > 0) { u.stun--; continue; }
       const foes = u.side === 'ally' ? b.enemies : b.allies;
-      hurt(b, u, living(foes)[0], .55);
+      const own = u.side === 'ally' ? b.allies : b.enemies;
+      const victim = formationTarget(foes, own.indexOf(u) % 2);
+      hurt(b, u, victim, .55, 'physical');
+      if (victim) { b.events.push({ serial: ++b.serial, at: b.clock, kind: 'attack', actor: u.id, side: u.side, targets: [victim.key], text: '' }); b.events = b.events.slice(-32); }
       u.energy = Math.min(100, u.energy + (u.side === 'ally' && b.bonds.includes('investiture') ? 24 : 20));
       checkWinner(b);
       if (!b.winner && (u.side === 'enemy' || autoSkill) && u.energy >= 100) castInPlace(b, u.key);
@@ -194,7 +263,9 @@ export function worldTick(state, delta) {
     if (next.battle.winner) {
       if (next.battle.winner === 'ally') {
         const first = !next.cleared.includes(node.id);
-        next.coins += first ? 200 * node.level : 60 * node.level;
+        const coins = first ? 200 * node.level : 60 * node.level;
+        next.battle.reward = { coins, food: 150 * node.level, wood: 100 * node.level };
+        next.coins += coins;
         next.resources.food += 150 * node.level; next.resources.wood += 100 * node.level;
         if (first) next.cleared.push(node.id);
         next.wins++; m.units = Math.max(15, Math.round(m.units * .8));
@@ -209,7 +280,7 @@ export function worldTick(state, delta) {
         if (node.type === 'camp') { m.stage = 'combat'; next.battle = createSkirmish(next, node.id); }
         else { m.stage = 'gathering'; m.duration = 20; }
       } else if (m.stage === 'gathering') { next.resources[node.type] = Math.min(999999, next.resources[node.type] + 500); m.rewarded = true; m.stage = 'returning'; m.duration = 6; }
-      else if (m.stage === 'returning') { next.troops = Math.min(1000, next.troops + m.units); next.march = null; }
+      else if (m.stage === 'returning') { addReserves(next, m.type || 'shield', m.units); next.march = null; }
     }
   }
   return next;
@@ -226,17 +297,21 @@ export function recallMarch(state) {
 // Saves store durable progression only. In-flight combat is intentionally not imported.
 export function durableSave(state) {
   const s = structuredClone(state);
-  if (s.march) s.troops = Math.min(1000, s.troops + s.march.units);
+  if (s.march) addReserves(s, s.march.type || 'shield', s.march.units);
   s.march = null; s.battle = null;
   return s;
 }
 export function validKingdomState(s) {
   if (!s || s.version !== 2 || !validState({ ...s, version: 1 }) || s.team.length > 4) return false;
   const finite = v => typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 999999;
+  if (s.troopType !== undefined && !Object.hasOwn(troopTypes, s.troopType)) return false;
+  if (s.regiments !== undefined && (!s.regiments || !Object.keys(troopTypes).every(type => Number.isInteger(s.regiments[type]) && s.regiments[type] >= 0 && s.regiments[type] <= 1000) || Object.values(s.regiments).reduce((n, v) => n + v, 0) !== s.troops)) return false;
+  if (s.training?.type !== undefined && !Object.hasOwn(troopTypes, s.training.type)) return false;
+  if (s.construction !== undefined && s.construction !== null && (!s.construction || !structures.some(b => b.id === s.construction.id) || s.construction.target !== s.levels?.[s.construction.id] + 1 || s.construction.target > 5 || (s.construction.id !== 'hall' && s.construction.target > s.levels.hall) || !Number.isFinite(s.construction.endsAt) || s.construction.endsAt < 0 || s.construction.endsAt > Date.now() + 86400000)) return false;
   return s.resources && ['food', 'wood', 'stone'].every(k => finite(s.resources[k])) && s.levels && structures.every(b => Number.isInteger(s.levels[b.id]) && s.levels[b.id] >= 1 && s.levels[b.id] <= 5) && structures.every(b => b.id === 'hall' || s.levels[b.id] <= s.levels.hall) && Number.isInteger(s.troops) && s.troops >= 0 && s.troops <= 1000 && Number.isFinite(s.lastTick) && s.lastTick >= 0 && s.lastTick <= Date.now() + 86400000 && ['Hỏa', 'Thủy', 'Mộc'].includes(s.dragon) && typeof s.autoSkill === 'boolean' && typeof s.paused === 'boolean' && Array.isArray(s.cleared) && s.cleared.length <= 3 && new Set(s.cleared).size === s.cleared.length && s.cleared.every(id => worldNodes.some(n => n.id === id && n.type === 'camp')) && s.march === null && s.battle === null && (s.training === null || s.training && s.training.amount === 20 && Number.isFinite(s.training.endsAt) && s.training.endsAt >= 0 && s.training.endsAt <= Date.now() + 86400000);
 }
 export function migrateKingdom(s, now = Date.now()) {
-  if (validKingdomState(s)) return economyTick(s, now);
+  if (validKingdomState(s)) return economyTick({ ...s, troopType: s.troopType || 'shield', regiments: s.regiments || { shield: s.troops, spear: 0, bow: 0, cavalry: 0 }, construction: s.construction || null }, now);
   if (validState(s)) return { ...kingdomInitial(now), coins: s.coins, pity: s.pity, pulls: s.pulls, wins: s.wins, owned: [...s.owned], team: s.team.slice(0, 4), overrides: structuredClone(s.overrides) };
   throw new Error('Bản lưu không hợp lệ hoặc không hỗ trợ.');
 }

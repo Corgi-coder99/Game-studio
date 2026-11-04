@@ -23,9 +23,11 @@ Do not claim browser buttons call Codex: the Studio currently exports data and c
 
 - Node.js 22+; no dependency installation required.
 - `npm run dev` — serve on port 3000; `PORT=3001 npm run dev` for an alternate port.
-- `npm test` — built-in Node test API, currently 6 legacy/gacha tests plus 21 kingdom tests. V2 uses real-time combat, not the v1 turn-based battle functions.
+- `npm test` — built-in Node test API, currently 6 legacy/gacha tests plus 27 kingdom tests. V2 uses real-time combat, not the v1 turn-based battle functions.
 - `npm run build:offline` — regenerate the self-contained `offline/Thien-Menh.html` for Windows players without Node.js. After changing game/UI/CSS, regenerate and test it using file:// with networking disabled. Repackage the HTML and instructions in `Thien-Menh-Windows-Offline.zip`.
 - Changes are not automatically committed, pushed, published or deployed.
-- `python3 package-windows.py` — bundle HTML, BAT launchers, Python standard-library server and Vietnamese instructions into both the compatibility ZIP and `Thien-Menh-Kingdom-v2-Windows.zip`. No Python packages are required to play.
+- `python3 package-windows.py` — bundle HTML, BAT launchers, Python standard-library server and Vietnamese instructions into both the compatibility ZIP and `Thien-Menh-Kingdom-v3-Windows.zip`. No Python packages are required to play.
 - Preserve/migrate v1 saves. V2 durable saves recall in-flight troops and omit transient battles; resource production accrues up to 8 hours, combat advances only during the running session.
 - Infinity Kingdom is a gameplay reference for city building, four-hero elemental formations and supporting dragons. This is an original offline PvE prototype; do not copy its assets/UI or claim MMO parity.
+
+V3 uses a full-screen city with floating HUD and drawers (immersive.css). Drawers are hidden until a building/node is selected. Combat is a separate full-screen canvas scene with 2-front/2-back formation, troop regiments, type counters, armor/resistance, criticals and a damage report. Keep old v2 saves compatible: use migrateKingdom to fill optional fields. Do not claim the prototype formula is the original Infinity Kingdom formula. Research evidence and limitations are in docs/reference-analysis.md. All four PNG assets must be embedded in the offline build.
