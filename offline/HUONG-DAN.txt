@@ -1,0 +1,13 @@
+THIEN MENH - BAN THU NGHIEM OFFLINE CHO WINDOWS
+
+1. Giai nen toan bo tep ZIP (Extract All).
+2. Nhan dup Thien-Menh.html; mo bang Microsoft Edge hoac Google Chrome.
+3. Khong can Node.js, cai dat, tai khoan hay ket noi Internet.
+
+Tien do duoc luu trong trinh duyet neu trinh duyet cho phep.
+Vao Studio > Xuat ban luu JSON de sao luu truoc khi doi ten/di chuyen
+tep HTML, doi trinh duyet hoac xoa du lieu. Dung Nhap ban luu JSON
+de khoi phuc. Khong dung che do InPrivate/Incognito de luu lau dai.
+
+Day la ban choi thu: 8 nhan vat, 1 ai, gacha bang tien mo phong.
+Studio khong dieu khien Codex truc tiep va khong goi AI khi choi.

@@ -1,0 +1,44 @@
+THIÊN MỆNH — GAME PIXEL 2D OFFLINE CHO WINDOWS
+
+TRƯỚC TIÊN
+Nhấp chuột phải tệp ZIP → Extract All… / Giải nén tất cả.
+Mở thư mục vừa giải nén. Đừng chạy game khi còn ở trong tệp ZIP.
+
+CÁCH 1 — KHÔNG CẦN CÀI GÌ
+Nhấp đúp CHOI-NGAY.bat.
+Hoặc nhấp đúp Thien-Menh.html và mở bằng Microsoft Edge / Google Chrome.
+Không cần Node.js, Python, Internet hay tài khoản để chơi theo cách này.
+
+CÁCH 2 — CHẠY BẰNG PYTHON 3
+Nếu máy có Python 3, nhấp đúp CHAY-BANG-PYTHON.bat.
+Game sẽ mở trong trình duyệt. Giữ cửa sổ dòng lệnh mở khi đang chơi.
+Đóng cửa sổ đó hoặc nhấn Ctrl+C để dừng máy chủ.
+Python dùng hoàn toàn thư viện có sẵn; không cần pip install.
+
+Bạn cũng có thể mở Terminal trong thư mục đã giải nén rồi nhập:
+    py -3 chay_game.py
+Nếu không có lệnh py, thử:
+    python chay_game.py
+
+Nếu trình duyệt không tự mở, nhập địa chỉ in trong cửa sổ dòng lệnh.
+Mặc định: http://127.0.0.1:8765/
+Đây là địa chỉ trên chính máy bạn, không cần Internet.
+Nếu cổng đang được dùng, chạy:
+    py -3 chay_game.py --port 8766
+
+GIỮ TIẾN ĐỘ
+Trong game, vào Studio → Xuất bản lưu JSON để sao lưu.
+Studio → Nhập bản lưu JSON để khôi phục.
+Cách mở HTML và cách chạy Python có vùng lưu riêng. Dùng xuất/nhập JSON
+khi đổi cách chạy, đổi trình duyệt, đổi cổng hoặc chuyển máy.
+Không dùng InPrivate / Incognito nếu muốn giữ tiến độ lâu dài.
+
+NỘI DUNG BẢN THỬ
+8 nhân vật pixel 2D, đội 5 tướng, gacha bằng tiền mô phỏng, 1 ải chiến đấu,
+công cụ chỉnh HP/ATK. Ảnh đã nằm sẵn trong game. Chưa có hoạt ảnh ra đòn.
+Game không gọi AI khi chơi và không điều khiển Codex trực tiếp.
+
+KIỂM TRA PHIÊN BẢN PYTHON (KHÔNG BẮT BUỘC CHO CÁCH 1)
+    py -3 --version
+Hoặc:
+    python --version
