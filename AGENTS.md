@@ -35,7 +35,7 @@ python3 package-windows.py
 
 204 meaningful tests cover gameplay and save invariants. Exercise changed browser flows (desktop/mobile). Test the delivered ZIP extracted to a path with spaces, Python server GET/HEAD/404, offline image/skill loading and actual gameplay. Report that BAT has not been run on Windows if that remains true.
 
-Current delivery: Thien-Menh-Kingdom-v10-Windows.zip plus compatibility Thien-Menh-Windows-Python.zip. No Node/Python is needed for direct HTML play; Python launcher uses only the standard library. Regenerate delivery whenever source/UI/art/instructions change. GitHub publication requires session authorization. Prior push was rejected by automatic review; do not retry publication without direct authorization for the concrete payload and destination. Local implementation/packaging remains authorized.
+Current delivery: Thien-Menh-Kingdom-v10-Windows.zip plus compatibility Thien-Menh-Windows-Python.zip. No Node/Python is needed for direct HTML play; Python launcher uses only the standard library. Regenerate delivery whenever source/UI/art/instructions change. GitHub publication requires session authorization. The user explicitly authorized publishing all v10 source and ZIP to Corgi-coder99/Game-studio on codex/thien-menh-offline only. Preserve main. Local implementation/packaging remains authorized.
 
 UI v7: read docs/v7-interface.md. Native 1920×1080 frame scales uniformly; do not scale individual text panels. gallery-ui.mjs owns fixed bag/pet/campaign scenes and description dialogs; recommendations.mjs provides owned-only heuristic formations. New reports are restricted to mode bot; secret reward parcels remain mandatory.
 

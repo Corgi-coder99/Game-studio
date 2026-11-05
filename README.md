@@ -1,10 +1,10 @@
 ## Bản v10 · Ba đội song song, chiến đấu theo lượt và bảy long linh
 
-Gói mới: **Thien-Menh-Kingdom-v10-Windows.zip** trong workspace. Giải nén → **CHOI-NGAY.bat** hoặc mở **Thien-Menh.html** bằng Chrome/Edge. Chạy offline, không cần AI, Node.js hay Python.
+[Tải ZIP Windows offline v10](https://github.com/Corgi-coder99/Game-studio/blob/codex/thien-menh-offline/Thien-Menh-Kingdom-v10-Windows.zip) → **Download raw**. Giải nén → **CHOI-NGAY.bat** hoặc mở **Thien-Menh.html** bằng Chrome/Edge. Chạy offline, không cần AI, Node.js hay Python.
 
 Ba đội thế giới có thể thu thập, tiến công và trấn thủ trong khi đội tháp riêng vẫn chạy. Hai phe hành động theo ô đội hình; bấm kỹ năng để xếp vào lượt của tướng. Trang bị có hình theo tám phẩm cấp; cửa hàng bán hộp mảnh có màu phẩm, mảnh long và mảnh tướng VIP. Điện Long Linh có bảy hệ, chỉ một long được chọn có hiệu lực; Ánh sáng/Bóng tối mở từ quà VIP13/14. Cảnh thành có nhà dân, chợ, dân thu hoạch, chim và rồng; thi công và triệu hồi có chuyển cảnh mới.
 
-Chi tiết luật và kiểm thử: [docs/v10-update.md](docs/v10-update.md). Bản v10 chưa được xuất bản lên GitHub; các liên kết dưới là bản lịch sử.
+Chi tiết luật và kiểm thử: [docs/v10-update.md](docs/v10-update.md). Các phần dưới ghi lại những bản cập nhật trước.
 
 ## Bản v9 · Nhiệm vụ, Kĩ thuật và bản đồ
 
