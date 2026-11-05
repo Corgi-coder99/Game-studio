@@ -32,7 +32,7 @@ export function summon(state, count = 1, random = Math.random) {
 }
 
 export function multiplier(attacker, defender) {
-  return { Hỏa: 'Mộc', Mộc: 'Thủy', Thủy: 'Hỏa' }[attacker] === defender ? 1.35 : 1;
+  return { Hỏa:'Kim',Kim:'Mộc',Mộc:'Thổ',Thổ:'Thủy',Thủy:'Hỏa','Ánh sáng':'Bóng tối','Bóng tối':'Ánh sáng' }[attacker] === defender ? 1.35 : 1;
 }
 
 export function createBattle(state) {

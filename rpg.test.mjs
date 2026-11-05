@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { characterRoster, characterById, gradeOrder, archetypeLabels } from './characters.mjs';
 import { kingdomInitial, createSkirmish, dispatchMarch, worldTick, migrateKingdom, validKingdomState, durableSave } from './kingdom.mjs';
 import { normalizeProgression, validProgression, getCharacterStats, defaultFormation, assignFormation, toggleFormation, levelUpHero, levelUpSkill, forgeItem, equipItem, enhanceItem, itemTemplates, pullCharacters } from './progression.mjs';
-import { createTacticsBattle, castTactics, tickTactics, tacticsHit, tacticsHeal, tacticsShield, tacticsStatus, tacticsTarget } from './tactics.mjs';
+import { createTacticsBattle, resolveTacticsSkill as castTactics, tickTactics, tacticsHit, tacticsHeal, tacticsShield, tacticsStatus, tacticsTarget } from './tactics.mjs';
 
 const ids=characterRoster.map(h=>h.id);
 function rich(team=['wukong','bajie','zhugeliang','zhaoyun']){const s=kingdomInitial();s.owned=[...ids];s.team=team;s.formation=defaultFormation(team);s.coins=100000;s.resources.food=100000;const n=normalizeProgression(s);for(const id of ids)n.heroXP[id]=10000;n.essence=10000;return n;}
@@ -92,7 +92,7 @@ test('slow affects attack cadence, stun prevents actions and mana fatigue halves
  const b=arena(['zhugeliang','zhaoyun']),a=b.allies[0];a.resource='mana';a.mana=0;a.manaMax=1000;a.manaRegen=20;a.skillCost=9999;
  assert.equal(tickTactics(b,1,false).allies[0].mana,20);tacticsStatus(a,'manaLock',3);assert.equal(tickTactics(b,1,false).allies[0].mana,10);
  delete a.effects.manaLock;a.attackTimer=0;a.attackSpeed=1;const count=next=>next.events.filter(e=>e.kind==='attack'&&e.actor===a.id&&e.side==='ally').length;
- const normal=count(tickTactics(b,4,false));tacticsStatus(a,'slow',5);assert.ok(count(tickTactics(b,4,false))<normal);tacticsStatus(a,'stun',5);assert.equal(count(tickTactics(b,4,false)),0);
+ const normal=tickTactics(b,4,false).events.find(e=>e.kind==='attack'&&e.actor===a.id&&e.side==='ally');tacticsStatus(a,'slow',5);const slowed=tickTactics(b,4,false).events.find(e=>e.kind==='attack'&&e.actor===a.id&&e.side==='ally');assert.ok(slowed.at>normal.at);tacticsStatus(a,'stun',5);assert.equal(count(tickTactics(b,4,false)),0);
 });
 test('front/middle/back targeting protects lines, while assassins prioritize weak back-line targets',()=>{
  const units=Array.from({length:9},(_,slot)=>({slot,hp:100,maxHp:100}));assert.equal(tacticsTarget(units,2).slot,2);units[2].hp=0;assert.ok(tacticsTarget(units,2).slot<3);for(let i=0;i<3;i++)units[i].hp=0;assert.ok(tacticsTarget(units,0).slot>=3&&tacticsTarget(units,0).slot<6);units[7].hp=10;assert.equal(tacticsTarget(units,0,true).slot,7);

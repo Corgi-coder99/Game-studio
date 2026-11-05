@@ -6,7 +6,7 @@ import {chooseRealm} from './realms.mjs';
 import {gatherRegional,worldSystemsTick} from './world-sim.mjs';
 import {secretRealms,inheritanceManuals,equipInheritance,activeAbilities} from './inheritance-data.mjs';
 import {discoverMapFragment,enterSecretRealm,startSecretBoss,secretBattleTick,claimSecretParcel,leaveSecretRealm,retreatSecret} from './inheritance-sim.mjs';
-import {createTacticsBattle,castTactics,tickTactics,tacticsHit} from './tactics.mjs';
+import {createTacticsBattle,resolveTacticsSkill as castTactics,tickTactics,tacticsHit} from './tactics.mjs';
 import {defaultFormation} from './progression.mjs';
 function found(){const s=chooseRealm(kingdomInitial(),'shu','chengdu');discoverMapFragment(s,'res-chengdu-0');return s;}
 function bossWin(s){s=startSecretBoss(s,'sword-tomb');for(const u of s.battle.enemies)u.hp=0;return secretBattleTick(s,.1);}

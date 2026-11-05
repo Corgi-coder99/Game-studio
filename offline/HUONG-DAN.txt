@@ -1,4 +1,4 @@
-THIÊN MỆNH — PIXEL KINGDOM v9 — OFFLINE CHO WINDOWS
+THIÊN MỆNH — PIXEL KINGDOM v10 — OFFLINE CHO WINDOWS
 
 1. TẢI VÀ GIẢI NÉN
 Trên GitHub bấm Download raw để tải ZIP.
@@ -30,36 +30,43 @@ trình duyệt, cổng hoặc máy. Tránh InPrivate / Incognito để giữ ti�
 Bản lưu cũ giữ tướng, trang bị và tài nguyên; đội cũ chỉ lấy bốn tướng đầu.
 Đội đang hành quân được thu hồi một lần khi mở lại. Không chạy trận khi đóng game.
 
-5. NỘI DUNG v9
-- Anh hùng, Túi đồ, Nhiệm vụ, Bí cảnh nằm trên thanh dưới bằng hình ảnh.
-- VIP mở từ Người chơi. Báo cáo và chiến lợi mở bằng biểu tượng thư.
-- Nhiệm vụ: chọn Trưởng thành, Quà thời gian hoặc Danh hiệu; nhận từng quà một lần.
-- Kĩ thuật: nghiên cứu 6 nhánh, mỗi nhánh tối đa 10 cấp. Tốn vật tư ngay.
-  Bộ binh áp dụng Thuẫn/Thương; nhánh thành trì chỉ áp dụng trận thành BOT.
-  Mỗi cấp nghiên cứu yêu cầu Đại điện cao hơn 5 cấp; chờ quân trở về mới đổi.
-- Bảng ngọc hiển thị lưới icon: rê chuột/Tab để đọc, bấm để nâng.
-- Bấm công trình Thiên Tháp trong Thành trì để vào vượt ải.
-- Nền thế giới, nông trại, trại gỗ, mỏ đá và cổng có hình mới đồng bộ.
+5. NỘI DUNG v10
+- Anh hùng, Túi đồ, Cửa hàng, Nhiệm vụ và Bí cảnh ở thanh dưới.
+- Xếp tối đa bốn tướng mỗi đội. Ba đội thế giới có nhiệm vụ độc lập.
+- Đội thu thập, đội tiến công và đội trấn thủ có thể chạy cùng tháp.
+- Vào Anh hùng → Tổng quan 3 đội để chuyển, chỉnh và giao nhiệm vụ.
+- Tướng không trùng giữa các đội đang triển khai ngoài thế giới; tháp dùng riêng.
+- Trong Thiên Tháp hoặc Tổng quan 3 đội, bấm Lưu đội hiện tại cho tháp.
+- Đội trấn thủ tự chặn BOT thù địch tập kích, có trận và báo cáo riêng.
+- Quân dự bị bị trừ khi xuất phát; quân sống sót được trả khi về.
+- Khi nạp bản lưu, các đội được thu hồi một lần, tháp dừng tự động.
+- Hai phe đánh theo thứ tự ô đội hình. Xếp kỹ năng để dùng vào lượt tướng.
+- Tự chiêu cũng theo lượt. Tướng chết bị bỏ qua; choáng mất lượt.
+- Hiệu ứng chiêu, chỉ báo lượt, môi trường công thành đã được thay đổi.
+- Khi chiến đấu, dùng nút Bản đồ / Chiến dịch để ra thanh điều hướng.
+- Điện Long Linh có Hỏa, Thủy, Mộc, Thổ, Kim, Ánh sáng và Bóng tối.
+- Chỉ long được chọn hỗ trợ mỗi đội; các long sở hữu khác không cộng dồn.
+- Quà VIP13 mở Quang long, VIP14 mở Ám long. Mua mảnh không tự mở khóa.
+- Long nâng tối đa 10 cấp; mỗi cấp tăng 5% sức mạnh, cần 40 × cấp mới mảnh.
+- Nhân vật thường dùng ngũ hành; Ánh sáng/Bóng tối dành cho nhân vật quà VIP.
+- Cửa hàng bán mảnh long và mảnh tướng VIP đã sở hữu, mỗi gói 10 mảnh.
+- Hộp mảnh D/C/B/A/S/SS/SSS/SSR có màu phẩm, mỗi hộp cho 10 mảnh thường.
+- Mua hộp vào túi; bấm hộp để đọc hoặc mở. Không có tướng VIP trong hộp.
+- Ghép 80 mảnh để mở một tướng thường chưa sở hữu.
+- Túi dùng chung cho quà, trang bị, hộp, mảnh nhân vật và mảnh long.
+- Trang bị có hình theo phẩm cấp và loại vũ khí, từ đơn giản đến thần trang.
+- Triệu hồi có cổng ánh sáng và cảnh hiện nhân vật; có nút bỏ qua.
+  Kết quả đã được nhận một lần; bỏ qua không đổi hoặc nhân đôi phần thưởng.
+- Thành có nhà dân, chợ, hồ, dân thu hoạch và đi lại, chim và rồng.
+  Dân minh họa sản xuất tự động; không tự cộng tài nguyên lần thứ hai.
+- Thi công có vòng sáng/giàn giáo; hoàn thành nâng cấp có hiệu ứng ánh sáng.
+- Công trình cấp tối đa 100; bốn hàng đợi huấn luyện riêng.
+- Kĩ thuật, bảng ngọc, skin đang trang bị và bí kíp giữ tác dụng thực tế.
+- Thiên Tháp 999 tầng tự nối, dừng khi thua; không gửi chiến báo PVE.
+- Báo cáo công thành và chiến lợi BOSS xem qua biểu tượng thư.
+- Studio có Max tài nguyên, tiền, mảnh, trang bị và MAX TẤT CẢ để thử offline.
+  Xuất JSON trước nếu muốn giữ tiến độ thật. Không dùng AI khi chơi.
 
-- Khung 1920 × 1080 tự thu phóng theo màn hình, có nút toàn màn hình.
-- Mỗi đội tối đa 4 tướng. Dải tướng kéo ngang dưới trận đồ; bấm hình để xem.
-- Ba bộ đội hình lưu sẵn dùng chung kho, một đội xuất phát mỗi lần.
-- Công trình tối đa cấp 100. Công trình phụ không vượt Đại điện.
-- Mỗi công trình có cảnh quản lý riêng; vật tư và thời gian tăng theo cấp.
-- Cung, Kỵ, Thương và Thuẫn có bốn hàng đợi riêng, luyện đồng thời.
-- Mỗi mẻ 20 lính; không thể luyện hai mẻ cùng loại đồng thời.
-- Thanh kỹ năng luôn cạnh tướng; bấm biểu tượng để đọc hoặc nâng kỹ năng.
-- 61 tướng, trang bị năm ô, sao tướng 7, thú cưng 5 sao, VIP 15.
-- Đủ mười hình skin thành; chỉ skin đang đeo có hiệu ứng.
-- Túi đồ hiển thị lưới hình và số lượng; bấm hình để mở toàn bộ mô tả.
-- Thế giới mở lớp cận cảnh có điểm tài nguyên, thành BOT, cổng và bí cảnh.
-- Mảnh bản đồ ở điểm tài nguyên dẫn tới bí cảnh; thắng BOSS nhận sách qua thư.
-- Thiên Tháp 999 tầng có tự nối tầng, tự chiêu, ×1/×2/×4; dừng khi thua.
-- Chỉ công thành thế giới gửi chiến báo. PVE không bật bảng kết quả giữa ải.
-- Studio có Max tài nguyên, Max tiền, Max mảnh, Max trang bị và MAX TẤT CẢ.
-  Các nút sửa bản lưu để kiểm thử, không dùng AI. Xuất JSON trước nếu cần.
-  Max tất cả không tự vượt tháp hoặc nhận bí kíp BOSS.
-
-Hình mới gồm cảnh từng công trình, ba vùng môi trường, lính có bước đi,
-hiệu ứng kỹ năng và đài chiêu mộ. Hoạt ảnh tướng là chuyển động sprite và
-lớp hiệu ứng, chưa có khung tay/chân riêng cho toàn bộ nhân vật.
+Đồ họa gốc pixel, hiệu ứng canvas và chuyển động sprite; chưa có hoạt ảnh
+khung tay/chân riêng cho toàn bộ nhân vật. BAT chưa được chạy trên Windows
+trong đợt kiểm thử Linux; HTML và máy chủ Python đã được kiểm tra offline.

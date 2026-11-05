@@ -28,7 +28,7 @@ test('SSR pity triggers at pull 30 and resets, including in ten pulls', () => {
   assert.equal(summon(initialState(), 1, () => .1).results[0].rarity, 'SR');
 });
 test('elemental damage and skills respect turn constraints', () => {
-  assert.equal(multiplier('Hỏa', 'Mộc'), 1.35); assert.equal(multiplier('Mộc', 'Hỏa'), 1);
+  assert.equal(multiplier('Hỏa', 'Kim'), 1.35); assert.equal(multiplier('Kim', 'Hỏa'), 1);
   const b = createBattle(initialState());
   assert.throws(() => attack(b, b.enemies[0].key, true));
   const next = attack(b, b.enemies[0].key);

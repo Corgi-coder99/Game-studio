@@ -1,6 +1,14 @@
+## Bản v10 · Ba đội song song, chiến đấu theo lượt và bảy long linh
+
+Gói mới: **Thien-Menh-Kingdom-v10-Windows.zip** trong workspace. Giải nén → **CHOI-NGAY.bat** hoặc mở **Thien-Menh.html** bằng Chrome/Edge. Chạy offline, không cần AI, Node.js hay Python.
+
+Ba đội thế giới có thể thu thập, tiến công và trấn thủ trong khi đội tháp riêng vẫn chạy. Hai phe hành động theo ô đội hình; bấm kỹ năng để xếp vào lượt của tướng. Trang bị có hình theo tám phẩm cấp; cửa hàng bán hộp mảnh có màu phẩm, mảnh long và mảnh tướng VIP. Điện Long Linh có bảy hệ, chỉ một long được chọn có hiệu lực; Ánh sáng/Bóng tối mở từ quà VIP13/14. Cảnh thành có nhà dân, chợ, dân thu hoạch, chim và rồng; thi công và triệu hồi có chuyển cảnh mới.
+
+Chi tiết luật và kiểm thử: [docs/v10-update.md](docs/v10-update.md). Bản v10 chưa được xuất bản lên GitHub; các liên kết dưới là bản lịch sử.
+
 ## Bản v9 · Nhiệm vụ, Kĩ thuật và bản đồ
 
-[Tải ZIP Windows offline v9](https://github.com/Corgi-coder99/Game-studio/blob/codex/thien-menh-offline/Thien-Menh-Kingdom-v9-Windows.zip) → **Download raw** → giải nén → **CHOI-NGAY.bat**.
+Bản v9 được lưu trong workspace, chưa xuất bản lên GitHub → **Download raw** → giải nén → **CHOI-NGAY.bat**.
 
 Thanh dưới có Anh hùng, Túi đồ, Nhiệm vụ và Bí cảnh với hình nhận diện. VIP nằm trong Người chơi. Nhiệm vụ hiển thị tiến độ, quà và nút nhận; Bảng ngọc là lưới biểu tượng có chú thích. Kĩ thuật gồm sáu nghiên cứu bằng tài nguyên, tác động thực tế đến bộ binh và chiến tranh thành trì. Bấm công trình Thiên Tháp trong thành để vượt 999 tầng. Thế giới có nền đúng tỷ lệ hơn, điểm khai thác và cổng đá phép thuật mới.
 

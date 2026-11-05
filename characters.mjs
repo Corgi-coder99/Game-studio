@@ -79,7 +79,8 @@ const legacy = [
  [118,32,'猴','#ec9860','Tề Thiên Đại Thánh','SSR'],[145,26,'義','#7fb49a','Võ Thánh','SSR'],[105,27,'蓮','#e8939f','Tam Thái Tử','SR'],[100,28,'龍','#93b8db','Ngọa Long','SR'],[120,24,'眼','#b2a1d7','Nhị Lang Thần','SR'],[108,22,'槍','#b7c8c3','Thường Sơn Tử Long','R'],[150,16,'豬','#c5a58a','Thiên Bồng Nguyên Soái','R'],[95,25,'月','#cfacd1','Bế Nguyệt','R'],
 ];
 export const characterRoster = rows.map((row,index)=>{
-  const [id,name,grade,roles,faction,element,weapon,skillName,operations,passives,resourceOverride]=row;
+  const [id,name,grade,roles,faction,originalElement,weapon,skillName,operations,passives,resourceOverride]=row;
+  const element=index>=56?(['lingbao'].includes(id)?'Bóng tối':'Ánh sáng'):['pangu','bajie','zhangfei','bulldemon','tuxingsun','xingtian','dianwei','xuhuang','dongzhuo','zhoutai','zhurong','menghuo'].includes(id)?'Thổ':['houyi','zhaoyun','erlang','machao','sunce','zhangliao','huangzhong','xiahouyuan','xiahoudun','yangjian','jinzha','muzha'].includes(id)?'Kim':originalElement;
   const resource=resourceOverride||(roles.includes('mage')||roles.includes('support')?'mana':'rage');
   const base=legacy[index]||[roles.includes('tank')?145:roles.includes('support')?105:115,roles.includes('tank')?22:roles.includes('mage')?29:27,'✦',gradeColors[grade],weapon,grade];
   const dark=['lubu','caocao','zhouyu','simayi','zhangliao','ganning','pangtong','redboy','bulldemon','ironfan','daji','shengongbao','tuxingsun','xingtian','lingbao'].includes(id);const divine={path:dark?'dark':'light',name:skillName+(dark?' · Diệt Thế Ám Vực':' · Vĩnh Hằng Quang Vực'),lore:'Diễn giải thời không từ '+weapon+' và '+skillName+' trong điển tích '+faction+'.'};

@@ -6,8 +6,8 @@ Vietnamese-first, low-cost offline pixel strategy prototype. Read docs/v5-system
 
 - Use one Codex session. Do not spawn agents or paid services unless explicitly requested.
 - Keep gameplay free of network AI, accounts, runtime dependencies and paid APIs. No tokens in browser code.
-- Preserve old saves through migrateKingdom. Durable saves refund either deployed army once, drop transient battles and stop automatic campaigns.
-- Original generated pixel art only; no copied Infinity Kingdom assets/UI. There are twenty PNGs embedded once as browser-local Blob URLs by the offline builder.
+- Preserve old saves through migrateKingdom. Durable saves refund all deployed surviving armies once, drop transient battles and stop automatic campaigns.
+- Original generated pixel art only; no copied Infinity Kingdom assets/UI. There are twenty-six PNGs embedded once as browser-local Blob URLs by the offline builder.
 - Ship concrete playable changes and verify actual UI flows. Do not claim the Studio invokes Codex; it exports/copies data for the user's separate session.
 
 ## Source ownership
@@ -33,9 +33,9 @@ npm run build:offline
 python3 package-windows.py
 ```
 
-195 meaningful tests cover gameplay and save invariants. Exercise changed browser flows (desktop/mobile). Test the delivered ZIP extracted to a path with spaces, Python server GET/HEAD/404, offline image/skill loading and actual gameplay. Report that BAT has not been run on Windows if that remains true.
+204 meaningful tests cover gameplay and save invariants. Exercise changed browser flows (desktop/mobile). Test the delivered ZIP extracted to a path with spaces, Python server GET/HEAD/404, offline image/skill loading and actual gameplay. Report that BAT has not been run on Windows if that remains true.
 
-Current delivery: Thien-Menh-Kingdom-v9-Windows.zip plus compatibility Thien-Menh-Windows-Python.zip. No Node/Python is needed for direct HTML play; Python launcher uses only the standard library. Regenerate delivery whenever source/UI/art/instructions change. GitHub publication requires session authorization; this thread already authorizes pushing the secondary branch for user download.
+Current delivery: Thien-Menh-Kingdom-v10-Windows.zip plus compatibility Thien-Menh-Windows-Python.zip. No Node/Python is needed for direct HTML play; Python launcher uses only the standard library. Regenerate delivery whenever source/UI/art/instructions change. GitHub publication requires session authorization. Prior push was rejected by automatic review; do not retry publication without direct authorization for the concrete payload and destination. Local implementation/packaging remains authorized.
 
 UI v7: read docs/v7-interface.md. Native 1920×1080 frame scales uniformly; do not scale individual text panels. gallery-ui.mjs owns fixed bag/pet/campaign scenes and description dialogs; recommendations.mjs provides owned-only heuristic formations. New reports are restricted to mode bot; secret reward parcels remain mandatory.
 
@@ -44,3 +44,5 @@ squads.mjs owns exactly three saved presets and real reserve allocation; army-ui
 Current rules v8: read docs/v8-update.md. Player and enemy active formations cap at four; internal 9-slot coordinates remain only for backward compatibility. revision 8 imports enforce cap, older revisions migrate without asset loss. city-rules.mjs owns level100 and four concurrent training queues; preserve legacy training alias and total troop capacity. art-cache.mjs shares images; avoid remounting map panels or combat buttons each simulation tick. sandbox.mjs debug grants are local only and repeatable without gear duplication.
 
 UI v9: read docs/v9-update.md. technology.mjs owns six persistent material-funded research nodes; systems-ui.mjs owns native mission/technology/rune scenes. world-art.mjs shares five world site sprites. Keep the mailbox available through the HUD; campaign opens through the city tower.
+
+Rules/UI v10: read docs/v10-update.md. operations.mjs owns three parallel deployments plus the separate tower battle; durable saves refund all survivors once and clear transient battles. Keep the legacy expedition alias without double-counting. Turn-based new battles queue manual skills; resolveTacticsSkill is the action resolver for effect-level tests. elements.mjs/long-ui.mjs own seven innate elements and exactly one equipped dragon per team. VIP13/14 claim gates Light/Dark dragons; shop.mjs owns paid boxes and fragment purchases. Twenty-six embedded PNGs include tiered equipment/weapons, city life, temple, seven dragons and element badges.

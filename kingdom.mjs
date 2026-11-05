@@ -1,3 +1,5 @@
+import {elementNames,canUseDragon,elementalMultiplier} from './elements.mjs';
+import {deployments,deployedUnits} from './operations.mjs';
 import {technologyBonus} from './technology.mjs';
 import {buildingLevelMax, normalizeTraining, trainingJobs, validTraining, constructionSeconds} from './city-rules.mjs';
 import {syncActiveSquad} from './squads.mjs';
@@ -52,7 +54,7 @@ export function calculateDamage(actor, target, factor, options = {}) {
   const attack = type === 'magic' ? actor.magicAtk ?? actor.atk : actor.physicalAtk ?? actor.atk;
   const rawDefense = type === 'magic' ? target.resist || 0 : (target.armor || 0) * (target.exposed > 0 ? .75 : 1);
   const mitigation = 100 / (100 + Math.max(0, rawDefense));
-  const elemental = { Hỏa: 'Mộc', Mộc: 'Thủy', Thủy: 'Hỏa' }[actor.element] === target.element ? 1.25 : 1;
+  const elemental=elementalMultiplier(actor.element,target.element);
   const strength = actor.maxHp ? .6 + .4 * Math.max(0, Math.min(1, actor.hp / actor.maxHp)) : 1;
   const amount = Math.max(1, Math.round(attack * factor * mitigation * elemental * strength * (actor.boost > 0 ? 1.2 : 1) * (target.marked > 0 ? 1.25 : 1) * (options.armyBonus || 1) * (options.reduction || 1) * (options.critical ? 1.5 : 1)));
   return { amount, type, mitigation, elemental, strength, defense: rawDefense, critical: Boolean(options.critical) };
@@ -67,7 +69,7 @@ export function kingdomInitial(now = Date.now()) {
 }
 export function activeBonds(team) { return bonds.filter(b => b.ids.filter(id=>team.includes(id)).length >= (b.required||b.ids.length)); }
 export function elementalResonance(team) {
-  const counts = Object.fromEntries(['Hỏa', 'Mộc', 'Thủy'].map(e => [e, team.filter(id => heroes.find(h => h.id === id)?.element === e).length]));
+  const counts = Object.fromEntries(elementNames.map(e => [e, team.filter(id => heroes.find(h => h.id === id)?.element === e).length]));
   const element = Object.keys(counts).find(e => counts[e] >= 3);
   return { element: element || null, bonus: element ? counts[element] >= 4 ? Math.min(.28,.18+(counts[element]-4)*.02) : .1 : 0 };
 }
@@ -103,7 +105,7 @@ export function accelerateConstruction(state) {
 export function trainTroops(state,now=Date.now(),type=state.troopType||'shield'){
  if(!Object.hasOwn(troopTypes,type))throw new Error('Binh chủng không hợp lệ.');
  const next=normalizeTraining(structuredClone(state));if(next.trainingQueues[type])throw new Error('Binh chủng này đang huấn luyện. Các doanh trại khác vẫn hoạt động riêng.');
- const incoming=trainingJobs(next).reduce((n,j)=>n+j.amount,0),deployed=next.march?.units||next.worldAI?.expedition?.units||0;
+ const incoming=trainingJobs(next).reduce((n,j)=>n+j.amount,0),deployed=deployedUnits(next);
  if(next.troops+incoming+deployed+20>1000)throw new Error('Kho quân đã đủ chỗ cho 1.000 quân kể cả quân đang luyện/hành quân.');
  if(next.resources.food<160||next.resources.wood<80)throw new Error('Cần 160 lương thực và 80 gỗ.');
  next.resources.food-=160;next.resources.wood-=80;next.trainingQueues[type]={amount:20,type,endsAt:now+Math.max(4000,14000-next.levels.barracks*2000)/(1+vipBonuses(next).training+(skinBonus(next).training||0))};return normalizeTraining(next);
@@ -185,8 +187,8 @@ export function recallMarch(state) {
 export function durableSave(state) {
   const s = syncActiveSquad(structuredClone(state));
   if (s.march) addReserves(s, s.march.type || 'shield', s.march.units);
-  if(s.worldAI?.expedition){const e=s.worldAI.expedition;addReserves(s,e.type,e.units);s.worldAI.expedition=null;}
-  s.march = null; s.battle = null;if(s.campaign){s.campaign.autoAdvance=false;s.campaign.autoReplay=false;}
+  if(s.worldAI){for(const e of deployments(s))addReserves(s,e.type,e.units);s.worldAI.expedition=null;s.worldAI.expeditions=[];}s.campaignBattle=null;delete s.cityCelebration;
+  s.march = null; s.battle = null;if(s.campaign){s.campaign.autoAdvance=false;s.campaign.autoReplay=false;s.campaign.paused=false;}
   return s;
 }
 export function validKingdomState(s) {
@@ -196,7 +198,7 @@ export function validKingdomState(s) {
   if (s.regiments !== undefined && (!s.regiments || !Object.keys(troopTypes).every(type => Number.isInteger(s.regiments[type]) && s.regiments[type] >= 0 && s.regiments[type] <= 1000) || Object.values(s.regiments).reduce((n, v) => n + v, 0) !== s.troops)) return false;
   if (s.training?.type !== undefined && !Object.hasOwn(troopTypes, s.training.type)) return false;
   if (s.construction !== undefined && s.construction !== null && (!s.construction || !structures.some(b => b.id === s.construction.id) || s.construction.target !== s.levels?.[s.construction.id] + 1 || s.construction.target > buildingLevelMax || (s.construction.id !== 'hall' && s.construction.target > s.levels.hall) || !Number.isFinite(s.construction.endsAt) || s.construction.endsAt < 0 || s.construction.endsAt > Date.now() + 86400000)) return false;
-  return s.resources && ['food', 'wood', 'stone'].every(k => finite(s.resources[k])) && s.levels && structures.every(b => Number.isInteger(s.levels[b.id]) && s.levels[b.id] >= 1 && s.levels[b.id] <= buildingLevelMax) && structures.every(b => b.id === 'hall' || s.levels[b.id] <= s.levels.hall) && Number.isInteger(s.troops) && s.troops >= 0 && s.troops <= 1000 && Number.isFinite(s.lastTick) && s.lastTick >= 0 && s.lastTick <= Date.now() + 86400000 && ['Hỏa', 'Thủy', 'Mộc'].includes(s.dragon) && typeof s.autoSkill === 'boolean' && typeof s.paused === 'boolean' && Array.isArray(s.cleared) && s.cleared.length <= 3 && new Set(s.cleared).size === s.cleared.length && s.cleared.every(id => worldNodes.some(n => n.id === id && n.type === 'camp')) && s.march === null && s.battle === null && validTraining(s);
+  return s.resources && ['food', 'wood', 'stone'].every(k => finite(s.resources[k])) && s.levels && structures.every(b => Number.isInteger(s.levels[b.id]) && s.levels[b.id] >= 1 && s.levels[b.id] <= buildingLevelMax) && structures.every(b => b.id === 'hall' || s.levels[b.id] <= s.levels.hall) && Number.isInteger(s.troops) && s.troops >= 0 && s.troops <= 1000 && Number.isFinite(s.lastTick) && s.lastTick >= 0 && s.lastTick <= Date.now() + 86400000 && canUseDragon(s,s.dragon) && typeof s.autoSkill === 'boolean' && typeof s.paused === 'boolean' && Array.isArray(s.cleared) && s.cleared.length <= 3 && new Set(s.cleared).size === s.cleared.length && s.cleared.every(id => worldNodes.some(n => n.id === id && n.type === 'camp')) && s.march === null && s.battle === null && (s.campaignBattle===undefined||s.campaignBattle===null) && validTraining(s);
 }
 export function migrateKingdom(s, now = Date.now()) {
   if (validKingdomState(s)) return economyTick(normalizeAccount({ ...s, troopType: s.troopType || 'shield', regiments: s.regiments || { shield: s.troops, spear: 0, bow: 0, cavalry: 0 }, construction: s.construction || null }), now);

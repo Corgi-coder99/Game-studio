@@ -1,8 +1,8 @@
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 
 const root = new URL('./', import.meta.url);
-const moduleFiles=['art-cache','world-art','technology','characters','game','progression','realms','skins','chronicle','world-data','inheritance-data','runes','mail','squads','city-rules','account','troops','viewport-ui','inventory-ui','account-ui','character-ui','inheritance-ui','strategy-ui','inheritance-combat','tactics','kingdom','inheritance-sim','world-sim','world-ui','combat-motion','region-map','campaign','campaign-ui','realm-map','inheritance-map','map','recommendations','sandbox','gallery-ui','army-ui','systems-ui','app'];
-const assetNames=['heroes-pixel.png','hulao-pixel.png','city-pixel.png','battle-units-pixel.png','roster-a-pixel.png','roster-b-pixel.png','celestial-pets-pixel.png','pets-awakened-pixel.png','skills-pixel.png','castle-skins-pixel.png','window-scenes-pixel.png','elemental-dragons-pixel.png','equipment-icons-pixel.png','inventory-icons-pixel.png','troops-walk-pixel.png','trial-tower-pixel.png','weapon-icons-pixel.png','building-scenes-pixel.png','world-terrain-pixel.png','world-sites-pixel.png'];
+const moduleFiles=['elements','city-life','operations','skill-vfx','art-cache','world-art','technology','characters','game','progression','realms','skins','chronicle','world-data','inheritance-data','runes','mail','squads','city-rules','account','troops','viewport-ui','inventory-ui','account-ui','character-ui','inheritance-ui','strategy-ui','inheritance-combat','tactics','kingdom','inheritance-sim','world-sim','world-ui','combat-motion','region-map','campaign','campaign-ui','realm-map','inheritance-map','map','recommendations','sandbox','shop','long-ui','gallery-ui','army-ui','systems-ui','app'];
+const assetNames=['heroes-pixel.png','hulao-pixel.png','city-pixel.png','battle-units-pixel.png','roster-a-pixel.png','roster-b-pixel.png','celestial-pets-pixel.png','pets-awakened-pixel.png','skills-pixel.png','castle-skins-pixel.png','window-scenes-pixel.png','elemental-dragons-pixel.png','equipment-icons-pixel.png','inventory-icons-pixel.png','troops-walk-pixel.png','trial-tower-pixel.png','weapon-icons-pixel.png','building-scenes-pixel.png','world-terrain-pixel.png','world-sites-pixel.png','equipment-rarity-pixel.png','weapon-rarity-pixel.png','city-life-pixel.png','summon-temple-pixel.png','seven-dragons-pixel.png','element-icons-pixel.png'];
 const [template,styles,sources,assetBytes]=await Promise.all([
  readFile(new URL('index.html',root),'utf8'),
  Promise.all(['style','pixel','immersive','rpg','account','viewport','design'].map(f=>readFile(new URL(f+'.css',root),'utf8'))),
@@ -23,4 +23,4 @@ if(html.includes('src="/app.mjs"')||html.includes('href="/style.css"'))throw new
 await mkdir(new URL('offline/',root),{recursive:true});
 await writeFile(new URL('offline/Thien-Menh.html',root),html);
 await writeFile(new URL('offline/HUONG-DAN.txt',root),await readFile(new URL('windows/HUONG-DAN.txt',root),'utf8'));
-console.log('Offline build: offline/Thien-Menh.html (all twenty PNGs embedded once; no network or Node.js needed)');
+console.log('Offline build: offline/Thien-Menh.html (all twenty-six PNGs embedded once; no network or Node.js needed)');
