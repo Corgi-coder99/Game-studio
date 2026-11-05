@@ -1,4 +1,4 @@
-THIÊN MỆNH — PIXEL KINGDOM v5 — OFFLINE CHO WINDOWS
+THIÊN MỆNH — PIXEL KINGDOM v7 — OFFLINE CHO WINDOWS
 
 TRƯỚC TIÊN
 Nhấp chuột phải tệp ZIP → Extract All… / Giải nén tất cả.
@@ -34,7 +34,7 @@ Cách mở HTML và cách chạy Python có vùng lưu riêng. Dùng xuất/nh�
 khi đổi cách chạy, đổi trình duyệt, đổi cổng hoặc chuyển máy.
 Không dùng InPrivate / Incognito nếu muốn giữ tiến độ lâu dài.
 
-NỘI DUNG BẢN THỬ v5
+NỘI DUNG BẢN THỬ v7
 Thành phố pixel toàn màn hình, HUD và các nút nổi; chọn công trình để mở bảng.
 6 loại công trình, 4 doanh trại, sản xuất tài nguyên, nâng cấp cấp 1–5 có thời gian,
 huấn luyện quân, 3 trại địch và 3 điểm thu thập trên bản đồ thế giới.
@@ -86,3 +86,28 @@ Vào Cổng không gian hoặc tab Bí cảnh để đến địa điểm đã t
 để nhận gói chiến lợi tại Hộp thư → Chiến lợi bí cảnh; phải bấm nhận mới vào túi.
 Bí kíp mở thêm một ô kỹ năng cho bất kỳ tướng nào. Gắn trong màn nhân vật
 hoặc thư viện; cùng một bí kíp đã học có thể truyền cho nhiều tướng.
+
+GIAO DIỆN v7
+Khung thiết kế 1920 × 1080, tự thu phóng toàn màn hình theo cùng tỷ lệ.
+Bấm hình vật phẩm, kỹ năng hoặc thú cưng để mở thông tin; Esc để đóng.
+Túi đồ: chọn nhóm bên trái, bấm ô hình, thao tác trong cửa sổ mô tả.
+Nhân vật: bấm chân dung, chọn ô trang bị quanh tướng, chọn hình món đồ
+rồi bấm Trang bị. Biểu tượng mặt trời/mặt trăng là ấn ngoại hình; THẦN
+chiến đấu theo đường tướng khi đủ bộ SSR.
+Đội hình: chọn mục gợi ý trận rồi Áp dụng, hoặc tự kéo thả tướng vào 9 ô.
+Thú cưng: các nút xếp đội, tăng cấp và tăng sao nằm dưới mỗi hình thú.
+Chiến dịch: Xuất trận tự bật nối ải và tự dùng chiêu; có ×1/×2/×4.
+Không bật bảng kết quả giữa các ải; tự nhận thưởng, dừng khi thua hoặc
+hoàn tất 999. Hộp thư chiến đấu chỉ hiển thị trận công thành thế giới.
+Chiến lợi bí cảnh vẫn nhận riêng qua hộp thư.
+Bản đồ: nút Tổng quan / Cận cảnh để chuyển giữa hai lớp; lớp cận cảnh
+giữ điểm tài nguyên, thành BOT và cổng dịch chuyển.
+
+BA ĐẠO QUÂN VÀ CHIẾN BÁO
+Trong Đội hình, dải tướng nằm dưới, có thể lướt ngang hoặc kéo lên ô.
+Tổng quan 3 đội: lưu đội hiện tại vào một bộ, kích hoạt để sử dụng.
+Các bộ dùng chung kho và tướng; chỉ một đạo quân xuất phát mỗi lần.
+Phân bổ quân: chọn binh chủng, nhập số hoặc Tự điền tối đa. Quân chỉ
+trừ khi xuất phát; cần ít nhất 60 quân để công thành.
+Chiến báo hai phe có thanh máu và số liệu riêng từng tướng. Bấm hình
+tướng để xem chi tiết, Phân tích để đọc bảng số liệu và gợi ý.

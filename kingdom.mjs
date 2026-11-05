@@ -1,3 +1,4 @@
+import {syncActiveSquad} from './squads.mjs';
 import {recordBattleMail} from './mail.mjs';
 import {troopStats} from './troops.mjs';
 import {skinBonus} from './skins.mjs';
@@ -182,7 +183,7 @@ export function recallMarch(state) {
 
 // Saves store durable progression only. In-flight combat is intentionally not imported.
 export function durableSave(state) {
-  const s = structuredClone(state);
+  const s = syncActiveSquad(structuredClone(state));
   if (s.march) addReserves(s, s.march.type || 'shield', s.march.units);
   if(s.worldAI?.expedition){const e=s.worldAI.expedition;addReserves(s,e.type,e.units);s.worldAI.expedition=null;}
   s.march = null; s.battle = null;if(s.campaign){s.campaign.autoAdvance=false;s.campaign.autoReplay=false;}

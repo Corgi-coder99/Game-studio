@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {kingdomInitial,validKingdomState,durableSave} from './kingdom.mjs';
+import {characterRoster,characterById} from './characters.mjs';
+import {normalizeProgression} from './progression.mjs';
+import {recommendFormation,battlePlans} from './recommendations.mjs';
+test('recommendations use only owned heroes, unique legal slots, and leave state unchanged',()=>{const s=kingdomInitial(),before=structuredClone(s);for(const plan of Object.keys(battlePlans)){const r=recommendFormation(s,plan);assert.equal(r.formation.length,9);const ids=r.formation.filter(Boolean);assert.equal(new Set(ids).size,ids.length);assert.ok(ids.every(id=>s.owned.includes(id)));assert.ok(validKingdomState(durableSave(normalizeProgression({...s,formation:r.formation,team:ids}))));}assert.deepEqual(s,before);});
+test('formation protects support in the rear and places a tank in the front when owned',()=>{const s=kingdomInitial(),r=recommendFormation(s);assert.ok(r.formation.slice(0,3).some(id=>characterById[id]?.roles.includes('tank')));assert.ok(r.formation.slice(6).some(id=>characterById[id]?.roles.includes('support')));});
+test('different combat plans change recommendations and prioritize assassins against the rear',()=>{let s=kingdomInitial();s.owned=characterRoster.filter(h=>!h.vipExclusive).map(h=>h.id);s=normalizeProgression(s);const boss=recommendFormation(s,'boss'),rear=recommendFormation(s,'backline');assert.notDeepEqual(boss.formation,rear.formation);assert.ok(rear.formation.filter(Boolean).some(id=>characterById[id].roles.includes('assassin')));assert.ok(rear.formation.filter(Boolean).some(id=>characterById[id].roles.includes('tank')));});
+test('empty and partial collections never invent unavailable characters or VIP heroes',()=>{const s=kingdomInitial();s.owned=[];assert.deepEqual(recommendFormation(s).formation,Array(9).fill(null));s.owned=['zhaoyun'];assert.deepEqual(recommendFormation(s).formation.filter(Boolean),['zhaoyun']);});

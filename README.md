@@ -1,3 +1,13 @@
+Bản v7 bổ sung dải tướng kéo ngang dưới trận đồ, ba bộ đội hình lưu sẵn, phân bổ/tự điền quân thật và chiến báo hai phe. Nút Thế giới mở lớp thu thập/cổng/bí cảnh trước.
+
+## Giao diện v7 · 1920×1080
+
+[Tải ZIP offline v7](https://github.com/Corgi-coder99/Game-studio/blob/codex/thien-menh-offline/Thien-Menh-Kingdom-v7-Windows.zip) → Download raw → giải nén → CHOI-NGAY.bat. Không cần Node.js. Python là cách chạy tùy chọn.
+
+Túi lưới biểu tượng, mô tả bật khi bấm hình, trang bị có hình và ấn quang/ám, tướng căn giữa, thẻ thú nguyên vẹn, gợi ý đội hình và rồng phía sau. Chiến dịch tự chuyển ải, không bật kết quả hay tạo chiến báo PVE; chỉ công thành thế giới có chiến báo. Hai lớp bản đồ tổng quan/cận cảnh giữ thu thập và cổng dịch chuyển.
+
+Quy chuẩn và giới hạn: [docs/v7-interface.md](docs/v7-interface.md).
+
 ## Bản giao diện v6
 
 [Tải ZIP Windows offline](https://github.com/Corgi-coder99/Game-studio/blob/codex/thien-menh-offline/Thien-Menh-Kingdom-v6.1-Windows.zip). Bấm Download raw, giải nén rồi mở CHOI-NGAY.bat hoặc mở Thien-Menh.html bằng Edge/Chrome. Không cần Node.js. Có thể chạy chay_game.py nếu đã có Python.
