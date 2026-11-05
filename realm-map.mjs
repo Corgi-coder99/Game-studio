@@ -1,0 +1,22 @@
+import {realmFactions,realmCities} from './realms.mjs';
+export function drawRealmAtlas(ctx,state,time){
+ const hits=[],ox=-520,oy=75;ctx.save();ctx.translate(ox,oy);
+ function shape(points,fill,stroke='#dccfa088'){ctx.beginPath();for(const [i,[x,y]]of points.entries())i?ctx.lineTo(x,y):ctx.moveTo(x,y);ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=stroke;ctx.lineWidth=3;ctx.stroke();}
+ function line(points,color,width=3){ctx.beginPath();for(const [i,[x,y]]of points.entries())i?ctx.lineTo(x,y):ctx.moveTo(x,y);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke();}
+ function text(value,x,y,size=16,color='#f5e3b0'){ctx.textAlign='center';ctx.font=`bold ${size}px Georgia`;ctx.strokeStyle='#183b43';ctx.lineWidth=4;ctx.strokeText(value,x,y);ctx.fillStyle=color;ctx.fillText(value,x,y);}
+ // Strategic Three Kingdoms geography: Wei north, Shu southwest, Wu southeast.
+ shape([[110,80],[240,45],[330,75],[450,50],[560,78],[690,50],[810,90],[920,160],[955,265],[905,340],[820,390],[680,385],[560,355],[460,330],[350,365],[265,310],[145,335],[70,230]],'#9b4655');
+ shape([[145,335],[265,310],[350,365],[460,330],[510,400],[490,515],[545,585],[460,650],[325,665],[245,610],[140,640],[70,550],[80,440]],'#356694');
+ shape([[510,400],[560,355],[680,385],[820,390],[905,340],[965,405],[970,525],[935,590],[870,675],[740,645],[660,695],[545,650],[545,585],[490,515]],'#3c805c');
+ shape([[445,355],[510,375],[550,430],[515,495],[460,465]],'#9d865e','#e9cc7988');
+ for(const path of [[[240,45],[265,170],[200,250],[265,310]],[[450,50],[420,170],[510,210],[460,330]],[[690,50],[680,170],[740,245],[680,385]],[[810,90],[825,235],[905,340]],[[145,335],[235,440],[140,640]],[[350,365],[325,480],[325,665]],[[560,355],[625,485],[545,650]],[[820,390],[810,520],[740,645]],[[970,525],[810,520]]])line(path,'#dfd1b755',1.5);
+ line([[210,160],[330,155],[420,195],[535,200],[590,245],[730,240],[860,285],[935,265]],'#9cc5cc',8);
+ line([[230,505],[330,530],[410,480],[510,460],[625,485],[730,480],[815,430],[920,435],[960,470]],'#a0d9dc',10);
+ text('HOÀNG HÀ',470,170,11,'#cbe8df');text('TRƯỜNG GIANG',665,520,11,'#cbe8df');
+ text('TÀO NGỤY',575,125,29,'#ffe1d9');text('THỤC HÁN',240,375,27,'#cfe7ff');text('ĐÔNG NGÔ',760,600,29,'#d5ffcf');text('KINH CHÂU',485,415,10);
+ for(let n=0;n<32;n++){const x=90+(n*127%850),y=110+(n*83%490);if((x<430&&y>330)||(x>350&&y<200)){ctx.fillStyle=n%2?'#293e3b':'#5b6963';ctx.beginPath();ctx.moveTo(x-10,y+9);ctx.lineTo(x,y-13);ctx.lineTo(x+12,y+9);ctx.fill();ctx.fillStyle='#a3b5a4';ctx.fillRect(x-2,y-11,4,4);}}
+ const home=realmCities.find(c=>c.id===state.account?.realm?.city);
+ if(state.march&&home){const target=realmCities.find(c=>c.node===state.march.nodeId)||realmCities[0],r=state.march.stage==='returning'?1-Math.min(1,state.march.progress/state.march.duration):state.march.stage==='marching'?Math.min(1,state.march.progress/state.march.duration):1;ctx.setLineDash([9,7]);line([[home.x,home.y],[target.x,target.y]],'#f7df83',3);ctx.setLineDash([]);ctx.fillStyle='#fff0b8';const x=home.x+(target.x-home.x)*r,y=home.y+(target.y-home.y)*r;ctx.fillRect(x-5,y-5,10,10);}
+ for(const city of realmCities){const f=realmFactions[city.faction],selected=home?.id===city.id;ctx.fillStyle='#233d42';ctx.fillRect(city.x-20,city.y-24,40,28);ctx.fillStyle='#d2bd83';ctx.fillRect(city.x-17,city.y-24,34,21);for(let j=0;j<3;j++)ctx.fillRect(city.x-20+j*15,city.y-32,10,10);ctx.fillStyle=f.color;ctx.fillRect(city.x-6,city.y-21,12,18);ctx.fillStyle='#edcd71';ctx.fillRect(city.x+17,city.y-45,2,24);ctx.fillStyle=f.color;ctx.fillRect(city.x+19,city.y-44,17,11);if(selected){ctx.strokeStyle='#ffe99b';ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(city.x,city.y-7,33+Math.sin(time*2)*2,24,0,0,Math.PI*2);ctx.stroke();}text(city.name+(selected?' · THÀNH CỦA BẠN':''),city.x,city.y+20,selected?14:13);hits.push({id:city.id,type:'realmCity',x:city.x+ox-50,y:city.y+oy-50,w:100,h:85});}
+ text('TAM QUỐC · THANH VÂN ĐẠI LỤC',510,735,17,'#d2dfc6');ctx.restore();return hits;
+}

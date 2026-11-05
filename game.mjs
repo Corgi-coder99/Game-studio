@@ -19,7 +19,7 @@ export function summon(state, count = 1, random = Math.random) {
   for (let i = 0; i < count; i++) {
     const roll = random();
     const rarity = next.pity === 29 || roll < 0.05 ? 'SSR' : roll < 0.3 ? 'SR' : 'R';
-    const pool = heroes.filter(h => h.rarity === rarity);
+    const pool = heroes.filter(h => h.rarity === rarity && !h.vipExclusive);
     const hero = pool[Math.min(pool.length - 1, Math.floor(random() * pool.length))];
     const duplicate = next.owned.includes(hero.id);
     if (duplicate) next.coins += 25;

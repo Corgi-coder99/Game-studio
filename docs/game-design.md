@@ -63,3 +63,7 @@ Thành phố toàn màn hình với HUD nổi, bảng công trình đóng/mở t
 ## V4: phát triển nhân vật
 
 Đặc tả đang áp dụng: [Hệ thống v4](character-system-v4.md), [56 nhân vật](characters.md). Đội hình 9 ô thay thế giới hạn 4 tướng. Tám phẩm cấp theo yêu cầu, sáu vai trò kết hợp, cấp nhân vật/trang bị/kỹ năng và tài nguyên mana hoặc nộ. Giới hạn hiệu ứng được thực thi trong mô phỏng, không chỉ hiển thị trong mô tả.
+
+## V5 — spécification hiện hành
+
+[Thiết kế v5](v5-systems.md) thay thế các giới hạn v3/v4 ở trên: người chơi cấp 100, VIP15, 61 tướng, 202 chiêu chủ động, 5 bị động VIP, 7 sao nhân vật, gacha riêng, linh thú thức tỉnh 5 sao, túi đồ tổng và bộ SSR/THẦN.

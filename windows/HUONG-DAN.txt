@@ -1,4 +1,4 @@
-THIÊN MỆNH — PIXEL KINGDOM v4 — OFFLINE CHO WINDOWS
+THIÊN MỆNH — PIXEL KINGDOM v5 — OFFLINE CHO WINDOWS
 
 TRƯỚC TIÊN
 Nhấp chuột phải tệp ZIP → Extract All… / Giải nén tất cả.
@@ -34,17 +34,23 @@ Cách mở HTML và cách chạy Python có vùng lưu riêng. Dùng xuất/nh�
 khi đổi cách chạy, đổi trình duyệt, đổi cổng hoặc chuyển máy.
 Không dùng InPrivate / Incognito nếu muốn giữ tiến độ lâu dài.
 
-NỘI DUNG BẢN THỬ v4
+NỘI DUNG BẢN THỬ v5
 Thành phố pixel toàn màn hình, HUD và các nút nổi; chọn công trình để mở bảng.
 6 loại công trình, 4 doanh trại, sản xuất tài nguyên, nâng cấp cấp 1–5 có thời gian,
 huấn luyện quân, 3 trại địch và 3 điểm thu thập trên bản đồ thế giới.
-56 tướng, đội hình 3×3, 5 ô trang bị, cấp độ và 8 liên kết điển tích, 3 linh long.
+61 tướng, đội hình 3×3, 202 kỹ năng chủ động, 5 bị động VIP, 8 liên kết và 3 linh long.
+Nhân vật tăng tối đa 7 sao; thú cưng tối đa 5 sao, thức tỉnh hình và kỹ năng.
+Nhấp chân dung góc trái để mở hồ sơ. Quà cấp 5,10,...100; VIP tối đa 15.
+Túi Càn Khôn thống kê mọi tài nguyên, vật phẩm, mảnh, trang bị, thú và ngoại trang.
+Gacha tướng, trang bị và thú cưng riêng. Điểm gacha thú chỉ từ quà VIP.
+Đủ 5 món SSR: chỉ số ×3; lần tung kỹ năng 3,6,9... kích hoạt THẦN Ánh sáng/Bóng tối.
 Bốn binh chủng Thuẫn/Thương/Cung/Kỵ có quân số và khắc chế riêng.
 Công vật lý/phép, giáp/kháng phép, bạo kích và báo cáo sát thương.
 Nâng cấp cần thời gian; tăng tốc công trình tốn 50 linh ngọc mô phỏng.
 Quân hành quân và giao chiến tự động theo thời gian thực. Có thể tạm dừng,
 tắt tự dùng kỹ năng để tung chiêu thủ công. Vào Cách chơi trong game để đọc.
-Muốn thử mọi kỹ năng: Studio → Mở 8 tướng để thử nghiệm.
+Muốn thử mọi kỹ năng: Studio → Vật tư phát triển nhân vật để mở 56 tướng thường.
+Studio → Sandbox đạt cấp 100/VIP15 để thử quà. Năm SSR Thái Sơ chỉ nhận bằng quà VIP.
 Vào Anh hùng để thay đội hình và đọc kỹ năng/combo.
 Ảnh đã nằm sẵn trong game, có hiệu ứng chiêu và hành quân; có sprite toàn thân và chuyển động/hiệu ứng canvas, chưa có hoạt ảnh nhiều khung
 hoặc thế giới MMO nhiều người.
@@ -59,3 +65,24 @@ KIỂM TRA PHIÊN BẢN PYTHON (KHÔNG BẮT BUỘC CHO CÁCH 1)
     py -3 --version
 Hoặc:
     python --version
+
+MỞ RỘNG V5
+Chọn quốc gia và thành khi bắt đầu: Ngụy tăng Kỵ, Thục tăng Thương, Ngô tăng Cung.
+Chiến dịch 1–999: tự nối màn, cày lại, tua ×1/×2/×4; nhận thưởng tự động.
+Thế giới → Khu vực quanh thành: tài nguyên, 27 BOT, cổng không gian, công thành.
+Mỗi khu vực có 3 BOT và 6 điểm tài nguyên. BOT tự xây/luyện/thu thập bằng AI luật offline.
+Nhiệm vụ: quà thời gian chơi, thành tích, danh hiệu, skin nhiệm vụ.
+VIP13/14/15 mỗi cấp cho một skin riêng; chỉ skin đang dùng cho buff.
+Binh bộ: mọi binh chủng tự tăng theo cấp người chơi, tối đa 100.
+
+Hộp thư chiến tuyến: nhấn phong bì trên HUD hoặc tab Chiến tuyến để xem báo cáo,
+đóng góp từng tướng, kỹ năng, linh long và gợi ý nâng theo dữ liệu của trận.
+Bảng ngọc: mở từ cấp5, từng ô yêu cầu cấp khác nhau. Nhận điểm trong gói quà
+cấp5/10/.../100, nâng ngọc toàn đội. Có hoàn điểm miễn phí khi đội đã trở về.
+
+BÍ CẢNH & TRUYỀN THỪA
+Thu thập trên bản đồ khu vực có thể tìm mảnh bản đồ chỉ đúng vị trí cổng ẩn.
+Vào Cổng không gian hoặc tab Bí cảnh để đến địa điểm đã tìm thấy. Thắng BOSS
+để nhận gói chiến lợi tại Hộp thư → Chiến lợi bí cảnh; phải bấm nhận mới vào túi.
+Bí kíp mở thêm một ô kỹ năng cho bất kỳ tướng nào. Gắn trong màn nhân vật
+hoặc thư viện; cùng một bí kíp đã học có thể truyền cho nhiều tướng.

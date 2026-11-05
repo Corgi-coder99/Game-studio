@@ -10,9 +10,9 @@ function rich(team=['wukong','bajie','zhugeliang','zhaoyun']){const s=kingdomIni
 function arena(team=['wukong','bajie','zhugeliang','zhaoyun']){const s=rich(team),b=createTacticsBattle(s,{id:'test',name:'Thử hiệu ứng',level:1,enemies:ids.slice(8,17)},[],{bonus:0});for(const u of [...b.allies,...b.enemies]){u.effects={};u.immune=0;u.invincible=0;u.shield=0;u.reflect=0;u.block=0;u.lifesteal=0;u.regen=0;u.revive=false;u.execute=false;u.crit=0;u.armor=0;u.resist=0;u.hp=u.maxHp=10000;u.attackTimer=999;u.manaRegen=0;u.rageRegen=0;u.mana=0;u.rage=0;}return b;}
 function ready(b,id){const u=b.allies.find(u=>u.id===id);u[u.resource]=u.skillCost;u.cooldown=0;return u;}
 
-test('56 distinct characters cover all eight grades, six roles, unique signature weapons and skills',()=>{
- assert.equal(characterRoster.length,56);assert.equal(new Set(ids).size,56);assert.equal(new Set(characterRoster.map(h=>h.name)).size,56);
- assert.equal(new Set(characterRoster.map(h=>h.skill.name)).size,56);assert.ok(new Set(characterRoster.map(h=>h.weapon)).size>=50);
+test('61 distinct characters cover all eight grades, six roles, unique signature weapons and skills',()=>{
+ assert.equal(characterRoster.length,61);assert.equal(new Set(ids).size,61);assert.equal(new Set(characterRoster.map(h=>h.name)).size,61);
+ assert.equal(new Set(characterRoster.map(h=>h.skill.name)).size,61);assert.ok(new Set(characterRoster.map(h=>h.weapon)).size>=50);
  for(const grade of gradeOrder)assert.ok(characterRoster.some(h=>h.grade===grade));
  for(const role of Object.keys(archetypeLabels))assert.ok(characterRoster.some(h=>h.roles.includes(role)));
  for(const h of characterRoster){assert.ok(h.skill.operations.length>=2);assert.ok(h.preferredRows.every(r=>r>=0&&r<=2));assert.ok(['mana','rage'].includes(h.resource));}

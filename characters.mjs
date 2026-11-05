@@ -1,5 +1,6 @@
 export const gradeOrder = ['SSR','SSS','SS','S','A','B','C','D'];
-export const gradeColors = { SSR:'#ffd779', SSS:'#f5a8e6', SS:'#bf9aff', S:'#7ebeff', A:'#78d2b6', B:'#b6cc8d', C:'#b8c2c7', D:'#a99582' };
+export const gradeColors = { SSR:'#bdf8ff', SSS:'#ffb43b', SS:'#ffd34e', S:'#ff535b', A:'#ff983d', B:'#bd85ff', C:'#2456b8', D:'#61cf71' };
+export const gradePaints={SSR:'linear-gradient(115deg,#ff536e,#ffcf4e,#62e1a6,#55c8ff,#ba83ff)',SSS:'linear-gradient(115deg,#c92137,#ff5f47,#ffd65a,#b27b12)',SS:'#ffd34e',S:'#ff535b',A:'#ff983d',B:'#bd85ff',C:'#2456b8',D:'#61cf71'};
 export const archetypeLabels = { fighter:'Đấu sĩ', tank:'Đỡ đòn', assassin:'Sát thủ', support:'Hỗ trợ', mage:'Pháp sư', archer:'Cung thủ' };
 export const effectDescriptions = {
   block:'Chặn tối đa 70% sát thương sau phòng thủ.', reflect:'Phản tối đa 50% HP thực mất; không phản dây chuyền.', lifesteal:'Hút tối đa 50% sát thương thực gây ra; không vượt HP tối đa.', regen:'Tự hồi HP theo giây khi dưới 50% HP.', revive:'Hồi sinh một lần mỗi trận với 30% HP tối đa.', execute:'Kết liễu mục tiêu dưới 10% HP, trừ khi miễn sát thương/vô địch.',
@@ -67,6 +68,12 @@ const rows = [
  ['jingwei','Tinh Vệ','C',['archer','support'],'Thần Thoại','Thủy','Tinh Vệ Linh Vũ','Tinh Vệ Điền Hải',[D('enemyBack',1.5),E('slow','enemyBack',4),S('weakAlly',.12)],{}],
  ['kuafu','Khoa Phụ','SS',['tank','fighter'],'Thần Thoại','Mộc','Đào Mộc Thần Trượng','Trục Nhật Đại Địa',[D('enemyFront',2),H('self',.3),E('stun','enemyFront',1.5)],{block:.5,regen:.03}],
  ['pangu','Bàn Cổ','SSR',['tank','fighter'],'Thần Thoại','Hỏa','Khai Thiên Thần Phủ','Khai Thiên Tích Địa',[D('enemyAll',2.1),E('immune','self',2),S('self',.3)],{block:.6,reflect:.35}],
+ ['hongjun','Hồng Quân Đạo Tổ','SSR',['support','mage'],'Thái Sơ','Thủy','Tạo Hóa Ngọc Điệp','Hồng Mông Diễn Đạo',[D('enemyAll',2.1,'magic'),E('manaLock','enemyAll',5),H('allyAll',.3),E('boost','allyAll',5)],{revive:true,regen:.03}],
+ ['yuanshi','Nguyên Thủy Thiên Tôn','SSR',['mage','tank'],'Thái Sơ','Mộc','Bàn Cổ Phiên','Ngọc Thanh Khai Giới',[D('enemyAll',2.5,'magic'),E('stun','enemyFront',2),S('allyAll',.15)],{block:.4,reflect:.2}],
+ ['taishang','Thái Thượng Lão Quân','SSR',['support','mage'],'Thái Sơ','Hỏa','Thái Cực Đồ','Cửu Chuyển Kim Đan',[H('allyAll',.42),S('allyAll',.15),E('immune','weakAlly',3)],{revive:true,regen:.04}],
+ ['lingbao','Linh Bảo Thiên Tôn','SSR',['assassin','mage'],'Thái Sơ','Thủy','Tru Tiên Tứ Kiếm','Tru Tiên Kiếm Trận',[D('enemyBack',3,'magic'),D('enemyAll',1.6,'magic'),E('marked','enemyAll',4)],{execute:true,lifesteal:.3}],
+ ['haotian','Hạo Thiên Thượng Đế','SSR',['tank','fighter'],'Thái Sơ','Hỏa','Hạo Thiên Tinh Kiếm','Thiên Đình Ngự Lệnh',[D('enemyAll',2.3),E('immune','allyAll',2),E('boost','allyAll',4)],{block:.55,reflect:.35,revive:true}],
+
 ];
 const legacy = [
  [118,32,'猴','#ec9860','Tề Thiên Đại Thánh','SSR'],[145,26,'義','#7fb49a','Võ Thánh','SSR'],[105,27,'蓮','#e8939f','Tam Thái Tử','SR'],[100,28,'龍','#93b8db','Ngọa Long','SR'],[120,24,'眼','#b2a1d7','Nhị Lang Thần','SR'],[108,22,'槍','#b7c8c3','Thường Sơn Tử Long','R'],[150,16,'豬','#c5a58a','Thiên Bồng Nguyên Soái','R'],[95,25,'月','#cfacd1','Bế Nguyệt','R'],
@@ -75,6 +82,21 @@ export const characterRoster = rows.map((row,index)=>{
   const [id,name,grade,roles,faction,element,weapon,skillName,operations,passives,resourceOverride]=row;
   const resource=resourceOverride||(roles.includes('mage')||roles.includes('support')?'mana':'rage');
   const base=legacy[index]||[roles.includes('tank')?145:roles.includes('support')?105:115,roles.includes('tank')?22:roles.includes('mage')?29:27,'✦',gradeColors[grade],weapon,grade];
-  return {id,name,grade,rarity:base[5],roles,faction,element,weapon,title:base[4],hp:base[0],atk:base[1],glyph:base[2],color:base[3],resource,passives,preferredRows:roles.includes('tank')?[0]:roles.includes('fighter')?[0,1]:roles.includes('assassin')?[1,2]:roles.includes('support')||roles.includes('archer')?[2]:[1,2],fx:index<8?['monkey','crescent','flame','formation','beam','spear','quake','petal'][index]:['fuxi','jiangziya'].includes(id)||!operations.some(o=>o.effect==='damage')?'formation':operations.some(o=>o.effect==='burn')?'flame':roles.includes('assassin')?'beam':roles.includes('archer')?'spear':roles.includes('mage')?(element==='Thủy'?'beam':'petal'):roles.includes('tank')?'quake':'crescent',skill:{name:skillName,operations,cooldown:5+index%3,cost:resource==='mana'?.7:1},artIndex:index};
+  const dark=['lubu','caocao','zhouyu','simayi','zhangliao','ganning','pangtong','redboy','bulldemon','ironfan','daji','shengongbao','tuxingsun','xingtian','lingbao'].includes(id);const divine={path:dark?'dark':'light',name:skillName+(dark?' · Diệt Thế Ám Vực':' · Vĩnh Hằng Quang Vực'),lore:'Diễn giải thời không từ '+weapon+' và '+skillName+' trong điển tích '+faction+'.'};
+  return {id,name,grade,rarity:base[5],roles,faction,element,weapon,title:base[4],hp:base[0],atk:base[1],glyph:base[2],color:base[3],resource,passives,preferredRows:roles.includes('tank')?[0]:roles.includes('fighter')?[0,1]:roles.includes('assassin')?[1,2]:roles.includes('support')||roles.includes('archer')?[2]:[1,2],fx:index<8?['monkey','crescent','flame','formation','beam','spear','quake','petal'][index]:['fuxi','jiangziya'].includes(id)||!operations.some(o=>o.effect==='damage')?'formation':operations.some(o=>o.effect==='burn')?'flame':roles.includes('assassin')?'beam':roles.includes('archer')?'spear':roles.includes('mage')?(element==='Thủy'?'beam':'petal'):roles.includes('tank')?'quake':'crescent',skill:{name:skillName,operations,cooldown:5+index%3,cost:resource==='mana'?.7:1},divine,vipExclusive:index>=56,artIndex:index};
 });
+// Active ability families adapt each character's signature weapon and original myth motif.
+const extraAbilityFamilies={
+ tank:[['Hộ Thể',9,[S('self',.3),E('immune','self',1)]],['Trấn Địa',6,[D('enemyFront',1.35),E('stun','enemyFront',1.2)]],['Hộ Đạo',9,[S('allyAll',.15),E('invincible','self',1.5)]]],
+ fighter:[['Phá Trận',1,[D('enemyFront',1.45),E('slow','enemyFront',3)]],['Chiến Ý',5,[D('enemyColumn',1.1),S('self',.2)]],['Vạn Quân',0,[D('enemyAll',2),E('marked','enemyFront',3)]]],
+ assassin:[['Ảnh Tập',12,[D('enemyBack',1.6),E('marked','enemyBack',3)]],['Truy Hồn',4,[D('enemyWeak',2),E('stun','enemyWeak',1)]],['Vô Ảnh',13,[D('enemyAll',1.5),E('immune','self',1)]]],
+ support:[['Dưỡng Tâm',8,[H('weakAlly',.3),E('boost','allyAll',3)]],['Hộ Mệnh',9,[S('allyAll',.12),E('slow','enemyAll',2)]],['Tịnh Thế',14,[H('allyAll',.22),E('immune','weakAlly',1)]]],
+ mage:[['Pháp Ấn',10,[D('enemyColumn',1.6,'magic'),E('burn','enemyColumn',3,.12)]],['Huyền Trận',3,[D('enemyAll',1.1,'magic'),E('slow','enemyAll',2.5)]],['Thiên Phạt',12,[D('enemyAll',1.6,'magic'),E('manaLock','enemyAll',4)]]],
+ archer:[['Xuyên Vân',11,[D('enemyBack',1.6),E('marked','enemyBack',2)]],['Liên Tiễn',5,[D('enemyColumn',1.4),E('slow','enemyColumn',3)]],['Vạn Tiễn',11,[D('enemyAll',1.8),E('boost','self',3)]]],
+};
+for(const hero of characterRoster){
+ const count=['SSR','SSS'].includes(hero.grade)?4:3,family=extraAbilityFamilies[hero.roles[0]],mainIcon=hero.artIndex<8?hero.artIndex:hero.skill.operations.some(o=>o.effect==='heal')?8:hero.roles.includes('archer')?11:hero.roles.includes('assassin')?12:hero.roles.includes('tank')?9:hero.roles.includes('mage')?10:1;
+ hero.skills=[{...hero.skill,index:0,iconIndex:mainIcon,fx:hero.fx},...family.slice(0,count-1).map(([tag,iconIndex,operations],i)=>({name:hero.skill.name+' · '+tag,index:i+1,iconIndex,operations:operations.map(op=>({...op})),cooldown:7+i*2+hero.artIndex%3,cost:hero.resource==='mana'?[.4,.35,.55][i]:[.5,.45,.65][i],fx:operations.some(op=>op.effect==='heal')?'formation':operations.some(op=>op.effect==='burn')?'flame':iconIndex===9?'formation':hero.fx}))];
+ if(hero.vipExclusive)hero.passiveSkill={name:({hongjun:'Vạn Pháp Quy Nhất',yuanshi:'Ngọc Thanh Bất Diệt',taishang:'Cửu Chuyển Đan Tâm',lingbao:'Kiếm Tâm Diệt Thế',haotian:'Thiên Mệnh Đế Uy'})[hero.id],iconIndex:({hongjun:3,yuanshi:9,taishang:15,lingbao:12,haotian:14})[hero.id],text:({hongjun:'+20% hồi mana, +15% hiệu quả hồi máu.',yuanshi:'+15% kháng phép, +10% chặn đòn (tối đa 70%).',taishang:'Thêm 1% tái sinh HP/giây dưới nửa máu; nội tại hồi sinh vẫn chỉ một lần.',lingbao:'+15% xuyên kháng phép, +10% hút máu (tối đa 50%).',haotian:'+10% HP tối đa và +15% công vật lý.'})[hero.id]};
+}
 export const characterById = Object.fromEntries(characterRoster.map(h=>[h.id,h]));

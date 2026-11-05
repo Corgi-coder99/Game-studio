@@ -1,35 +1,38 @@
-# Codex Legend Studio
+# Thiên Mệnh — Codex Legend Studio
 
-This repository is a low-cost, Vietnamese-first card strategy prototype and a lightweight workspace for Codex. Use the existing checkout; cloud tasks are isolated already, so do not create worktrees unless explicitly requested.
+Vietnamese-first, low-cost offline pixel strategy prototype. Read docs/v5-systems.md and docs/characters.md before changing rules. Keep the existing checkout and the authorized secondary branch; preserve main and historical v4 ZIP.
 
 ## Working agreement
 
-- Read `docs/game-design.md` before changing gameplay. Ship small playable improvements.
-- Default to one Codex session. Do not launch parallel agents or paid tools unless the user requests them. Roles such as designer, programmer and reviewer are review perspectives, not automatically launched agents.
-- Keep gameplay free of external AI calls, accounts, paid services and runtime dependencies unless the user approves a scope change. Never put tokens in browser code.
-- Roster, gacha and v1 compatibility live in `game.mjs`. Active v2 city/economy/marching/combat/skills/save rules are in `kingdom.mjs`; pixel-map rendering in `map.mjs`; UI and browser persistence in `app.mjs`; styles in `style.css` and `pixel.css`. `server.mjs` serves a fixed list of local files.
-- Do not copy art or character depictions from existing games. Current AI-generated pixel portraits depict historical and mythological figures. Preserve the 4×2 atlas order matching game.mjs; pixel.css maps the cells. The offline bundler embeds both PNG assets as data URIs. Regenerate the offline build whenever art changes.
+- Use one Codex session. Do not spawn agents or paid services unless explicitly requested.
+- Keep gameplay free of network AI, accounts, runtime dependencies and paid APIs. No tokens in browser code.
+- Preserve old saves through migrateKingdom. Durable saves refund either deployed army once, drop transient battles and stop automatic campaigns.
+- Original generated pixel art only; no copied Infinity Kingdom assets/UI. There are ten PNGs embedded once as browser-local Blob URLs by the offline builder.
+- Ship concrete playable changes and verify actual UI flows. Do not claim the Studio invokes Codex; it exports/copies data for the user's separate session.
 
-## Task loop
+## Source ownership
 
-1. Designer: state the player-visible goal and acceptance criteria in a few lines. Update the design document only when rules change.
-2. Programmer: implement the smallest complete change, preserving existing saves or providing migration.
-3. Reviewer: consider economy exploits, broken imports, targeting, mobile layout and keyboard access.
-4. QA: run `npm test`; start `npm run dev` and exercise the changed feature in a browser when available. Report untested behavior explicitly.
+- characters.mjs: 61 heroes, 202 base active skills, 5 VIP passives. game.mjs retains v1 compatibility.
+- progression.mjs: hero levels, per-skill ranks, equipment, hero gacha, 3×3 formation.
+- tactics.mjs: actual combat, status caps, per-unit counters and ability snapshots. Enemy states must not inherit player gear, runes or manuals.
+- account.mjs: profile, level100, VIP15, milestone/VIP gifts, pet/gear draws, stars, cosmetics. Only VIP gift claims issue pet draw points.
+- kingdom.mjs: economy/build/train/old world marches/save migration. campaign.mjs: stages1..999 and auto/replay.
+- realms.mjs/realm-map.mjs: country/city selection and territory. world-data.mjs/region-map.mjs/world-sim.mjs: 27 rule-based AI towns, 54 harvest nodes, portals, regional armies and sieges.
+- chronicle.mjs: active-play timer, missions, win/loss streaks and titles. skins.mjs: only equipped owned skin gives bonuses, not collection stacking. troops.mjs: unit level follows player level to100.
+- runes.mjs: 26 nodes, milestone gift points, level gates, conservation of earned/spent/refunded points; effects must work in tactics, not only text.
+- mail.mjs: 60 battle reports, 40 notices, pending secret treasure parcels. Record once on settlement and escape imported strings in UI. Include dragons and added abilities in analytics.
+- inheritance-data/sim/combat/ui/map.mjs: six map fragments/hidden realms/universal manuals, one extra active slot per hero. Boss rewards go exclusively into claimable mail parcels. Never prune unclaimed parcels or grant duplicate manuals/claims.
+- app.mjs and *-ui.mjs: interaction/persistence. map.mjs: city/battle canvas. CSS: style/pixel/immersive/rpg/account.
 
-Do not claim browser buttons call Codex: the Studio currently exports data and copies a prompt for the user to paste into their Codex session. Future backend orchestration needs a separate design and secure server-side authentication.
+## Required verification and delivery
 
-## Commands
+```sh
+npm test
+npm run dev
+npm run build:offline
+python3 package-windows.py
+```
 
-- Node.js 22+; no dependency installation required.
-- `npm run dev` — serve on port 3000; `PORT=3001 npm run dev` for an alternate port.
-- `npm test` — built-in Node test API, currently 6 legacy/gacha tests plus 27 kingdom tests. V2 uses real-time combat, not the v1 turn-based battle functions.
-- `npm run build:offline` — regenerate the self-contained `offline/Thien-Menh.html` for Windows players without Node.js. After changing game/UI/CSS, regenerate and test it using file:// with networking disabled. Repackage the HTML and instructions in `Thien-Menh-Windows-Offline.zip`.
-- Changes are not automatically committed, pushed, published or deployed.
-- `python3 package-windows.py` — bundle HTML, BAT launchers, Python standard-library server and Vietnamese instructions into both the compatibility ZIP and `Thien-Menh-Kingdom-v3-Windows.zip`. No Python packages are required to play.
-- Preserve/migrate v1 saves. V2 durable saves recall in-flight troops and omit transient battles; resource production accrues up to 8 hours, combat advances only during the running session.
-- Infinity Kingdom is a gameplay reference for city building, four-hero elemental formations and supporting dragons. This is an original offline PvE prototype; do not copy its assets/UI or claim MMO parity.
+171 meaningful tests cover gameplay and save invariants. Exercise changed browser flows (desktop/mobile). Test the delivered ZIP extracted to a path with spaces, Python server GET/HEAD/404, offline image/skill loading and actual gameplay. Report that BAT has not been run on Windows if that remains true.
 
-V3 uses a full-screen city with floating HUD and drawers (immersive.css). Drawers are hidden until a building/node is selected. Combat is a separate full-screen canvas scene with 2-front/2-back formation, troop regiments, type counters, armor/resistance, criticals and a damage report. Keep old v2 saves compatible: use migrateKingdom to fill optional fields. Do not claim the prototype formula is the original Infinity Kingdom formula. Research evidence and limitations are in docs/reference-analysis.md. All four PNG assets must be embedded in the offline build.
-
-V4: characters.mjs owns 56 heroes; progression.mjs owns 9-slot formation, levels, items and gacha; tactics.mjs owns active combat. Embed all six PNG assets. rpg.css styles roster/progression. Run all 96 tests. Package current delivery as Thien-Menh-Kingdom-v4-Windows.zip and compatibility ZIP; preserve historical v3 ZIP. See docs/character-system-v4.md.
+Current delivery: Thien-Menh-Kingdom-v5-Windows.zip plus compatibility Thien-Menh-Windows-Python.zip. No Node/Python is needed for direct HTML play; Python launcher uses only the standard library. Regenerate delivery whenever source/UI/art/instructions change. GitHub publication requires session authorization; this thread already authorizes pushing the secondary branch for user download.
