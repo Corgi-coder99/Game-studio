@@ -1,3 +1,9 @@
+## Bản giao diện v6
+
+[Tải ZIP Windows offline](https://github.com/Corgi-coder99/Game-studio/blob/codex/thien-menh-offline/Thien-Menh-Kingdom-v6-Windows.zip). Bấm Download raw, giải nén rồi mở CHOI-NGAY.bat hoặc mở Thien-Menh.html bằng Edge/Chrome. Không cần Node.js. Có thể chạy chay_game.py nếu đã có Python.
+
+Giao diện vừa màn hình, chuyển trang thay cuộn; cửa sổ hình nhân, kho trang bị trực quan, quà VIP và mảnh tướng trong túi, nền pixel cho các cửa sổ và hình tướng thống nhất giữa thẻ/đội hình/chi tiết. Chi tiết tại [docs/v6-interface.md](docs/v6-interface.md).
+
 # Thiên Mệnh — Pixel Kingdom v5
 
 Game chiến thuật pixel 2D tiếng Việt, chơi offline trên Windows. Xây thành, xếp đội 3×3, kết hợp nhân vật Trung Hoa và linh long trong PvE. Không cần Node.js, tài khoản, API key hoặc Internet khi chơi.

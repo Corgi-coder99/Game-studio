@@ -1,5 +1,5 @@
 /* Atlas order follows heroes in game.mjs. Embedded by the offline builder. */
-.hero-art{background-image:url('/assets/heroes-pixel.png')}
+.hero-art{background-image:url('/assets/battle-units-pixel.png')}
 .location-art,.summon-stage{background-image:url('/assets/hulao-pixel.png');background-size:cover;background-position:center}
 
 .hero-art.sheet-a{background-image:url('/assets/roster-a-pixel.png')}

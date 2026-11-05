@@ -7,7 +7,7 @@ Vietnamese-first, low-cost offline pixel strategy prototype. Read docs/v5-system
 - Use one Codex session. Do not spawn agents or paid services unless explicitly requested.
 - Keep gameplay free of network AI, accounts, runtime dependencies and paid APIs. No tokens in browser code.
 - Preserve old saves through migrateKingdom. Durable saves refund either deployed army once, drop transient battles and stop automatic campaigns.
-- Original generated pixel art only; no copied Infinity Kingdom assets/UI. There are ten PNGs embedded once as browser-local Blob URLs by the offline builder.
+- Original generated pixel art only; no copied Infinity Kingdom assets/UI. There are eleven PNGs embedded once as browser-local Blob URLs by the offline builder.
 - Ship concrete playable changes and verify actual UI flows. Do not claim the Studio invokes Codex; it exports/copies data for the user's separate session.
 
 ## Source ownership
@@ -35,4 +35,4 @@ python3 package-windows.py
 
 171 meaningful tests cover gameplay and save invariants. Exercise changed browser flows (desktop/mobile). Test the delivered ZIP extracted to a path with spaces, Python server GET/HEAD/404, offline image/skill loading and actual gameplay. Report that BAT has not been run on Windows if that remains true.
 
-Current delivery: Thien-Menh-Kingdom-v5-Windows.zip plus compatibility Thien-Menh-Windows-Python.zip. No Node/Python is needed for direct HTML play; Python launcher uses only the standard library. Regenerate delivery whenever source/UI/art/instructions change. GitHub publication requires session authorization; this thread already authorizes pushing the secondary branch for user download.
+Current delivery: Thien-Menh-Kingdom-v6-Windows.zip plus compatibility Thien-Menh-Windows-Python.zip. No Node/Python is needed for direct HTML play; Python launcher uses only the standard library. Regenerate delivery whenever source/UI/art/instructions change. GitHub publication requires session authorization; this thread already authorizes pushing the secondary branch for user download.
