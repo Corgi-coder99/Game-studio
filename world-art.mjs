@@ -1,0 +1,3 @@
+import {cachedImage} from './art-cache.mjs';
+export function worldSiteArt(kind){const i=({food:0,wood:1,stone:2,portal:3,tower:4})[kind]??0;return `<span class="world-site-picture" style="--site-x:${i*25}%" role="img" aria-label="${({food:'Nông trại',wood:'Trại khai thác gỗ',stone:'Mỏ quặng đá',portal:'Cổng không gian',tower:'Thiên Tháp'})[kind]}"></span>`;}
+export function drawWorldSite(ctx,kind,x,y,width){const img=cachedImage('/assets/world-sites-pixel.png');if(!img.complete||!img.naturalWidth)return;const i=({food:0,wood:1,stone:2,portal:3,tower:4})[kind]??0,sw=img.naturalWidth/5,h=width*img.naturalHeight/sw;ctx.drawImage(img,i*sw,0,sw,img.naturalHeight,x-width/2,y-h+22,width,h);}

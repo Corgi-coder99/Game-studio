@@ -1,3 +1,4 @@
+import {drawWorldSite} from './world-art.mjs';
 import {combatPose} from './combat-motion.mjs';
 import {cachedImage} from './art-cache.mjs';
 import {trainingFor,constructionSeconds} from './city-rules.mjs';
@@ -19,6 +20,7 @@ export const citySites = [
   { id: 'wood', x: 18, y: 12, size: 230 },
   { id: 'stone', x: 17, y: 3, size: 230 },
   { id: 'dragon', x: 13, y: 5, size: 250 },
+  { id:'tower',x:8,y:0,size:220 },
 ];
 export function mountMap(canvas, read, select) {
   const ctx = canvas.getContext('2d',{alpha:false}), camera = { x: 0, y: 0, zoom: 1 }, hits = [];
@@ -149,10 +151,10 @@ export function mountMap(canvas, read, select) {
       // Houses and civic ornaments make the scene a continuous inhabited city.
       for(const [x,y]of [[-1,5],[0,8],[17,7],[17,16],[5,17],[19,6],[12,0]]){const[a,b]=iso(x,y);building(2,a,b,105);}
       const[fx,fy]=iso(9,9);poly(ctx,[[fx-65,fy],[fx,fy-30],[fx+65,fy],[fx,fy+30]],'#dbd0a5');ctx.fillStyle='#65b6bc';ctx.beginPath();ctx.ellipse(fx,fy-2,36,16,0,0,Math.PI*2);ctx.fill();rect(ctx,fx-5,fy-35,10,34,'#e2d6b4');for(let i=0;i<4;i++)rect(ctx,fx-24+i*15,fy-5+Math.sin(time*2+i)*3,7,2,'#d9f8d7');
-      for(const b of [...citySites].sort((a,b)=>a.x+a.y-b.x-b.y)){const[x,y]=iso(b.x,b.y);const selectedHere=selected===b.id&&(b.id!=='barracks'||read().trainingType===b.type);if(selectedHere){ctx.strokeStyle='#d7ef8e';ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(x,y+6,b.size*.42,b.size*.2,0,0,Math.PI*2);ctx.stroke();}building(structures.findIndex(s=>s.id===b.id),x,y,b.size);
+      for(const b of [...citySites].sort((a,b)=>a.x+a.y-b.x-b.y)){const[x,y]=iso(b.x,b.y);const selectedHere=selected===b.id&&(b.id!=='barracks'||read().trainingType===b.type);if(selectedHere){ctx.strokeStyle='#d7ef8e';ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(x,y+6,b.size*.42,b.size*.2,0,0,Math.PI*2);ctx.stroke();}if(b.id==='tower')drawWorldSite(ctx,'tower',x,y,b.size);else building(structures.findIndex(s=>s.id===b.id),x,y,b.size);
         if(b.type){const color=troopTypes[b.type].color;rect(ctx,x+b.size*.27,y-b.size*.55,3,65,'#bbac7c');poly(ctx,[[x+b.size*.27+3,y-b.size*.55],[x+b.size*.27+37,y-b.size*.55+9],[x+b.size*.27+3,y-b.size*.55+25]],color);for(let i=0;i<5;i++)soldier(x-35+i*16,y+8,color,b.type,time*4+i,.9);}
-        hits.push({id:b.id,type:b.type,x:x-b.size/2,y:y-b.size+34,w:b.size,h:b.size+24});}
-      for(const b of citySites){const[x,y]=iso(b.x,b.y),job=state.construction?.id===b.id?state.construction:b.id==='barracks'?trainingFor(state,b.type):null;const timer=job?`${Math.max(0,Math.ceil((job.endsAt-Date.now())/1000))}s`:null;const duration=job?.amount?Math.max(4000,14000-state.levels.barracks*2000):constructionSeconds(state.levels[b.id])*1000;const progress=job?1-(job.endsAt-Date.now())/duration:0;label(x,y+32,b.type?`Doanh trại ${troopTypes[b.type].name.replace(' binh','')}`:structures.find(s=>s.id===b.id).name,state.levels[b.id],selected===b.id&&(!b.type||read().trainingType===b.type),timer,progress);}
+        hits.push({id:b.id,type:b.type,x:x-b.size/2,y:y-b.size*(b.id==='tower'?1.7:1)+34,w:b.size,h:b.size*(b.id==='tower'?1.7:1)+24});}
+      for(const b of citySites){const[x,y]=iso(b.x,b.y),job=state.construction?.id===b.id?state.construction:b.id==='barracks'?trainingFor(state,b.type):null;const timer=job?`${Math.max(0,Math.ceil((job.endsAt-Date.now())/1000))}s`:null;const duration=job?.amount?Math.max(4000,14000-state.levels.barracks*2000):constructionSeconds(state.levels[b.id])*1000;const progress=job?1-(job.endsAt-Date.now())/duration:0;label(x,y+32,b.type?`Doanh trại ${troopTypes[b.type].name.replace(' binh','')}`:(b.id==='tower'?'Thiên Tháp · 999 tầng':structures.find(s=>s.id===b.id).name),b.id==='tower'?state.campaign.unlocked:state.levels[b.id],selected===b.id&&(!b.type||read().trainingType===b.type),timer,progress);}
       for(let i=0;i<20;i++){const p=(time*.22+i*1.3)%15,[x,y]=iso(i%2?8:p+1,i%2?p+2:9);soldier(x,y+11,i%3?'#82a9ba':'#d2ac83','spear',time*6+i,.65,i%2?1:-1);}
     }else{
       for(const n of [...worldNodes].sort((a,b)=>a.x+a.y-b.x-b.y)){const[x,y]=iso(n.x,n.y);if(n.type==='home')building(0,x,y,270);else if(n.type==='camp'){poly(ctx,[[x-75,y+12],[x,y-110],[x+75,y+12]],'#af6755','#e0b57b');poly(ctx,[[x,y-110],[x+75,y+12],[x+20,y+12]],'#804d48');rect(ctx,x-12,y-23,25,36,'#313b35');for(let i=0;i<4;i++)soldier(x-45+i*26,y+14,'#e3a37d','spear',time*4+i,1.2,-1);}else building(n.type==='food'?1:n.type==='wood'?2:3,x,y,210);label(x,y+37,n.name,n.level,selected===n.id);hits.push({id:n.id,x:x-105,y:y-195,w:210,h:260});}

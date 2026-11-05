@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node server.mjs",
     "build:offline": "node build-offline.mjs",
-    "test": "node game.test.mjs && node kingdom.test.mjs && node rpg.test.mjs && node account.test.mjs && node campaign.test.mjs && node world.test.mjs && node strategy.test.mjs && node inheritance.test.mjs && node recommendations.test.mjs && node squads.test.mjs && node v8.test.mjs"
+    "test": "node game.test.mjs && node kingdom.test.mjs && node rpg.test.mjs && node account.test.mjs && node campaign.test.mjs && node world.test.mjs && node strategy.test.mjs && node inheritance.test.mjs && node recommendations.test.mjs && node squads.test.mjs && node v8.test.mjs && node technology.test.mjs"
   },
   "engines": { "node": ">=22" }
 }

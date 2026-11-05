@@ -1,4 +1,4 @@
-THIÊN MỆNH — PIXEL KINGDOM v8 — OFFLINE CHO WINDOWS
+THIÊN MỆNH — PIXEL KINGDOM v9 — OFFLINE CHO WINDOWS
 
 1. TẢI VÀ GIẢI NÉN
 Trên GitHub bấm Download raw để tải ZIP.
@@ -30,7 +30,17 @@ trình duyệt, cổng hoặc máy. Tránh InPrivate / Incognito để giữ ti�
 Bản lưu cũ giữ tướng, trang bị và tài nguyên; đội cũ chỉ lấy bốn tướng đầu.
 Đội đang hành quân được thu hồi một lần khi mở lại. Không chạy trận khi đóng game.
 
-5. NỘI DUNG v8
+5. NỘI DUNG v9
+- Anh hùng, Túi đồ, Nhiệm vụ, Bí cảnh nằm trên thanh dưới bằng hình ảnh.
+- VIP mở từ Người chơi. Báo cáo và chiến lợi mở bằng biểu tượng thư.
+- Nhiệm vụ: chọn Trưởng thành, Quà thời gian hoặc Danh hiệu; nhận từng quà một lần.
+- Kĩ thuật: nghiên cứu 6 nhánh, mỗi nhánh tối đa 10 cấp. Tốn vật tư ngay.
+  Bộ binh áp dụng Thuẫn/Thương; nhánh thành trì chỉ áp dụng trận thành BOT.
+  Mỗi cấp nghiên cứu yêu cầu Đại điện cao hơn 5 cấp; chờ quân trở về mới đổi.
+- Bảng ngọc hiển thị lưới icon: rê chuột/Tab để đọc, bấm để nâng.
+- Bấm công trình Thiên Tháp trong Thành trì để vào vượt ải.
+- Nền thế giới, nông trại, trại gỗ, mỏ đá và cổng có hình mới đồng bộ.
+
 - Khung 1920 × 1080 tự thu phóng theo màn hình, có nút toàn màn hình.
 - Mỗi đội tối đa 4 tướng. Dải tướng kéo ngang dưới trận đồ; bấm hình để xem.
 - Ba bộ đội hình lưu sẵn dùng chung kho, một đội xuất phát mỗi lần.

@@ -1,3 +1,11 @@
+## Bản v9 · Nhiệm vụ, Kĩ thuật và bản đồ
+
+[Tải ZIP Windows offline v9](https://github.com/Corgi-coder99/Game-studio/blob/codex/thien-menh-offline/Thien-Menh-Kingdom-v9-Windows.zip) → **Download raw** → giải nén → **CHOI-NGAY.bat**.
+
+Thanh dưới có Anh hùng, Túi đồ, Nhiệm vụ và Bí cảnh với hình nhận diện. VIP nằm trong Người chơi. Nhiệm vụ hiển thị tiến độ, quà và nút nhận; Bảng ngọc là lưới biểu tượng có chú thích. Kĩ thuật gồm sáu nghiên cứu bằng tài nguyên, tác động thực tế đến bộ binh và chiến tranh thành trì. Bấm công trình Thiên Tháp trong thành để vượt 999 tầng. Thế giới có nền đúng tỷ lệ hơn, điểm khai thác và cổng đá phép thuật mới.
+
+Chi tiết: [docs/v9-update.md](docs/v9-update.md). Giữ bản lưu cũ và các quy tắc v8 bên dưới.
+
 ## Bản v8 · Công trình và thế giới pixel mới
 
 [Tải ZIP Windows offline v8](https://github.com/Corgi-coder99/Game-studio/blob/codex/thien-menh-offline/Thien-Menh-Kingdom-v8-Windows.zip) → **Download raw** → giải nén → **CHOI-NGAY.bat**. Không cần Node.js, AI hay Internet để chơi.

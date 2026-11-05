@@ -1,3 +1,4 @@
+import {technologyBonus} from './technology.mjs';
 import {buildingLevelMax, normalizeTraining, trainingJobs, validTraining, constructionSeconds} from './city-rules.mjs';
 import {syncActiveSquad} from './squads.mjs';
 import {recordBattleMail} from './mail.mjs';
@@ -131,7 +132,7 @@ export function dispatchMarch(state, nodeId) {
   if (!next.regiments) next.regiments = { shield: state.troops, spear: 0, bow: 0, cavalry: 0 };
   next.regiments[type] -= 60;
   next.troops -= 60; next.battle = null;
-  next.march = { nodeId, type, units: 60, stage: 'marching', progress: 0, duration: (6 + node.level * 2)/(1+vipBonuses(state).march+troopStats(state).march+(skinBonus(state).march||0)), rewarded: false };
+  next.march = { nodeId, type, units: 60, stage: 'marching', progress: 0, duration: (6 + node.level * 2)/(1+vipBonuses(state).march+troopStats(state).march+(skinBonus(state).march||0)+(['shield','spear'].includes(state.troopType)?technologyBonus(state,'infantry','march'):0)), rewarded: false };
   return next;
 }
 export function createSkirmish(state,nodeId){const node=worldNodes.find(n=>n.id===nodeId&&n.type==='camp');if(!node||!state.team.length||state.team.length>4)throw new Error('Đội hình hoặc mục tiêu không hợp lệ.');return createTacticsBattle(state,node,activeBonds(state.team).map(b=>b.id),elementalResonance(state.team));}
@@ -156,7 +157,7 @@ export function worldTick(state, delta) {
         if (first) next.cleared.push(node.id);
         grantHeroXP(next,40*node.level); awardPlayerXP(next,120*node.level); next.wins++; m.units = Math.max(15, Math.round(m.units * .8));
       } else m.units = Math.round(m.units * .5);
-      recordBattleMail(next,next.battle,{target:node.name,mode:'world'});m.rewarded = true; m.stage = 'returning'; m.progress = 0; m.duration = 6/(1+vipBonuses(next).march+troopStats(next).march+(skinBonus(next).march||0));
+      recordBattleMail(next,next.battle,{target:node.name,mode:'world'});m.rewarded = true; m.stage = 'returning'; m.progress = 0; m.duration = 6/(1+vipBonuses(next).march+troopStats(next).march+(skinBonus(next).march||0)+(['shield','spear'].includes(next.troopType)?technologyBonus(next,'infantry','march'):0));
     }
   } else {
     m.progress += dt;
@@ -165,7 +166,7 @@ export function worldTick(state, delta) {
       if (m.stage === 'marching') {
         if (node.type === 'camp') { m.stage = 'combat'; next.battle = createSkirmish(next, node.id); }
         else { m.stage = 'gathering'; m.duration = 20/(1+vipBonuses(next).gather+(skinBonus(next).gather||0)+(petBonus(next).gather||0)); }
-      } else if (m.stage === 'gathering') { initChronicle(next);next.chronicle.stats.gathers++;awardPlayerXP(next,70); next.resources[node.type] = Math.min(9999999, next.resources[node.type] + Math.round(500*(1+(petBonus(next).gatherYield||0)))); m.rewarded = true; m.stage = 'returning'; m.duration = 6/(1+vipBonuses(next).march+troopStats(next).march+(skinBonus(next).march||0)); }
+      } else if (m.stage === 'gathering') { initChronicle(next);next.chronicle.stats.gathers++;awardPlayerXP(next,70); next.resources[node.type] = Math.min(9999999, next.resources[node.type] + Math.round(500*(1+(petBonus(next).gatherYield||0)))); m.rewarded = true; m.stage = 'returning'; m.duration = 6/(1+vipBonuses(next).march+troopStats(next).march+(skinBonus(next).march||0)+(['shield','spear'].includes(next.troopType)?technologyBonus(next,'infantry','march'):0)); }
       else if (m.stage === 'returning') { addReserves(next, m.type || 'shield', m.units); next.march = null; }
     }
   }
