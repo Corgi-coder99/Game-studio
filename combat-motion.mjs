@@ -1,0 +1,3 @@
+const motionClamp=n=>Math.max(0,Math.min(1,n));
+const motionEase=t=>{t=motionClamp(t);return t*t*(3-2*t);};
+export function combatPose(kind,age,side=1,ranged=false,impactAge=99){let x=0,y=0,angle=0;const duration=kind==='attack'?.65:1.05,t=motionClamp(age/duration);if(kind&&age>=0&&age<duration){const wind=t<.22?-.22*motionEase(t/.22):t<.5?-.22+1.22*motionEase((t-.22)/.28):1-motionEase((t-.5)/.5);x=side*wind*(ranged?10:42);y=-Math.max(0,wind)*(ranged?16:9);angle=side*wind*(ranged?-.07:.14);}if(impactAge>=0&&impactAge<.45){const recoil=Math.sin(impactAge/.45*Math.PI)*(1-impactAge/.45);x-=side*recoil*15;angle-=side*recoil*.12;}return{x,y,angle};}

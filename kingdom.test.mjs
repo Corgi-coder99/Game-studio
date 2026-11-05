@@ -9,7 +9,7 @@ test('initial and migrated city saves are valid and reject malformed resources',
 });
 test('upgrade prerequisites, costs and maximum level are enforced',()=>{
  const s=kingdomInitial();assert.throws(()=>upgradeStructure(s,'farm'));const hall=upgradeStructure(s,'hall');assert.equal(hall.levels.hall,2);assert.equal(hall.resources.wood,s.resources.wood-160);assert.equal(s.levels.hall,1);assert.equal(upgradeStructure(hall,'farm').levels.farm,2);
- assert.throws(()=>upgradeStructure({...s,resources:{food:0,wood:0,stone:0}},'hall'));assert.throws(()=>upgradeStructure({...s,levels:{...s.levels,hall:5}},'hall'));
+ assert.throws(()=>upgradeStructure({...s,resources:{food:0,wood:0,stone:0}},'hall'));assert.throws(()=>upgradeStructure({...s,levels:{...s.levels,hall:100}},'hall'));
 });
 test('construction deducts once, completes on schedule and supports 50-gem acceleration',()=>{
  const s=kingdomInitial(100000),started=startConstruction(s,'hall',100000);assert.equal(started.levels.hall,1);assert.equal(started.resources.wood,s.resources.wood-160);assert.throws(()=>startConstruction(started,'hall'));
@@ -20,7 +20,7 @@ test('economy caps offline income at eight hours and does not accrue negative el
  const s=kingdomInitial(100000);assert.equal(economyTick(s,110000).resources.food,s.resources.food+20);assert.equal(economyTick(s,0).resources.food,s.resources.food);assert.equal(economyTick(s,100000+48*3600000).resources.food,s.resources.food+28800*2);
 });
 test('typed training spends resources and completes exactly once',()=>{
- const s=kingdomInitial(100000),job=trainTroops(s,100000,'bow');assert.equal(job.training.endsAt,112000);assert.throws(()=>trainTroops(job));const done=economyTick(job,112000);assert.equal(done.regiments.bow,60);assert.equal(done.troops,200);assert.equal(done.resources.food,s.resources.food-160+24);assert.equal(economyTick(done,112000).troops,200);
+ const s=kingdomInitial(100000),job=trainTroops(s,100000,'bow');assert.equal(job.training.endsAt,112000);assert.throws(()=>trainTroops(job,100000,'bow'));assert.ok(trainTroops(job,100000,'spear').trainingQueues.spear);const done=economyTick(job,112000);assert.equal(done.regiments.bow,60);assert.equal(done.troops,200);assert.equal(done.resources.food,s.resources.food-160+24);assert.equal(economyTick(done,112000).troops,200);
 });
 test('marches reserve the selected regiment, reject concurrent missions and return gathered resources once',()=>{
  const s=kingdomInitial();let next=dispatchMarch(s,'grain');assert.equal(next.regiments.shield,20);assert.equal(next.troops,120);assert.throws(()=>dispatchMarch(next,'camp1'));assert.throws(()=>dispatchMarch({...s,team:[]},'camp1'));assert.throws(()=>dispatchMarch({...s,troopType:'cavalry'},'camp1'));

@@ -1,0 +1,7 @@
+export const buildingLevelMax=100;
+export const trainingKinds=['shield','spear','bow','cavalry'];
+export function normalizeTraining(s){if(!s.trainingQueues){s.trainingQueues=Object.fromEntries(trainingKinds.map(k=>[k,null]));if(s.training)s.trainingQueues[s.training.type||'shield']={...s.training,type:s.training.type||'shield'};}s.training=trainingKinds.map(k=>s.trainingQueues[k]).find(Boolean)||null;return s;}
+export function trainingJobs(s){return s.trainingQueues?trainingKinds.map(k=>s.trainingQueues[k]).filter(Boolean):s.training?[s.training]:[];}
+export function trainingFor(s,type){return s.trainingQueues?s.trainingQueues[type]:s.training?.type===type?s.training:null;}
+export function constructionSeconds(level){return 8+level*4+Math.max(0,level-5)**2*.6;}
+export function validTraining(s){const job=(v,type)=>v===null||v&&v.amount===20&&v.type===type&&Number.isFinite(v.endsAt)&&v.endsAt>=0&&v.endsAt<=Date.now()+86400000;if(s.trainingQueues===undefined)return s.training===null||s.training&&job({...s.training,type:s.training.type||'shield'},s.training.type||'shield');const q=s.trainingQueues;if(!q||Array.isArray(q)||Object.keys(q).length!==4||!trainingKinds.every(k=>Object.hasOwn(q,k)&&job(q[k],k)))return false;const first=trainingKinds.map(k=>q[k]).find(Boolean)||null;return JSON.stringify(s.training)===JSON.stringify(first)&&s.troops+trainingJobs(s).reduce((n,j)=>n+j.amount,0)<=1000;}

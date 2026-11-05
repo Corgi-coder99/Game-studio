@@ -7,7 +7,7 @@ Vietnamese-first, low-cost offline pixel strategy prototype. Read docs/v5-system
 - Use one Codex session. Do not spawn agents or paid services unless explicitly requested.
 - Keep gameplay free of network AI, accounts, runtime dependencies and paid APIs. No tokens in browser code.
 - Preserve old saves through migrateKingdom. Durable saves refund either deployed army once, drop transient battles and stop automatic campaigns.
-- Original generated pixel art only; no copied Infinity Kingdom assets/UI. There are fourteen PNGs embedded once as browser-local Blob URLs by the offline builder.
+- Original generated pixel art only; no copied Infinity Kingdom assets/UI. There are nineteen PNGs embedded once as browser-local Blob URLs by the offline builder.
 - Ship concrete playable changes and verify actual UI flows. Do not claim the Studio invokes Codex; it exports/copies data for the user's separate session.
 
 ## Source ownership
@@ -33,10 +33,12 @@ npm run build:offline
 python3 package-windows.py
 ```
 
-183 meaningful tests cover gameplay and save invariants. Exercise changed browser flows (desktop/mobile). Test the delivered ZIP extracted to a path with spaces, Python server GET/HEAD/404, offline image/skill loading and actual gameplay. Report that BAT has not been run on Windows if that remains true.
+192 meaningful tests cover gameplay and save invariants. Exercise changed browser flows (desktop/mobile). Test the delivered ZIP extracted to a path with spaces, Python server GET/HEAD/404, offline image/skill loading and actual gameplay. Report that BAT has not been run on Windows if that remains true.
 
-Current delivery: Thien-Menh-Kingdom-v7-Windows.zip plus compatibility Thien-Menh-Windows-Python.zip. No Node/Python is needed for direct HTML play; Python launcher uses only the standard library. Regenerate delivery whenever source/UI/art/instructions change. GitHub publication requires session authorization; this thread already authorizes pushing the secondary branch for user download.
+Current delivery: Thien-Menh-Kingdom-v8-Windows.zip plus compatibility Thien-Menh-Windows-Python.zip. No Node/Python is needed for direct HTML play; Python launcher uses only the standard library. Regenerate delivery whenever source/UI/art/instructions change. GitHub publication requires session authorization; this thread already authorizes pushing the secondary branch for user download.
 
 UI v7: read docs/v7-interface.md. Native 1920×1080 frame scales uniformly; do not scale individual text panels. gallery-ui.mjs owns fixed bag/pet/campaign scenes and description dialogs; recommendations.mjs provides owned-only heuristic formations. New reports are restricted to mode bot; secret reward parcels remain mandatory.
 
 squads.mjs owns exactly three saved presets and real reserve allocation; army-ui.mjs owns preset, allocation and two-side report scenes. Preserve troop conservation and import validation. `squads.autoFill` defaults false for old 60-unit behavior; explicit auto-fill uses actual reserves and level capacity.
+
+Current rules v8: read docs/v8-update.md. Player and enemy active formations cap at four; internal 9-slot coordinates remain only for backward compatibility. revision 8 imports enforce cap, older revisions migrate without asset loss. city-rules.mjs owns level100 and four concurrent training queues; preserve legacy training alias and total troop capacity. art-cache.mjs shares images; avoid remounting map panels or combat buttons each simulation tick. sandbox.mjs debug grants are local only and repeatable without gear duplication.

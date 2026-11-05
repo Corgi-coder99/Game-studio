@@ -1,5 +1,6 @@
 import { characterRoster, characterById, gradeOrder, archetypeLabels, effectDescriptions } from './characters.mjs';
 
+export const maxTeamSize=4;
 export const gearSlots=['helmet','armor','weapon','jewelry','relic'];
 export const gearSlotNames={helmet:'Mũ',armor:'Giáp',weapon:'Vũ khí',jewelry:'Trang sức',relic:'Cổ vật đặc biệt'};
 export const statNames={maxHp:'Máu',physicalAtk:'Công vật lý',magicAtk:'Công phép',armor:'Kháng vật lý',resist:'Kháng phép',crit:'Chí mạng',attackSpeed:'Tốc độ đánh',manaMax:'Mana tối đa',rageMax:'Nộ tối đa',manaRegen:'Hồi mana/giây',rageRegen:'Hồi nộ/giây'};
@@ -36,23 +37,24 @@ const plain=v=>v&&typeof v==='object'&&!Array.isArray(v);
 const bounded=(n,min,max)=>Number.isInteger(n)&&n>=min&&n<=max;
 export function defaultFormation(team) {
  const slots=Array(9).fill(null);
- for(const id of team.slice(0,9)){const h=characterById[id];if(!h||slots.includes(id))continue;const preferred=h.preferredRows.flatMap(r=>[r*3,r*3+1,r*3+2]);const slot=[...preferred,...Array.from({length:9},(_,i)=>i)].find(i=>slots[i]===null);if(slot!==undefined)slots[slot]=id;}
+ for(const id of team.slice(0,4)){const h=characterById[id];if(!h||slots.includes(id))continue;const preferred=(h.roles.includes('support')||h.roles.includes('mage')||h.roles.includes('archer'))?[6,8,0,2]:[0,2,6,8];const slot=[...preferred,...Array.from({length:9},(_,i)=>i)].find(i=>slots[i]===null);if(slot!==undefined)slots[slot]=id;}
  return slots;
 }
 export function normalizeProgression(source) {
- const s=structuredClone(source);s.revision=5;
+ const s=structuredClone(source);s.revision=8;
  s.heroSkillRanks=s.heroSkillRanks||{};s.heroLevels=s.heroLevels||{};s.heroXP=s.heroXP||{};s.skillLevels=s.skillLevels||{};s.heroGear=s.heroGear||{};s.essence=s.essence??100;
  for(const id of s.owned){s.heroLevels[id]??=1;s.heroXP[id]??=80;s.skillLevels[id]??=1;}
  if(!s.inventory){s.inventory=itemTemplates.filter(t=>!t.heroId&&!t.rewardOnly&&!t.id.startsWith('crafted-')).map((t,i)=>({id:'item-'+(i+1),templateId:t.id,level:1}));}
  s.nextItemId=s.nextItemId||Math.max(0,...s.inventory.map(i=>Number(i.id.slice(5))))+1;
- s.formation=s.formation||defaultFormation(s.team);s.team=s.formation.filter(Boolean);
+ s.formation=s.formation||defaultFormation(s.team);let count=0;s.formation=s.formation.map(id=>id&&count++<4?id:null);s.team=s.formation.filter(Boolean);
  return s;
 }
 export function validProgression(s) {
- if(s.revision!==undefined&&![4,5].includes(s.revision))return false;
+ if(s.revision!==undefined&&![4,5,8].includes(s.revision))return false;
  for(const [key,min,max]of [['heroLevels',1,levelLimit],['skillLevels',1,skillLimit],['heroXP',0,1000000]])if(s[key]!==undefined&&(!plain(s[key])||!Object.entries(s[key]).every(([id,n])=>knownHero(id)&&bounded(n,min,max))))return false;
  if(s.heroSkillRanks!==undefined&&(!plain(s.heroSkillRanks)||!Object.entries(s.heroSkillRanks).every(([id,ranks])=>knownHero(id)&&plain(ranks)&&Object.entries(ranks).every(([index,rank])=>/^[1-3]$/.test(index)&&Number(index)<characterById[id].skills.length&&bounded(rank,1,5)))))return false;
- if(s.essence!==undefined&&!bounded(s.essence,0,999999))return false;
+ if(s.essence!==undefined&&!bounded(s.essence,0,9999999))return false;
+ if(s.revision===8&&s.formation?.filter(Boolean).length>4)return false;
  if(s.formation!==undefined&&(!Array.isArray(s.formation)||s.formation.length!==9||!s.formation.every(id=>id===null||knownHero(id)&&s.owned.includes(id))||new Set(s.formation.filter(Boolean)).size!==s.formation.filter(Boolean).length||JSON.stringify(s.formation.filter(Boolean))!==JSON.stringify(s.team)))return false;
  if(s.inventory!==undefined){
   if(!Array.isArray(s.inventory)||!s.inventory.every(i=>plain(i)&&/^item-[1-9]\d{0,8}$/.test(i.id)&&Object.hasOwn(itemById,i.templateId)&&bounded(i.level,1,gearLimit))||new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length)return false;
@@ -93,11 +95,11 @@ export function passiveText(h){return Object.entries(h.passives).map(([key,value
 function ownedCheck(s,id){if(!knownHero(id)||!s.owned.includes(id))throw new Error('Bạn chưa sở hữu nhân vật này.');}
 export function assignFormation(state,id,slot) {
  ownedCheck(state,id);if(!bounded(slot,0,8))throw new Error('Ô đội hình không hợp lệ.');
- const s=normalizeProgression(state),old=s.formation.indexOf(id),displaced=s.formation[slot];
+ const s=normalizeProgression(state),old=s.formation.indexOf(id),displaced=s.formation[slot];if(old<0&&!displaced&&s.team.length>=4)throw new Error('Đội hình tối đa 4 tướng. Chọn một vị trí để thay thế.');
  if(old>=0)s.formation[old]=displaced;
  s.formation[slot]=id;s.team=s.formation.filter(Boolean);return s;
 }
-export function toggleFormation(state,id){ownedCheck(state,id);const s=normalizeProgression(state),old=s.formation.indexOf(id);if(old>=0)s.formation[old]=null;else{const preferred=defaultFormation([id]).findIndex(Boolean),row=Math.floor(preferred/3);const slot=[row*3,row*3+1,row*3+2,...Array.from({length:9},(_,i)=>i)].find(i=>!s.formation[i]);if(slot===undefined)throw new Error('Đã đủ 9 tướng. Chọn ô để thay thế hoặc bỏ một tướng.');s.formation[slot]=id;}s.team=s.formation.filter(Boolean);return s;}
+export function toggleFormation(state,id){ownedCheck(state,id);const s=normalizeProgression(state),old=s.formation.indexOf(id);if(old>=0)s.formation[old]=null;else{if(s.team.length>=4)throw new Error('Đội hình tối đa 4 tướng. Chọn một vị trí để thay thế.');const slot=[...defaultFormation([id]).map((v,i)=>v?i:null).filter(v=>v!==null),0,2,6,8,...Array.from({length:9},(_,i)=>i)].find(i=>!s.formation[i]);s.formation[slot]=id;}s.team=s.formation.filter(Boolean);return s;}
 export function heroLevelCost(s,id){const level=s.heroLevels?.[id]||1;return{xp:30+level*15,coins:30+level*20,food:50*level};}
 export function levelUpHero(state,id){ownedCheck(state,id);const s=normalizeProgression(state),price=heroLevelCost(s,id);if(s.heroLevels[id]>=levelLimit)throw new Error('Đã đạt cấp 60.');if(s.heroXP[id]<price.xp||s.coins<price.coins||s.resources.food<price.food)throw new Error('Chưa đủ kinh nghiệm, linh ngọc hoặc lương thực.');s.heroXP[id]-=price.xp;s.coins-=price.coins;s.resources.food-=price.food;s.heroLevels[id]++;return s;}
 export function getSkillRank(s,id,index=0){return index===0?s.skillLevels?.[id]||1:s.heroSkillRanks?.[id]?.[index]||1;}
@@ -107,5 +109,5 @@ export function forgeItem(state,templateId){const template=itemById[templateId];
 export function equipmentOwner(s,instanceId){return Object.entries(s.heroGear||{}).find(([,slots])=>Object.values(slots).includes(instanceId))?.[0]||null;}
 export function equipItem(state,id,slot,instanceId){ownedCheck(state,id);if(!gearSlots.includes(slot))throw new Error('Ô trang bị không hợp lệ.');const s=normalizeProgression(state);s.heroGear[id]??={};if(!instanceId){delete s.heroGear[id][slot];return s;}const item=s.inventory.find(i=>i.id===instanceId),template=item&&itemById[item.templateId],owner=equipmentOwner(s,instanceId);if(!template||template.slot!==slot||template.heroId&&template.heroId!==id)throw new Error('Trang bị không phù hợp với nhân vật/ô này.');if(owner&&owner!==id)throw new Error('Trang bị đang được nhân vật khác sử dụng.');s.heroGear[id][slot]=instanceId;return s;}
 export function enhanceItem(state,instanceId){const s=normalizeProgression(state),item=s.inventory.find(i=>i.id===instanceId);if(!item)throw new Error('Trang bị không tồn tại.');if(item.level>=gearLimit)throw new Error('Trang bị đã đạt +10.');const cost=item.level*80;if(s.coins<cost)throw new Error('Chưa đủ linh ngọc để cường hóa.');s.coins-=cost;item.level++;return s;}
-export function grantHeroXP(s,amount){for(const id of s.team)s.heroXP[id]=Math.min(1000000,(s.heroXP[id]||0)+amount);s.essence=Math.min(999999,(s.essence||0)+Math.round(amount/4));}
-export function pullCharacters(state,count=1,random=Math.random,payment='coins'){if(!['coins','tickets'].includes(payment)||![1,10].includes(count)||(payment==='tickets'?(state.account?.bag?.summonTicket||0)<count:state.coins<count*100))throw new Error('Không đủ linh ngọc.');const s=normalizeProgression(state),results=[];if(payment==='tickets')s.account.bag.summonTicket-=count;else s.coins-=count*100;const weights=[.01,.03,.06,.1,.2,.25,.2,.15];for(let n=0;n<count;n++){let grade='SSR';if(s.pity!==29){let value=random(),sum=0;grade=gradeOrder.find((_,i)=>(sum+=weights[i])>value)||'D';}const pool=characterRoster.filter(h=>h.grade===grade&&!h.vipExclusive),h=pool[Math.min(pool.length-1,Math.floor(random()*pool.length))],duplicate=s.owned.includes(h.id);if(duplicate){if(s.account)s.account.shards[h.id]=Math.min(999999,(s.account.shards[h.id]||0)+shardYield[h.grade]);s.coins+=25;s.essence=Math.min(999999,s.essence+10);}else{s.owned.push(h.id);s.heroLevels[h.id]=1;s.heroXP[h.id]=80;s.skillLevels[h.id]=1;}s.pity=grade==='SSR'?0:s.pity+1;s.pulls++;results.push({...h,duplicate});}return{state:s,results};}
+export function grantHeroXP(s,amount){for(const id of s.team)s.heroXP[id]=Math.min(1000000,(s.heroXP[id]||0)+amount);s.essence=Math.min(9999999,(s.essence||0)+Math.round(amount/4));}
+export function pullCharacters(state,count=1,random=Math.random,payment='coins'){if(!['coins','tickets'].includes(payment)||![1,10].includes(count)||(payment==='tickets'?(state.account?.bag?.summonTicket||0)<count:state.coins<count*100))throw new Error('Không đủ linh ngọc.');const s=normalizeProgression(state),results=[];if(payment==='tickets')s.account.bag.summonTicket-=count;else s.coins-=count*100;const weights=[.01,.03,.06,.1,.2,.25,.2,.15];for(let n=0;n<count;n++){let grade='SSR';if(s.pity!==29){let value=random(),sum=0;grade=gradeOrder.find((_,i)=>(sum+=weights[i])>value)||'D';}const pool=characterRoster.filter(h=>h.grade===grade&&!h.vipExclusive),h=pool[Math.min(pool.length-1,Math.floor(random()*pool.length))],duplicate=s.owned.includes(h.id);if(duplicate){if(s.account)s.account.shards[h.id]=Math.min(9999999,(s.account.shards[h.id]||0)+shardYield[h.grade]);s.coins+=25;s.essence=Math.min(9999999,s.essence+10);}else{s.owned.push(h.id);s.heroLevels[h.id]=1;s.heroXP[h.id]=80;s.skillLevels[h.id]=1;}s.pity=grade==='SSR'?0:s.pity+1;s.pulls++;results.push({...h,duplicate});}return{state:s,results};}

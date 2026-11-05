@@ -1,113 +1,55 @@
-THIÊN MỆNH — PIXEL KINGDOM v7 — OFFLINE CHO WINDOWS
+THIÊN MỆNH — PIXEL KINGDOM v8 — OFFLINE CHO WINDOWS
 
-TRƯỚC TIÊN
-Nhấp chuột phải tệp ZIP → Extract All… / Giải nén tất cả.
-Mở thư mục vừa giải nén. Đừng chạy game khi còn ở trong tệp ZIP.
+1. TẢI VÀ GIẢI NÉN
+Trên GitHub bấm Download raw để tải ZIP.
+Nhấp chuột phải ZIP → Extract All… / Giải nén tất cả.
+Đừng chạy game khi còn ở trong tệp ZIP.
 
-CÁCH 1 — KHÔNG CẦN CÀI GÌ
-Nhấp đúp CHOI-NGAY.bat.
-Tệp này sẽ tìm Edge hoặc Chrome để mở game, tránh mở nhầm trong VS Code.
-Hoặc nhấp đúp Thien-Menh.html và mở bằng Microsoft Edge / Google Chrome.
-Không cần Node.js, Python, Internet hay tài khoản để chơi theo cách này.
+2. MỞ GAME KHÔNG CẦN CÀI GÌ
+Nhấp đúp CHOI-NGAY.bat để mở bằng Edge hoặc Chrome.
+Hoặc mở Thien-Menh.html bằng Microsoft Edge / Google Chrome.
+Không cần Node.js, Python, Internet, AI hay tài khoản để chơi theo cách này.
+Nếu thấy mã nguồn trong VS Code, chuột phải Thien-Menh.html → Open with → Edge.
 
-CÁCH 2 — CHẠY BẰNG PYTHON 3
-Nếu máy có Python 3, nhấp đúp CHAY-BANG-PYTHON.bat.
-Game sẽ mở trong trình duyệt. Giữ cửa sổ dòng lệnh mở khi đang chơi.
-Đóng cửa sổ đó hoặc nhấn Ctrl+C để dừng máy chủ.
-Python dùng hoàn toàn thư viện có sẵn; không cần pip install.
-
-Bạn cũng có thể mở Terminal trong thư mục đã giải nén rồi nhập:
+3. CHẠY QUA PYTHON (TÙY CHỌN)
+Nếu đã có Python 3, mở CHAY-BANG-PYTHON.bat.
+Hoặc mở Terminal trong thư mục và nhập:
     py -3 chay_game.py
 Nếu không có lệnh py, thử:
     python chay_game.py
+Giữ cửa sổ dòng lệnh mở; Ctrl+C để dừng.
+Python chỉ dùng thư viện chuẩn, không cần pip install.
+Nếu trình duyệt không tự mở, nhập địa chỉ in trong cửa sổ.
+Mặc định http://127.0.0.1:8765/ là địa chỉ trên máy bạn, không cần Internet.
+Nếu cổng bận: py -3 chay_game.py --port 8766
 
-Nếu trình duyệt không tự mở, nhập địa chỉ in trong cửa sổ dòng lệnh.
-Mặc định: http://127.0.0.1:8765/
-Đây là địa chỉ trên chính máy bạn, không cần Internet.
-Nếu cổng đang được dùng, chạy:
-    py -3 chay_game.py --port 8766
+4. GIỮ TIẾN ĐỘ
+Studio → Xuất bản lưu JSON để sao lưu; Nhập bản lưu để khôi phục.
+HTML trực tiếp và Python có vùng lưu riêng. Xuất/nhập khi đổi cách mở,
+trình duyệt, cổng hoặc máy. Tránh InPrivate / Incognito để giữ tiến độ.
+Bản lưu cũ giữ tướng, trang bị và tài nguyên; đội cũ chỉ lấy bốn tướng đầu.
+Đội đang hành quân được thu hồi một lần khi mở lại. Không chạy trận khi đóng game.
 
-GIỮ TIẾN ĐỘ
-Trong game, vào Studio → Xuất bản lưu JSON để sao lưu.
-Studio → Nhập bản lưu JSON để khôi phục.
-Cách mở HTML và cách chạy Python có vùng lưu riêng. Dùng xuất/nhập JSON
-khi đổi cách chạy, đổi trình duyệt, đổi cổng hoặc chuyển máy.
-Không dùng InPrivate / Incognito nếu muốn giữ tiến độ lâu dài.
+5. NỘI DUNG v8
+- Khung 1920 × 1080 tự thu phóng theo màn hình, có nút toàn màn hình.
+- Mỗi đội tối đa 4 tướng. Dải tướng kéo ngang dưới trận đồ; bấm hình để xem.
+- Ba bộ đội hình lưu sẵn dùng chung kho, một đội xuất phát mỗi lần.
+- Công trình tối đa cấp 100. Công trình phụ không vượt Đại điện.
+- Mỗi công trình có cảnh quản lý riêng; vật tư và thời gian tăng theo cấp.
+- Cung, Kỵ, Thương và Thuẫn có bốn hàng đợi riêng, luyện đồng thời.
+- Mỗi mẻ 20 lính; không thể luyện hai mẻ cùng loại đồng thời.
+- Thanh kỹ năng luôn cạnh tướng; bấm biểu tượng để đọc hoặc nâng kỹ năng.
+- 61 tướng, trang bị năm ô, sao tướng 7, thú cưng 5 sao, VIP 15.
+- Đủ mười hình skin thành; chỉ skin đang đeo có hiệu ứng.
+- Túi đồ hiển thị lưới hình và số lượng; bấm hình để mở toàn bộ mô tả.
+- Thế giới mở lớp cận cảnh có điểm tài nguyên, thành BOT, cổng và bí cảnh.
+- Mảnh bản đồ ở điểm tài nguyên dẫn tới bí cảnh; thắng BOSS nhận sách qua thư.
+- Thiên Tháp 999 tầng có tự nối tầng, tự chiêu, ×1/×2/×4; dừng khi thua.
+- Chỉ công thành thế giới gửi chiến báo. PVE không bật bảng kết quả giữa ải.
+- Studio có Max tài nguyên, Max tiền, Max mảnh, Max trang bị và MAX TẤT CẢ.
+  Các nút sửa bản lưu để kiểm thử, không dùng AI. Xuất JSON trước nếu cần.
+  Max tất cả không tự vượt tháp hoặc nhận bí kíp BOSS.
 
-NỘI DUNG BẢN THỬ v7
-Thành phố pixel toàn màn hình, HUD và các nút nổi; chọn công trình để mở bảng.
-6 loại công trình, 4 doanh trại, sản xuất tài nguyên, nâng cấp cấp 1–5 có thời gian,
-huấn luyện quân, 3 trại địch và 3 điểm thu thập trên bản đồ thế giới.
-61 tướng, đội hình 3×3, 202 kỹ năng chủ động, 5 bị động VIP, 8 liên kết và 3 linh long.
-Nhân vật tăng tối đa 7 sao; thú cưng tối đa 5 sao, thức tỉnh hình và kỹ năng.
-Nhấp chân dung góc trái để mở hồ sơ. Quà cấp 5,10,...100; VIP tối đa 15.
-Túi Càn Khôn thống kê mọi tài nguyên, vật phẩm, mảnh, trang bị, thú và ngoại trang.
-Gacha tướng, trang bị và thú cưng riêng. Điểm gacha thú chỉ từ quà VIP.
-Đủ 5 món SSR: chỉ số ×3; lần tung kỹ năng 3,6,9... kích hoạt THẦN Ánh sáng/Bóng tối.
-Bốn binh chủng Thuẫn/Thương/Cung/Kỵ có quân số và khắc chế riêng.
-Công vật lý/phép, giáp/kháng phép, bạo kích và báo cáo sát thương.
-Nâng cấp cần thời gian; tăng tốc công trình tốn 50 linh ngọc mô phỏng.
-Quân hành quân và giao chiến tự động theo thời gian thực. Có thể tạm dừng,
-tắt tự dùng kỹ năng để tung chiêu thủ công. Vào Cách chơi trong game để đọc.
-Muốn thử mọi kỹ năng: Studio → Vật tư phát triển nhân vật để mở 56 tướng thường.
-Studio → Sandbox đạt cấp 100/VIP15 để thử quà. Năm SSR Thái Sơ chỉ nhận bằng quà VIP.
-Vào Anh hùng để thay đội hình và đọc kỹ năng/combo.
-Ảnh đã nằm sẵn trong game, có hiệu ứng chiêu và hành quân; có sprite toàn thân và chuyển động/hiệu ứng canvas, chưa có hoạt ảnh nhiều khung
-hoặc thế giới MMO nhiều người.
-Game không gọi AI khi chơi và không điều khiển Codex trực tiếp.
-
-LƯU Ý VỀ TIẾN ĐỘ
-Game chuyển bản lưu v1 sang v2, giữ tướng, tiền và chỉ số đã chỉnh.
-Đội đang hành quân tự thu hồi khi nạp lại trang/bản lưu; quân được hoàn về.
-Sản xuất vẫn tích lũy khi đóng game (tối đa 8 giờ), giao chiến thì không.
-
-KIỂM TRA PHIÊN BẢN PYTHON (KHÔNG BẮT BUỘC CHO CÁCH 1)
-    py -3 --version
-Hoặc:
-    python --version
-
-MỞ RỘNG V5
-Chọn quốc gia và thành khi bắt đầu: Ngụy tăng Kỵ, Thục tăng Thương, Ngô tăng Cung.
-Chiến dịch 1–999: tự nối màn, cày lại, tua ×1/×2/×4; nhận thưởng tự động.
-Thế giới → Khu vực quanh thành: tài nguyên, 27 BOT, cổng không gian, công thành.
-Mỗi khu vực có 3 BOT và 6 điểm tài nguyên. BOT tự xây/luyện/thu thập bằng AI luật offline.
-Nhiệm vụ: quà thời gian chơi, thành tích, danh hiệu, skin nhiệm vụ.
-VIP13/14/15 mỗi cấp cho một skin riêng; chỉ skin đang dùng cho buff.
-Binh bộ: mọi binh chủng tự tăng theo cấp người chơi, tối đa 100.
-
-Hộp thư chiến tuyến: nhấn phong bì trên HUD hoặc tab Chiến tuyến để xem báo cáo,
-đóng góp từng tướng, kỹ năng, linh long và gợi ý nâng theo dữ liệu của trận.
-Bảng ngọc: mở từ cấp5, từng ô yêu cầu cấp khác nhau. Nhận điểm trong gói quà
-cấp5/10/.../100, nâng ngọc toàn đội. Có hoàn điểm miễn phí khi đội đã trở về.
-
-BÍ CẢNH & TRUYỀN THỪA
-Thu thập trên bản đồ khu vực có thể tìm mảnh bản đồ chỉ đúng vị trí cổng ẩn.
-Vào Cổng không gian hoặc tab Bí cảnh để đến địa điểm đã tìm thấy. Thắng BOSS
-để nhận gói chiến lợi tại Hộp thư → Chiến lợi bí cảnh; phải bấm nhận mới vào túi.
-Bí kíp mở thêm một ô kỹ năng cho bất kỳ tướng nào. Gắn trong màn nhân vật
-hoặc thư viện; cùng một bí kíp đã học có thể truyền cho nhiều tướng.
-
-GIAO DIỆN v7
-Khung thiết kế 1920 × 1080, tự thu phóng toàn màn hình theo cùng tỷ lệ.
-Bấm hình vật phẩm, kỹ năng hoặc thú cưng để mở thông tin; Esc để đóng.
-Túi đồ: chọn nhóm bên trái, bấm ô hình, thao tác trong cửa sổ mô tả.
-Nhân vật: bấm chân dung, chọn ô trang bị quanh tướng, chọn hình món đồ
-rồi bấm Trang bị. Biểu tượng mặt trời/mặt trăng là ấn ngoại hình; THẦN
-chiến đấu theo đường tướng khi đủ bộ SSR.
-Đội hình: chọn mục gợi ý trận rồi Áp dụng, hoặc tự kéo thả tướng vào 9 ô.
-Thú cưng: các nút xếp đội, tăng cấp và tăng sao nằm dưới mỗi hình thú.
-Chiến dịch: Xuất trận tự bật nối ải và tự dùng chiêu; có ×1/×2/×4.
-Không bật bảng kết quả giữa các ải; tự nhận thưởng, dừng khi thua hoặc
-hoàn tất 999. Hộp thư chiến đấu chỉ hiển thị trận công thành thế giới.
-Chiến lợi bí cảnh vẫn nhận riêng qua hộp thư.
-Bản đồ: nút Tổng quan / Cận cảnh để chuyển giữa hai lớp; lớp cận cảnh
-giữ điểm tài nguyên, thành BOT và cổng dịch chuyển.
-
-BA ĐẠO QUÂN VÀ CHIẾN BÁO
-Trong Đội hình, dải tướng nằm dưới, có thể lướt ngang hoặc kéo lên ô.
-Tổng quan 3 đội: lưu đội hiện tại vào một bộ, kích hoạt để sử dụng.
-Các bộ dùng chung kho và tướng; chỉ một đạo quân xuất phát mỗi lần.
-Phân bổ quân: chọn binh chủng, nhập số hoặc Tự điền tối đa. Quân chỉ
-trừ khi xuất phát; cần ít nhất 60 quân để công thành.
-Chiến báo hai phe có thanh máu và số liệu riêng từng tướng. Bấm hình
-tướng để xem chi tiết, Phân tích để đọc bảng số liệu và gợi ý.
+Hình mới gồm cảnh từng công trình, ba vùng môi trường, lính có bước đi,
+hiệu ứng kỹ năng và đài chiêu mộ. Hoạt ảnh tướng là chuyển động sprite và
+lớp hiệu ứng, chưa có khung tay/chân riêng cho toàn bộ nhân vật.

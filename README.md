@@ -1,3 +1,11 @@
+## Bản v8 · Công trình và thế giới pixel mới
+
+[Tải ZIP Windows offline v8](https://github.com/Corgi-coder99/Game-studio/blob/codex/thien-menh-offline/Thien-Menh-Kingdom-v8-Windows.zip) → **Download raw** → giải nén → **CHOI-NGAY.bat**. Không cần Node.js, AI hay Internet để chơi.
+
+Đội hình tối đa 4 tướng; công trình cấp 100; bốn hàng đợi luyện quân riêng. Cảnh nền riêng cho các công trình và ba vùng thế giới, đủ 10 hình skin, lính có bước đi, chuyển động/hiệu ứng chiêu, thanh kỹ năng cạnh tướng, đài chiêu mộ có hình, Thiên Tháp 999 tầng và các nút Max kiểm thử offline.
+
+Chi tiết luật, tương thích bản lưu, số đo và giới hạn: [docs/v8-update.md](docs/v8-update.md).
+
 Bản v7 bổ sung dải tướng kéo ngang dưới trận đồ, ba bộ đội hình lưu sẵn, phân bổ/tự điền quân thật và chiến báo hai phe. Nút Thế giới mở lớp thu thập/cổng/bí cảnh trước.
 
 ## Giao diện v7 · 1920×1080

@@ -38,11 +38,11 @@ test('stat caps hold even when high-level equipment stacks with strong passives'
  s=equipItem(s,'pangu','relic',find('mirror'));assert.equal(getCharacterStats(s,'pangu').reflect,.5);
  s=equipItem(s,'wukong','relic',find('blood-pearl'));s=equipItem(s,'wukong','jewelry',find('tiger-fang'));assert.equal(getCharacterStats(s,'wukong').lifesteal,.5);
 });
-test('3×3 formation moves and replaces characters without duplicates; supports all nine cells',()=>{
- let s=rich(ids.slice(0,9));assert.equal(s.team.length,9);for(let i=0;i<9;i++)s=assignFormation(s,ids[i],i);assert.deepEqual(s.formation,ids.slice(0,9));
- s=assignFormation(s,ids[0],8);assert.equal(s.formation[8],ids[0]);assert.equal(s.formation[0],ids[8]);assert.equal(new Set(s.team).size,9);
- s=assignFormation(s,ids[9],4);assert.equal(s.formation[4],ids[9]);assert.ok(!s.team.includes(ids[4]));assert.ok(validKingdomState(s));
- s=toggleFormation(s,ids[9]);assert.equal(s.formation[4],null);assert.equal(s.team.length,8);assert.throws(()=>assignFormation(s,ids[10],9));
+test('four-hero formations move and swap without duplicates, and reject a fifth hero',()=>{
+ let s=rich(ids.slice(0,9));assert.equal(s.team.length,4);const slots=s.formation.map((id,i)=>id?i:null).filter(i=>i!==null),a=s.formation[slots[0]],b=s.formation[slots[1]];
+ s=assignFormation(s,a,slots[1]);assert.equal(s.formation[slots[1]],a);assert.equal(s.formation[slots[0]],b);assert.equal(new Set(s.team).size,4);
+ const empty=s.formation.findIndex(id=>!id);assert.throws(()=>assignFormation(s,ids[5],empty),/4/);assert.throws(()=>toggleFormation(s,ids[5]),/4/);
+ s=assignFormation(s,ids[5],slots[0]);assert.ok(s.team.includes(ids[5]));assert.ok(!s.team.includes(b));assert.ok(validKingdomState(s));s=toggleFormation(s,ids[5]);assert.equal(s.team.length,3);assert.throws(()=>assignFormation(s,ids[10],9));
 });
 test('imports reject invalid levels, duplicate equipment and malformed formation; v3 progress migrates',()=>{
  const s=rich();assert.ok(validKingdomState(s));const bad=structuredClone(s);bad.inventory[1].id=bad.inventory[0].id;assert.equal(validKingdomState(bad),false);
@@ -97,8 +97,8 @@ test('slow affects attack cadence, stun prevents actions and mana fatigue halves
 test('front/middle/back targeting protects lines, while assassins prioritize weak back-line targets',()=>{
  const units=Array.from({length:9},(_,slot)=>({slot,hp:100,maxHp:100}));assert.equal(tacticsTarget(units,2).slot,2);units[2].hp=0;assert.ok(tacticsTarget(units,2).slot<3);for(let i=0;i<3;i++)units[i].hp=0;assert.ok(tacticsTarget(units,0).slot>=3&&tacticsTarget(units,0).slot<6);units[7].hp=10;assert.equal(tacticsTarget(units,0,true).slot,7);
 });
-test('skill rank increases real damage and all-target skills cover a nine-unit formation',()=>{
- const b=arena(['lubu',...ids.filter(id=>id!=='lubu').slice(0,8)]),u=ready(b,'lubu');const one=castTactics(b,u.key);u.skillLevel=5;const five=castTactics(b,u.key);assert.ok(five.damageStats.physical>one.damageStats.physical);assert.equal(five.enemies.length,9);assert.ok(five.enemies.every(u=>u.hp<10000));
+test('skill rank increases real damage and all-target skills cover every enemy in a four-unit formation',()=>{
+ const b=arena(['lubu',...ids.filter(id=>id!=='lubu').slice(0,8)]),u=ready(b,'lubu');const one=castTactics(b,u.key);u.skillLevel=5;const five=castTactics(b,u.key);assert.ok(five.damageStats.physical>one.damageStats.physical);assert.equal(five.enemies.length,4);assert.ok(five.enemies.every(u=>u.hp<10000));
 });
 test('new combat and progression settle once and survive durable save/import',()=>{
  let s=kingdomInitial();s=dispatchMarch(s,'camp1');for(let i=0;i<200&&s.march;i++)s=worldTick(s,1);

@@ -1,3 +1,4 @@
+import {buildingLevelMax, normalizeTraining, trainingJobs, validTraining, constructionSeconds} from './city-rules.mjs';
 import {syncActiveSquad} from './squads.mjs';
 import {recordBattleMail} from './mail.mjs';
 import {troopStats} from './troops.mjs';
@@ -17,7 +18,7 @@ export const bonds = [
 ];
 bonds.push(
  {id:'sworn',name:'Đào Viên Kết Nghĩa',ids:['liubei','guanyu','zhangfei'],text:'+10% HP toàn đội; Lưu Bị dùng chiêu gọi Quan Vũ trợ kích tiền tuyến.',lore:'Ba anh em kết nghĩa trong Tam Quốc diễn nghĩa.'},
- {id:'tigers',name:'Ngũ Hổ Thượng Tướng',ids:['guanyu','zhangfei','zhaoyun','machao','huangzhong'],text:'+15% công vật lý/phép và +5% chí mạng toàn đội.',lore:'Ngũ Hổ Tướng của Thục Hán trong Tam Quốc diễn nghĩa.'},
+ {id:'tigers',name:'Ngũ Hổ Thượng Tướng',required:4,ids:['guanyu','zhangfei','zhaoyun','machao','huangzhong'],text:'Có 4 trong 5 Ngũ Hổ: +15% công vật lý/phép và +5% chí mạng toàn đội.',lore:'Ngũ Hổ Tướng của Thục Hán trong Tam Quốc diễn nghĩa.'},
  {id:'pilgrims',name:'Tây Hành Hộ Pháp',ids:['wukong','bajie','shawujing','tangsanzang'],text:'+15% kháng phép, +10% hồi mana toàn đội.',lore:'Bốn thầy trò trên đường thỉnh kinh trong Tây Du Ký.'},
  {id:'moon',name:'Nhật Nguyệt Tương Phùng',ids:['houyi','change'],text:'+10% hiệu quả hồi máu; Hậu Nghệ dùng chiêu gọi Hằng Nga hồi 8% HP cho toàn đội.',lore:'Hậu Nghệ và Hằng Nga trong thần thoại Trung Hoa.'}
 );
@@ -63,7 +64,7 @@ function addReserves(s, type, amount) {
 export function kingdomInitial(now = Date.now()) {
   return normalizeAccount({ version: 2, coins: 1800, pity: 0, pulls: 0, wins: 0, owned: ['zhaoyun','bajie','diaochan','nezha','zhugeliang','liubei','huangzhong','liaohua','lusu'], team: ['zhaoyun', 'bajie', 'nezha', 'zhugeliang'], overrides: {}, resources: { food: 1800, wood: 1600, stone: 1000 }, levels: Object.fromEntries(structures.map(b => [b.id, 1])), troops: 180, regiments: { shield: 80, spear: 40, bow: 40, cavalry: 20 }, troopType: 'shield', construction: null, training: null, march: null, battle: null, cleared: [], dragon: 'Hỏa', lastTick: now, autoSkill: true, paused: false });
 }
-export function activeBonds(team) { return bonds.filter(b => b.ids.every(id => team.includes(id))); }
+export function activeBonds(team) { return bonds.filter(b => b.ids.filter(id=>team.includes(id)).length >= (b.required||b.ids.length)); }
 export function elementalResonance(team) {
   const counts = Object.fromEntries(['Hỏa', 'Mộc', 'Thủy'].map(e => [e, team.filter(id => heroes.find(h => h.id === id)?.element === e).length]));
   const element = Object.keys(counts).find(e => counts[e] >= 3);
@@ -72,11 +73,11 @@ export function elementalResonance(team) {
 export function upgradePrice(state, id) {
   if (!structures.some(b => b.id === id)) throw new Error('Công trình không hợp lệ.');
   const level = state.levels[id];
-  return { food: 100 * level, wood: 160 * level, stone: 90 * level };
+  return { food: Math.ceil(100*level*(1+(level-1)*.1)), wood: Math.ceil(160*level*(1+(level-1)*.1)), stone: Math.ceil(90*level*(1+(level-1)*.1)) };
 }
 export function upgradeStructure(state, id) {
   const price = upgradePrice(state, id), level = state.levels[id];
-  if (level >= 5) throw new Error('Công trình đã đạt cấp tối đa (5).');
+  if (level >= buildingLevelMax) throw new Error('Công trình đã đạt cấp tối đa (100).');
   if (id !== 'hall' && level >= state.levels.hall) throw new Error('Nâng Đại điện trước để mở giới hạn cấp.');
   if (Object.keys(price).some(k => state.resources[k] < price[k])) throw new Error('Chưa đủ tài nguyên.');
   const next = structuredClone(state);
@@ -88,7 +89,7 @@ export function startConstruction(state, id, now = Date.now()) {
   if (state.construction) throw new Error('Một công trình đang nâng cấp. Chờ hoàn tất hoặc tăng tốc.');
   const next = upgradeStructure(state, id);
   const target = next.levels[id]; next.levels[id]--;
-  next.construction = { id, target, endsAt: now + Math.max(.5,(8 + state.levels[id] * 4)/(1+vipBonuses(state).construction+(skinBonus(state).construction||0))-vipBonuses(state).freeBuildSeconds)*1000 };
+  next.construction = { id, target, endsAt: now + Math.max(.5,constructionSeconds(state.levels[id])/(1+vipBonuses(state).construction+(skinBonus(state).construction||0))-vipBonuses(state).freeBuildSeconds)*1000 };
   return next;
 }
 export function accelerateConstruction(state) {
@@ -98,22 +99,20 @@ export function accelerateConstruction(state) {
   initChronicle(next);next.chronicle.stats.builds++;awardPlayerXP(next,100*next.construction.target); next.levels[next.construction.id] = next.construction.target; next.construction = null;
   return next;
 }
-export function trainTroops(state, now = Date.now(), type = state.troopType || 'shield') {
-  if (!Object.hasOwn(troopTypes, type)) throw new Error('Binh chủng không hợp lệ.');
-  if (state.training) throw new Error('Doanh trại đang huấn luyện.');
-  if (state.troops > 980) throw new Error('Giới hạn 1.000 quân trong thành.');
-  if (state.resources.food < 160 || state.resources.wood < 80) throw new Error('Cần 160 lương thực và 80 gỗ.');
-  const next = structuredClone(state);
-  next.resources.food -= 160; next.resources.wood -= 80;
-  next.training = { amount: 20, type, endsAt: now + Math.max(4000, 14000 - state.levels.barracks * 2000)/(1+vipBonuses(state).training+(skinBonus(state).training||0)) };
-  return next;
+export function trainTroops(state,now=Date.now(),type=state.troopType||'shield'){
+ if(!Object.hasOwn(troopTypes,type))throw new Error('Binh chủng không hợp lệ.');
+ const next=normalizeTraining(structuredClone(state));if(next.trainingQueues[type])throw new Error('Binh chủng này đang huấn luyện. Các doanh trại khác vẫn hoạt động riêng.');
+ const incoming=trainingJobs(next).reduce((n,j)=>n+j.amount,0),deployed=next.march?.units||next.worldAI?.expedition?.units||0;
+ if(next.troops+incoming+deployed+20>1000)throw new Error('Kho quân đã đủ chỗ cho 1.000 quân kể cả quân đang luyện/hành quân.');
+ if(next.resources.food<160||next.resources.wood<80)throw new Error('Cần 160 lương thực và 80 gỗ.');
+ next.resources.food-=160;next.resources.wood-=80;next.trainingQueues[type]={amount:20,type,endsAt:now+Math.max(4000,14000-next.levels.barracks*2000)/(1+vipBonuses(next).training+(skinBonus(next).training||0))};return normalizeTraining(next);
 }
 export function economyTick(state, now = Date.now()) {
-  const next = structuredClone(state);
+  const next = normalizeTraining(structuredClone(state));
   const elapsed = Math.max(0, Math.min(28800, (now - state.lastTick) / 1000));
   next.lastTick = Math.max(state.lastTick, now);
-  for (const [resource, building, rate] of [['food', 'farm', 2], ['wood', 'wood', 2], ['stone', 'stone', 1]]) next.resources[resource] = Math.min(999999, next.resources[resource] + elapsed * state.levels[building] * rate*(1+vipBonuses(state).production+(skinBonus(state).production||0)+(petBonus(state).production||0)));
-  if (next.training && now >= next.training.endsAt) { initChronicle(next);next.chronicle.stats.trainings++;awardPlayerXP(next,30); addReserves(next, next.training.type || 'shield', next.training.amount); next.training = null; }
+  for (const [resource, building, rate] of [['food', 'farm', 2], ['wood', 'wood', 2], ['stone', 'stone', 1]]) next.resources[resource] = Math.min(9999999, next.resources[resource] + elapsed * state.levels[building] * rate*(1+vipBonuses(state).production+(skinBonus(state).production||0)+(petBonus(state).production||0)));
+  for(const [type,job] of Object.entries(next.trainingQueues))if(job&&now>=job.endsAt){initChronicle(next);next.chronicle.stats.trainings++;awardPlayerXP(next,30);addReserves(next,type,job.amount);next.trainingQueues[type]=null;}normalizeTraining(next);
   if (next.construction && now >= next.construction.endsAt) { initChronicle(next);next.chronicle.stats.builds++;awardPlayerXP(next,100*next.construction.target); next.levels[next.construction.id] = next.construction.target; next.construction = null; }
   return next;
 }
@@ -123,7 +122,7 @@ export function dispatchMarch(state, nodeId) {
   if(state.worldAI?.expedition)throw new Error('Đội khu vực đang hoạt động.');
   if(state.battle&&!state.battle.winner)throw new Error('Hoàn tất trận đang chạy trước.');
   if (state.march) throw new Error('Một đội đang hành quân. Chờ đội trở về.');
-  if (!state.team.length || state.team.length > 9) throw new Error('Xếp từ 1 đến 9 anh hùng vào trận đồ 3×3.');
+  if (!state.team.length || state.team.length > 4) throw new Error('Xếp từ 1 đến 4 anh hùng vào đội hình.');
   if (state.troops < 60) throw new Error('Cần 60 quân để xuất chinh. Hãy huấn luyện thêm.');
   const type = state.troopType || 'shield';
   if (!Object.hasOwn(troopTypes, type)) throw new Error('Binh chủng không hợp lệ.');
@@ -135,7 +134,7 @@ export function dispatchMarch(state, nodeId) {
   next.march = { nodeId, type, units: 60, stage: 'marching', progress: 0, duration: (6 + node.level * 2)/(1+vipBonuses(state).march+troopStats(state).march+(skinBonus(state).march||0)), rewarded: false };
   return next;
 }
-export function createSkirmish(state,nodeId){const node=worldNodes.find(n=>n.id===nodeId&&n.type==='camp');if(!node||!state.team.length||state.team.length>9)throw new Error('Đội hình hoặc mục tiêu không hợp lệ.');return createTacticsBattle(state,node,activeBonds(state.team).map(b=>b.id),elementalResonance(state.team));}
+export function createSkirmish(state,nodeId){const node=worldNodes.find(n=>n.id===nodeId&&n.type==='camp');if(!node||!state.team.length||state.team.length>4)throw new Error('Đội hình hoặc mục tiêu không hợp lệ.');return createTacticsBattle(state,node,activeBonds(state.team).map(b=>b.id),elementalResonance(state.team));}
 export function castCommander(battle,key,skillIndex=0){return castTactics(battle,key,skillIndex);}
 export function combatTick(battle,delta,autoSkill=true,dragon='Hỏa',dragonLevel=1){return tickTactics(battle,delta,autoSkill,dragon,dragonLevel);}
 export function formationTarget(units,column=0){return tacticsTarget(units,column);}
@@ -153,7 +152,7 @@ export function worldTick(state, delta) {
         const coins = Math.round((first ? 200 * node.level : 60 * node.level)*(1+(petBonus(next).loot||0)));
         next.battle.reward = { coins, food: 150 * node.level, wood: 100 * node.level };
         next.coins += coins;
-        next.resources.food = Math.min(999999,next.resources.food+150*node.level); next.resources.wood = Math.min(999999,next.resources.wood+100*node.level);
+        next.resources.food = Math.min(9999999,next.resources.food+150*node.level); next.resources.wood = Math.min(9999999,next.resources.wood+100*node.level);
         if (first) next.cleared.push(node.id);
         grantHeroXP(next,40*node.level); awardPlayerXP(next,120*node.level); next.wins++; m.units = Math.max(15, Math.round(m.units * .8));
       } else m.units = Math.round(m.units * .5);
@@ -166,7 +165,7 @@ export function worldTick(state, delta) {
       if (m.stage === 'marching') {
         if (node.type === 'camp') { m.stage = 'combat'; next.battle = createSkirmish(next, node.id); }
         else { m.stage = 'gathering'; m.duration = 20/(1+vipBonuses(next).gather+(skinBonus(next).gather||0)+(petBonus(next).gather||0)); }
-      } else if (m.stage === 'gathering') { initChronicle(next);next.chronicle.stats.gathers++;awardPlayerXP(next,70); next.resources[node.type] = Math.min(999999, next.resources[node.type] + Math.round(500*(1+(petBonus(next).gatherYield||0)))); m.rewarded = true; m.stage = 'returning'; m.duration = 6/(1+vipBonuses(next).march+troopStats(next).march+(skinBonus(next).march||0)); }
+      } else if (m.stage === 'gathering') { initChronicle(next);next.chronicle.stats.gathers++;awardPlayerXP(next,70); next.resources[node.type] = Math.min(9999999, next.resources[node.type] + Math.round(500*(1+(petBonus(next).gatherYield||0)))); m.rewarded = true; m.stage = 'returning'; m.duration = 6/(1+vipBonuses(next).march+troopStats(next).march+(skinBonus(next).march||0)); }
       else if (m.stage === 'returning') { addReserves(next, m.type || 'shield', m.units); next.march = null; }
     }
   }
@@ -191,12 +190,12 @@ export function durableSave(state) {
 }
 export function validKingdomState(s) {
   if (!s || s.version !== 2 || !Array.isArray(s.team) || s.team.length > 9 || new Set(s.team).size !== s.team.length || !s.team.every(id=>s.owned?.includes(id)) || !validState({ ...s, version: 1, team:s.team.slice(0,5) }) || !validProgression(s) || !validAccount(s)) return false;
-  const finite = v => typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 999999;
+  const finite = v => typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 9999999;
   if (s.troopType !== undefined && !Object.hasOwn(troopTypes, s.troopType)) return false;
   if (s.regiments !== undefined && (!s.regiments || !Object.keys(troopTypes).every(type => Number.isInteger(s.regiments[type]) && s.regiments[type] >= 0 && s.regiments[type] <= 1000) || Object.values(s.regiments).reduce((n, v) => n + v, 0) !== s.troops)) return false;
   if (s.training?.type !== undefined && !Object.hasOwn(troopTypes, s.training.type)) return false;
-  if (s.construction !== undefined && s.construction !== null && (!s.construction || !structures.some(b => b.id === s.construction.id) || s.construction.target !== s.levels?.[s.construction.id] + 1 || s.construction.target > 5 || (s.construction.id !== 'hall' && s.construction.target > s.levels.hall) || !Number.isFinite(s.construction.endsAt) || s.construction.endsAt < 0 || s.construction.endsAt > Date.now() + 86400000)) return false;
-  return s.resources && ['food', 'wood', 'stone'].every(k => finite(s.resources[k])) && s.levels && structures.every(b => Number.isInteger(s.levels[b.id]) && s.levels[b.id] >= 1 && s.levels[b.id] <= 5) && structures.every(b => b.id === 'hall' || s.levels[b.id] <= s.levels.hall) && Number.isInteger(s.troops) && s.troops >= 0 && s.troops <= 1000 && Number.isFinite(s.lastTick) && s.lastTick >= 0 && s.lastTick <= Date.now() + 86400000 && ['Hỏa', 'Thủy', 'Mộc'].includes(s.dragon) && typeof s.autoSkill === 'boolean' && typeof s.paused === 'boolean' && Array.isArray(s.cleared) && s.cleared.length <= 3 && new Set(s.cleared).size === s.cleared.length && s.cleared.every(id => worldNodes.some(n => n.id === id && n.type === 'camp')) && s.march === null && s.battle === null && (s.training === null || s.training && s.training.amount === 20 && Number.isFinite(s.training.endsAt) && s.training.endsAt >= 0 && s.training.endsAt <= Date.now() + 86400000);
+  if (s.construction !== undefined && s.construction !== null && (!s.construction || !structures.some(b => b.id === s.construction.id) || s.construction.target !== s.levels?.[s.construction.id] + 1 || s.construction.target > buildingLevelMax || (s.construction.id !== 'hall' && s.construction.target > s.levels.hall) || !Number.isFinite(s.construction.endsAt) || s.construction.endsAt < 0 || s.construction.endsAt > Date.now() + 86400000)) return false;
+  return s.resources && ['food', 'wood', 'stone'].every(k => finite(s.resources[k])) && s.levels && structures.every(b => Number.isInteger(s.levels[b.id]) && s.levels[b.id] >= 1 && s.levels[b.id] <= buildingLevelMax) && structures.every(b => b.id === 'hall' || s.levels[b.id] <= s.levels.hall) && Number.isInteger(s.troops) && s.troops >= 0 && s.troops <= 1000 && Number.isFinite(s.lastTick) && s.lastTick >= 0 && s.lastTick <= Date.now() + 86400000 && ['Hỏa', 'Thủy', 'Mộc'].includes(s.dragon) && typeof s.autoSkill === 'boolean' && typeof s.paused === 'boolean' && Array.isArray(s.cleared) && s.cleared.length <= 3 && new Set(s.cleared).size === s.cleared.length && s.cleared.every(id => worldNodes.some(n => n.id === id && n.type === 'camp')) && s.march === null && s.battle === null && validTraining(s);
 }
 export function migrateKingdom(s, now = Date.now()) {
   if (validKingdomState(s)) return economyTick(normalizeAccount({ ...s, troopType: s.troopType || 'shield', regiments: s.regiments || { shield: s.troops, spear: 0, bow: 0, cavalry: 0 }, construction: s.construction || null }), now);
