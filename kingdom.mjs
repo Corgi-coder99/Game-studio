@@ -1,3 +1,4 @@
+import {finishHealing,woundedTotal,recordCasualties} from './civic.mjs';
 import {elementNames,canUseDragon,elementalMultiplier} from './elements.mjs';
 import {deployments,deployedUnits} from './operations.mjs';
 import {technologyBonus} from './technology.mjs';
@@ -27,11 +28,12 @@ bonds.push(
 );
 export const structures = [
   { id: 'hall', name: 'Đại điện', icon: '♜', x: 8, y: 4, color: '#b7454e', text: 'Trung tâm thành trì. Mở giới hạn nâng cấp các công trình.' },
-  { id: 'farm', name: 'Nông trang', icon: '♧', x: 4, y: 12, color: '#b99f45', text: 'Sản xuất lương thực: 2 × cấp mỗi giây.' },
-  { id: 'wood', name: 'Xưởng gỗ', icon: '♠', x: 15, y: 11, color: '#628853', text: 'Sản xuất gỗ: 2 × cấp mỗi giây.' },
-  { id: 'stone', name: 'Mỏ đá', icon: '◆', x: 14, y: 5, color: '#768c9c', text: 'Sản xuất đá: 1 × cấp mỗi giây.' },
+  { id: 'farm', name: 'Nông trang', icon: '♧', x: 4, y: 12, color: '#b99f45', text: 'Giao dân, cấp thức ăn và bắt đầu một mẻ trồng trọt. Thu hoạch thủ công.' },
+  { id: 'wood', name: 'Xưởng gỗ', icon: '♠', x: 15, y: 11, color: '#628853', text: 'Điều dân và cấp thức ăn để bắt đầu khai thác gỗ. Không tự sản xuất.' },
+  { id: 'stone', name: 'Mỏ đá', icon: '◆', x: 14, y: 5, color: '#768c9c', text: 'Cấp thức ăn, giao thợ khai thác rồi nhận đá khi xong mẻ.' },
   { id: 'barracks', name: 'Doanh trại', icon: '⚑', x: 4, y: 6, color: '#578aaa', text: 'Huấn luyện binh lính và tăng HP và ATK đội viễn chinh thêm 5% mỗi cấp.' },
   { id: 'dragon', name: 'Điện linh long', icon: '✧', x: 12, y: 15, color: '#a478be', text: 'Linh long hồi nộ để hỗ trợ toàn đội. Nâng cấp tăng sức mạnh long tức.' },
+  {id:'infirmary',name:'Linh Dược Viện',icon:'✚',x:2,y:4,color:'#63b18a',text:'Tiếp nhận thương binh và dùng thức ăn, gỗ để cứu chữa, trả quân về dự bị.'},
 ];
 export const worldNodes = [
   { id: 'home', name: 'Thiên Mệnh Thành', x: 10, y: 10, type: 'home', level: 1 },
@@ -106,15 +108,15 @@ export function trainTroops(state,now=Date.now(),type=state.troopType||'shield')
  if(!Object.hasOwn(troopTypes,type))throw new Error('Binh chủng không hợp lệ.');
  const next=normalizeTraining(structuredClone(state));if(next.trainingQueues[type])throw new Error('Binh chủng này đang huấn luyện. Các doanh trại khác vẫn hoạt động riêng.');
  const incoming=trainingJobs(next).reduce((n,j)=>n+j.amount,0),deployed=deployedUnits(next);
- if(next.troops+incoming+deployed+20>1000)throw new Error('Kho quân đã đủ chỗ cho 1.000 quân kể cả quân đang luyện/hành quân.');
+ if(next.troops+incoming+deployed+woundedTotal(next)+20>1000)throw new Error('Kho quân đã đủ chỗ cho 1.000 quân kể cả quân đang luyện/hành quân.');
  if(next.resources.food<160||next.resources.wood<80)throw new Error('Cần 160 lương thực và 80 gỗ.');
  next.resources.food-=160;next.resources.wood-=80;next.trainingQueues[type]={amount:20,type,endsAt:now+Math.max(4000,14000-next.levels.barracks*2000)/(1+vipBonuses(next).training+(skinBonus(next).training||0))};return normalizeTraining(next);
 }
 export function economyTick(state, now = Date.now()) {
   const next = normalizeTraining(structuredClone(state));
-  const elapsed = Math.max(0, Math.min(28800, (now - state.lastTick) / 1000));
   next.lastTick = Math.max(state.lastTick, now);
-  for (const [resource, building, rate] of [['food', 'farm', 2], ['wood', 'wood', 2], ['stone', 'stone', 1]]) next.resources[resource] = Math.min(9999999, next.resources[resource] + elapsed * state.levels[building] * rate*(1+vipBonuses(state).production+(skinBonus(state).production||0)+(petBonus(state).production||0)));
+  // Only player-started production exists; completed batches wait for collection.
+  finishHealing(next,now);
   for(const [type,job] of Object.entries(next.trainingQueues))if(job&&now>=job.endsAt){initChronicle(next);next.chronicle.stats.trainings++;awardPlayerXP(next,30);addReserves(next,type,job.amount);next.trainingQueues[type]=null;}normalizeTraining(next);
   if (next.construction && now >= next.construction.endsAt) { initChronicle(next);next.chronicle.stats.builds++;awardPlayerXP(next,100*next.construction.target); next.levels[next.construction.id] = next.construction.target; next.construction = null; }
   return next;
@@ -149,6 +151,7 @@ export function worldTick(state, delta) {
   if (m.stage === 'combat') {
     next.battle = combatTick(next.battle, dt, next.autoSkill, next.dragon, next.levels.dragon);
     if (next.battle.winner) {
+      const startedUnits=m.units;
       registerBattle(next,next.battle.winner==='ally');
       if (next.battle.winner === 'ally') {
         const first = !next.cleared.includes(node.id);
@@ -159,7 +162,7 @@ export function worldTick(state, delta) {
         if (first) next.cleared.push(node.id);
         grantHeroXP(next,40*node.level); awardPlayerXP(next,120*node.level); next.wins++; m.units = Math.max(15, Math.round(m.units * .8));
       } else m.units = Math.round(m.units * .5);
-      recordBattleMail(next,next.battle,{target:node.name,mode:'world'});m.rewarded = true; m.stage = 'returning'; m.progress = 0; m.duration = 6/(1+vipBonuses(next).march+troopStats(next).march+(skinBonus(next).march||0)+(['shield','spear'].includes(next.troopType)?technologyBonus(next,'infantry','march'):0));
+      next.battle.casualties=recordCasualties(next,m.type||next.troopType,startedUnits-m.units);recordBattleMail(next,next.battle,{target:node.name,mode:'world'});m.rewarded = true; m.stage = 'returning'; m.progress = 0; m.duration = 6/(1+vipBonuses(next).march+troopStats(next).march+(skinBonus(next).march||0)+(['shield','spear'].includes(next.troopType)?technologyBonus(next,'infantry','march'):0));
     }
   } else {
     m.progress += dt;
@@ -178,7 +181,7 @@ export function recallMarch(state) {
   if (!state.march) throw new Error('Không có đội hành quân.');
   const next = structuredClone(state);
   if (next.march.stage === 'returning') return next;
-  if (next.march.stage === 'combat') { next.march.units = Math.floor(next.march.units * .9); next.battle.winner = 'retreat';recordBattleMail(next,next.battle,{target:worldNodes.find(n=>n.id===next.march.nodeId).name,mode:'world'}); }
+  if (next.march.stage === 'combat') { const beforeUnits=next.march.units; next.march.units = Math.floor(next.march.units * .9); next.battle.casualties=recordCasualties(next,next.march.type||'shield',beforeUnits-next.march.units); next.battle.winner = 'retreat';recordBattleMail(next,next.battle,{target:worldNodes.find(n=>n.id===next.march.nodeId).name,mode:'world'}); }
   next.march.stage = 'returning'; next.march.progress = 0; next.march.duration = 6;
   return next;
 }
@@ -187,7 +190,7 @@ export function recallMarch(state) {
 export function durableSave(state) {
   const s = syncActiveSquad(structuredClone(state));
   if (s.march) addReserves(s, s.march.type || 'shield', s.march.units);
-  if(s.worldAI){for(const e of deployments(s))addReserves(s,e.type,e.units);s.worldAI.expedition=null;s.worldAI.expeditions=[];}s.campaignBattle=null;delete s.cityCelebration;
+  if(s.worldAI){for(const e of deployments(s))addReserves(s,e.type,e.units);s.worldAI.expedition=null;s.worldAI.expeditions=[];for(const stock of Object.values(s.worldAI.wild||{}))stock.reserved=0;}s.campaignBattle=null;delete s.cityCelebration;
   s.march = null; s.battle = null;if(s.campaign){s.campaign.autoAdvance=false;s.campaign.autoReplay=false;s.campaign.paused=false;}
   return s;
 }
@@ -198,7 +201,7 @@ export function validKingdomState(s) {
   if (s.regiments !== undefined && (!s.regiments || !Object.keys(troopTypes).every(type => Number.isInteger(s.regiments[type]) && s.regiments[type] >= 0 && s.regiments[type] <= 1000) || Object.values(s.regiments).reduce((n, v) => n + v, 0) !== s.troops)) return false;
   if (s.training?.type !== undefined && !Object.hasOwn(troopTypes, s.training.type)) return false;
   if (s.construction !== undefined && s.construction !== null && (!s.construction || !structures.some(b => b.id === s.construction.id) || s.construction.target !== s.levels?.[s.construction.id] + 1 || s.construction.target > buildingLevelMax || (s.construction.id !== 'hall' && s.construction.target > s.levels.hall) || !Number.isFinite(s.construction.endsAt) || s.construction.endsAt < 0 || s.construction.endsAt > Date.now() + 86400000)) return false;
-  return s.resources && ['food', 'wood', 'stone'].every(k => finite(s.resources[k])) && s.levels && structures.every(b => Number.isInteger(s.levels[b.id]) && s.levels[b.id] >= 1 && s.levels[b.id] <= buildingLevelMax) && structures.every(b => b.id === 'hall' || s.levels[b.id] <= s.levels.hall) && Number.isInteger(s.troops) && s.troops >= 0 && s.troops <= 1000 && Number.isFinite(s.lastTick) && s.lastTick >= 0 && s.lastTick <= Date.now() + 86400000 && canUseDragon(s,s.dragon) && typeof s.autoSkill === 'boolean' && typeof s.paused === 'boolean' && Array.isArray(s.cleared) && s.cleared.length <= 3 && new Set(s.cleared).size === s.cleared.length && s.cleared.every(id => worldNodes.some(n => n.id === id && n.type === 'camp')) && s.march === null && s.battle === null && (s.campaignBattle===undefined||s.campaignBattle===null) && validTraining(s);
+  return s.resources && ['food', 'wood', 'stone'].every(k => finite(s.resources[k])) && s.levels && structures.every(b => b.id==='infirmary'&&s.levels[b.id]===undefined||Number.isInteger(s.levels[b.id]) && s.levels[b.id] >= 1 && s.levels[b.id] <= buildingLevelMax) && structures.every(b => b.id === 'hall' || b.id==='infirmary'&&s.levels[b.id]===undefined || s.levels[b.id] <= s.levels.hall) && Number.isInteger(s.troops) && s.troops >= 0 && s.troops <= 1000 && Number.isFinite(s.lastTick) && s.lastTick >= 0 && s.lastTick <= Date.now() + 86400000 && canUseDragon(s,s.dragon) && typeof s.autoSkill === 'boolean' && typeof s.paused === 'boolean' && Array.isArray(s.cleared) && s.cleared.length <= 3 && new Set(s.cleared).size === s.cleared.length && s.cleared.every(id => worldNodes.some(n => n.id === id && n.type === 'camp')) && s.march === null && s.battle === null && (s.campaignBattle===undefined||s.campaignBattle===null) && validTraining(s);
 }
 export function migrateKingdom(s, now = Date.now()) {
   if (validKingdomState(s)) return economyTick(normalizeAccount({ ...s, troopType: s.troopType || 'shield', regiments: s.regiments || { shield: s.troops, spear: 0, bow: 0, cavalry: 0 }, construction: s.construction || null }), now);

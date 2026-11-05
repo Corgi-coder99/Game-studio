@@ -1,0 +1,10 @@
+import {realmCities} from './realms.mjs';
+import {cachedImage} from './art-cache.mjs';
+export const wildlifeSpecies=[{id:'deer',name:'Hươu rừng',index:0,element:'Mộc'},{id:'boar',name:'Lợn rừng',index:1,element:'Thổ'},{id:'pheasant',name:'Trĩ vàng',index:2,element:'Kim'}];
+export const wildlifeNodes=realmCities.flatMap((city,ci)=>wildlifeSpecies.map((a,i)=>({id:'wild-'+city.id+'-'+i,cityId:city.id,species:a.id,name:a.name,level:1+(ci+i)%5,food:300+(ci+i)%5*180,x:[-770,720,-340][i],y:[390,680,800][i]})));
+export function initWildlife(s){if(s.worldAI)s.worldAI.wild??=Object.fromEntries(wildlifeNodes.map(n=>[n.id,{remaining:3,reserved:0,respawnAt:0}]));return s;}
+export function validWildlife(s){const w=s.worldAI?.wild;if(w===undefined)return true;return w&&typeof w==='object'&&!Array.isArray(w)&&Object.keys(w).length===wildlifeNodes.length&&wildlifeNodes.every(n=>{const v=w[n.id];return v&&Number.isInteger(v.remaining)&&v.remaining>=0&&v.remaining<=3&&v.reserved===0&&Number.isFinite(v.respawnAt)&&v.respawnAt>=0&&v.respawnAt<=1e9;});}
+export function releaseHuntReservation(s,e,killed=false){if(e.kind!=='hunt'||e.huntReleased)return;const stock=s.worldAI.wild[e.targetId];stock.reserved=Math.max(0,stock.reserved-1);if(killed)stock.remaining=Math.max(0,stock.remaining-1);if(!stock.remaining&&!stock.reserved)stock.respawnAt=Math.min(1e9,s.worldAI.clock+90);e.huntReleased=true;}
+export function wildlifeArt(species){const i=wildlifeSpecies.findIndex(a=>a.id===species);return `<span class="wildlife-art" style="--animal-row:${Math.max(0,i)*50}%" role="img" aria-label="${wildlifeSpecies[i]?.name||'Động vật'}"></span>`;}
+export function animationFrame(time,frames=4,fps=7){return Math.floor(Math.max(0,time)*fps)%frames;}
+export function drawAnimal(ctx,species,x,y,size,time=0,facing=1){const img=cachedImage('/assets/wildlife-walk-pixel.png');if(!img.complete||!img.naturalWidth)return;const row=Math.max(0,wildlifeSpecies.findIndex(a=>a.id===species)),sw=img.naturalWidth/4,sh=img.naturalHeight/3,col=animationFrame(time);ctx.save();ctx.translate(x,y);ctx.scale(facing,1);ctx.drawImage(img,col*sw,row*sh,sw,sh,-size/2,-size,size,size);ctx.restore();}

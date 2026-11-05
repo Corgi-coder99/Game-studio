@@ -1,4 +1,4 @@
-THIÊN MỆNH — PIXEL KINGDOM v10 — OFFLINE CHO WINDOWS
+THIÊN MỆNH — PIXEL KINGDOM v11 — OFFLINE CHO WINDOWS
 
 1. TẢI VÀ GIẢI NÉN
 Trên GitHub bấm Download raw để tải ZIP.
@@ -30,7 +30,19 @@ trình duyệt, cổng hoặc máy. Tránh InPrivate / Incognito để giữ ti�
 Bản lưu cũ giữ tướng, trang bị và tài nguyên; đội cũ chỉ lấy bốn tướng đầu.
 Đội đang hành quân được thu hồi một lần khi mở lại. Không chạy trận khi đóng game.
 
-5. NỘI DUNG v10
+5. NỘI DUNG v11
+- Nông trang/Xưởng gỗ/Mỏ đá: bấm công trình → chọn mẻ → cấp dân và thức ăn.
+  Không tự sản xuất khi chờ. Thành phẩm cần bấm Thu hoạch; dân được trả về.
+  Hủy mẻ không hoàn thức ăn. Hái lượm cứu đói dùng 3 dân, không cần thức ăn.
+- Dân số = 60 + 20 × cấp Đại điện. Công trình phụ không vượt cấp Đại điện.
+- Kĩ thuật → Sản xuất: giảm dân, thức ăn, thời gian và tăng cơ hội gấp đôi.
+- Linh Dược Viện: chọn binh chủng và số thương binh → cấp thức ăn/gỗ để cứu.
+  75% tổn thất được tiếp nhận nếu còn giường; phần còn lại tử trận.
+  Thương binh chiếm chỗ trong tổng quân 1.000; hoàn tất chữa trả quân một lần.
+- Thế giới có hươu/lợn rừng/trĩ vàng: bấm đàn → xuất quân săn thức ăn.
+  Săn chiếm một đội thế giới, tháp hoạt động riêng. Hết đàn hồi sau 90s chơi.
+- Rồng, thú, dân, hạc có nhiều tư thế hoạt họa; 26 ngọc có hình khác nhau.
+- Chiêu mộ dùng quảng trường, cổng trung tâm, ngọc/vé phía dưới và cảnh mở cửa.
 - Anh hùng, Túi đồ, Cửa hàng, Nhiệm vụ và Bí cảnh ở thanh dưới.
 - Xếp tối đa bốn tướng mỗi đội. Ba đội thế giới có nhiệm vụ độc lập.
 - Đội thu thập, đội tiến công và đội trấn thủ có thể chạy cùng tháp.
@@ -58,7 +70,7 @@ Bản lưu cũ giữ tướng, trang bị và tài nguyên; đội cũ chỉ l�
 - Triệu hồi có cổng ánh sáng và cảnh hiện nhân vật; có nút bỏ qua.
   Kết quả đã được nhận một lần; bỏ qua không đổi hoặc nhân đôi phần thưởng.
 - Thành có nhà dân, chợ, hồ, dân thu hoạch và đi lại, chim và rồng.
-  Dân minh họa sản xuất tự động; không tự cộng tài nguyên lần thứ hai.
+  Dân dùng hoạt ảnh nhiều khung, chỉ thu hoạch sau khi được giao việc.
 - Thi công có vòng sáng/giàn giáo; hoàn thành nâng cấp có hiệu ứng ánh sáng.
 - Công trình cấp tối đa 100; bốn hàng đợi huấn luyện riêng.
 - Kĩ thuật, bảng ngọc, skin đang trang bị và bí kíp giữ tác dụng thực tế.

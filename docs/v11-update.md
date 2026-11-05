@@ -1,0 +1,17 @@
+# v11 — Dân sinh, săn bắt và Linh Dược Viện
+
+Nông trang, Xưởng gỗ và Mỏ đá không tự sinh tài nguyên. Chọn công trình, chọn 1/5/10 mẻ, xem dân cần, thức ăn cấp ngay, thời gian và sản lượng rồi giao việc. Ba công trình hoạt động độc lập. Thành phẩm chờ bấm thu hoạch; dân chỉ trở lại sau khi nhận hoặc hủy. Hủy không hoàn thức ăn. Đóng game vẫn giữ mẻ đã giao, không tạo thêm mẻ. Nông trang có hái lượm cứu đói miễn phí thức ăn, dùng 3 dân trong 30 giây để nhận 50 thức ăn.
+
+Dân số = 60 + 20 × cấp Đại điện (80–2.060). Đại điện mở giới hạn nâng cấp các công trình phụ tới cùng cấp, tối đa 100. Đây là dân lao động, tách với quân số dự bị. Nhánh Kĩ thuật → Sản xuất có bốn nghiên cứu, mỗi loại tối đa 10 cấp: giảm dân 3%/cấp, giảm thức ăn 3%/cấp, giảm thời gian 2,5%/cấp, tăng cơ hội gấp đôi 2%/cấp. Mẻ chụp chi phí/hiệu ứng lúc bắt đầu; nghiên cứu sau không đổi mẻ cũ. VIP, skin và thú đồng hành vẫn tăng sản lượng mẻ.
+
+Linh Dược Viện là công trình mới. Mỗi lần tổn thất ở công thành, trấn thủ, săn bắt hoặc rút quân chiến đấu, 75% làm tròn xuống được tiếp nhận nếu còn giường. Phần còn lại tử trận. Giường = 20 + 20 × cấp viện, tối đa 1.000. Chọn binh chủng và số thương binh; mỗi quân cần 8 thức ăn + 4 gỗ. Một hàng chữa trị độc lập; nâng viện tăng giường và giảm thời gian. Hoàn tất trả quân về đúng binh chủng một lần, kể cả khi mở lại game. Thương binh và quân đang luyện/triển khai đều chiếm chỗ trong giới hạn 1.000 quân. Tháp dùng trận riêng, không tiêu hao quân dự bị.
+
+Mỗi vùng có ba đàn thú: hươu, lợn rừng, trĩ vàng. Bấm đàn, chọn đội rồi xuất quân. Trận săn dùng hệ thống theo lượt, hình động vật và đòn riêng, thắng nhận thức ăn. Mỗi đàn có ba con; một con chỉ giao cho một đội. Hết đàn hồi sau 90 giây chơi. Rút trước trận không mất con; thua không nhận thức ăn. Săn dùng một trong ba đội thế giới, có thể chạy cùng thu thập, công thành/trấn thủ và đội tháp độc lập. Khi mở lại, các đội được hoàn quân sống sót một lần, bỏ đặt chỗ đàn thú và dừng trận.
+
+Đồ họa gốc mới: 26 biểu tượng ngọc riêng; túi da và cửa hiệu có hình khác nhau; bảy hệ rồng có bốn tư thế cánh/thân/đuôi; ba động vật có bốn khung đi lại; dân đi bộ, làm ruộng và hạc có bốn khung. Rừng, đồng cỏ, hồ, nhà dân và viện thuốc bổ sung vào cảnh. Cổng nằm trên trục đường chính trong tường bao liền mạch; doanh trại nằm hai bên. Canvas giữ bộ nhớ đệm cho nền/cây và dùng lại ảnh tải sẵn.
+
+Đài Chiêu Mộ được thay toàn bộ bố cục: quảng trường ngoài trời, cổng Thiên Mệnh ở giữa, lựa chọn ngọc/vé phía dưới, tỉ lệ trong bảng mở rộng. Triệu hồi có cửa mở, chớp sáng, pháp trận và nhân vật xuất hiện theo màu phẩm. Chi phí/kết quả quyết định một lần trước hiệu ứng; bỏ qua không quay lại hoặc nhận trùng. Không dùng hình hay video thương mại trong bản phát hành.
+
+Bản offline nhúng 27 PNG đang dùng một lần dưới dạng Blob URL. Ảnh cũ được giữ trong nguồn cho lịch sử, không nhúng lại các atlas đã thay thế. Video tham khảo không được đưa vào game.
+
+Kiểm thử: 217 kiểm thử quy tắc/bản lưu, gồm 13 kiểm thử mới về sản xuất, dân, nghiên cứu, thương binh, săn thú và chạy song song. Kiểm tra trình duyệt thực tế gồm giao dân/thu hoạch/cứu thương/nghiên cứu/săn/triệu hồi; kiểm tra bản ZIP giải nén vào đường dẫn có dấu cách, cùng tệp HTML độc lập qua máy chủ Python, GET/HEAD/404 và hoạt động khi ngắt mạng. Trình duyệt quản lý chặn file:// nên chưa xác minh mở tệp trực tiếp trong đợt này; cùng tệp HTML được kiểm tra qua localhost rồi ngắt mạng. Các BAT chưa được chạy trên Windows; toàn bộ tướng chưa có bộ khung tay/chân riêng.

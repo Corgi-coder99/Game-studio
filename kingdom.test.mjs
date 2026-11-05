@@ -16,11 +16,11 @@ test('construction deducts once, completes on schedule and supports 50-gem accel
  assert.equal(economyTick(started,111000).levels.hall,1);const done=economyTick(started,112000);assert.equal(done.levels.hall,2);assert.equal(done.construction,null);assert.equal(economyTick(done,120000).levels.hall,2);
  const fast=accelerateConstruction(started);assert.equal(fast.levels.hall,2);assert.equal(fast.coins,s.coins-50);assert.throws(()=>accelerateConstruction({...started,coins:49}));
 });
-test('economy caps offline income at eight hours and does not accrue negative elapsed time',()=>{
- const s=kingdomInitial(100000);assert.equal(economyTick(s,110000).resources.food,s.resources.food+20);assert.equal(economyTick(s,0).resources.food,s.resources.food);assert.equal(economyTick(s,100000+48*3600000).resources.food,s.resources.food+28800*2);
+test('idle economy never creates resources, including offline and negative elapsed time',()=>{
+ const s=kingdomInitial(100000);assert.equal(economyTick(s,110000).resources.food,s.resources.food);assert.equal(economyTick(s,0).resources.food,s.resources.food);assert.equal(economyTick(s,100000+48*3600000).resources.food,s.resources.food);
 });
 test('typed training spends resources and completes exactly once',()=>{
- const s=kingdomInitial(100000),job=trainTroops(s,100000,'bow');assert.equal(job.training.endsAt,112000);assert.throws(()=>trainTroops(job,100000,'bow'));assert.ok(trainTroops(job,100000,'spear').trainingQueues.spear);const done=economyTick(job,112000);assert.equal(done.regiments.bow,60);assert.equal(done.troops,200);assert.equal(done.resources.food,s.resources.food-160+24);assert.equal(economyTick(done,112000).troops,200);
+ const s=kingdomInitial(100000),job=trainTroops(s,100000,'bow');assert.equal(job.training.endsAt,112000);assert.throws(()=>trainTroops(job,100000,'bow'));assert.ok(trainTroops(job,100000,'spear').trainingQueues.spear);const done=economyTick(job,112000);assert.equal(done.regiments.bow,60);assert.equal(done.troops,200);assert.equal(done.resources.food,s.resources.food-160);assert.equal(economyTick(done,112000).troops,200);
 });
 test('marches reserve the selected regiment, reject concurrent missions and return gathered resources once',()=>{
  const s=kingdomInitial();let next=dispatchMarch(s,'grain');assert.equal(next.regiments.shield,20);assert.equal(next.troops,120);assert.throws(()=>dispatchMarch(next,'camp1'));assert.throws(()=>dispatchMarch({...s,team:[]},'camp1'));assert.throws(()=>dispatchMarch({...s,troopType:'cavalry'},'camp1'));

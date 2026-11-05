@@ -1,3 +1,11 @@
+## Bản v11 · Dân sinh, săn bắt và thành trì sống động
+
+[Tải ZIP Windows offline v11](https://github.com/Corgi-coder99/Game-studio/blob/codex/thien-menh-offline/Thien-Menh-Kingdom-v11-Windows.zip) → **Download raw** → giải nén → mở **CHOI-NGAY.bat** hoặc **Thien-Menh.html** bằng Chrome/Edge. Chạy offline, không cần AI, Node.js hay Python.
+
+Sản xuất cần giao dân và cấp thức ăn; thu hoạch bằng tay. Đại điện tăng dân số, Kĩ thuật có nhánh sản xuất, Linh Dược Viện cứu thương binh. Ba loài thú ngoài thế giới có thể săn bằng đội hình trong khi đội khác và tháp vẫn hoạt động độc lập. Bảng ngọc có 26 hình riêng, Túi đồ/Cửa hàng dùng icon khác nhau; rồng, thú và dân dùng hoạt ảnh nhiều khung. Thành có tường bao/cổng trên trục đường, cây cối và dân cư. Chiêu mộ đổi sang quảng trường với cổng trung tâm và chuyển cảnh mở cửa.
+
+Chi tiết cách chơi và giới hạn: [docs/v11-update.md](docs/v11-update.md). 217 kiểm thử đạt; kiểm tra bản offline bằng Chromium và Python trên Linux. BAT chưa được chạy trên Windows. Các bản cũ được giữ bên dưới.
+
 ## Bản v10 · Ba đội song song, chiến đấu theo lượt và bảy long linh
 
 [Tải ZIP Windows offline v10](https://github.com/Corgi-coder99/Game-studio/blob/codex/thien-menh-offline/Thien-Menh-Kingdom-v10-Windows.zip) → **Download raw**. Giải nén → **CHOI-NGAY.bat** hoặc mở **Thien-Menh.html** bằng Chrome/Edge. Chạy offline, không cần AI, Node.js hay Python.

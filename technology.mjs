@@ -6,6 +6,10 @@ export const technologyCatalog=[
  {id:'city-arms',name:'Hỏa lực công thành',branch:'city',stat:'attack',step:.025,icon:2,gate:5},
  {id:'city-walls',name:'Thành đồng vách sắt',branch:'city',stat:'defense',step:.03,icon:3,gate:5},
  {id:'city-vitality',name:'Hậu cần chiến tuyến',branch:'city',stat:'health',step:.03,icon:8,gate:5},
+ {id:'work-planning',name:'Điều phối nhân công',branch:'production',stat:'labor',step:.03,icon:5,gate:1},
+ {id:'ration-saving',name:'Dưỡng dân tiết lương',branch:'production',stat:'foodSaving',step:.03,icon:8,gate:1},
+ {id:'production-tools',name:'Công cụ tinh luyện',branch:'production',stat:'productionTime',step:.025,icon:1,gate:3},
+ {id:'double-harvest',name:'Phong điều vũ thuận',branch:'production',stat:'doubleHarvest',step:.02,icon:14,gate:5},
 ];
 export function initTechnology(s){s.technology??={ranks:{}};return s;}
 export function technologyCost(node,rank){const n=rank+1,m=node.branch==='city'?2:1;return{food:300*n*n*m,wood:240*n*n*m,stone:180*n*n*m};}

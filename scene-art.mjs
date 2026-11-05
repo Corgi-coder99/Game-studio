@@ -1,0 +1,8 @@
+import {cachedImage} from './art-cache.mjs';
+import {elementNames} from './elements.mjs';
+export function runePicture(index,name){return `<span class="rune-picture" style="--rune-x:${index%7*100/6}%;--rune-y:${Math.floor(index/7)*100/3}%" role="img" aria-label="Ngọc ${name}"></span>`;}
+export function provincePicture(index,name='Cảnh quan'){return `<span class="province-picture" style="--province-x:${index%4*100/3}%;--province-y:${Math.floor(index/4)*100}%" role="img" aria-label="${name}"></span>`;}
+export function drawProvinceProp(ctx,index,x,y,width){const img=cachedImage('/assets/province-props-pixel.png');if(!img.complete||!img.naturalWidth)return;const sw=img.naturalWidth/4,sh=img.naturalHeight/2;ctx.drawImage(img,index%4*sw,Math.floor(index/4)*sh,sw,sh,x-width/2,y-width+12,width,width);}
+export function dragonFrame(time){return Math.floor(Math.max(0,time)*6.25)%4;}
+export function drawFlyingDragon(ctx,element,x,y,size,time){const img=cachedImage('/assets/dragon-flight-pixel.png');if(!img.complete||!img.naturalWidth)return;const sw=img.naturalWidth/7,sh=img.naturalHeight/4,index=Math.max(0,elementNames.indexOf(element));ctx.drawImage(img,index*sw,dragonFrame(time)*sh,sw,sh,x-size/2,y-size/2,size,size);}
+export function drawCivilian(ctx,row,x,y,size,time,facing=1){const img=cachedImage('/assets/village-motion-pixel.png');if(!img.complete||!img.naturalWidth)return;const sw=img.naturalWidth/4,sh=img.naturalHeight/3,frame=Math.floor(Math.max(0,time)*6)%4;ctx.save();ctx.translate(x,y);ctx.scale(facing,1);ctx.drawImage(img,frame*sw,row*sh,sw,sh,-size/2,-size,size,size);ctx.restore();}
