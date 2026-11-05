@@ -30,3 +30,5 @@ export function mountViewportScenes(main,key){
  bar.onclick=e=>{if(e.target.closest('[data-scene-prev]')&&index>0)index--;else if(e.target.closest('[data-scene-next]')&&index<pages.length-1)index++;else return;show();};
  show();
 }
+
+export function elementalDragonArt(element){const index=Math.max(0,["Hỏa","Thủy","Mộc"].indexOf(element));return `<span class="elemental-dragon-art" style="--dragon-x:${index*50}%" role="img" aria-label="${element} Long"></span>`;}

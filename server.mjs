@@ -6,7 +6,7 @@ files['/account.css']=['account.css','text/css; charset=utf-8'];
 files['/rpg.css']=['rpg.css','text/css; charset=utf-8'];
 files['/viewport.css']=['viewport.css','text/css; charset=utf-8'];
 const port = Number(process.env.PORT || 3000);
-for (const asset of ['heroes-pixel.png', 'hulao-pixel.png', 'city-pixel.png', 'battle-units-pixel.png','roster-a-pixel.png','roster-b-pixel.png','celestial-pets-pixel.png','pets-awakened-pixel.png','skills-pixel.png','castle-skins-pixel.png','window-scenes-pixel.png']) {
+for (const asset of ['heroes-pixel.png', 'hulao-pixel.png', 'city-pixel.png', 'battle-units-pixel.png','roster-a-pixel.png','roster-b-pixel.png','celestial-pets-pixel.png','pets-awakened-pixel.png','skills-pixel.png','castle-skins-pixel.png','window-scenes-pixel.png','elemental-dragons-pixel.png']) {
   files[`/assets/${asset}`] = [`assets/${asset}`, 'image/png'];
 }
 files['/pixel.css'] = ['pixel.css', 'text/css; charset=utf-8'];

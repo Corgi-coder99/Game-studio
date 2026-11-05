@@ -1,6 +1,6 @@
 ## Bản giao diện v6
 
-[Tải ZIP Windows offline](https://github.com/Corgi-coder99/Game-studio/blob/codex/thien-menh-offline/Thien-Menh-Kingdom-v6-Windows.zip). Bấm Download raw, giải nén rồi mở CHOI-NGAY.bat hoặc mở Thien-Menh.html bằng Edge/Chrome. Không cần Node.js. Có thể chạy chay_game.py nếu đã có Python.
+[Tải ZIP Windows offline](https://github.com/Corgi-coder99/Game-studio/blob/codex/thien-menh-offline/Thien-Menh-Kingdom-v6.1-Windows.zip). Bấm Download raw, giải nén rồi mở CHOI-NGAY.bat hoặc mở Thien-Menh.html bằng Edge/Chrome. Không cần Node.js. Có thể chạy chay_game.py nếu đã có Python.
 
 Giao diện vừa màn hình, chuyển trang thay cuộn; cửa sổ hình nhân, kho trang bị trực quan, quà VIP và mảnh tướng trong túi, nền pixel cho các cửa sổ và hình tướng thống nhất giữa thẻ/đội hình/chi tiết. Chi tiết tại [docs/v6-interface.md](docs/v6-interface.md).
 
