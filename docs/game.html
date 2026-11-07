@@ -238,11 +238,70 @@ html,body{overscroll-behavior:none;position:fixed;inset:0;touch-action:manipulat
 .touch-game #app .long-card{min-height:235px}
 .touch-game #app .long-sanctuary .gallery-heading>span{display:none}
 .touch-game #app .long-sanctuary .gallery-heading h1{flex:1}
-body[data-scene="city"] #app .map-tools [data-zoom],body[data-scene="city"] #app .map-tools [data-center]{display:none}
+
 
 .touch-game #app .game-nav button{max-width:none}
 .touch-game #app .event-dock{display:flex;flex-direction:row;align-items:flex-start}
 .touch-game #app .event-dock button{max-width:none;flex:none}
+
+#app .formation-help{display:none}
+/* Compact formation controls stay visible while the roster scrolls independently. */
+.touch-game body[data-scene="heroes"] #app .account-tabs{display:none}
+.touch-game #app .carousel-formation{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);overflow:hidden;padding:10px;gap:10px}
+.touch-game #app .carousel-formation>.gallery-heading{grid-column:1/-1;min-height:54px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px}
+.touch-game #app .carousel-formation>.gallery-heading>span{display:none}
+.touch-game #app .carousel-formation>.gallery-heading button{flex:none;font-size:19px!important}
+.touch-game #app .formation-help{display:block}
+.touch-game #app .formation-upper{display:block;min-width:0;min-height:0;overflow:hidden}
+.touch-game #app .carousel-formation .formation-stage{height:100%;padding:6px 6px 22px;display:flex;align-items:center}
+.touch-game #app .carousel-formation .formation-dragon{display:none}
+.touch-game #app .carousel-formation .formation-board{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none;transform:none}
+.touch-game #app .carousel-formation .formation-cell{height:112px;display:grid;grid-template-columns:72px minmax(0,1fr);grid-template-rows:28px 62px;gap:5px;padding:6px;align-items:center;position:relative;justify-content:stretch}
+.touch-game #app .carousel-formation .formation-cell>span[data-inspect]{grid-row:1/3}
+.touch-game #app .carousel-formation .formation-cell>span[data-inspect]>.hero-art{width:70px;height:70px}
+.touch-game #app .carousel-formation .formation-cell>b{font-size:17px;line-height:1.1;max-height:38px;overflow:hidden;padding:0}
+.touch-game #app .carousel-formation .formation-cell>button[data-slot-select]{position:static;min-height:62px;height:62px;grid-column:2;font-size:18px!important;padding:3px}
+.touch-game #app .carousel-formation .formation-cell>.cell-number{position:absolute;left:3px;top:3px;font-size:16px}
+.touch-game #app .carousel-formation .formation-cell>.empty-sigil{grid-row:1/3;font-size:40px}
+.touch-game #app .carousel-formation .formation-cell>.remove-slot{position:absolute;right:2px;top:0;min-height:28px;height:28px;width:28px;padding:0;font-size:21px!important}
+.touch-game #app .carousel-formation .formation-caption{font-size:16px}
+.touch-game #app .carousel-formation .recommendation-panel{display:none;height:100%;overflow-y:auto}
+.touch-game #app .carousel-formation.recommendation-open .recommendation-panel{display:flex}
+.touch-game #app .carousel-formation.recommendation-open .formation-stage{display:none}
+.touch-game #app .hero-carousel-row{height:auto;min-height:0;display:block;overflow:hidden}
+.touch-game #app .hero-carousel-row>button{display:none}
+.touch-game #app .hero-carousel{height:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;gap:8px;overflow-x:hidden;overflow-y:auto;touch-action:pan-y;overscroll-behavior:contain;padding:0 4px 8px}
+.touch-game #app .carousel-hero{width:auto;min-width:0;min-height:170px;padding:5px;gap:3px}
+.touch-game #app .carousel-hero .hero-art{width:65px;height:65px}
+.touch-game #app .carousel-hero>button:first-child{min-height:95px}
+.touch-game #app .carousel-hero>button:last-child{min-height:62px;font-size:19px!important}
+.touch-game #app .carousel-hero b,.touch-game #app .carousel-hero small{font-size:17px!important}
+
+#app .formation-exit{display:none}
+.touch-game #app .formation-exit{display:block}
+.touch-game body[data-scene="heroes"] #app .game-nav{display:none}
+.touch-game body[data-scene="heroes"] #app .game-content.scroll-content{bottom:10px!important}
+/* Rotated Safari/Chromium frames may report gesture axes in screen space. */
+.touch-game #app .hero-carousel{touch-action:pan-x pan-y}
+.touch-game body[data-scene="character"] #app .account-tabs,.touch-game body[data-scene="character"] #app .game-nav{display:none}
+.touch-game body[data-scene="character"] #app .game-content.scroll-content{bottom:10px!important}
+.touch-game #app .doll-title{height:68px;flex:none}
+.touch-game #app .doll-information{overflow:hidden}
+.touch-game #app .doll-tab-content{overflow-y:auto;overscroll-behavior:contain}
+.touch-game #app .gear-picker,.touch-game #app .description-dialog{max-height:95%;overflow-y:auto}
+/* Let caption controls determine their own height instead of clipping the last button. */
+#app .doll-caption{height:auto;min-height:130px}
+.touch-game #app .doll-figure{bottom:190px}
+.touch-game #app .doll-gear{bottom:195px}
+.touch-game #app .doll-gear{inset:8px 8px auto;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.touch-game #app .doll-slot{width:auto;height:76px;min-height:76px;padding:3px;gap:0}
+.touch-game #app .doll-slot>.equipment-picture,.touch-game #app .doll-slot>.item-picture{width:44px;height:44px}
+.touch-game #app .doll-slot small{font-size:14px!important;line-height:1.1;max-height:24px;overflow:hidden}
+.touch-game #app .doll-caption{min-height:0;gap:2px;padding:4px}
+.touch-game #app .doll-caption b,.touch-game #app .doll-caption span{font-size:20px;line-height:1.2}
+.touch-game #app .doll-caption small{font-size:14px!important}
+.touch-game #app .doll-figure{left:50%;top:90px;bottom:auto;width:auto;height:calc(100% - 250px);aspect-ratio:1;transform:translateX(-50%)}
+.touch-game #app .doll-figure>.character-splash-art{width:100%;height:100%}
 </style><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Thiên Mệnh"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./app-icon.png"><style>.game-nav [data-view="room"]{display:none!important}#app .peer-start>section:last-child{display:none}#app .peer-start{grid-template-columns:1fr}</style></head>
 <body><div id="app"></div><div id="toast" role="status" aria-live="polite"></div><script>(()=>{
 function nativeCommand(action,payload=''){if(window.ThienMenhNative){const bridge=window.ThienMenhNative;if(action==='send')bridge.send(payload);else if(action==='export')bridge.exportData(payload);else if(action==='host')bridge.host();else if(action==='scan')bridge.scan();else if(action==='disconnect')bridge.disconnect();return true;}if(window.webkit?.messageHandlers?.ThienMenh){window.webkit.messageHandlers.ThienMenh.postMessage({action,payload});return true;}return false;}
@@ -347,6 +406,12 @@ function drawCivilian(ctx,row,x,y,size,time,facing=1){const img=cachedImage('ass
 const cityGate={x:12,y:28,size:240};
 const citySites=[{id:'hall',x:12,y:4,size:340},{id:'infirmary',x:4,y:5,size:230},{id:'dragon',x:21,y:5,size:240},{id:'barracks',type:'shield',x:4,y:13,size:220},{id:'barracks',type:'spear',x:4,y:21,size:220},{id:'barracks',type:'bow',x:19,y:14,size:220},{id:'barracks',type:'cavalry',x:19,y:22,size:220},{id:'farm',x:-1,y:24,size:220},{id:'wood',x:23,y:18,size:220},{id:'stone',x:24,y:11,size:220},{id:'tower',x:16,y:16,size:210},{id:'auction',x:1,y:12,size:185}];
 const cityHomes=[[-1,4],[-1,11],[-1,18],[24,2],[27,14],[27,25],[3,26],[9,24],[20,0],[6,0],[22,27],[15,25]];
+
+// Fit the whole city at minimum zoom; clamp panning to the visible city bounds.
+function cityCameraLayout(width,height,camera={},touch=false){
+ const top=touch?105:145,bottom=touch?85:125,availableWidth=Math.max(1,width-90),availableHeight=Math.max(1,height-top-bottom),zoom=Math.max(1,Math.min(3,camera.zoom||1)),base=Math.max(.01,Math.min(availableWidth/3168,availableHeight/1584)),z=base*zoom,maxX=Math.max(0,(3168*z-availableWidth)/2),maxY=Math.max(0,(1584*z-availableHeight)/2),x=Math.max(-maxX,Math.min(maxX,camera.x||0)),y=Math.max(-maxY,Math.min(maxY,camera.y||0));
+ return{z,ox:width/2+x,oy:top+availableHeight/2-492*z,x,y,zoom,maxX,maxY};
+}
 
 const civicNames={farm:'Nông trang',wood:'Xưởng gỗ',stone:'Mỏ đá'},civicUnits={food:'thức ăn',wood:'gỗ',stone:'đá'},civicTroops={shield:'Thuẫn binh',spear:'Thương binh',bow:'Cung binh',cavalry:'Kỵ binh'};
 const civicFmt=n=>Math.floor(n).toLocaleString('vi-VN');
@@ -1052,6 +1117,18 @@ function fitGameResolution(){
 
 function navArt(id){if(id==='bag'||id==='shop')return `<span class="navigation-art navigation-painted" style="--navigation-x:${id==='bag'?0:100/3}%" role="img" aria-label="${id==='bag'?'Túi đồ':'Cửa hàng'}"></span>`;if(id==='city'||id==='skins')return `<span class="navigation-art navigation-castle" role="img" aria-label="Thành trì"></span>`;if(id==='heroes'||id==='profile')return `<span class="navigation-art navigation-hero" role="img" aria-label="Anh hùng"></span>`;if(id==='pets')return `<span class="navigation-art navigation-pet" role="img" aria-label="Thú cưng"></span>`;const item={shop:'resourcePack',bag:'resourcePack',quests:'xpTome',inheritance:'map',region:'map',summon:'summonTicket',studio:'gearTicket',runes:'coins',help:'xpTome'}[id];if(item)return `<span class="navigation-art">${itemPicture(item)}</span>`;const index=({army:9,mail:4})[id]??3;return `<span class="navigation-art navigation-skill" style="--nav-x:${index%4*100/3}%;--nav-y:${Math.floor(index/4)*100/3}%" role="img" aria-label="${id}"></span>`;}
 
+// Native scrolling can use the wrong axis inside Safari's rotated game frame.
+function bindHeroCarouselGestures(carousel){
+ if(!matchMedia('(pointer:coarse)').matches)return;
+ let drag=null,swiped=false;
+ carousel.style.touchAction='none';
+ carousel.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch')return;drag={id:e.pointerId,x:e.clientX,y:e.clientY,top:carousel.scrollTop};swiped=false;});
+ carousel.addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;const scale=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--game-scale'))||1,delta=document.documentElement.classList.contains('rotated-game')?-(e.clientX-drag.x)/scale:(e.clientY-drag.y)/scale;if(!swiped&&Math.abs(delta)<6)return;if(!swiped){swiped=true;carousel.setPointerCapture(e.pointerId);}e.preventDefault();carousel.scrollTop=drag.top-delta;},{passive:false});
+ carousel.addEventListener('pointerup',()=>{drag=null;});
+ carousel.addEventListener('pointercancel',()=>{drag=null;swiped=false;});
+ carousel.addEventListener('click',e=>{if(swiped){e.preventDefault();e.stopImmediatePropagation();swiped=false;}},true);
+}
+
 const invFmt=n=>Number(n).toLocaleString('vi-VN',{maximumFractionDigits:3});
 const invBonusNames={...statNames,...rareStatNames,block:'Chặn đòn',reflect:'Phản sát thương',lifesteal:'Hút máu',regen:'Tái sinh HP/giây',revive:'Hồi sinh một lần',execute:'Kết liễu',healPower:'Hiệu quả hồi máu'};
 function inventoryBonusText(t,level){const f=1+(level-1)*.12;return Object.entries(t.bonuses).map(([k,v])=>`${invBonusNames[k]||k}: ${typeof v==='boolean'?'Có':v<1?invFmt(v*f*100)+'%':invFmt(v*f)}`).join(' · ');}
@@ -1641,7 +1718,7 @@ let cachedCityGround=null,cachedGroundTextured=false,cachedCivicTrees=false;
 
 
 function mountMap(canvas, read, select) {
-  const ctx = canvas.getContext('2d',{alpha:false}), camera = { x: 0, y: 0, zoom: matchMedia('(pointer:coarse)').matches?1.35:1 }, hits = [];
+  const ctx = canvas.getContext('2d',{alpha:false}), camera = { x: 0, y: 0, zoom: read().view==='city'?1:matchMedia('(pointer:coarse)').matches?1.35:1 }, hits = [];
   const terrainArt=cachedImage('assets/living-terrain-pixel.png');
   const troopSprite=cachedImage('assets/troops-walk-pixel.png');
   const cityArt=cachedImage('assets/city-pixel.png'),fighterArt=cachedImage('assets/battle-units-pixel.png'),fighterA=cachedImage('assets/roster-a-pixel.png'),fighterB=cachedImage('assets/roster-b-pixel.png'),celestialArt=cachedImage('assets/celestial-pets-pixel.png'),castleArt=cachedImage('assets/castle-skins-pixel.png'),backdrop=cachedImage('assets/hulao-pixel.png');
@@ -1760,7 +1837,8 @@ function mountMap(canvas, read, select) {
     for(let i=floaters.length-1;i>=0;i--){const f=floaters[i],age=time-f.time;if(age>1.4){floaters.splice(i,1);continue;}ctx.globalAlpha=1-age/1.4;ctx.font='bold 21px system-ui';ctx.textAlign='center';ctx.strokeStyle='#243b39';ctx.lineWidth=3;const value=f.value>0?'+'+f.value:String(f.value);ctx.strokeText(value,f.x,f.y-age*40);ctx.fillStyle=f.value>0?'#b5ffc8':'#ffdf9e';ctx.fillText(value,f.x,f.y-age*40);ctx.globalAlpha=1;ctx.textAlign='left';}
     const orbit=time*.6,dx=w*(.26+Math.cos(orbit)*.14),dy=h*(.19+Math.sin(orbit)*.025);ctx.save();ctx.globalAlpha=.78;ctx.translate(dx,dy);ctx.rotate(Math.sin(orbit)*.12);dragon(0,0,time,b.dragon||state.dragon,.7);ctx.restore();if(b.dragonEnergy<12){ctx.strokeStyle='#b7efff88';ctx.lineWidth=3;for(const u of b.allies.filter(u=>u.hp>0)){const p=position(u);ctx.beginPath();ctx.ellipse(p.x,p.y+12,50,20,0,0,7);ctx.stroke();}}
   }
-  function transform(w,h,city){if(city){const touch=matchMedia('(pointer:coarse)').matches,top=touch?105:145,bottom=touch?85:125,z=Math.max(.05,Math.min((w-90)/3168,(h-top-bottom)/1584));return{z,ox:w/2,oy:top+(h-top-bottom)/2-492*z};}const view=read().view;const fit=city?Math.min((w-220)/3100,(h-210)/1750):view==='region'?Math.min((w-320)/1550,(h-250)/1100):Math.min((w-240)/1060,(h-230)/800);const z=fit*camera.zoom;const mx=city?0:view==='world'?-10:0,my=city?570:view==='world'?470:370;const maxX=Math.max(80,(1700*z-(w-300))/2+80),maxY=Math.max(60,(1000*z-(h-250))/2+60);camera.x=Math.max(-maxX,Math.min(maxX,camera.x));camera.y=Math.max(-maxY,Math.min(maxY,camera.y));return{z,ox:w/2-mx*z+camera.x,oy:h/2+35-my*z+camera.y};}
+  function transform(w,h,city){if(city){const layout=cityCameraLayout(w,h,camera,matchMedia('(pointer:coarse)').matches);camera.x=layout.x;camera.y=layout.y;camera.zoom=layout.zoom;return layout;}const view=read().view;const fit=city?Math.min((w-220)/3100,(h-210)/1750):view==='region'?Math.min((w-320)/1550,(h-250)/1100):Math.min((w-240)/1060,(h-230)/800);const z=fit*camera.zoom;const mx=city?0:view==='world'?-10:0,my=city?570:view==='world'?470:370;const maxX=Math.max(80,(1700*z-(w-300))/2+80),maxY=Math.max(60,(1000*z-(h-250))/2+60);camera.x=Math.max(-maxX,Math.min(maxX,camera.x));camera.y=Math.max(-maxY,Math.min(maxY,camera.y));return{z,ox:w/2-mx*z+camera.x,oy:h/2+35-my*z+camera.y};}
+  function setMapZoom(value,anchor=null){const w=canvas.clientWidth,h=canvas.clientHeight,city=read().view==='city',before=transform(w,h,city);camera.zoom=Math.max(city?1:.6,Math.min(city?3:2.6,value));if(anchor){const worldX=(anchor.x-before.ox)/before.z,worldY=(anchor.y-before.oy)/before.z,after=transform(w,h,city);camera.x+=anchor.x-(worldX*after.z+after.ox);camera.y+=anchor.y-(worldY*after.z+after.oy);}transform(w,h,city);}
   function draw(ms){if(disposed)return;if(ms-lastFrame<(read().view==='combat'?16:33)){frame=requestAnimationFrame(draw);return;}lastFrame=ms;const{state,view,selected,motionDelta=0}=read(),time=ms/1000,w=canvas.clientWidth,h=canvas.clientHeight,city=view==='city';ctx.setTransform(pixelRatio,0,0,pixelRatio,0,0);ctx.imageSmoothingEnabled=false;hits.length=0;
     if(view==='combat'){battleScene(state,time,w,h);frame=requestAnimationFrame(draw);return;}
     if(view==='region'){rect(ctx,0,0,w,h,'#6b9683');const{z,ox,oy}=transform(w,h,false);ctx.save();ctx.translate(ox,oy);ctx.scale(z,z);if(state.inheritance.activeRealm)hits.push(...drawSecretRealm(ctx,state,time,{fighterArt,fighterA,fighterB}));else{hits.push(...drawRegionScene(ctx,state,time,cityArt,castleArt,z,motionDelta));hits.push(...drawHiddenGates(ctx,state,time,activeWorldCity(state)));}ctx.restore();drawWeather(ctx,w,h,time);frame=requestAnimationFrame(draw);return;}
@@ -1783,11 +1861,11 @@ function mountMap(canvas, read, select) {
     ctx.restore();if(city&&state.account?.equipped.city!=='city-default'){const skin=state.account?.equipped.city;ctx.save();ctx.globalAlpha=.12;ctx.fillStyle=skin==='city-gold'?'#ffbf26':skin==='city-celestial'?'#b477ff':'#18d5b0';ctx.fillRect(0,0,w,h);ctx.globalAlpha=.7;ctx.strokeStyle=ctx.fillStyle;ctx.lineWidth=6;ctx.strokeRect(3,3,w-6,h-6);ctx.restore();}if(city)drawWeather(ctx,w,h,time);frame=requestAnimationFrame(draw);
   }
   canvas.addEventListener('pointerdown',e=>{if(read().view==='combat')return;e.preventDefault();canvas.setPointerCapture(e.pointerId);touchPointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(touchPointers.size===2){const[a,b]=[...touchPointers.values()];pinch={distance:Math.hypot(a.x-b.x,a.y-b.y),zoom:camera.zoom};moved=true;return;}dragging={...localPoint(e),cx:camera.x,cy:camera.y};moved=false;canvas.setPointerCapture(e.pointerId);});
-  canvas.addEventListener('pointermove',e=>{if(touchPointers.has(e.pointerId))touchPointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pinch&&touchPointers.size===2){if(read().view==='city')return;const[a,b]=[...touchPointers.values()];camera.zoom=Math.max(.6,Math.min(2.6,pinch.zoom*Math.hypot(a.x-b.x,a.y-b.y)/Math.max(1,pinch.distance)));return;}if(!dragging)return;const point=localPoint(e),dx=point.x-dragging.x,dy=point.y-dragging.y;if(Math.abs(dx)+Math.abs(dy)>5)moved=true;if(read().view==='city')return;camera.x=dragging.cx+dx;camera.y=dragging.cy+dy;});
+  canvas.addEventListener('pointermove',e=>{if(touchPointers.has(e.pointerId))touchPointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pinch&&touchPointers.size===2){const[a,b]=[...touchPointers.values()];setMapZoom(pinch.zoom*Math.hypot(a.x-b.x,a.y-b.y)/Math.max(1,pinch.distance));return;}if(!dragging)return;const point=localPoint(e),dx=point.x-dragging.x,dy=point.y-dragging.y;if(Math.abs(dx)+Math.abs(dy)>5)moved=true;camera.x=dragging.cx+dx;camera.y=dragging.cy+dy;});
   canvas.addEventListener('pointercancel',e=>{touchPointers.delete(e.pointerId);pinch=null;dragging=null;moved=true;});
   canvas.addEventListener('pointerup',e=>{touchPointers.delete(e.pointerId);if(pinch){pinch=null;dragging=null;return;}if(!moved&&dragging){const point=localPoint(e),{z,ox,oy}=transform(canvas.clientWidth,canvas.clientHeight,read().view==='city'),x=(point.x-ox)/z,y=(point.y-oy)/z;const hit=[...hits].reverse().find(p=>x>=p.x&&x<=p.x+p.w&&y>=p.y&&y<=p.y+p.h);if(hit)select(hit.id,hit.type);else if(read().view==='world'){const ax=Math.round(x+520),ay=Math.round(y-75);if(ax>=150&&ax<=950&&ay>=100&&ay<=650)select(ax+','+ay,'coordinate');}}dragging=null;});
-  canvas.addEventListener('wheel',e=>{e.preventDefault();if(read().view==='city')return;camera.zoom=Math.max(.6,Math.min(2.6,camera.zoom-e.deltaY*.001));},{passive:false});frame=requestAnimationFrame(draw);
-  return{reset(){camera.x=0;camera.y=0;camera.zoom=matchMedia('(pointer:coarse)').matches?1.35:1;},zoom(d){if(read().view==='city')return;camera.zoom=Math.max(.6,Math.min(2.6,camera.zoom+d));},focus(id,type){if(read().view==='city')return;const b=citySites.find(s=>s.id===id&&(!type||s.type===type));if(!b)return;const[x,y]=iso(b.x,b.y),{z}=transform(canvas.clientWidth,canvas.clientHeight,true);camera.x=(40-x)*z-180;camera.y=(420-y+80)*z;},dispose(){disposed=true;cancelAnimationFrame(frame);resize.disconnect();}};
+  canvas.addEventListener('wheel',e=>{e.preventDefault();setMapZoom(camera.zoom-e.deltaY*.001,localPoint(e));},{passive:false});frame=requestAnimationFrame(draw);
+  return{reset(){camera.x=0;camera.y=0;camera.zoom=read().view==='city'?1:matchMedia('(pointer:coarse)').matches?1.35:1;},zoom(d){setMapZoom(camera.zoom+d);},focus(id,type){if(read().view==='city')return;const b=citySites.find(s=>s.id===id&&(!type||s.type===type));if(!b)return;const[x,y]=iso(b.x,b.y),{z}=transform(canvas.clientWidth,canvas.clientHeight,true);camera.x=(40-x)*z-180;camera.y=(420-y+80)*z;},dispose(){disposed=true;cancelAnimationFrame(frame);resize.disconnect();}};
 }
 
 const battlePlans={balanced:{name:'Cân bằng · Vượt ải',text:'Ưu tiên tiền tuyến vững, hồi phục và sát thương nhiều mục tiêu.'},boss:{name:'BOSS · Đơn mục tiêu',text:'Ưu tiên sát thương duy trì, tốc đánh và hỗ trợ sống sót.'},siege:{name:'Công thành · Diện rộng',text:'Ưu tiên chống chịu, phá hàng đầu và kỹ năng đánh nhiều địch.'},backline:{name:'Phá hậu tuyến',text:'Ưu tiên sát thủ, chí mạng và áp lực lên tướng yếu máu.'}};
@@ -1901,6 +1979,7 @@ let rosterPage=0,carouselPosition=0,reportUnitPage=0,mailDetailed=false;
 let descriptionKey=null,descriptionPage=0,descriptionFallback=null,recommendPlan='balanced';
 let characterTab='stats',pickedGearSlot=null,pickedGearPage=0;
 let vipPreview=null,bagTab='resources',bagPageIndex=0,gearResults=[],petResults=[];
+let carouselTop=0,formationHelp=false;
 let selectedFormationSlot=null,gradeFilter='all',roleFilter='all';
 let lastDrawerSignature='',lastCombatSignature='',lastSimulationStamp=performance.now();
 let productionBatches=1,medicalType='shield',medicalAmount=20,technologyTab='infantry',lastMedicalSignature='';
@@ -1971,7 +2050,7 @@ function mapPage() {
 }
 function heroCard(h,result=false){const owned=state.owned.includes(h.id);return `<article class="hero-result-card grade-${h.grade}" data-hero-id="${h.id}" draggable="${owned&&!gameBusy()}"><button data-inspect="${h.id}">${portrait(h.id)}<h3>${h.name}</h3><b>${h.grade} · ${h.element}</b></button>${result?`<small>${h.duplicate?'Trùng tướng · +'+(shardYield[h.grade]||0)+' mảnh':'Đã nhận nhân vật'}</small>`:''}<button data-inspect="${h.id}">Kỹ năng & trang bị</button></article>`;}
 function formationBoard(){const occupied=state.formation.map((id,i)=>id?i:null).filter(i=>i!==null),slots=[...new Set([...occupied,0,2,6,8])].slice(0,4);return `<div class="formation-board">${slots.map((slot,index)=>{const id=state.formation[slot],h=id&&characterById[id];return `<div class="formation-cell ${selectedFormationSlot===slot?'slot-selected':''}" data-slot="${slot}" ${id?`data-drag-hero="${id}" draggable="${!gameBusy()}"`:''}><span class="cell-number">${index+1}</span>${h?`<span data-inspect="${id}">${portrait(id)}</span><b>${h.name}</b><button class="remove-slot" data-remove-slot="${slot}" ${gameBusy()?'disabled':''}>×</button>`:'<span class="empty-sigil">＋</span>'}<button data-slot-select="${slot}" ${gameBusy()?'disabled':''}>${selectedFormationSlot===slot?'ĐANG CHỌN':'Chọn vị trí'}</button></div>`;}).join('')}</div>`;}
-function heroesPage(){const owned=heroes.filter(h=>state.owned.includes(h.id)),rec=recommendFormation(state,recommendPlan);return `<section class="fixed-screen formation-gallery carousel-formation"><header class="gallery-heading"><h1>Đạo quân ${state.squads.active+1} · ${state.team.length}/4</h1><span>Giữ trận đồ phía trên · Lướt dải tướng bên dưới để chọn</span><button data-view="squads">Tổng quan 3 đội</button><button data-view="allocation">Phân bổ & tự điền quân</button></header><div class="formation-upper"><section class="formation-stage"><button class="formation-dragon" data-description="dragon:${state.dragon}">${elementalDragonArt(state.dragon)}</button>${formationBoard()}<div class="formation-caption">Tiền tuyến · Hậu tuyến</div></section><aside class="recommendation-panel"><h2>Gợi ý đội hình</h2><nav>${Object.entries(battlePlans).map(([id,p])=>`<button data-recommend-plan="${id}" class="${recommendPlan===id?'selected':''}">${p.name}</button>`).join('')}</nav><p>${battlePlans[recommendPlan].text}</p><div class="recommendation-heroes">${rec.formation.filter(Boolean).map(id=>`<button data-inspect="${id}" title="${rec.reasons[id]}">${portrait(id)}<span>${characterById[id].name}</span></button>`).join('')}</div><button class="gold-button" data-apply-recommendation ${gameBusy()?'disabled':''}>Áp dụng gợi ý</button><small>Gợi ý dựa trên tướng và trang bị đang sở hữu.</small></aside></div><div class="hero-carousel-row"><button data-carousel-left aria-label="Tướng phía trước">❮</button><section class="hero-carousel" aria-label="Dải nhân vật kéo ngang">${owned.map(h=>`<article class="carousel-hero grade-${h.grade}" data-hero-id="${h.id}" draggable="${!gameBusy()}"><button data-inspect="${h.id}">${portrait(h.id)}<b>${h.name}</b><small>${h.grade} · Lv.${state.heroLevels[h.id]||1}</small></button><button data-team="${h.id}" ${gameBusy()?'disabled':''}>${state.team.includes(h.id)?'Rút khỏi đội':'＋ Xếp vào ô'}</button></article>`).join('')}</section><button data-carousel-right aria-label="Tướng phía sau">❯</button></div></section>`;}
+function heroesPage(){const owned=heroes.filter(h=>state.owned.includes(h.id)),rec=recommendFormation(state,recommendPlan);return `<section class="fixed-screen formation-gallery carousel-formation${formationHelp?' recommendation-open':''}"><header class="gallery-heading"><h1>Đạo quân ${state.squads.active+1} · ${state.team.length}/4</h1><span>Chọn ô trong đội hình, sau đó chọn tướng để xếp vào ô.</span><button class="formation-exit" data-view="city">← Về thành</button><button class="formation-help" data-formation-help>${formationHelp?'Đội hình':'Gợi ý'}</button><button data-view="squads">Tổng quan 3 đội</button><button data-view="allocation">Phân bổ & tự điền quân</button></header><div class="formation-upper"><section class="formation-stage"><button class="formation-dragon" data-description="dragon:${state.dragon}">${elementalDragonArt(state.dragon)}</button>${formationBoard()}<div class="formation-caption">Tiền tuyến · Hậu tuyến</div></section><aside class="recommendation-panel"><h2>Gợi ý đội hình</h2><nav>${Object.entries(battlePlans).map(([id,p])=>`<button data-recommend-plan="${id}" class="${recommendPlan===id?'selected':''}">${p.name}</button>`).join('')}</nav><p>${battlePlans[recommendPlan].text}</p><div class="recommendation-heroes">${rec.formation.filter(Boolean).map(id=>`<button data-inspect="${id}" title="${rec.reasons[id]}">${portrait(id)}<span>${characterById[id].name}</span></button>`).join('')}</div><button class="gold-button" data-apply-recommendation ${gameBusy()?'disabled':''}>Áp dụng gợi ý</button><small>Gợi ý dựa trên tướng và trang bị đang sở hữu.</small></aside></div><div class="hero-carousel-row"><button data-carousel-left aria-label="Tướng phía trước">❮</button><section class="hero-carousel" aria-label="Dải nhân vật kéo ngang">${owned.map(h=>`<article class="carousel-hero grade-${h.grade}" data-hero-id="${h.id}" draggable="${!gameBusy()}"><button data-inspect="${h.id}">${portrait(h.id)}<b>${h.name}</b><small>${h.grade} · Lv.${state.heroLevels[h.id]||1}</small></button><button data-team="${h.id}" ${gameBusy()?'disabled':''}>${state.team.includes(h.id)?'Rút khỏi đội':'＋ Xếp vào ô'}</button></article>`).join('')}</section><button data-carousel-right aria-label="Tướng phía sau">❯</button></div></section>`;}
 function characterPage(){return renderCharacterPage(state,heroFocus,portrait,characterTab,pickedGearSlot,pickedGearPage);}
 function summonPage(){return `<section class="fixed-screen summon-gallery summon-plaza"><header class="gallery-heading"><h1>Thiên Mệnh · Đài Chiêu Mộ</h1><span>Vé ${fmt(state.account.bag.summonTicket)} · Bảo hiểm SSR ${state.pity}/30</span><button data-view="heroes">Danh sách anh hùng</button></header><div class="summon-courtyard"><div class="plaza-gate"><i></i><i></i></div><div class="plaza-motes">✧<i>✦</i><b>✧</b></div><div class="plaza-title"><h2>Cổng Thiên Mệnh</h2><p>Dẫn linh khí · Mở cổng · Đón anh hùng</p></div><details class="summon-rates"><summary>Tỉ lệ chiêu mộ & quy tắc</summary><p>SSR 1% · SSS 3% · SS 6% · S 10% · A 20% · B 25% · C 20% · D 15%. Bảo hiểm SSR sau 30 lượt. Trùng tướng nhận mảnh riêng. Năm SSR Thái Sơ chỉ nhận từ quà VIP.</p></details><div class="plaza-controls"><section><h3>Linh ngọc triệu hồi</h3><button class="gold-button" data-summon="1" ${state.coins<100?'disabled':''}>Chiêu mộ ×1 · 100 ngọc</button><button class="gold-button" data-summon="10" ${state.coins<1000?'disabled':''}>Chiêu mộ ×10 · 1.000 ngọc</button></section><section><h3>Chiêu mộ lệnh</h3><button data-ticket-summon="1" ${state.account.bag.summonTicket<1?'disabled':''}>Dùng 1 vé</button><button data-summon="100" ${state.coins<10000?'disabled':''}>Chiêu mộ ×100 · 10.000 ngọc</button><button data-ticket-summon="100" ${state.account.bag.summonTicket<100?'disabled':''}>Dùng 100 vé</button><button data-ticket-summon="10" ${state.account.bag.summonTicket<10?'disabled':''}>Dùng 10 vé</button></section></div></div>${results.length?`<div class="summon-results-ribbon">${results.map(hero=>`<button data-inspect="${hero.id}">${portrait(hero.id)}<b>${hero.name}</b><small>${hero.grade} · ${hero.duplicate?'+'+(shardYield[hero.grade]||0)+' mảnh':'Đã nhận'}</small></button>`).join('')}</div>`:''}</section>`;}
 function studioPage() {
@@ -1994,7 +2073,7 @@ const navigation = [['city', '♜', 'Thành trì'], ['region', '⌖', 'Thế gi�
 function render() {
   if(link?.active)view='room';
   if(view==='medical')lastMedicalSignature=JSON.stringify([state.medical.wounded,state.medical.queue?.endsAt]);
-  if($('.hero-carousel'))carouselPosition=$('.hero-carousel').scrollLeft;
+  if($('.hero-carousel')){carouselPosition=$('.hero-carousel').scrollLeft;carouselTop=$('.hero-carousel').scrollTop;}
   lastDrawerSignature='';lastCombatSignature='';
   mapView?.dispose();mapView=null;
   if(view==='combat'&&!state.battle)view='world';
@@ -2002,7 +2081,7 @@ function render() {
   const mapMode=['city','world','region','combat'].includes(view);document.body.className=mapMode?('immersive'+(view==='combat'?' in-combat':'')):'panel-mode';
   $('#app').innerHTML=`<header class="game-header"><button class="kingdom-brand" data-view="profile" title="Hồ sơ người chơi"><span class="hud-avatar ${state.account.equipped.frame}">${portrait(state.account.avatar)}</span><span class="lord-level">${playerProgress(state).level}</span><div><b>${escapeAccountText(state.account.name)}</b><small id="power-value">⚔ ${fmt(state.levels.hall*1300+state.troops*10+state.owned.length*120)}</small></div></button><div class="resource-strip">${[['food','♧','Thức ăn'],['wood','♠','Gỗ'],['stone','◆','Đá'],['coins','◈','Ngọc']].map(([id,icon,label])=>`<div class="resource resource-${id}"><span>${icon}</span><div><small>${label}</small><b id="res-${id}">${fmt(id==='coins'?state.coins:state.resources[id])}</b></div></div>`).join('')}<div class="resource resource-gold"><span>●</span><div><small>Vàng</small><b id="gold-value">${fmt(state.commerce.gold)}</b></div></div><div class="resource population-resource"><span>♙</span><div><small>Dân rảnh / Tổng</small><b id="population-value">${populationAvailable(state)} / ${populationCapacity(state)}</b></div></div></div><button class="hud-mail" data-view="mail" title="Hộp thư chiến tuyến">✉<small id="mail-unread">${state.mailbox.reports.filter(r=>r.mode==='bot'&&!r.read).length+state.mailbox.notices.filter(n=>!n.read).length+state.mailbox.parcels.filter(p=>!p.claimed).length}</small></button><button class="fullscreen-button" data-fullscreen title="Toàn màn hình">⛶</button></header><nav class="game-nav" aria-label="Chức năng game">${navigation.map(([id,icon,title])=>`<button data-view="${id}" class="${(view===id||(view==='character'&&id==='heroes'))?'current':''}">${navArt(id)}<small>${title}</small></button>`).join('')}</nav><main class="game-content ${mapMode?'map-content':'scroll-content'}">${mapMode?mapPage():accountTabs(view)+({auction:()=>roomPage(state,link,'auction',null,portrait,tradeSelection,tradePage,tradeRecipient),room:()=>roomPage(state,link,roomTab,null,portrait,tradeSelection,tradePage,tradeRecipient),relocation:()=>relocationPage(state,destinationX,destinationY),exchange:()=>exchangePage(state),squads:()=>squadOverviewPage(state,portrait),allocation:()=>troopAllocationPage(state,portrait),mail:()=>mailTab==='reports'&&!mailDetailed?battleComparisonPage(state,portrait,selectedMailId,reportUnitPage):'<button data-report-summary>← Tổng quan hai phe</button>'+mailPage({...state,mailbox:{...state.mailbox,reports:state.mailbox.reports.filter(r=>r.mode==='bot')}},portrait,selectedMailId,mailTab),inheritance:()=>inheritancePage(state),runes:()=>runeIconPage(state),quests:()=>missionPage(state,missionTab,missionPageIndex),skins:()=>skinsPage(state),production:()=>productionPage(state,selectedBuilding,productionBatches),medical:()=>medicalPage(state,medicalType,medicalAmount),army:()=>technologyPage(state,technologyTab),campaign:()=>renderCampaignGallery(state,campaignChapter),longs:()=>longSanctuaryPage(state),shop:()=>shopTab==='exchange'?exchangePage(state):shopTab==='boxes'?shopPage(state):fragmentShopPage(state,shopTab),profile:()=>profilePage(state,portrait),vip:()=>vipPage(state,portrait,vipPreview),pets:()=>renderPetGallery(state,petResults),bag:()=>renderBagGallery(state,portrait,bagTab,bagPageIndex),'gear-gacha':()=>renderEquipmentGacha(state,gearResults),heroes:heroesPage,character:characterPage,summon:summonPage,studio:studioPage,help:helpPage,building:buildingInterior})[view]()}</main>${state.account.realm.faction?'':realmSetup(state,realmDraft)}`;
   fitGameResolution();
-  if($('.hero-carousel')){const carousel=$('.hero-carousel');carousel.scrollLeft=carouselPosition;carousel.addEventListener('wheel',e=>{e.preventDefault();carousel.scrollLeft+=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;},{passive:false});}
+  if($('.hero-carousel')){const carousel=$('.hero-carousel');carousel.scrollLeft=carouselPosition;carousel.scrollTop=carouselTop;bindHeroCarouselGestures(carousel);carousel.addEventListener('wheel',e=>{e.preventDefault();if(matchMedia('(pointer:coarse)').matches)carousel.scrollTop+=e.deltaY;else carousel.scrollLeft+=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;},{passive:false});}
 
   if($('#peer-map'))mapView=mountPeerMap($('#peer-map'),()=>link.room,(x,y)=>{$('#peer-move-x').value=Math.max(150,Math.min(950,x));$('#peer-move-y').value=Math.max(100,Math.min(650,y));});
   if(summonReveal)$('#app').insertAdjacentHTML('beforeend',summonRevealScene());
@@ -2084,6 +2163,7 @@ document.addEventListener('click', e => {
     else if(button.dataset.research){state=researchTechnology(state,button.dataset.research);save();render();notify('Đã nghiên cứu kĩ thuật.');}
     else if(button.dataset.sandboxMax){state=sandboxMax(state,button.dataset.sandboxMax);save();render();notify('Đã áp dụng kiểm thử offline: '+button.dataset.sandboxMax);}
     else if(button.dataset.summonPreview){summonPreview=button.dataset.summonPreview;render();}
+    else if(button.hasAttribute('data-formation-help')){formationHelp=!formationHelp;$('.formation-gallery').classList.toggle('recommendation-open',formationHelp);button.textContent=formationHelp?'Đội hình':'Gợi ý';}
     else if(button.hasAttribute('data-carousel-left')||button.hasAttribute('data-carousel-right')){$('.hero-carousel').scrollBy({left:button.hasAttribute('data-carousel-left')?-700:700,behavior:'smooth'});}
     else if(button.dataset.saveSquad!==undefined){state=saveSquad(state,Number(button.dataset.saveSquad));save();render();notify('Đã lưu bộ đội hình.');}
     else if(button.dataset.activateSquad!==undefined){state=activateSquad(state,Number(button.dataset.activateSquad));view='heroes';save();render();}
@@ -2098,7 +2178,7 @@ document.addEventListener('click', e => {
     else if(button.dataset.descriptionPage!==undefined){descriptionPage=Number(button.dataset.descriptionPage);render();}
     else if(button.dataset.description){descriptionKey=button.dataset.description;descriptionPage=0;descriptionFallback=null;render();}
     else if(button.dataset.recommendPlan){recommendPlan=button.dataset.recommendPlan;render();}
-    else if(button.hasAttribute('data-apply-recommendation')){assertIdle();const rec=recommendFormation(state,recommendPlan);state.formation=rec.formation;state.team=rec.formation.filter(Boolean);state=normalizeProgression(state);save();render();notify('Đã áp dụng đội hình gợi ý.');}
+    else if(button.hasAttribute('data-apply-recommendation')){assertIdle();formationHelp=false;const rec=recommendFormation(state,recommendPlan);state.formation=rec.formation;state.team=rec.formation.filter(Boolean);state=normalizeProgression(state);save();render();notify('Đã áp dụng đội hình gợi ý.');}
     else if(button.dataset.characterTab){characterTab=button.dataset.characterTab;render();}
     else if(button.dataset.pickSlot){pickedGearSlot=button.dataset.pickSlot;pickedGearPage=0;render();}
     else if(button.hasAttribute('data-close-gear')){pickedGearSlot=null;render();}

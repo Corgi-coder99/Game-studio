@@ -25,3 +25,5 @@ The preparation script copies current game files into the Xcode project and crea
 ## Multiplayer and saves
 
 Safari does not support the native BLE bridge. Native multiplayer uses an authoritative room protocol with up to four peers; solo simulation pauses while a room is active. Desktop multi-tab tests do not verify Bluetooth radio behavior. Export save backups before replacing an app signed with a different key or clearing browser storage.
+
+See [iPhone distribution options](IOS-DISTRIBUTION.md) for the requirements for hosted macOS builds, TestFlight, and App Store distribution without a personal Mac.

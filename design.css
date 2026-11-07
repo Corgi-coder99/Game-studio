@@ -173,8 +173,67 @@ html,body{overscroll-behavior:none;position:fixed;inset:0;touch-action:manipulat
 .touch-game #app .long-card{min-height:235px}
 .touch-game #app .long-sanctuary .gallery-heading>span{display:none}
 .touch-game #app .long-sanctuary .gallery-heading h1{flex:1}
-body[data-scene="city"] #app .map-tools [data-zoom],body[data-scene="city"] #app .map-tools [data-center]{display:none}
+
 
 .touch-game #app .game-nav button{max-width:none}
 .touch-game #app .event-dock{display:flex;flex-direction:row;align-items:flex-start}
 .touch-game #app .event-dock button{max-width:none;flex:none}
+
+#app .formation-help{display:none}
+/* Compact formation controls stay visible while the roster scrolls independently. */
+.touch-game body[data-scene="heroes"] #app .account-tabs{display:none}
+.touch-game #app .carousel-formation{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);overflow:hidden;padding:10px;gap:10px}
+.touch-game #app .carousel-formation>.gallery-heading{grid-column:1/-1;min-height:54px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px}
+.touch-game #app .carousel-formation>.gallery-heading>span{display:none}
+.touch-game #app .carousel-formation>.gallery-heading button{flex:none;font-size:19px!important}
+.touch-game #app .formation-help{display:block}
+.touch-game #app .formation-upper{display:block;min-width:0;min-height:0;overflow:hidden}
+.touch-game #app .carousel-formation .formation-stage{height:100%;padding:6px 6px 22px;display:flex;align-items:center}
+.touch-game #app .carousel-formation .formation-dragon{display:none}
+.touch-game #app .carousel-formation .formation-board{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none;transform:none}
+.touch-game #app .carousel-formation .formation-cell{height:112px;display:grid;grid-template-columns:72px minmax(0,1fr);grid-template-rows:28px 62px;gap:5px;padding:6px;align-items:center;position:relative;justify-content:stretch}
+.touch-game #app .carousel-formation .formation-cell>span[data-inspect]{grid-row:1/3}
+.touch-game #app .carousel-formation .formation-cell>span[data-inspect]>.hero-art{width:70px;height:70px}
+.touch-game #app .carousel-formation .formation-cell>b{font-size:17px;line-height:1.1;max-height:38px;overflow:hidden;padding:0}
+.touch-game #app .carousel-formation .formation-cell>button[data-slot-select]{position:static;min-height:62px;height:62px;grid-column:2;font-size:18px!important;padding:3px}
+.touch-game #app .carousel-formation .formation-cell>.cell-number{position:absolute;left:3px;top:3px;font-size:16px}
+.touch-game #app .carousel-formation .formation-cell>.empty-sigil{grid-row:1/3;font-size:40px}
+.touch-game #app .carousel-formation .formation-cell>.remove-slot{position:absolute;right:2px;top:0;min-height:28px;height:28px;width:28px;padding:0;font-size:21px!important}
+.touch-game #app .carousel-formation .formation-caption{font-size:16px}
+.touch-game #app .carousel-formation .recommendation-panel{display:none;height:100%;overflow-y:auto}
+.touch-game #app .carousel-formation.recommendation-open .recommendation-panel{display:flex}
+.touch-game #app .carousel-formation.recommendation-open .formation-stage{display:none}
+.touch-game #app .hero-carousel-row{height:auto;min-height:0;display:block;overflow:hidden}
+.touch-game #app .hero-carousel-row>button{display:none}
+.touch-game #app .hero-carousel{height:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;gap:8px;overflow-x:hidden;overflow-y:auto;touch-action:pan-y;overscroll-behavior:contain;padding:0 4px 8px}
+.touch-game #app .carousel-hero{width:auto;min-width:0;min-height:170px;padding:5px;gap:3px}
+.touch-game #app .carousel-hero .hero-art{width:65px;height:65px}
+.touch-game #app .carousel-hero>button:first-child{min-height:95px}
+.touch-game #app .carousel-hero>button:last-child{min-height:62px;font-size:19px!important}
+.touch-game #app .carousel-hero b,.touch-game #app .carousel-hero small{font-size:17px!important}
+
+#app .formation-exit{display:none}
+.touch-game #app .formation-exit{display:block}
+.touch-game body[data-scene="heroes"] #app .game-nav{display:none}
+.touch-game body[data-scene="heroes"] #app .game-content.scroll-content{bottom:10px!important}
+/* Rotated Safari/Chromium frames may report gesture axes in screen space. */
+.touch-game #app .hero-carousel{touch-action:pan-x pan-y}
+.touch-game body[data-scene="character"] #app .account-tabs,.touch-game body[data-scene="character"] #app .game-nav{display:none}
+.touch-game body[data-scene="character"] #app .game-content.scroll-content{bottom:10px!important}
+.touch-game #app .doll-title{height:68px;flex:none}
+.touch-game #app .doll-information{overflow:hidden}
+.touch-game #app .doll-tab-content{overflow-y:auto;overscroll-behavior:contain}
+.touch-game #app .gear-picker,.touch-game #app .description-dialog{max-height:95%;overflow-y:auto}
+/* Let caption controls determine their own height instead of clipping the last button. */
+#app .doll-caption{height:auto;min-height:130px}
+.touch-game #app .doll-figure{bottom:190px}
+.touch-game #app .doll-gear{bottom:195px}
+.touch-game #app .doll-gear{inset:8px 8px auto;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.touch-game #app .doll-slot{width:auto;height:76px;min-height:76px;padding:3px;gap:0}
+.touch-game #app .doll-slot>.equipment-picture,.touch-game #app .doll-slot>.item-picture{width:44px;height:44px}
+.touch-game #app .doll-slot small{font-size:14px!important;line-height:1.1;max-height:24px;overflow:hidden}
+.touch-game #app .doll-caption{min-height:0;gap:2px;padding:4px}
+.touch-game #app .doll-caption b,.touch-game #app .doll-caption span{font-size:20px;line-height:1.2}
+.touch-game #app .doll-caption small{font-size:14px!important}
+.touch-game #app .doll-figure{left:50%;top:90px;bottom:auto;width:auto;height:calc(100% - 250px);aspect-ratio:1;transform:translateX(-50%)}
+.touch-game #app .doll-figure>.character-splash-art{width:100%;height:100%}

@@ -40,3 +40,15 @@ export function fitGameResolution(){
 
 
 export function navArt(id){if(id==='bag'||id==='shop')return `<span class="navigation-art navigation-painted" style="--navigation-x:${id==='bag'?0:100/3}%" role="img" aria-label="${id==='bag'?'Túi đồ':'Cửa hàng'}"></span>`;if(id==='city'||id==='skins')return `<span class="navigation-art navigation-castle" role="img" aria-label="Thành trì"></span>`;if(id==='heroes'||id==='profile')return `<span class="navigation-art navigation-hero" role="img" aria-label="Anh hùng"></span>`;if(id==='pets')return `<span class="navigation-art navigation-pet" role="img" aria-label="Thú cưng"></span>`;const item={shop:'resourcePack',bag:'resourcePack',quests:'xpTome',inheritance:'map',region:'map',summon:'summonTicket',studio:'gearTicket',runes:'coins',help:'xpTome'}[id];if(item)return `<span class="navigation-art">${itemPicture(item)}</span>`;const index=({army:9,mail:4})[id]??3;return `<span class="navigation-art navigation-skill" style="--nav-x:${index%4*100/3}%;--nav-y:${Math.floor(index/4)*100/3}%" role="img" aria-label="${id}"></span>`;}
+
+// Native scrolling can use the wrong axis inside Safari's rotated game frame.
+export function bindHeroCarouselGestures(carousel){
+ if(!matchMedia('(pointer:coarse)').matches)return;
+ let drag=null,swiped=false;
+ carousel.style.touchAction='none';
+ carousel.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch')return;drag={id:e.pointerId,x:e.clientX,y:e.clientY,top:carousel.scrollTop};swiped=false;});
+ carousel.addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;const scale=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--game-scale'))||1,delta=document.documentElement.classList.contains('rotated-game')?-(e.clientX-drag.x)/scale:(e.clientY-drag.y)/scale;if(!swiped&&Math.abs(delta)<6)return;if(!swiped){swiped=true;carousel.setPointerCapture(e.pointerId);}e.preventDefault();carousel.scrollTop=drag.top-delta;},{passive:false});
+ carousel.addEventListener('pointerup',()=>{drag=null;});
+ carousel.addEventListener('pointercancel',()=>{drag=null;swiped=false;});
+ carousel.addEventListener('click',e=>{if(swiped){e.preventDefault();e.stopImmediatePropagation();swiped=false;}},true);
+}

@@ -4,7 +4,7 @@ An offline-first pixel strategy game with city building, three independent world
 
 ## Current version
 
-This branch contains the current playable version: larger touch controls, a stable mobile viewport, animated elemental dragons, and three consecutive tower encounters per floor. Surviving heroes keep their HP between encounters. See [current release notes](docs/current-release.md).
+This branch contains the current playable version: larger touch controls, a stable mobile viewport, bounded map zoom, a touch-friendly formation editor, animated elemental dragons, and three consecutive tower encounters per floor. Surviving heroes keep their HP between encounters. See [current release notes](docs/current-release.md).
 
 Only one current desktop package is maintained. Historical downloads, screenshots, unused atlases, and outdated native packages have been removed from the current tree. Previous commits remain available in Git history.
 
@@ -42,11 +42,11 @@ Keep `assets/` as the editable source assets and `docs/` as the generated hostin
 
 ## Native mobile projects
 
-Android and iOS source projects remain under [`mobile/`](mobile/README.md). Outdated APK and iOS project ZIP downloads have been removed. Rebuild from current sources before distributing a native app. iOS installation requires Apple signing and an appropriate build/distribution workflow; the repository is not an installable IPA.
+Android and iOS source projects remain under [`mobile/`](mobile/README.md). Outdated APK and iOS project ZIP downloads have been removed. Rebuild from current sources before distributing a native app. iOS installation requires Apple signing and an appropriate build/distribution workflow; the repository is not an installable IPA. See [iPhone distribution options](mobile/IOS-DISTRIBUTION.md) for Home Screen installation, TestFlight, and hosted macOS builds.
 
 ## Validation and limitations
 
-242 automated checks passed for the current gameplay and web-cache contracts. Touch layouts were exercised in Chromium mobile emulation in landscape and portrait; desktop, offline launch, cache repair, and restart persistence were also checked. Physical iPhone Safari and Bluetooth hardware have not been validated. Windows BAT launchers have not been run on Windows; the iOS project has not been compiled with Xcode.
+245 automated checks passed for the current gameplay and web-cache contracts. Touch layouts were exercised in Chromium mobile emulation in landscape and portrait; desktop, offline launch, cache repair, and restart persistence were also checked. Physical iPhone Safari and Bluetooth hardware have not been validated. Windows BAT launchers have not been run on Windows; the iOS project has not been compiled with Xcode.
 
 ## Repository policy
 

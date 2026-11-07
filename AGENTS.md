@@ -33,7 +33,7 @@ npm run build:offline
 python3 package-windows.py
 ```
 
-242 meaningful tests cover gameplay, save invariants and web cache contracts. Exercise changed browser flows (desktop/mobile). Test the delivered ZIP extracted to a path with spaces, Python server GET/HEAD/404, offline image/skill loading and actual gameplay. Report that BAT has not been run on Windows if that remains true.
+245 meaningful tests cover gameplay, save invariants and web cache contracts. Exercise changed browser flows (desktop/mobile). Test the delivered ZIP extracted to a path with spaces, Python server GET/HEAD/404, offline image/skill loading and actual gameplay. Report that BAT has not been run on Windows if that remains true.
 
 Current delivery: Thien-Menh-Windows.zip only. Remove superseded packages and unused assets from the current tree on each release; retain history. Native APKs and iOS project ZIPs are local build outputs and must not be advertised as current unless rebuilt and verified. No Node/Python is needed for direct HTML play; Python launcher uses only the standard library. Regenerate delivery whenever source/UI/art/instructions change. GitHub publication requires session authorization. The user authorized the current completed release, including repository cleanup, to be promoted to main in Corgi-coder99/Game-studio. Continue future development on codex/thien-menh-offline. Local implementation/packaging remains authorized.
 
