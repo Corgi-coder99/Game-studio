@@ -10,3 +10,8 @@ mobile/ios/ThienMenh/Thien-Menh.html
 mobile/ios/ThienMenh/assets/
 *.keystore
 *.apk.idsig
+
+# Keep one current distributable; historical/native packages are local build outputs.
+Thien-Menh-*.zip
+!Thien-Menh-Windows.zip
+Thien-Menh-*.apk

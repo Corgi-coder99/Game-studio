@@ -1,6 +1,6 @@
 # Thiên Mệnh — Codex Legend Studio
 
-Vietnamese-first, low-cost offline pixel strategy prototype. Read docs/v5-systems.md and docs/characters.md before changing rules. Keep the existing checkout and the authorized secondary branch; preserve main and historical v4 ZIP.
+Vietnamese-first, low-cost offline pixel strategy prototype. Read docs/v5-systems.md and docs/characters.md before changing rules. Keep the existing checkout and the authorized secondary branch; preserve main.
 
 ## Working agreement
 
@@ -33,9 +33,9 @@ npm run build:offline
 python3 package-windows.py
 ```
 
-240 meaningful tests cover gameplay, save invariants and web cache contracts. Exercise changed browser flows (desktop/mobile). Test the delivered ZIP extracted to a path with spaces, Python server GET/HEAD/404, offline image/skill loading and actual gameplay. Report that BAT has not been run on Windows if that remains true.
+242 meaningful tests cover gameplay, save invariants and web cache contracts. Exercise changed browser flows (desktop/mobile). Test the delivered ZIP extracted to a path with spaces, Python server GET/HEAD/404, offline image/skill loading and actual gameplay. Report that BAT has not been run on Windows if that remains true.
 
-Current delivery: Thien-Menh-Kingdom-v12-Windows.zip plus compatibility Thien-Menh-Windows-Python.zip. No Node/Python is needed for direct HTML play; Python launcher uses only the standard library. Regenerate delivery whenever source/UI/art/instructions change. GitHub publication requires session authorization. The user explicitly authorized GitHub publication and instructed pushes to codex/thien-menh-offline only in Corgi-coder99/Game-studio. Preserve main. Local implementation/packaging remains authorized.
+Current delivery: Thien-Menh-Windows.zip only. Remove superseded packages and unused assets from the current tree on each release; retain history. Native APKs and iOS project ZIPs are local build outputs and must not be advertised as current unless rebuilt and verified. No Node/Python is needed for direct HTML play; Python launcher uses only the standard library. Regenerate delivery whenever source/UI/art/instructions change. GitHub publication requires session authorization. The user explicitly authorized GitHub publication and instructed pushes to codex/thien-menh-offline only in Corgi-coder99/Game-studio. Preserve main. Local implementation/packaging remains authorized.
 
 UI v7: read docs/v7-interface.md. Native 1920×1080 frame scales uniformly; do not scale individual text panels. gallery-ui.mjs owns fixed bag/pet/campaign scenes and description dialogs; recommendations.mjs provides owned-only heuristic formations. New reports are restricted to mode bot; secret reward parcels remain mandatory.
 
