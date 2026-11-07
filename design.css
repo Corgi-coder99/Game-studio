@@ -139,7 +139,7 @@ html,body{overscroll-behavior:none;position:fixed;inset:0;touch-action:manipulat
 .touch-game #app .fight-score{top:85px}
 .touch-game #app .world-layer-switch{left:190px;top:85px}
 .touch-game #app .detail-panel{width:360px;bottom:110px;overflow:auto}
-@media(orientation:portrait){.touch-game #app .long-gallery{grid-template-columns:1fr}.touch-game #app .resource small{display:none}.touch-game #app .resource{height:38px;min-width:78px}.touch-game #app .kingdom-brand{width:150px;min-width:150px}.touch-game #app .gallery-heading h1{font-size:28px!important}.touch-game #app .campaign-gallery-layout{display:flex;flex-direction:column}.touch-game #app .trial-tower{display:none}.touch-game #app .campaign-tile-grid{min-height:620px}.touch-game #app .campaign-summary{padding:12px}.touch-game #app .formation-gallery-body{display:flex;flex-direction:column;overflow:auto}.touch-game #app .formation-stage{min-height:480px}.touch-game #app .skill-dock{overflow-x:auto;justify-content:flex-start}.touch-game #app .world-layer-switch{left:160px;right:12px;top:90px}.touch-game #app .game-nav{justify-content:flex-start}}
+
 .touch-game #app .resource-strip{display:flex;flex-direction:row;align-items:flex-start;flex:1;min-width:0;max-width:none}
 .touch-game #app .kingdom-brand div{min-width:0;max-width:110px}.touch-game #app .kingdom-brand b{font-size:19px;white-space:nowrap}.touch-game #app .kingdom-brand small{font-size:17px!important;white-space:nowrap}
 .touch-game #app .resource small{font-size:14px!important}.touch-game #app .resource b{font-size:20px;white-space:nowrap}
@@ -154,15 +154,27 @@ html,body{overscroll-behavior:none;position:fixed;inset:0;touch-action:manipulat
 .touch-game #app .long-sanctuary>footer{font-size:16px;line-height:1.2;flex:none}
 .touch-game #app .long-sanctuary{overflow:hidden}
 .touch-game #app .long-card h3{margin-bottom:5px}.touch-game #app .long-card p{line-height:1.25}.touch-game #app .long-card footer button{font-size:18px!important;min-height:54px}
-@media(orientation:portrait){.touch-game #app .gallery-heading>span{flex-basis:100%}.touch-game #app .long-gallery{grid-auto-rows:280px}.touch-game #app .resource-strip{max-height:70px;overflow:auto}.touch-game #app .queue-stack{display:none}}
+
 .touch-game body:before{display:none}
 .touch-game #app .hud-avatar{flex:none}.touch-game #app .kingdom-brand div{overflow:hidden}.touch-game #app .kingdom-brand b{display:block;text-overflow:ellipsis;overflow:hidden}
 
 .touch-game #app .long-card p{font-size:21px!important}.touch-game #app .long-card small{font-size:19px!important}
 @media(orientation:landscape){.touch-game #app .long-sanctuary .gallery-heading>span{display:none}.touch-game #app .long-gallery{grid-auto-rows:235px}.touch-game #app .long-card{min-height:235px}.touch-game #app .long-sanctuary .gallery-heading h1{flex:1}}
-@media(orientation:portrait){.touch-game #app button{min-height:74px}.touch-game #app .long-card footer button{min-height:74px}.touch-game #app .long-gallery{grid-auto-rows:300px}}
+
 
 :root{--safe-left:env(safe-area-inset-left,0px);--safe-right:env(safe-area-inset-right,0px);--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
 /* Combat already provides its own navigation; keep commands against the bottom edge. */
 .touch-game #app .combat-bottom{bottom:8px}
 .touch-game #app .fight-score{pointer-events:none}
+
+/* Keep one landscape game layout, including when Safari cannot lock orientation. */
+.rotated-game #app{transform:rotate(90deg) scale(var(--game-scale))}
+.touch-game #app .long-gallery{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:235px}
+.touch-game #app .long-card{min-height:235px}
+.touch-game #app .long-sanctuary .gallery-heading>span{display:none}
+.touch-game #app .long-sanctuary .gallery-heading h1{flex:1}
+body[data-scene="city"] #app .map-tools [data-zoom],body[data-scene="city"] #app .map-tools [data-center]{display:none}
+
+.touch-game #app .game-nav button{max-width:none}
+.touch-game #app .event-dock{display:flex;flex-direction:row;align-items:flex-start}
+.touch-game #app .event-dock button{max-width:none;flex:none}

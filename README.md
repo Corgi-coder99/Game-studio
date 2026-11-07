@@ -14,7 +14,7 @@ The complete Safari installation site is generated in `docs/`. Once GitHub Pages
 
 https://corgi-coder99.github.io/Game-studio/
 
-In Safari, choose **Share → Add to Home Screen**, open the new icon while connected to Wi-Fi, and download the game until the offline-ready message appears. Landscape mode is recommended. The initial download is approximately 74 MiB. Subsequent solo sessions can run offline. Back up saves through Studio before clearing browser storage.
+In Safari, choose **Share → Add to Home Screen**, open the new icon while connected to Wi-Fi, and download the game until the offline-ready message appears. The game uses a landscape layout on every phone size, rotating its frame when the device is held upright. The Home Screen app provides the fullscreen experience when Safari does not support the Fullscreen API. The initial download is approximately 74 MiB. Subsequent solo sessions can run offline. Back up saves through Studio before clearing browser storage.
 
 The repository owner must select **Settings → Pages → Deploy from a branch → main → /docs**. Pages availability depends on repository visibility and plan; this README does not imply that hosting is enabled. Safari does not provide this game's Bluetooth multiplayer.
 

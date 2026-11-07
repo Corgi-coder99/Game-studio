@@ -2,7 +2,8 @@
 
 ## Gameplay and presentation
 
-- Touch screens use a larger logical viewport, fixed page positioning, safe-area insets, and larger controls. Safari viewport height changes resize the frame without recreating the map.
+- City view uses a fixed full-city camera; dragging, wheel input, zoom controls, and building focus cannot move it outside the scene. Landscape terrain covers the canvas independently of city placement.
+- Touch screens always use a landscape layout fitted to the available screen and safe-area insets. When Safari cannot lock device orientation, the game rotates its frame in portrait-held devices and converts map input coordinates accordingly. Browser toolbar changes resize the frame without recreating the map. Safari fullscreen requires the Home Screen app where the Fullscreen API is unavailable.
 - The seven elemental dragons share a four-frame flight atlas with additional body and tail motion. A stale atlas positioning override has been removed. Only the selected dragon supports a team.
 - Skill effects include directed energy trails, impact particles, and sword or ice effects according to the skill family. Visual changes do not change damage.
 - Each Inferno Tower floor (1–999) has three encounters: scouts, siege, and a boss. Enemy health and strength increase. Surviving HP, resources, cooldowns, effects, fallen heroes, and spent revives carry between encounters. Rewards and floor unlocks occur only after the boss. In-combat healing skills still work.
