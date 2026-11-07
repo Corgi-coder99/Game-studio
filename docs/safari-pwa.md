@@ -4,7 +4,7 @@ Trang dự kiến: https://corgi-coder99.github.io/Game-studio/
 
 ## Bật GitHub Pages một lần (chủ kho)
 
-Mở https://github.com/Corgi-coder99/Game-studio/settings/pages bằng tài khoản chủ kho. Trong Build and deployment: Source → Deploy from a branch; Branch → `codex/thien-menh-offline`; Folder → `/docs`; Save. Không đổi main. Chờ GitHub xuất bản xong, thường vài phút, rồi mở đường dẫn chơi phía trên. API cấu hình Pages bị chặn trong kết nối của phiên làm việc, nên không thể bật hoặc xác nhận trạng thái Pages qua API tại đây. Không coi URL dự kiến là đã hoạt động trước khi bật Pages.
+Mở https://github.com/Corgi-coder99/Game-studio/settings/pages bằng tài khoản chủ kho. Trong Build and deployment: Source → Deploy from a branch; Branch → `main`; Folder → `/docs`; Save. Dùng main cho bản hoàn chỉnh đã được cho phép phát hành. Chờ GitHub xuất bản xong, thường vài phút, rồi mở đường dẫn chơi phía trên. API cấu hình Pages bị chặn trong kết nối của phiên làm việc, nên không thể bật hoặc xác nhận trạng thái Pages qua API tại đây. Không coi URL dự kiến là đã hoạt động trước khi bật Pages.
 
 ## Trên iPhone
 

@@ -16,7 +16,7 @@ https://corgi-coder99.github.io/Game-studio/
 
 In Safari, choose **Share → Add to Home Screen**, open the new icon while connected to Wi-Fi, and download the game until the offline-ready message appears. Landscape mode is recommended. The initial download is approximately 74 MiB. Subsequent solo sessions can run offline. Back up saves through Studio before clearing browser storage.
 
-The repository owner must select **Settings → Pages → Deploy from a branch → codex/thien-menh-offline → /docs**. Pages availability depends on repository visibility and plan; this README does not imply that hosting is enabled. Safari does not provide this game's Bluetooth multiplayer.
+The repository owner must select **Settings → Pages → Deploy from a branch → main → /docs**. Pages availability depends on repository visibility and plan; this README does not imply that hosting is enabled. Safari does not provide this game's Bluetooth multiplayer.
 
 ## Download for desktop
 
@@ -50,4 +50,4 @@ Android and iOS source projects remain under [`mobile/`](mobile/README.md). Outd
 
 ## Repository policy
 
-Publish changes only to `codex/thien-menh-offline`; preserve `main`. Maintain one current download, remove obsolete generated packages and unused files, and keep README links aligned with the current tree. Preserve Vietnamese player-facing text. Never commit signing keys, credentials, saves, or local build caches.
+Use `main` for the completed release and `codex/thien-menh-offline` for ongoing work. Update `main` only when the user authorizes a release. Maintain one current download, remove obsolete generated packages and unused files, and keep README links aligned with the current tree. Preserve Vietnamese player-facing text. Never commit signing keys, credentials, saves, or local build caches.
