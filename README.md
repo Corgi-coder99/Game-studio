@@ -1,3 +1,9 @@
+## Chơi trên iPhone bằng Safari — không cần Mac
+
+Bản web đã chuẩn bị tại thư mục `docs`. Chủ kho bật **Settings → Pages → Deploy from a branch → codex/thien-menh-offline → /docs → Save** một lần. Sau khi Pages xuất bản, mở **https://corgi-coder99.github.io/Game-studio/** bằng Safari.
+
+Chọn **Chia sẻ → Thêm vào Màn hình chính**. Mở biểu tượng khi còn Wi-Fi, bấm **Tải game về máy** nếu cần và chờ **Sẵn sàng offline** ngay trong biểu tượng. Xoay ngang để chơi. Lần đầu cần Wi-Fi khoảng 75 MB; những lần sau có thể chơi đơn khi không có mạng. Bluetooth cần ứng dụng native. [Hướng dẫn và kiểm thử Safari](docs/safari-pwa.md).
+
 ## Bản v12 · Tiên thành, thương mại và điện thoại
 
 - [APK Android thử nghiệm](Thien-Menh-v12-Android.apk): đóng gói offline, có mã Bluetooth LE; đã biên dịch và xác minh chữ ký, chưa kiểm tra trên điện thoại thật.

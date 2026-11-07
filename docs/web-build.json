@@ -1,0 +1,186 @@
+{
+  "version": "v12-fc046f826b08",
+  "bytes": 77393984,
+  "files": [
+    {
+      "url": "index.html",
+      "size": 2382,
+      "sha256": "f73b05f8effd56e1cb675690c838723fa12c10783ee444751662a8940198127d"
+    },
+    {
+      "url": "game.html",
+      "size": 697736,
+      "sha256": "42fa920327e44b590fe36d8e255c03e5276378387add86655c5d9ef10b6b29f3"
+    },
+    {
+      "url": "install.css",
+      "size": 1866,
+      "sha256": "d2108408be7fffc88ad57e4f5fdf552c4f3ed5d3b076f554c772e9e9e2599a5a"
+    },
+    {
+      "url": "install.js",
+      "size": 4386,
+      "sha256": "b03f2ddffea32b82305c8438f62dffb79aa8f929723c05fad9cc303799fd0507"
+    },
+    {
+      "url": "manifest.webmanifest",
+      "size": 509,
+      "sha256": "2cac8176c9ca0fdb5d2560ccce6cb841bfb2ec2aa59fbe9ed44fe4de099a90b2"
+    },
+    {
+      "url": "app-icon.png",
+      "size": 1734712,
+      "sha256": "2dd8e979ebcf17ffa3a4ec4ec83ff59506608a28020b2063083c0b230332e9c1"
+    },
+    {
+      "url": "assets/battle-units-pixel.png",
+      "size": 2090123,
+      "sha256": "7773c347f411157d04feb739ea79810522975429247159742442180caba5f4ad"
+    },
+    {
+      "url": "assets/blind-boxes-pixel.png",
+      "size": 2421702,
+      "sha256": "4bc2a3bbbf2dfa77ee671f3cd8e029967149424761a14f8b5a4e02f0a00743ea"
+    },
+    {
+      "url": "assets/building-scenes-pixel.png",
+      "size": 3893483,
+      "sha256": "1cd4d5c9ced164a9ee6236b767a1e729bc4de8e7f3c8b6392e62f7d21c45487f"
+    },
+    {
+      "url": "assets/castle-skins-pixel.png",
+      "size": 3226590,
+      "sha256": "ecbaaec6ea37d5502eb428477e30d9123559c7d91268cb4685677b11a5d5a3db"
+    },
+    {
+      "url": "assets/celestial-pets-pixel.png",
+      "size": 2694047,
+      "sha256": "d9b4460167f997f71e1ab4b403351d5bfd778f40a59f9e10896c2041d985a4bd"
+    },
+    {
+      "url": "assets/city-foundation-pixel.png",
+      "size": 2642292,
+      "sha256": "3921b2a42a4e76859984fe53e785048e8debbf4dc5aaeb86c10d55723673efdc"
+    },
+    {
+      "url": "assets/city-life-pixel.png",
+      "size": 2175478,
+      "sha256": "26c06fe1ffd88d92fe9aecbfa3c69c541598e1f8aece043040bb805cdbfe0a99"
+    },
+    {
+      "url": "assets/city-pixel.png",
+      "size": 2357667,
+      "sha256": "132bc26b85178aa26fccf210ae6ace55d7fad8341b6a02a9acea12a453d7dd36"
+    },
+    {
+      "url": "assets/dragon-flight-pixel.png",
+      "size": 3103428,
+      "sha256": "182475b3db7d05bfe573c37e7805c0d895b4e1da2e64ae8d6c61477d27152417"
+    },
+    {
+      "url": "assets/element-icons-pixel.png",
+      "size": 807748,
+      "sha256": "0dcfe4dbe2c02bc4100350f0d77cf240ab36663b294a54d2205e6d90c95be09c"
+    },
+    {
+      "url": "assets/equipment-rarity-pixel.png",
+      "size": 2571486,
+      "sha256": "7c0569b3ac593fc5687a55cb4bcbb1ae376a377796e0f613291788c61acd9363"
+    },
+    {
+      "url": "assets/hulao-pixel.png",
+      "size": 2349484,
+      "sha256": "6a9971e6ada1d5d6f63adebb0dad5673138b62bf0962158adf4f1ce1b74d3dc6"
+    },
+    {
+      "url": "assets/inventory-icons-pixel.png",
+      "size": 1818785,
+      "sha256": "779437c25780347a1d97ac8c35aa54c607c24d18bbd356820c0dd9637188ef05"
+    },
+    {
+      "url": "assets/living-terrain-pixel.png",
+      "size": 3562320,
+      "sha256": "9888a5216d318378cc98db3d9ec98d29c6ecba1c0b76e6196179a7fe135f334f"
+    },
+    {
+      "url": "assets/navigation-icons-pixel.png",
+      "size": 1597877,
+      "sha256": "fdd4b13b9c6373e5bda10cdc8446257298bbc1dd079a781eb764136b35081ee4"
+    },
+    {
+      "url": "assets/pets-awakened-pixel.png",
+      "size": 3131090,
+      "sha256": "99003b5be401833501592689393c0ea6c196366e8a524e48d24ab942c2a4ae44"
+    },
+    {
+      "url": "assets/province-props-pixel.png",
+      "size": 2687888,
+      "sha256": "8b861bac94d450ac971881ac5e7bbc2582b1ab19c2da01fcf89c325dc0b0a968"
+    },
+    {
+      "url": "assets/roster-a-pixel.png",
+      "size": 2629715,
+      "sha256": "f019c78d37d2fe0c84b6e46eac56e75712cc4ffac2152932e5829a9100071cb6"
+    },
+    {
+      "url": "assets/roster-b-pixel.png",
+      "size": 2815682,
+      "sha256": "1230eb0eec3339842fb8952ecb7d1938a4eba375cea332490020c6a688fee8c9"
+    },
+    {
+      "url": "assets/rune-gems-pixel.png",
+      "size": 3170568,
+      "sha256": "ebb850342c0d8e932947138bebe0aa2fbd9214c450e0a48f8996a9f547a0a8f8"
+    },
+    {
+      "url": "assets/skill-frames-pixel.png",
+      "size": 1835018,
+      "sha256": "ac64ef73006f020c95f8209e09b27f551015ecab97fa71dcc1128916885f3a37"
+    },
+    {
+      "url": "assets/skills-pixel.png",
+      "size": 2616736,
+      "sha256": "95dd4150012387c90d014f670923bd6ebf44dfe9b0fc0370f3ff944615df7594"
+    },
+    {
+      "url": "assets/summon-plaza-pixel.png",
+      "size": 3441848,
+      "sha256": "6918f8b9c5833207661f5d0d8ec1f0da9c8e18f9ee3e1cd35228bea2ebe1ea2f"
+    },
+    {
+      "url": "assets/trial-tower-pixel.png",
+      "size": 3344200,
+      "sha256": "80d52f0e51aac878b256e826f7d808a0fbd54d1b881bc09c85886285b251a256"
+    },
+    {
+      "url": "assets/troops-walk-pixel.png",
+      "size": 1485108,
+      "sha256": "164d51a80b946bf3b8c762a0e56ea08edf0a36abbce920a914239c0b061e7286"
+    },
+    {
+      "url": "assets/village-motion-pixel.png",
+      "size": 1538505,
+      "sha256": "35e367bdd44f1f1c47bc8c795089853186de1ccf9adeddec22c737a94b7de617"
+    },
+    {
+      "url": "assets/weapon-rarity-pixel.png",
+      "size": 2358975,
+      "sha256": "949e20598d7eab6dd97de572f2c3bc1be328ed9cccd2328eb5a7b9442d5b2ced"
+    },
+    {
+      "url": "assets/wildlife-walk-pixel.png",
+      "size": 1449796,
+      "sha256": "cf616d1a4125aee1a50948fa9e0297d8f2e241dd95fa97b92101232ad5c26a9e"
+    },
+    {
+      "url": "assets/window-scenes-pixel.png",
+      "size": 3173016,
+      "sha256": "a8caae65cba490f906e9d2360d5e09ef82acb082373f3dcc9d61864809479349"
+    },
+    {
+      "url": "assets/world-sites-pixel.png",
+      "size": 1961738,
+      "sha256": "49313b9cf506347a3dd94b6a6349499b6bdb4fda724a3b5eb6401a9939817bb6"
+    }
+  ]
+}

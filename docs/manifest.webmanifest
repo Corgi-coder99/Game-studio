@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Thiên Mệnh · Pixel Kingdom",
+  "short_name": "Thiên Mệnh",
+  "lang": "vi",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#0c2029",
+  "theme_color": "#102d35",
+  "description": "Game xây thành và đội hình pixel, chơi đơn offline sau lần tải đầu.",
+  "icons": [
+    {
+      "src": "./app-icon.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
