@@ -1,6 +1,6 @@
 {
-  "version": "v12-fc046f826b08",
-  "bytes": 77393984,
+  "version": "v12-1de25ebe2bc6",
+  "bytes": 77535095,
   "files": [
     {
       "url": "index.html",
@@ -9,8 +9,8 @@
     },
     {
       "url": "game.html",
-      "size": 697736,
-      "sha256": "42fa920327e44b590fe36d8e255c03e5276378387add86655c5d9ef10b6b29f3"
+      "size": 709355,
+      "sha256": "ab88b6f0cab5bde7e28d2a948525edfa092b1e75198288dc468f1a94a8c86930"
     },
     {
       "url": "install.css",
@@ -74,8 +74,8 @@
     },
     {
       "url": "assets/dragon-flight-pixel.png",
-      "size": 3103428,
-      "sha256": "182475b3db7d05bfe573c37e7805c0d895b4e1da2e64ae8d6c61477d27152417"
+      "size": 3232920,
+      "sha256": "12465fb6abefb4ce595f6a7f634e820b5fcfece61135c05a6ed8dd7b319abce1"
     },
     {
       "url": "assets/element-icons-pixel.png",

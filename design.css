@@ -48,7 +48,7 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden!important;background:#
 @media(prefers-reduced-motion:reduce){#app .summon-reveal,#app .summon-reveal-hero,#app .summon-reveal-caption{animation:none}#app .summon-gate-light{display:none}}
 #app .summon-open-portal{position:absolute;left:38%;top:19%;width:24%;height:40%;border:4px double #dec57b;border-radius:48% 48% 3% 3%;background:radial-gradient(ellipse,#132466,#070b19 70%);box-shadow:inset 0 0 70px #3169b3,0 0 30px var(--reveal-color);animation:portal-open 2.2s ease-out both}@keyframes portal-open{0%,20%{transform:scaleX(0);opacity:0}80%,100%{transform:scaleX(1);opacity:1}}
 #app .element-icon{display:inline-block;width:28px;height:28px;flex:none;background:url('/assets/element-icons-pixel.png') var(--element-x) center/700% 100% no-repeat;image-rendering:pixelated;vertical-align:middle}#app .hero-art{position:relative}#app .hero-art>.element-icon{position:absolute;top:0;right:0;width:21px;height:21px;border-radius:5px;z-index:2}#app .elemental-dragon-art{background-image:url('/assets/dragon-flight-pixel.png')!important;background-size:700% 100%!important}#app .long-gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:18px;flex:1;min-height:0}#app .long-card{background:#15364be8;border:1px solid #7493a0;display:grid;grid-template-columns:140px 1fr;grid-template-rows:1fr auto;gap:10px;padding:14px;min-height:0}#app .long-card.active{border:2px solid #ffe29a;background:#36544ce8}#app .long-card>button{background:none;border:0;position:relative;padding:0}#app .long-card>button .element-icon{position:absolute;top:0;right:0}#app .long-card .elemental-dragon-art{width:135px;height:135px;display:block}#app .long-card h3{font-size:21px!important;margin:0 0 12px}#app .long-card p{font-size:17px!important;line-height:1.5;margin:0 0 8px}#app .long-card small{font-size:15px!important;color:#dce9e9}#app .long-card footer{grid-column:1/3;display:flex;gap:8px}#app .long-card footer button{flex:1;padding:8px;font-size:16px!important}#app .long-sanctuary>footer{font-size:16px;color:#e4eadb}#app .long-sanctuary{background:linear-gradient(#163344cc,#102b3dcc),url('/assets/building-scenes-pixel.png') 100% 100%/300% 200%}#app .shop-tabs{display:flex;gap:10px}#app .shop-fragment-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:18px;flex:1;min-height:0}#app .shop-fragment-grid article{background:#16384ce8;border:1px solid #af9a60;display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px}#app .shop-fragment-grid article>div{height:135px;width:135px}#app .shop-fragment-grid .elemental-dragon-art,#app .shop-fragment-grid .character-splash-art{width:135px;height:135px;display:block}#app .shop-fragment-grid h3,#app .shop-fragment-grid p{margin:0}#app .shop-fragment-grid button{margin-top:auto;width:100%}
-#app .element-icon{background-size:700% 200%;background-position:var(--element-x) center}#app .elemental-dragon-art{background-size:700% 200%!important;background-position:var(--dragon-x) center!important}
+#app .element-icon{background-size:700% 200%;background-position:var(--element-x) center}/* Replaced obsolete two-row dragon atlas positioning. */
 #app .game-nav>button small{font-size:14px!important;white-space:nowrap;line-height:1.2}#app .squad-preset-list{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));min-height:0;flex:1}#app .squad-preset{padding:8px 14px;display:grid;grid-template-rows:42px minmax(65px,1fr) 36px;gap:5px;min-height:0;overflow:hidden}#app .squad-preset>header{height:42px;padding:0;display:flex;gap:12px;align-items:center}#app .squad-preset header>b{font-size:20px}#app .squad-preset header>span{font-size:16px}#app .squad-preset button{font-size:16px!important;padding:5px 10px;min-height:30px}#app .squad-preset .squad-preset-line{min-height:0!important;height:auto;display:flex;align-items:center;gap:18px}#app .squad-preset .squad-dragon-thumb{height:70px;width:80px;display:flex;align-items:center;justify-content:center}#app .squad-preset .squad-dragon-thumb small{display:none}#app .squad-preset .squad-dragon-thumb .elemental-dragon-art{width:70px;height:70px}#app .squad-mission-status{padding:2px 5px;height:36px;font-size:16px;min-height:0}#app .squad-hero-thumbs{height:70px;flex:1}#app .squad-preset-list .hero-art{height:47px!important;width:47px!important}#app .squad-preset .squad-hero-thumbs button{padding:0 8px;min-height:0}
 #app:has(#combat-overlay)>.game-nav{display:none}#app .battle-commander b{color:#fff1d5!important}#app .combat-skill .resource-readout{color:#d9e9f1!important}#app .combat-portrait{background:#183d50!important;color:#fff1d5!important}#app .combat-portrait b{font-size:14px!important}#app .battle-extra-skills small{color:#e6eced!important}#app .battle-extra-skill{font-size:13px!important}#app .combat-bottom{bottom:24px}
 #app .inventory-tile .mystery-box{height:92px;width:90px}#app .inventory-categories{gap:5px}#app .inventory-categories button{min-height:0;padding:12px 8px;font-size:16px!important}
@@ -101,3 +101,68 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden!important;background:#
 @media(prefers-reduced-motion:reduce){#app .summon-batch .pixel-tv-flash{display:none}}
 
 #app .peer-bag .mystery-box{width:60px;height:60px}#app .reconnect-bar{display:flex;align-items:center;gap:15px;padding:10px;background:#673e2c}#app .reconnect-bar input{width:160px}
+/* Touch viewport: keep the page still; scroll only explicit content trays. */
+html,body{overscroll-behavior:none;position:fixed;inset:0;touch-action:manipulation;-webkit-text-size-adjust:100%}
+#app{width:var(--game-width,1920px);height:var(--game-height,1080px)}
+#app .map-content,#app .map-scene,#app #world-map{width:100%;height:100%}
+#app canvas{touch-action:none;-webkit-user-select:none;user-select:none}
+#app .elemental-dragon-art{aspect-ratio:1;overflow:hidden;background-size:700% 400%!important;background-repeat:no-repeat!important;background-position-x:var(--dragon-x)!important;animation:dragon-cells .8s steps(1) infinite}
+#app .long-card>button{display:grid;place-items:center;align-self:center;overflow:hidden}
+#app .long-card .elemental-dragon-art{width:132px!important;height:132px!important;min-height:132px;max-height:132px}
+.touch-game #app{--font-body:22px;--font-label:19px;--font-small:18px}
+.touch-game #app button{min-height:62px;touch-action:manipulation}
+.touch-game #app input,.touch-game #app select{min-height:58px;font-size:26px!important}
+.touch-game #app .game-header{top:8px;left:12px;right:12px;height:65px;gap:6px}
+.touch-game #app .kingdom-brand{width:170px;min-width:170px}
+.touch-game #app .resource-strip{gap:3px;flex-wrap:wrap;justify-content:flex-end}
+.touch-game #app .resource{min-width:85px;padding:3px 7px;height:48px}
+.touch-game #app .resource.population-resource{min-width:120px}
+.touch-game #app .game-nav{left:12px;right:12px;bottom:8px;gap:5px;justify-content:flex-end;height:90px;overflow-x:auto;overscroll-behavior:contain}
+.touch-game #app .game-nav button{flex:0 0 95px;width:95px;min-height:85px}
+.touch-game #app .game-nav small{font-size:20px!important}
+.touch-game #app .game-content.scroll-content{inset:85px 10px 108px!important}
+.touch-game #app .fixed-screen{padding:12px;gap:10px;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.touch-game #app .gallery-heading{height:auto;min-height:65px;flex-wrap:wrap;gap:10px}
+.touch-game #app .gallery-heading>span{flex-basis:100%}
+.touch-game #app .long-gallery{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto;overflow:auto;flex:1 0 auto}
+.touch-game #app .long-card{min-height:260px;grid-template-columns:140px 1fr}
+.touch-game #app .account-tabs{overflow-x:auto;min-height:66px;height:66px;max-height:66px}
+.touch-game #app .account-tabs button{flex:0 0 auto;min-width:170px;font-size:22px!important}
+.touch-game #app .viewport-tray,.touch-game #app .viewport-scene{overflow:auto;overscroll-behavior:contain}
+.touch-game #app .inventory-layout{grid-template-columns:170px 1fr}
+.touch-game #app .inventory-preview{display:none}
+.touch-game #app .inventory-grid{grid-template-columns:repeat(4,1fr);gap:8px}
+.touch-game #app .combat-bottom{bottom:110px;left:8px;right:8px;width:auto;transform:none}
+.touch-game #app .combat-options{overflow-x:auto;justify-content:flex-start;gap:5px}
+.touch-game #app .combat-options button{white-space:nowrap;flex:none}
+.touch-game #app .skill-dock{justify-content:center;gap:6px}
+.touch-game #app .fight-score{top:85px}
+.touch-game #app .world-layer-switch{left:190px;top:85px}
+.touch-game #app .detail-panel{width:360px;bottom:110px;overflow:auto}
+@media(orientation:portrait){.touch-game #app .long-gallery{grid-template-columns:1fr}.touch-game #app .resource small{display:none}.touch-game #app .resource{height:38px;min-width:78px}.touch-game #app .kingdom-brand{width:150px;min-width:150px}.touch-game #app .gallery-heading h1{font-size:28px!important}.touch-game #app .campaign-gallery-layout{display:flex;flex-direction:column}.touch-game #app .trial-tower{display:none}.touch-game #app .campaign-tile-grid{min-height:620px}.touch-game #app .campaign-summary{padding:12px}.touch-game #app .formation-gallery-body{display:flex;flex-direction:column;overflow:auto}.touch-game #app .formation-stage{min-height:480px}.touch-game #app .skill-dock{overflow-x:auto;justify-content:flex-start}.touch-game #app .world-layer-switch{left:160px;right:12px;top:90px}.touch-game #app .game-nav{justify-content:flex-start}}
+.touch-game #app .resource-strip{display:flex;flex-direction:row;align-items:flex-start;flex:1;min-width:0;max-width:none}
+.touch-game #app .kingdom-brand div{min-width:0;max-width:110px}.touch-game #app .kingdom-brand b{font-size:19px;white-space:nowrap}.touch-game #app .kingdom-brand small{font-size:17px!important;white-space:nowrap}
+.touch-game #app .resource small{font-size:14px!important}.touch-game #app .resource b{font-size:20px;white-space:nowrap}
+.touch-game #app .queue-stack{top:200px;width:145px;left:12px}.touch-game #app .queue-stack>div{padding:7px}.touch-game #app .queue-stack span{font-size:17px}
+.touch-game #app .quest-panel{display:none}.touch-game #app .event-dock{top:105px;right:12px;gap:8px}
+.touch-game #app .event-dock button{width:76px}.touch-game #app .event-dock small{font-size:18px!important}
+.touch-game #app .combat-portrait{display:none}.touch-game #app .battle-commander{width:175px}.touch-game #app .battle-ability-slot small{display:none}.touch-game #app .dragon-charge{height:155px}
+.touch-game #app .battle-ability-slot>button:first-child{min-height:40px}.touch-game #app .battle-extra-skill{min-height:48px!important;height:48px!important}
+.touch-game #app .gallery-heading{padding-bottom:6px;min-height:62px;gap:6px}.touch-game #app .gallery-heading>span{flex:1;flex-basis:auto;font-size:17px;line-height:1.25}
+.touch-game #app .gallery-heading h1{font-size:28px!important}.touch-game #app .gallery-heading button{font-size:19px!important;min-height:54px;padding:5px 10px}
+.touch-game #app .long-gallery{flex:1;min-height:0;grid-auto-rows:260px;grid-template-rows:none;overflow-y:auto}
+.touch-game #app .long-sanctuary>footer{font-size:16px;line-height:1.2;flex:none}
+.touch-game #app .long-sanctuary{overflow:hidden}
+.touch-game #app .long-card h3{margin-bottom:5px}.touch-game #app .long-card p{line-height:1.25}.touch-game #app .long-card footer button{font-size:18px!important;min-height:54px}
+@media(orientation:portrait){.touch-game #app .gallery-heading>span{flex-basis:100%}.touch-game #app .long-gallery{grid-auto-rows:280px}.touch-game #app .resource-strip{max-height:70px;overflow:auto}.touch-game #app .queue-stack{display:none}}
+.touch-game body:before{display:none}
+.touch-game #app .hud-avatar{flex:none}.touch-game #app .kingdom-brand div{overflow:hidden}.touch-game #app .kingdom-brand b{display:block;text-overflow:ellipsis;overflow:hidden}
+
+.touch-game #app .long-card p{font-size:21px!important}.touch-game #app .long-card small{font-size:19px!important}
+@media(orientation:landscape){.touch-game #app .long-sanctuary .gallery-heading>span{display:none}.touch-game #app .long-gallery{grid-auto-rows:235px}.touch-game #app .long-card{min-height:235px}.touch-game #app .long-sanctuary .gallery-heading h1{flex:1}}
+@media(orientation:portrait){.touch-game #app button{min-height:74px}.touch-game #app .long-card footer button{min-height:74px}.touch-game #app .long-gallery{grid-auto-rows:300px}}
+
+:root{--safe-left:env(safe-area-inset-left,0px);--safe-right:env(safe-area-inset-right,0px);--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+/* Combat already provides its own navigation; keep commands against the bottom edge. */
+.touch-game #app .combat-bottom{bottom:8px}
+.touch-game #app .fight-score{pointer-events:none}
