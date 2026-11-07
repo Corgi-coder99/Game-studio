@@ -3,3 +3,10 @@ __pycache__/
 node_modules/
 Thien-Menh-Pixel-Offline.zip
 Thien-Menh-Windows-Offline.zip
+
+mobile/bundle/
+mobile/android-build/
+mobile/ios/ThienMenh/Thien-Menh.html
+mobile/ios/ThienMenh/assets/
+*.keystore
+*.apk.idsig

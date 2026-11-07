@@ -1,3 +1,13 @@
+## Bản v12 · Tiên thành, thương mại và điện thoại
+
+- [APK Android thử nghiệm](Thien-Menh-v12-Android.apk): đóng gói offline, có mã Bluetooth LE; đã biên dịch và xác minh chữ ký, chưa kiểm tra trên điện thoại thật.
+- [Dự án iPhone/iPad cho Xcode](Thien-Menh-v12-iOS-Project.zip): có lõi game, ảnh và CoreBluetooth; cần Mac/Xcode để biên dịch, ký và cài. Chưa có IPA đã ký.
+- [ZIP Windows v12](Thien-Menh-Kingdom-v12-Windows.zip): giải nén và mở CHOI-NGAY.bat hoặc HTML bằng Chrome/Edge.
+
+Cảnh thành có tường/cổng/cầu liền khung, núi rừng và ngày đêm theo giờ thiết bị. Chiêu mộ 10/100 hiện cả lô thẻ cùng lúc; hộp mảnh và hiệu ứng chiến đấu dùng ảnh pixel mới. Thành di chuyển theo khoảng cách và có hình ảo chịu 5 lượt đánh. Vàng, đấu giá và thư thu hộ hoạt động trong phòng tối đa 4 người với máy chủ giữ đặt cọc. Chế độ nhiều thẻ trên PC để kiểm thử được ghi rõ riêng với Bluetooth.
+
+235 kiểm thử và luồng hai phiên trình duyệt đạt. Bluetooth Android↔iOS **chưa thử trên phần cứng thật**; dự án iOS **chưa được Xcode biên dịch**. Hướng dẫn: [mobile/README.md](mobile/README.md), luật và giới hạn: [docs/v12-update.md](docs/v12-update.md).
+
 ## Bản v11 · Dân sinh, săn bắt và thành trì sống động
 
 [Tải ZIP Windows offline v11](https://github.com/Corgi-coder99/Game-studio/blob/codex/thien-menh-offline/Thien-Menh-Kingdom-v11-Windows.zip) → **Download raw** → giải nén → mở **CHOI-NGAY.bat** hoặc **Thien-Menh.html** bằng Chrome/Edge. Chạy offline, không cần AI, Node.js hay Python.

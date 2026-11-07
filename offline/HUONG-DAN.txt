@@ -1,4 +1,4 @@
-THIÊN MỆNH — PIXEL KINGDOM v11 — OFFLINE CHO WINDOWS
+THIÊN MỆNH — PIXEL KINGDOM v12 — OFFLINE CHO WINDOWS
 
 1. TẢI VÀ GIẢI NÉN
 Trên GitHub bấm Download raw để tải ZIP.
@@ -30,7 +30,22 @@ trình duyệt, cổng hoặc máy. Tránh InPrivate / Incognito để giữ ti�
 Bản lưu cũ giữ tướng, trang bị và tài nguyên; đội cũ chỉ lấy bốn tướng đầu.
 Đội đang hành quân được thu hồi một lần khi mở lại. Không chạy trận khi đóng game.
 
-5. NỘI DUNG v11
+5. NỘI DUNG v12
+- Cảnh nền tự nhiên liền mạch, khung thành/cổng/cầu mới, ngày đêm theo giờ máy.
+- Chiêu mộ 1/10/100: hiện cả lô thẻ, không chờ lần lượt. Hiệu ứng pixel mới.
+- Vàng riêng với ngọc; Thương Các đổi 4 thức ăn = 2 gỗ = 1 đá = 1 vàng.
+  Shop hộp/mảnh dùng vàng. Thắng BOT thêm vàng; PvP chuyển vàng của đối thủ.
+- Bản đồ đại lục: chọn tọa độ → di chuyển thành theo khoảng cách hoặc cổng.
+  Hình ảo điểm đến chịu 5 lượt đánh; bị phá sẽ khóa di chuyển 60 giây.
+  Sang nước khác có BOT thù địch tự tập kích. Đến nơi sinh thế hệ BOT mới.
+- Vạn Bảo Lâu trong thành mở đấu giá với người chơi trong phòng Đồng hành.
+  Kéo/bấm món, số lượng, giá sàn/trần; giữ món/vàng trước; chốt sau 60 giây.
+- Tín Các trong phòng gửi đồ thu hộ vàng hoặc đổi vật tư tương đương, hạn 10 phút.
+- Phòng tối đa 4 người, tạm dừng solo khi ở phòng. Đóng phòng để hoàn đặt cọc.
+  Mất kết nối: giữ bản lưu phòng, khôi phục chủ phòng và kết nối lại.
+- Trình duyệt PC có chế độ thử hai thẻ cùng máy qua BroadcastChannel.
+  Bluetooth cần bản cài điện thoại. APK Android đã biên dịch, chưa thử máy thật.
+  iPhone/iPad có dự án Xcode; chưa có IPA đã ký. Chưa thử Bluetooth Android-iOS.
 - Nông trang/Xưởng gỗ/Mỏ đá: bấm công trình → chọn mẻ → cấp dân và thức ăn.
   Không tự sản xuất khi chờ. Thành phẩm cần bấm Thu hoạch; dân được trả về.
   Hủy mẻ không hoàn thức ăn. Hái lượm cứu đói dùng 3 dân, không cần thức ăn.

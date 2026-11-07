@@ -1,8 +1,8 @@
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 
 const root = new URL('./', import.meta.url);
-const moduleFiles=['scene-art','city-layout','civic-ui','civic','elements','city-life','operations','skill-vfx','art-cache','world-art','technology','characters','game','progression','realms','skins','chronicle','wildlife','world-data','inheritance-data','runes','mail','squads','city-rules','account','troops','viewport-ui','inventory-ui','account-ui','character-ui','inheritance-ui','strategy-ui','inheritance-combat','tactics','kingdom','inheritance-sim','hunting','world-sim','world-ui','combat-motion','region-map','campaign','campaign-ui','realm-map','inheritance-map','map','recommendations','sandbox','shop','long-ui','gallery-ui','army-ui','systems-ui','app'];
-const assetNames=['hulao-pixel.png','city-pixel.png','battle-units-pixel.png','roster-a-pixel.png','roster-b-pixel.png','celestial-pets-pixel.png','pets-awakened-pixel.png','skills-pixel.png','castle-skins-pixel.png','window-scenes-pixel.png','inventory-icons-pixel.png','troops-walk-pixel.png','trial-tower-pixel.png','building-scenes-pixel.png','world-terrain-pixel.png','world-sites-pixel.png','equipment-rarity-pixel.png','weapon-rarity-pixel.png','city-life-pixel.png','element-icons-pixel.png','rune-gems-pixel.png','dragon-flight-pixel.png','wildlife-walk-pixel.png','province-props-pixel.png','navigation-icons-pixel.png','village-motion-pixel.png','summon-plaza-pixel.png'];
+const moduleFiles=['room-client','peer-map','commerce','relocation','room','realm-ui','environment','scene-art','city-layout','civic-ui','civic','elements','city-life','operations','skill-vfx','art-cache','world-art','technology','characters','game','progression','realms','skins','chronicle','wildlife','world-data','inheritance-data','runes','mail','squads','city-rules','account','troops','viewport-ui','inventory-ui','account-ui','character-ui','inheritance-ui','strategy-ui','inheritance-combat','tactics','kingdom','inheritance-sim','hunting','world-sim','world-ui','combat-motion','region-map','campaign','campaign-ui','realm-map','inheritance-map','map','recommendations','sandbox','shop','long-ui','gallery-ui','army-ui','systems-ui','app'];
+const assetNames=['hulao-pixel.png','city-pixel.png','battle-units-pixel.png','roster-a-pixel.png','roster-b-pixel.png','celestial-pets-pixel.png','pets-awakened-pixel.png','skills-pixel.png','castle-skins-pixel.png','window-scenes-pixel.png','inventory-icons-pixel.png','troops-walk-pixel.png','trial-tower-pixel.png','building-scenes-pixel.png','living-terrain-pixel.png','world-sites-pixel.png','equipment-rarity-pixel.png','weapon-rarity-pixel.png','city-life-pixel.png','element-icons-pixel.png','rune-gems-pixel.png','dragon-flight-pixel.png','wildlife-walk-pixel.png','province-props-pixel.png','navigation-icons-pixel.png','village-motion-pixel.png','summon-plaza-pixel.png','blind-boxes-pixel.png','skill-frames-pixel.png','city-foundation-pixel.png'];
 const [template,styles,sources,assetBytes]=await Promise.all([
  readFile(new URL('index.html',root),'utf8'),
  Promise.all(['style','pixel','immersive','rpg','account','viewport','design'].map(f=>readFile(new URL(f+'.css',root),'utf8'))),
@@ -24,3 +24,11 @@ await mkdir(new URL('offline/',root),{recursive:true});
 await writeFile(new URL('offline/Thien-Menh.html',root),html);
 await writeFile(new URL('offline/HUONG-DAN.txt',root),await readFile(new URL('windows/HUONG-DAN.txt',root),'utf8'));
 console.log('Offline build: offline/Thien-Menh.html (all active PNGs embedded once; no network or Node.js needed)');
+// Native packages load local PNGs directly, avoiding the memory cost of a huge base64 script.
+let nativeScript=sources.map(combine).join('\n').replaceAll('/assets/','assets/').replace(/<\/script/gi,'<\\/script');
+let nativeHtml=template.replace(/<link rel="stylesheet" href="\/(?:style|pixel|immersive|rpg|account|viewport|design)\.css">/g,'');
+nativeHtml=nativeHtml.replace('</head>','<style>'+styles.join('\n').replaceAll('/assets/','assets/')+'</style></head>').replace('<script type="module" src="/app.mjs"></script>',()=>'<script>(()=>{\n'+nativeScript+'\n})();</script>');
+await mkdir(new URL('mobile/bundle/assets/',root),{recursive:true});
+await writeFile(new URL('mobile/bundle/index.html',root),nativeHtml);
+await Promise.all(assetNames.map((name,i)=>writeFile(new URL('mobile/bundle/assets/'+name,root),assetBytes[i])));
+console.log('Native bundle: mobile/bundle/index.html + local PNGs (no runtime network)');

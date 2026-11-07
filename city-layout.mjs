@@ -1,16 +1,3 @@
-// Shared city positions: the main avenue meets the southern gate, not the tower.
-export const cityGate={x:8,y:23,size:250};
-export const citySites=[
- {id:'hall',x:8,y:4,size:290},
- {id:'infirmary',x:2,y:4,size:215},
- {id:'dragon',x:14,y:4,size:210},
- {id:'barracks',type:'shield',x:3,y:10,size:205},
- {id:'barracks',type:'spear',x:3,y:15,size:205},
- {id:'barracks',type:'bow',x:13,y:10,size:205},
- {id:'barracks',type:'cavalry',x:13,y:16,size:205},
- {id:'farm',x:0,y:18,size:190},
- {id:'wood',x:18,y:15,size:190},
- {id:'stone',x:18,y:5,size:190},
- {id:'tower',x:18,y:10,size:190},
-];
-export const cityHomes=[[0,6],[0,12],[20,12],[18,19],[4,20],[14,0]];
+export const cityGate={x:12,y:28,size:240};
+export const citySites=[{id:'hall',x:12,y:4,size:340},{id:'infirmary',x:4,y:5,size:230},{id:'dragon',x:21,y:5,size:240},{id:'barracks',type:'shield',x:4,y:13,size:220},{id:'barracks',type:'spear',x:4,y:21,size:220},{id:'barracks',type:'bow',x:19,y:14,size:220},{id:'barracks',type:'cavalry',x:19,y:22,size:220},{id:'farm',x:-1,y:24,size:220},{id:'wood',x:23,y:18,size:220},{id:'stone',x:24,y:11,size:220},{id:'tower',x:16,y:16,size:210},{id:'auction',x:1,y:12,size:185}];
+export const cityHomes=[[-1,4],[-1,11],[-1,18],[24,2],[27,14],[27,25],[3,26],[9,24],[20,0],[6,0],[22,27],[15,25]];
