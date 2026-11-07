@@ -1,6 +1,6 @@
 {
-  "version": "v12-8091df4b4fa4",
-  "bytes": 77543510,
+  "version": "v12-654f4d139afb",
+  "bytes": 77544750,
   "files": [
     {
       "url": "index.html",
@@ -9,8 +9,8 @@
     },
     {
       "url": "game.html",
-      "size": 717770,
-      "sha256": "50085123278b073ceab7eaee200e8afad9821139b45bfc53134e783b53acb543"
+      "size": 719010,
+      "sha256": "efd44c9d06dddb9a67271c374257d9a06e911370fa807c3391f7663121d69f83"
     },
     {
       "url": "install.css",

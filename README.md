@@ -46,7 +46,7 @@ Android and iOS source projects remain under [`mobile/`](mobile/README.md). Outd
 
 ## Validation and limitations
 
-245 automated checks passed for the current gameplay and web-cache contracts. Touch layouts were exercised in Chromium mobile emulation in landscape and portrait; desktop, offline launch, cache repair, and restart persistence were also checked. Physical iPhone Safari and Bluetooth hardware have not been validated. Windows BAT launchers have not been run on Windows; the iOS project has not been compiled with Xcode.
+248 automated checks passed for the current gameplay and web-cache contracts. Touch layouts were exercised in Chromium mobile emulation in landscape and portrait; desktop, offline launch, cache repair, and restart persistence were also checked. Physical iPhone Safari and Bluetooth hardware have not been validated. Windows BAT launchers have not been run on Windows; the iOS project has not been compiled with Xcode.
 
 ## Repository policy
 
