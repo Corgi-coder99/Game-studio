@@ -1,0 +1,264 @@
+[
+  {
+    "id": "co_duyen_lenh",
+    "name": "Fated Encounter Token",
+    "rarity": 3,
+    "type": "consumable",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": false,
+    "premiumOnly": false,
+    "basePrice": 2400,
+    "iconIndex": 0,
+    "sources": [
+      "event",
+      "world_boss"
+    ],
+    "effect": "Roll one reward from the Fated Encounter table.",
+    "grade": "S"
+  },
+  {
+    "id": "do_kiep_dan",
+    "name": "Tribulation Pill",
+    "rarity": 4,
+    "type": "consumable",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": false,
+    "premiumOnly": false,
+    "basePrice": 12000,
+    "iconIndex": 1,
+    "sources": [
+      "secret_realm"
+    ],
+    "effect": "Adds 20 percentage points to the next art breakthrough attempt.",
+    "grade": "SS"
+  },
+  {
+    "id": "tan_quyen_cong_phap",
+    "name": "Ancient Art Fragment",
+    "rarity": 3,
+    "type": "fragment",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": false,
+    "premiumOnly": false,
+    "basePrice": 1400,
+    "iconIndex": 2,
+    "sources": [
+      "world_boss",
+      "secret_realm"
+    ],
+    "effect": "Combine 10 fragments into an Azure Sword Scripture.",
+    "grade": "S"
+  },
+  {
+    "id": "thu_dan_pham",
+    "name": "Spirit Beast Egg",
+    "rarity": 2,
+    "type": "egg",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": false,
+    "premiumOnly": false,
+    "basePrice": 1800,
+    "iconIndex": 3,
+    "sources": [
+      "exploration"
+    ],
+    "effect": "Hatch a common spirit beast using the existing pet collection.",
+    "grade": "S"
+  },
+  {
+    "id": "thu_dan_huyet_mach",
+    "name": "Bloodline Spirit Egg",
+    "rarity": 5,
+    "type": "egg",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": true,
+    "premiumOnly": false,
+    "basePrice": 45000,
+    "iconIndex": 4,
+    "sources": [
+      "world_boss",
+      "event"
+    ],
+    "effect": "Hatch a rare bloodline beast.",
+    "grade": "S"
+  },
+  {
+    "id": "ngoc_gian_truyen_thua",
+    "name": "Inheritance Jade Slip",
+    "rarity": 4,
+    "type": "consumable",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": false,
+    "premiumOnly": false,
+    "basePrice": 15000,
+    "iconIndex": 5,
+    "sources": [
+      "secret_realm"
+    ],
+    "effect": "Grant 10000 hero experience to a selected owned hero.",
+    "grade": "SS"
+  },
+  {
+    "id": "thien_ngoai_thiet",
+    "name": "Celestial Meteor Iron",
+    "rarity": 4,
+    "type": "material",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": false,
+    "premiumOnly": false,
+    "basePrice": 9000,
+    "iconIndex": 6,
+    "sources": [
+      "world_boss"
+    ],
+    "effect": "Used to forge SSR equipment and breakthrough arts.",
+    "grade": "SS"
+  },
+  {
+    "id": "linh_thao_van_nien",
+    "name": "Ancient Spirit Herb",
+    "rarity": 3,
+    "type": "material",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": false,
+    "premiumOnly": false,
+    "basePrice": 2800,
+    "iconIndex": 7,
+    "sources": [
+      "secret_realm"
+    ],
+    "effect": "Used to craft Tribulation Pills and rare arts.",
+    "grade": "S"
+  },
+  {
+    "id": "tran_phai_phu",
+    "name": "Sect Guardian Talisman",
+    "rarity": 2,
+    "type": "consumable",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": false,
+    "premiumOnly": false,
+    "basePrice": 1600,
+    "iconIndex": 8,
+    "sources": [
+      "event"
+    ],
+    "effect": "Protect the next hidden-realm defeat from resetting the win streak.",
+    "grade": "S"
+  },
+  {
+    "id": "ban_menh_kiem_hon",
+    "name": "Bound Sword Soul",
+    "rarity": 5,
+    "type": "material",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": true,
+    "premiumOnly": false,
+    "basePrice": 50000,
+    "iconIndex": 9,
+    "sources": [
+      "craft",
+      "event"
+    ],
+    "effect": "Forge a level-10 SSR weapon with Celestial Meteor Iron.",
+    "grade": "S"
+  },
+  {
+    "id": "azure_sword_scripture",
+    "name": "Azure Sword Scripture",
+    "rarity": 3,
+    "type": "manual",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": false,
+    "premiumOnly": false,
+    "basePrice": 6500,
+    "iconIndex": 10,
+    "sources": [
+      "craft"
+    ],
+    "effect": "Four homing spirit swords strike over four seconds.",
+    "grade": "S"
+  },
+  {
+    "id": "ssr_heavenfall",
+    "name": "Heavenfall Scripture",
+    "rarity": 5,
+    "type": "manual",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": true,
+    "premiumOnly": false,
+    "basePrice": 90000,
+    "iconIndex": 11,
+    "sources": [
+      "world_boss",
+      "secret_realm",
+      "event"
+    ],
+    "effect": "SSR: unleash a devastating magic strike against every living enemy.",
+    "grade": "SSR"
+  },
+  {
+    "id": "ssr_reversal",
+    "name": "Sovereign Reversal Art",
+    "rarity": 5,
+    "type": "manual",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": true,
+    "premiumOnly": false,
+    "basePrice": 110000,
+    "iconIndex": 12,
+    "sources": [
+      "world_boss",
+      "secret_realm",
+      "event"
+    ],
+    "effect": "SSR: restore one fallen ally once per battle and heal the living team.",
+    "grade": "SSR"
+  },
+  {
+    "id": "ssr_chronostasis",
+    "name": "Chronostasis Seal",
+    "rarity": 5,
+    "type": "manual",
+    "stackable": true,
+    "tradeable": true,
+    "auctionOnly": true,
+    "bindOnUse": true,
+    "premiumOnly": false,
+    "basePrice": 100000,
+    "iconIndex": 13,
+    "sources": [
+      "world_boss",
+      "secret_realm",
+      "event"
+    ],
+    "effect": "SSR: briefly stun all enemies and remove enemy shields.",
+    "grade": "SSR"
+  }
+]

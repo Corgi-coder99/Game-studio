@@ -1,6 +1,6 @@
 import { characterRoster, characterById, gradeOrder, archetypeLabels, effectDescriptions } from './characters.mjs';
 
-export const maxTeamSize=4;
+export const maxTeamSize=5;
 export const gearSlots=['helmet','armor','weapon','jewelry','relic'];
 export const gearSlotNames={helmet:'Mũ',armor:'Giáp',weapon:'Vũ khí',jewelry:'Trang sức',relic:'Cổ vật đặc biệt'};
 export const statNames={maxHp:'Máu',physicalAtk:'Công vật lý',magicAtk:'Công phép',armor:'Kháng vật lý',resist:'Kháng phép',crit:'Chí mạng',attackSpeed:'Tốc độ đánh',manaMax:'Mana tối đa',rageMax:'Nộ tối đa',manaRegen:'Hồi mana/giây',rageRegen:'Hồi nộ/giây'};
@@ -37,24 +37,24 @@ const plain=v=>v&&typeof v==='object'&&!Array.isArray(v);
 const bounded=(n,min,max)=>Number.isInteger(n)&&n>=min&&n<=max;
 export function defaultFormation(team) {
  const slots=Array(9).fill(null);
- for(const id of team.slice(0,4)){const h=characterById[id];if(!h||slots.includes(id))continue;const preferred=(h.roles.includes('support')||h.roles.includes('mage')||h.roles.includes('archer'))?[6,8,0,2]:[0,2,6,8];const slot=[...preferred,...Array.from({length:9},(_,i)=>i)].find(i=>slots[i]===null);if(slot!==undefined)slots[slot]=id;}
+ for(const id of team.slice(0,maxTeamSize)){const h=characterById[id];if(!h||slots.includes(id))continue;const preferred=(h.roles.includes('support')||h.roles.includes('mage')||h.roles.includes('archer'))?[6,8,7,0,2]:[0,2,6,7,8];const slot=[...preferred,...Array.from({length:9},(_,i)=>i)].find(i=>slots[i]===null);if(slot!==undefined)slots[slot]=id;}
  return slots;
 }
 export function normalizeProgression(source) {
- const s=structuredClone(source);s.revision=8;
+ const s=structuredClone(source);s.revision=9;
  s.heroSkillRanks=s.heroSkillRanks||{};s.heroLevels=s.heroLevels||{};s.heroXP=s.heroXP||{};s.skillLevels=s.skillLevels||{};s.heroGear=s.heroGear||{};s.essence=s.essence??100;
  for(const id of s.owned){s.heroLevels[id]??=1;s.heroXP[id]??=80;s.skillLevels[id]??=1;}
  if(!s.inventory){s.inventory=itemTemplates.filter(t=>!t.heroId&&!t.rewardOnly&&!t.id.startsWith('crafted-')).map((t,i)=>({id:'item-'+(i+1),templateId:t.id,level:1}));}
  s.nextItemId=s.nextItemId||Math.max(0,...s.inventory.map(i=>Number(i.id.slice(5))))+1;
- s.formation=s.formation||defaultFormation(s.team);let count=0;s.formation=s.formation.map(id=>id&&count++<4?id:null);s.team=s.formation.filter(Boolean);
+ s.formation=s.formation||defaultFormation(s.team);let count=0;s.formation=s.formation.map(id=>id&&count++<maxTeamSize?id:null);s.team=s.formation.filter(Boolean);
  return s;
 }
 export function validProgression(s) {
- if(s.revision!==undefined&&![4,5,8].includes(s.revision))return false;
+ if(s.revision!==undefined&&![4,5,8,9].includes(s.revision))return false;
  for(const [key,min,max]of [['heroLevels',1,levelLimit],['skillLevels',1,skillLimit],['heroXP',0,1000000]])if(s[key]!==undefined&&(!plain(s[key])||!Object.entries(s[key]).every(([id,n])=>knownHero(id)&&bounded(n,min,max))))return false;
  if(s.heroSkillRanks!==undefined&&(!plain(s.heroSkillRanks)||!Object.entries(s.heroSkillRanks).every(([id,ranks])=>knownHero(id)&&plain(ranks)&&Object.entries(ranks).every(([index,rank])=>/^[1-3]$/.test(index)&&Number(index)<characterById[id].skills.length&&bounded(rank,1,5)))))return false;
  if(s.essence!==undefined&&!bounded(s.essence,0,9999999))return false;
- if(s.revision===8&&s.formation?.filter(Boolean).length>4)return false;
+ if((s.revision===8&&s.formation?.filter(Boolean).length>4)||(s.revision===9&&s.formation?.filter(Boolean).length>maxTeamSize))return false;
  if(s.formation!==undefined&&(!Array.isArray(s.formation)||s.formation.length!==9||!s.formation.every(id=>id===null||knownHero(id)&&s.owned.includes(id))||new Set(s.formation.filter(Boolean)).size!==s.formation.filter(Boolean).length||JSON.stringify(s.formation.filter(Boolean))!==JSON.stringify(s.team)))return false;
  if(s.inventory!==undefined){
   if(!Array.isArray(s.inventory)||!s.inventory.every(i=>plain(i)&&/^item-[1-9]\d{0,8}$/.test(i.id)&&Object.hasOwn(itemById,i.templateId)&&bounded(i.level,1,gearLimit))||new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length)return false;
@@ -93,13 +93,14 @@ export function describeSkill(h,level=1) {
 }
 export function passiveText(h){return Object.entries(h.passives).map(([key,value])=>`${effectDescriptions[key]}${typeof value==='number'?` Mức gốc ${Math.round(value*100)}%.`:''}`).join(' ');}
 function ownedCheck(s,id){if(!knownHero(id)||!s.owned.includes(id))throw new Error('Bạn chưa sở hữu nhân vật này.');}
+export function heroAssignedElsewhere(s,id){return s.squads?.presets?.findIndex((p,i)=>i!==s.squads.active&&p.formation.includes(id))??-1;}
 export function assignFormation(state,id,slot) {
- ownedCheck(state,id);if(!bounded(slot,0,8))throw new Error('Ô đội hình không hợp lệ.');
- const s=normalizeProgression(state),old=s.formation.indexOf(id),displaced=s.formation[slot];if(old<0&&!displaced&&s.team.length>=4)throw new Error('Đội hình tối đa 4 tướng. Chọn một vị trí để thay thế.');
+ ownedCheck(state,id);if(heroAssignedElsewhere(state,id)>=0)throw new Error('This hero is assigned to another world squad. Remove the hero there first.');if(!bounded(slot,0,8))throw new Error('Ô đội hình không hợp lệ.');
+ const s=normalizeProgression(state),old=s.formation.indexOf(id),displaced=s.formation[slot];if(old<0&&!displaced&&s.team.length>=maxTeamSize)throw new Error('A formation supports at most five heroes. Chọn một vị trí để thay thế.');
  if(old>=0)s.formation[old]=displaced;
  s.formation[slot]=id;s.team=s.formation.filter(Boolean);return s;
 }
-export function toggleFormation(state,id){ownedCheck(state,id);const s=normalizeProgression(state),old=s.formation.indexOf(id);if(old>=0)s.formation[old]=null;else{if(s.team.length>=4)throw new Error('Đội hình tối đa 4 tướng. Chọn một vị trí để thay thế.');const slot=[...defaultFormation([id]).map((v,i)=>v?i:null).filter(v=>v!==null),0,2,6,8,...Array.from({length:9},(_,i)=>i)].find(i=>!s.formation[i]);s.formation[slot]=id;}s.team=s.formation.filter(Boolean);return s;}
+export function toggleFormation(state,id){ownedCheck(state,id);if(!state.team.includes(id)&&heroAssignedElsewhere(state,id)>=0)throw new Error('This hero is assigned to another world squad.');const s=normalizeProgression(state),old=s.formation.indexOf(id);if(old>=0)s.formation[old]=null;else{if(s.team.length>=maxTeamSize)throw new Error('A formation supports at most five heroes. Chọn một vị trí để thay thế.');const slot=[...defaultFormation([id]).map((v,i)=>v?i:null).filter(v=>v!==null),0,2,6,8,...Array.from({length:9},(_,i)=>i)].find(i=>!s.formation[i]);s.formation[slot]=id;}s.team=s.formation.filter(Boolean);return s;}
 export function heroLevelCost(s,id){const level=s.heroLevels?.[id]||1;return{xp:30+level*15,coins:30+level*20,food:50*level};}
 export function levelUpHero(state,id){ownedCheck(state,id);const s=normalizeProgression(state),price=heroLevelCost(s,id);if(s.heroLevels[id]>=levelLimit)throw new Error('Đã đạt cấp 60.');if(s.heroXP[id]<price.xp||s.coins<price.coins||s.resources.food<price.food)throw new Error('Chưa đủ kinh nghiệm, linh ngọc hoặc lương thực.');s.heroXP[id]-=price.xp;s.coins-=price.coins;s.resources.food-=price.food;s.heroLevels[id]++;return s;}
 export function getSkillRank(s,id,index=0){return index===0?s.skillLevels?.[id]||1:s.heroSkillRanks?.[id]?.[index]||1;}

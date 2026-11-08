@@ -15,7 +15,7 @@ export function recommendFormation(s,plan='balanced'){
  pick(h=>h.roles.includes('tank'),'Chống chịu, giữ hàng đầu');
  pick(h=>h.roles.includes('support'),'Hồi phục hoặc bảo vệ toàn đội');
  if(plan==='backline')pick(h=>h.roles.includes('assassin'),'Áp lực hậu tuyến địch');
- while(chosen.length<Math.min(4,s.owned.length)){const n=chosen.length;pick(()=>true,'Sát thương và phối hợp theo chỉ số hiện tại');if(n===chosen.length)break;}
+ while(chosen.length<Math.min(5,s.owned.length)){const n=chosen.length;pick(()=>true,'Sát thương và phối hợp theo chỉ số hiện tại');if(n===chosen.length)break;}
  const formation=Array(9).fill(null);
  const sorted=chosen.slice().sort((a,b)=>Number(characterById[b].roles.includes('tank'))-Number(characterById[a].roles.includes('tank')));
  for(const id of sorted){const h=characterById[id];const rows=h.roles.includes('tank')?[0,1,2]:h.roles.includes('support')||h.roles.includes('archer')?[2,1,0]:h.roles.includes('fighter')?[0,1,2]:[1,2,0];for(const row of rows){const slot=[0,1,2].map(c=>row*3+c).find(i=>!formation[i]);if(slot!==undefined){formation[slot]=id;break;}}}

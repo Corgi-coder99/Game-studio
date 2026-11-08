@@ -1,16 +1,16 @@
 {
-  "version": "v12-654f4d139afb",
-  "bytes": 77544750,
+  "version": "v12-502df2e3edd1",
+  "bytes": 83079204,
   "files": [
     {
       "url": "index.html",
-      "size": 2382,
-      "sha256": "f73b05f8effd56e1cb675690c838723fa12c10783ee444751662a8940198127d"
+      "size": 2217,
+      "sha256": "370f205eddab240ce792aefa3f8fe96e8d987d286ae53e6e2d450e1db1c111e4"
     },
     {
       "url": "game.html",
-      "size": 719010,
-      "sha256": "efd44c9d06dddb9a67271c374257d9a06e911370fa807c3391f7663121d69f83"
+      "size": 917523,
+      "sha256": "02ca7c72bf68117aeab0335171636a48f3869a4d2e80ea6ec78883d3b998e2e1"
     },
     {
       "url": "install.css",
@@ -19,13 +19,13 @@
     },
     {
       "url": "install.js",
-      "size": 4386,
-      "sha256": "b03f2ddffea32b82305c8438f62dffb79aa8f929723c05fad9cc303799fd0507"
+      "size": 4138,
+      "sha256": "f9491cc4e50079ac9c2044c0cf117b3cacf94147c94ea9399aa0c6d437d4392a"
     },
     {
       "url": "manifest.webmanifest",
-      "size": 509,
-      "sha256": "2cac8176c9ca0fdb5d2560ccce6cb841bfb2ec2aa59fbe9ed44fe4de099a90b2"
+      "size": 482,
+      "sha256": "ab4acbb042df18e722e423e7e46534b80add33116666897b5b038a9fd38d7108"
     },
     {
       "url": "app-icon.png",
@@ -86,6 +86,11 @@
       "url": "assets/equipment-rarity-pixel.png",
       "size": 2571486,
       "sha256": "7c0569b3ac593fc5687a55cb4bcbb1ae376a377796e0f613291788c61acd9363"
+    },
+    {
+      "url": "assets/exclusive-items-pixel.png",
+      "size": 1994695,
+      "sha256": "2a2472ea691a87391f4d9b787c0195e506aa749824405073ce7f320e6aaf0027"
     },
     {
       "url": "assets/hulao-pixel.png",
@@ -176,6 +181,11 @@
       "url": "assets/window-scenes-pixel.png",
       "size": 3173016,
       "sha256": "a8caae65cba490f906e9d2360d5e09ef82acb082373f3dcc9d61864809479349"
+    },
+    {
+      "url": "assets/world-bosses-pixel.png",
+      "size": 3341686,
+      "sha256": "2e03593218b4b4bb7a84dc1c30b240bb8cb8ecbbe47c6fd94df0b4becf501915"
     },
     {
       "url": "assets/world-sites-pixel.png",

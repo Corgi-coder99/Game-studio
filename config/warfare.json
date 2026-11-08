@@ -1,0 +1,1 @@
+{"meritBase":20,"meritPerLevel":5,"attackerWinLoss":0.2,"attackerDefeatLoss":0.5,"defenderWinLoss":0.2,"defenderDefeatLoss":0.5,"specialLootChance":0.1,"resourceLootFraction":0.1,"goldLootPerLevel":20,"returnCommandPrice":1000,"bossSanctuary":{"x":530,"y":390,"radius":70,"guards":3}}

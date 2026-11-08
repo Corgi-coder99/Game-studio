@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "rarities": [
+    {
+      "name": "Common",
+      "color": "#9aa0a6"
+    },
+    {
+      "name": "Spirit",
+      "color": "#4caf50"
+    },
+    {
+      "name": "Earth",
+      "color": "#2196f3"
+    },
+    {
+      "name": "Heaven",
+      "color": "#a855f7"
+    },
+    {
+      "name": "Immortal",
+      "color": "#ffb300"
+    }
+  ],
+  "sources": {
+    "exploration": [
+      70,
+      25,
+      5,
+      0,
+      0
+    ],
+    "secret_realm": [
+      20,
+      45,
+      28,
+      6.5,
+      0.5
+    ],
+    "world_boss": [
+      0,
+      25,
+      45,
+      25,
+      5
+    ],
+    "event": [
+      0,
+      20,
+      40,
+      30,
+      10
+    ]
+  },
+  "pity": 50,
+  "economy": {
+    "maxListings": 5,
+    "listingFee": 0.02,
+    "saleFee": 0.07,
+    "minimumPrice": 0.5,
+    "maximumPrice": 4,
+    "bidStep": 0.05,
+    "durations": [
+      6,
+      12,
+      24
+    ],
+    "extensionWindow": 60000,
+    "extensionMs": 60000,
+    "maxExtensions": 5,
+    "refreshMs": 1800000,
+    "npcMin": 15,
+    "npcMax": 30,
+    "npcTickMs": 15000,
+    "npcBidChance": 0.15,
+    "npcMinDemand": 0.7,
+    "npcMaxDemand": 1.3,
+    "npcStartMin": 0.6,
+    "npcStartMax": 0.9,
+    "npcCeilingMin": 1,
+    "npcCeilingMax": 1.6,
+    "historyLimit": 120,
+    "closedLimit": 120,
+    "listingStorageLimit": 200
+  },
+  "crafts": {
+    "tribulation": {
+      "items": {
+        "linh_thao_van_nien": 3
+      },
+      "gold": 2000,
+      "result": "do_kiep_dan"
+    },
+    "fragments": {
+      "items": {
+        "tan_quyen_cong_phap": 10
+      },
+      "gold": 1000,
+      "result": "azure_sword_scripture"
+    },
+    "breakthrough": {
+      "items": {
+        "thien_ngoai_thiet": 3,
+        "linh_thao_van_nien": 5
+      },
+      "gold": 12000,
+      "chance": 0.65,
+      "results": [
+        "ssr_heavenfall",
+        "ssr_reversal",
+        "ssr_chronostasis"
+      ]
+    },
+    "sword": {
+      "items": {
+        "ban_menh_kiem_hon": 1,
+        "thien_ngoai_thiet": 2
+      },
+      "gold": 15000
+    }
+  },
+  "effects": {
+    "breakthroughBoost": 0.2,
+    "jadeXP": 10000,
+    "manualCost": 0.9,
+    "manualCooldown": 30,
+    "heavenfallScale": 2.4,
+    "reviveRatio": 0.3,
+    "healRatio": 0.2,
+    "stunSeconds": 2.5,
+    "commonEggShards": 10,
+    "bloodlineEggShards": 40,
+    "bloodlineEggStars": 2
+  },
+  "commonDrops": [
+    "resourcePack",
+    "petFood"
+  ],
+  "npcNames": [
+    "Jade Crane",
+    "Scarlet Phoenix",
+    "Cloud Wanderer",
+    "Iron Lotus",
+    "Moon Hermit",
+    "Azure Merchant"
+  ]
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "frame_pham",
+    "name": "Weathered Wood",
+    "rarity": 1,
+    "color": "#a59a87",
+    "animation": {
+      "type": "none",
+      "periodMs": 3000
+    }
+  },
+  {
+    "id": "frame_linh",
+    "name": "Bronze Clouds",
+    "rarity": 2,
+    "color": "#b68f51",
+    "animation": {
+      "type": "none",
+      "periodMs": 3000
+    }
+  },
+  {
+    "id": "frame_dia_long",
+    "name": "Silver Dragon",
+    "rarity": 3,
+    "color": "#cfedff",
+    "animation": {
+      "type": "glow",
+      "periodMs": 3000
+    }
+  },
+  {
+    "id": "frame_thien_phuong",
+    "name": "Jade Phoenix",
+    "rarity": 4,
+    "color": "#cf8cff",
+    "animation": {
+      "type": "sparks",
+      "periodMs": 3000
+    }
+  },
+  {
+    "id": "frame_tien_rong",
+    "name": "Celestial Dragon",
+    "rarity": 5,
+    "color": "#ffd660",
+    "animation": {
+      "type": "radiance",
+      "periodMs": 3000
+    }
+  }
+]

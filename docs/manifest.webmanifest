@@ -1,15 +1,15 @@
 {
   "id": "./",
-  "name": "Thiên Mệnh · Pixel Kingdom",
-  "short_name": "Thiên Mệnh",
-  "lang": "vi",
+  "name": "Heavenly Mandate · Pixel Kingdom",
+  "short_name": "Heavenly Mandate",
+  "lang": "en",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "landscape",
   "background_color": "#0c2029",
   "theme_color": "#102d35",
-  "description": "Game xây thành và đội hình pixel, chơi đơn offline sau lần tải đầu.",
+  "description": "Offline pixel city-building and formation strategy.",
   "icons": [
     {
       "src": "./app-icon.png",

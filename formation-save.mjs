@@ -1,0 +1,2 @@
+export function initFormationSaves(s){s.savedFormations??={version:1,entries:[]};return s;}
+export function validFormationSaves(s){const v=s.savedFormations;if(v===undefined)return true;return v&&v.version===1&&Array.isArray(v.entries)&&v.entries.length<=5&&v.entries.every(e=>typeof e.name==='string'&&e.name.trim().length>0&&e.name.length<=24&&!/[<>\x00-\x1f]/.test(e.name)&&Array.isArray(e.slots)&&e.slots.length===9&&e.slots.filter(Boolean).length<=5&&new Set(e.slots.filter(Boolean)).size===e.slots.filter(Boolean).length&&e.slots.every(id=>id===null||s.owned.includes(id)));}

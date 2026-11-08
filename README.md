@@ -1,10 +1,10 @@
 # Thien Menh — Pixel Kingdom
 
-An offline-first pixel strategy game with city building, three independent world armies, turn-based combat, and a separate 999-floor Inferno Tower. The game interface is in Vietnamese; repository documentation and new code comments use English.
+An offline-first pixel strategy game with city building, three independent world armies, turn-based combat, and a separate 999-floor Inferno Tower. Game names, new screens, repository documentation and new code comments use English. Legacy explanatory text is being migrated.
 
-## Current version
+## Current release
 
-This branch contains the current playable version: larger touch controls, a stable mobile viewport, bounded map zoom, a touch-friendly formation editor, animated elemental dragons, and three consecutive tower encounters per floor. Surviving heroes keep their HP between encounters. See [current release notes](docs/current-release.md).
+Five-hero formations, three disjoint world squads, an independent Inferno Tower team, the Celestial Auction Hall and safe Reward Inbox, achievement titles and frames, scheduled world-boss raids, world strongholds, elemental formation advice and configurable game-feel/audio are included. See [release notes](docs/current-release.md), the [element-system audit](notes/element-system-audit.md) and [asset/audio credits](CREDITS.md).
 
 Only one current desktop package is maintained. Historical downloads, screenshots, unused atlases, and outdated native packages have been removed from the current tree. Previous commits remain available in Git history.
 
@@ -14,7 +14,7 @@ The complete Safari installation site is generated in `docs/`. Once GitHub Pages
 
 https://corgi-coder99.github.io/Game-studio/
 
-In Safari, choose **Share → Add to Home Screen**, open the new icon while connected to Wi-Fi, and download the game until the offline-ready message appears. The game uses a landscape layout on every phone size, rotating its frame when the device is held upright. The Home Screen app provides the fullscreen experience when Safari does not support the Fullscreen API. The initial download is approximately 74 MiB. Subsequent solo sessions can run offline. Back up saves through Studio before clearing browser storage.
+In Safari, choose **Share → Add to Home Screen**, open the new icon while connected to Wi-Fi, and download the game until the offline-ready message appears. The game uses a landscape layout on every phone size, rotating its frame when the device is held upright. The Home Screen app provides the fullscreen experience when Safari does not support the Fullscreen API. The initial download is approximately 79 MiB. Subsequent solo sessions can run offline. Back up saves through Studio before clearing browser storage.
 
 The repository owner must select **Settings → Pages → Deploy from a branch → main → /docs**. Pages availability depends on repository visibility and plan; this README does not imply that hosting is enabled. Safari does not provide this game's Bluetooth multiplayer.
 

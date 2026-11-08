@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {encodeAsset85,decodeAsset85} from './asset-encoding.mjs';
+test('offline asset encoding round-trips arbitrary PNG bytes and all four padding lengths',()=>{for(let length=0;length<260;length++){const bytes=Uint8Array.from({length},(_,i)=>(i*73+length)%256),encoded=encodeAsset85(bytes);assert.deepEqual(decodeAsset85(encoded),bytes);assert.equal(encoded.data.length,Math.ceil(length/4)*5);}});

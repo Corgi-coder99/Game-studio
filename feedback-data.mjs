@@ -1,0 +1,4 @@
+import {feedbackConfig} from './feedback-config.mjs';
+export function initFeedback(s){s.feedback??={version:1,...feedbackConfig.settings};return s;}
+export function validFeedback(s){const f=s.feedback;if(f===undefined)return true;return f&&f.version===1&&['volumeMaster','volumeMusic','volumeSfx'].every(k=>Number.isFinite(f[k])&&f[k]>=0&&f[k]<=1)&&['reduceMotion','vibration','audioEnabled'].every(k=>typeof f[k]==='boolean')&&['full','medium','minimal','off'].includes(f.effectsLevel)&&[1,2,3].includes(f.battleSpeed)&&['all','important','off'].includes(f.damageNumbers);}
+export function battleFeedbackEvent(b,name,data){b.feedbackSerial=(b.feedbackSerial||0)+1;b.feedbackEvents??=[];b.feedbackEvents.push({serial:b.feedbackSerial,name,...data});if(b.feedbackEvents.length>80)b.feedbackEvents.splice(0,b.feedbackEvents.length-80);}

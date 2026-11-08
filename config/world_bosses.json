@@ -1,0 +1,408 @@
+{
+  "bosses": [
+    {
+      "id": "boss_hac_long",
+      "name": "Heaven-Devouring Black Dragon",
+      "baseHp": 8000000,
+      "recommendedPower": 50000,
+      "rarity": 4,
+      "schedule": [
+        {
+          "days": "daily",
+          "time": "12:00"
+        },
+        {
+          "days": "daily",
+          "time": "20:00"
+        }
+      ],
+      "fightDurationSec": 1200,
+      "lobbySec": 300,
+      "phases": [
+        {
+          "fromHpPct": 100,
+          "toHpPct": 60,
+          "skills": [
+            "storm_sweep",
+            "roar_stun"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "M\u1ed9c",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 60,
+          "toHpPct": 30,
+          "skills": [
+            "storm_sweep",
+            "roar_stun",
+            "lightning_zone"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0.2,
+          "flying": false,
+          "element": "Kim",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 30,
+          "toHpPct": 0,
+          "skills": [
+            "lightning_rain"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0.2,
+          "flying": true,
+          "element": "Th\u1ee7y",
+          "defenseMultiplier": 1
+        }
+      ],
+      "drops": [
+        {
+          "itemId": "thien_ngoai_thiet",
+          "chance": 0.25,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "itemId": "co_duyen_lenh",
+          "chance": 0.4,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    {
+      "id": "boss_cuu_vi_ho",
+      "name": "Nine-Tailed Blood Fox",
+      "baseHp": 5000000,
+      "recommendedPower": 35000,
+      "rarity": 4,
+      "schedule": [
+        {
+          "days": "daily",
+          "time": "18:00"
+        }
+      ],
+      "fightDurationSec": 1200,
+      "lobbySec": 300,
+      "phases": [
+        {
+          "fromHpPct": 100,
+          "toHpPct": 90,
+          "skills": [
+            "phantom_fire"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "M\u1ed9c",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 90,
+          "toHpPct": 80,
+          "skills": [
+            "mirror_fox"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "H\u1ecfa",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 80,
+          "toHpPct": 70,
+          "skills": [
+            "charm_wave"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "Th\u1ed5",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 70,
+          "toHpPct": 60,
+          "skills": [
+            "blood_moon"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "Kim",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 60,
+          "toHpPct": 50,
+          "skills": [
+            "phantom_fire",
+            "charm_wave"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "Th\u1ee7y",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 50,
+          "toHpPct": 40,
+          "skills": [
+            "mirror_fox",
+            "blood_moon"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "M\u1ed9c",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 40,
+          "toHpPct": 30,
+          "skills": [
+            "charm_wave",
+            "phantom_fire"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "H\u1ecfa",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 30,
+          "toHpPct": 20,
+          "skills": [
+            "blood_moon",
+            "mirror_fox"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "Th\u1ed5",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 20,
+          "toHpPct": 10,
+          "skills": [
+            "fox_inferno"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "Kim",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 10,
+          "toHpPct": 0,
+          "skills": [
+            "last_tail"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "Th\u1ee7y",
+          "defenseMultiplier": 1
+        }
+      ],
+      "drops": [
+        {
+          "itemId": "tan_quyen_cong_phap",
+          "chance": 0.5,
+          "min": 1,
+          "max": 3
+        },
+        {
+          "itemId": "thu_dan_pham",
+          "chance": 0.2,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    {
+      "id": "boss_huyen_vu",
+      "name": "Ancient Black Tortoise",
+      "baseHp": 6000000,
+      "recommendedPower": 45000,
+      "rarity": 4,
+      "schedule": [
+        {
+          "days": "daily",
+          "time": "21:00"
+        }
+      ],
+      "fightDurationSec": 1500,
+      "lobbySec": 300,
+      "phases": [
+        {
+          "fromHpPct": 100,
+          "toHpPct": 60,
+          "skills": [
+            "poison_serpent"
+          ],
+          "damageReduction": 0.5,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "Th\u1ed5",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 60,
+          "toHpPct": 30,
+          "skills": [
+            "frozen_tide"
+          ],
+          "damageReduction": 0.25,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "Th\u1ee7y",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 30,
+          "toHpPct": 0,
+          "skills": [
+            "twin_fury"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "M\u1ed9c",
+          "defenseMultiplier": 1
+        }
+      ],
+      "drops": [
+        {
+          "itemId": "linh_thao_van_nien",
+          "chance": 0.45,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "itemId": "tran_phai_phu",
+          "chance": 0.35,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    {
+      "id": "boss_ma_ton",
+      "name": "Nameless Demon Lord",
+      "baseHp": 15000000,
+      "recommendedPower": 100000,
+      "rarity": 5,
+      "schedule": [
+        {
+          "days": "sunday",
+          "time": "20:00"
+        }
+      ],
+      "fightDurationSec": 1800,
+      "lobbySec": 600,
+      "phases": [
+        {
+          "fromHpPct": 100,
+          "toHpPct": 75,
+          "skills": [
+            "sword_rain"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "Kim",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 75,
+          "toHpPct": 40,
+          "skills": [
+            "spirit_drain"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "Th\u1ee7y",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 40,
+          "toHpPct": 15,
+          "skills": [
+            "demon_form"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "H\u1ecfa",
+          "defenseMultiplier": 1
+        },
+        {
+          "fromHpPct": 15,
+          "toHpPct": 0,
+          "skills": [
+            "world_end"
+          ],
+          "damageReduction": 0,
+          "speedBonus": 0,
+          "flying": false,
+          "element": "Th\u1ed5",
+          "defenseMultiplier": 0.6
+        }
+      ],
+      "drops": [
+        {
+          "itemId": "thu_dan_huyet_mach",
+          "chance": 0.12,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "itemId": "ban_menh_kiem_hon",
+          "chance": 0.08,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "itemId": "ngoc_gian_truyen_thua",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "minScale": 0.6,
+    "maxScale": 2,
+    "minPowerRatio": 0.4,
+    "npcMin": 10,
+    "npcMax": 30,
+    "npcDodge": 0.7,
+    "npcDpsMin": 0.5,
+    "npcDpsMax": 1.5,
+    "telegraphSec": 1.5,
+    "skillIntervalSec": 8,
+    "reviveDelaySec": 15,
+    "maxRevives": 3,
+    "minContribution": 0.01,
+    "pity": 50,
+    "baseRolls": 5,
+    "gold": 2500,
+    "essence": 30,
+    "merit": 100,
+    "dodgeCooldownSec": 3,
+    "damageHpRatio": 0.22,
+    "ssrChance": 0.03
+  }
+}

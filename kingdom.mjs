@@ -1,3 +1,4 @@
+import {strongholdMarchSave} from './stronghold-data.mjs';
 import {finishHealing,woundedTotal,recordCasualties} from './civic.mjs';
 import {elementNames,canUseDragon,elementalMultiplier} from './elements.mjs';
 import {deployments,deployedUnits} from './operations.mjs';
@@ -127,7 +128,7 @@ export function dispatchMarch(state, nodeId) {
   if(state.worldAI?.expedition)throw new Error('Đội khu vực đang hoạt động.');
   if(state.battle&&!state.battle.winner)throw new Error('Hoàn tất trận đang chạy trước.');
   if (state.march) throw new Error('Một đội đang hành quân. Chờ đội trở về.');
-  if (!state.team.length || state.team.length > 4) throw new Error('Xếp từ 1 đến 4 anh hùng vào đội hình.');
+  if (!state.team.length || state.team.length > 5) throw new Error('Xếp từ 1 đến 5 anh hùng vào đội hình.');
   if (state.troops < 60) throw new Error('Cần 60 quân để xuất chinh. Hãy huấn luyện thêm.');
   const type = state.troopType || 'shield';
   if (!Object.hasOwn(troopTypes, type)) throw new Error('Binh chủng không hợp lệ.');
@@ -139,7 +140,7 @@ export function dispatchMarch(state, nodeId) {
   next.march = { nodeId, type, units: 60, stage: 'marching', progress: 0, duration: (6 + node.level * 2)/(1+vipBonuses(state).march+troopStats(state).march+(skinBonus(state).march||0)+(['shield','spear'].includes(state.troopType)?technologyBonus(state,'infantry','march'):0)), rewarded: false };
   return next;
 }
-export function createSkirmish(state,nodeId){const node=worldNodes.find(n=>n.id===nodeId&&n.type==='camp');if(!node||!state.team.length||state.team.length>4)throw new Error('Đội hình hoặc mục tiêu không hợp lệ.');return createTacticsBattle(state,node,activeBonds(state.team).map(b=>b.id),elementalResonance(state.team));}
+export function createSkirmish(state,nodeId){const node=worldNodes.find(n=>n.id===nodeId&&n.type==='camp');if(!node||!state.team.length||state.team.length>5)throw new Error('Đội hình hoặc mục tiêu không hợp lệ.');return createTacticsBattle(state,node,activeBonds(state.team).map(b=>b.id),elementalResonance(state.team));}
 export function castCommander(battle,key,skillIndex=0){return castTactics(battle,key,skillIndex);}
 export function combatTick(battle,delta,autoSkill=true,dragon='Hỏa',dragonLevel=1){return tickTactics(battle,delta,autoSkill,dragon,dragonLevel);}
 export function formationTarget(units,column=0){return tacticsTarget(units,column);}
@@ -190,7 +191,7 @@ export function recallMarch(state) {
 export function durableSave(state) {
   const s = syncActiveSquad(structuredClone(state));
   if (s.march) addReserves(s, s.march.type || 'shield', s.march.units);
-  if(s.worldAI){for(const e of deployments(s))addReserves(s,e.type,e.units);s.worldAI.expedition=null;s.worldAI.expeditions=[];for(const stock of Object.values(s.worldAI.wild||{}))stock.reserved=0;}s.campaignBattle=null;delete s.cityCelebration;
+  if(s.worldAI){s.strongholds.marches=[...(s.strongholds.marches||[]),...deployments(s).filter(e=>e.kind==='stronghold').map(e=>strongholdMarchSave(e))];for(const e of deployments(s))if(e.kind!=='stronghold')addReserves(s,e.type,e.units);s.worldAI.expedition=null;s.worldAI.expeditions=[];for(const stock of Object.values(s.worldAI.wild||{}))stock.reserved=0;}s.campaignBattle=null;delete s.cityCelebration;
   s.march = null; s.battle = null;if(s.campaign){s.campaign.autoAdvance=false;s.campaign.autoReplay=false;s.campaign.paused=false;}
   return s;
 }

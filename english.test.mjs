@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {characterRoster} from './characters.mjs';import {englishText} from './english.mjs';
+test('every hero, weapon, title, active skill, divine skill and VIP passive has an English presentation name',()=>{for(const h of characterRoster)for(const name of [h.name,h.weapon,h.title,h.divine?.name,h.passiveSkill?.name,...h.skills.map(s=>s.name)])if(name)assert.equal(/[À-ỹĐđ]/.test(englishText(name)),false,h.id+': '+name);});

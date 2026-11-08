@@ -15,3 +15,6 @@ mobile/ios/ThienMenh/assets/
 Thien-Menh-*.zip
 !Thien-Menh-Windows.zip
 Thien-Menh-*.apk
+
+# Standalone build output is shipped inside the single current Windows ZIP.
+offline/

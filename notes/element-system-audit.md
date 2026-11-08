@@ -1,0 +1,9 @@
+# Element-system integration
+
+The existing natural overcoming cycle and damage multipliers are preserved: `elements.mjs:elementalMultiplier` returns **1.25** for overcoming and **1.0** otherwise. VIP Light and Dark still overcome one another. `tactics.mjs:tacticsHit` applies this factor once. The reference document's 1.30, 0.80 and 0.90 alternatives were deliberately not adopted.
+
+`team-synergy.mjs` adds pure generation/overcoming helpers, configurable adjacency links, capped generation bonuses and clash penalties, a single team-wide effect, six-hour local-device Heavenly Timing, and terrain-weighted enemy elements. The new calculator replaces the former same-element bonus at the point of application in `createTacticsBattle`; it is not stacked with the old `elementalResonance` result. All five hero slots can participate, including the five-natural-element team effect. Light, Dark and unrecognized elements are neutral for natural team links.
+
+`formation-advisor.mjs` filters deployed heroes and heroes assigned to another world squad. It searches a bounded beam for Counter Advantage, Safe and Balanced teams. Final displayed effective power calls the same battle constructor and stats used in combat. It is an estimate rather than a guaranteed win probability. Up to five reusable named templates are separate from the three operational squads and cannot bypass assignment locks. Template and feedback settings are included in save validation and migration.
+
+Stronghold waves expose their elements before dispatch; three-wave fortresses contain multiple elements and level-seven-plus leaders disclose their Fire guard. World-boss phase elements are configured in `config/world_bosses.json`, including the fox's ten-percent tail transitions. Nine tails are lost at 90% through 10% HP, producing ten health bands including the initial state.

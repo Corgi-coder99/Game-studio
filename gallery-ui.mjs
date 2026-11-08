@@ -14,7 +14,7 @@ import {castleSkins,castleSkinArt,skinEffectText} from './skins.mjs';
 import {inheritanceManuals,secretRealms} from './inheritance-data.mjs';
 import {itemPicture,equipmentPicture,equipmentAffinity,elementalDragonArt} from './viewport-ui.mjs';
 import {skillIcon,characterStageArt} from './character-ui.mjs';
-const galleryNumber=n=>Number(n||0).toLocaleString('vi-VN');
+const galleryNumber=n=>Number(n||0).toLocaleString('en-US');
 const galleryStatNames={...statNames,...rareStatNames,block:'Chặn đòn',reflect:'Phản sát thương',lifesteal:'Hút máu',regen:'Hồi HP/giây',revive:'Hồi sinh',execute:'Kết liễu',healPower:'Hiệu quả hồi máu'};
 export function equipmentDescription(t,level){return Object.entries(t.bonuses).map(([key,value])=>{const v=typeof value==='boolean'?value:value*(1+(level-1)*.12);return `${galleryStatNames[key]||key}: ${typeof v==='boolean'?(v?'Có':'Không'):value<1?(v*100).toFixed(1)+'%':Math.round(v)}`;});}
 export function inventoryEntries(s,tab,portrait){
