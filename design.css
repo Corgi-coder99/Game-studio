@@ -283,3 +283,109 @@ body.reduce-motion #app .summon-batch .pixel-tv-flash{display:none}
 
 #app .story-objective{margin:18px;padding:22px;border:1px solid #b89d63;background:#153846;line-height:1.6}#app .story-objective progress{width:60%;margin-right:16px}#app .story-objective button{margin:5px}#app .story-dialogue-curtain{position:absolute;inset:0;z-index:125;background:#061821d9;display:grid;place-items:center;padding:32px}#app .story-dialogue-curtain>section{max-width:1100px;display:grid;grid-template-columns:220px 1fr;gap:28px;padding:32px;background:linear-gradient(140deg,#214957,#102c38);border:2px solid #c9ad70;box-shadow:0 12px 50px #0008;line-height:1.7}#app .story-speaker-art{display:grid;place-items:center}#app .story-speaker-art>.hero-art{width:210px;height:210px}#app .story-dialogue-curtain small{color:#e3c883}#app .story-dialogue-curtain h2{margin:5px 0 12px}#app .story-dialogue-curtain button{margin:8px 12px 0 0}@media(pointer:coarse){#app .story-dialogue-curtain>section{grid-template-columns:150px 1fr;font-size:24px;padding:20px;gap:16px}#app .story-speaker-art>.hero-art{width:140px;height:140px}}
 #app .product-page{overflow:auto}#app .product-sections{display:grid;gap:18px;padding:18px}#app .product-sections section{padding:24px;line-height:1.65}
+
+/* Shared visual language. Keep geometry, hit targets and scene artwork intact. */
+:root {
+  --ui-ink: #f4ecd5;
+  --ui-muted: #b9cbd0;
+  --ui-gold: #c8ac6c;
+  --ui-gold-bright: #f2d994;
+  --ui-edge: #56737b;
+  --ui-deep: #0d2532;
+  --ui-panel: #163644;
+  --ui-raised: #214754;
+  --ui-font: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  --ui-heading: Georgia, "Times New Roman", serif;
+  --gold: var(--ui-gold);
+  --muted: var(--ui-muted);
+  --panel: var(--ui-panel);
+  --ink: var(--ui-deep);
+}
+#app { color: var(--ui-ink); font-family: var(--ui-font); }
+#app button, #app input, #app select, #app textarea { font-family: var(--ui-font); }
+#app h1, #app h2, #app .gallery-heading > h2 { font-family: var(--ui-heading); color: var(--ui-ink); text-shadow: 0 2px 2px #051722; }
+#app button { color: var(--ui-ink); }
+#app :is(.fixed-screen,.paper-panel,.market-bid-dialog,.description-curtain>section,.story-dialogue-curtain>section) {
+  border-color: var(--ui-gold);
+  box-shadow: inset 0 0 0 1px #f2d99416, 0 8px 24px #03131d55;
+}
+#app :is(.paper-panel,.market-bid-dialog,.description-curtain>section) {
+  background-color: var(--ui-deep);
+  background-image: linear-gradient(145deg,#214754f5,#0d2532f5);
+  color: var(--ui-ink);
+}
+#app :is(.gallery-heading,.gallery-footer,.market-tabs,.account-tabs) {
+  border-color: #c8ac6c66;
+  background-color: #0d2532d9;
+}
+#app :is(.fixed-screen,.description-curtain,.story-dialogue-curtain,.combat-options,.game-header,.game-nav) button:where(:not(.formation-cell):not(.summon-card):not(.inventory-tile):not(.hero-card):not(.hero-carousel-card):not(.box-preview)) {
+  border-color: var(--ui-edge);
+  border-radius: 4px;
+  background-color: var(--ui-panel);
+  background-image: linear-gradient(180deg,#284e5b,#173745);
+  box-shadow: inset 0 1px 0 #e5f2ee12, 0 2px 3px #03131d40;
+}
+#app :is(.fixed-screen,.description-curtain,.story-dialogue-curtain,.combat-options,.game-nav) button:is(.primary,.gold-button,.current,.active,.selected,[aria-selected="true"]) {
+  color: #172d38;
+  border-color: var(--ui-gold-bright);
+  background: linear-gradient(180deg,#e4cd91,#b89a56);
+  text-shadow: none;
+}
+#app button:disabled { opacity: .48; filter: saturate(.4); cursor: not-allowed; }
+#app button:focus-visible, #app input:focus-visible, #app select:focus-visible {
+  outline: 3px solid #a8e5e6; outline-offset: 3px;
+}
+@media(hover:hover) {
+  #app button:hover:not(:disabled) { border-color: var(--ui-gold-bright); }
+}
+#app :is(input:not([type=range]):not([type=checkbox]),select,textarea) {
+  color: var(--ui-ink); background-color: var(--ui-deep); border: 1px solid var(--ui-edge); border-radius: 4px;
+}
+#app option { color: var(--ui-ink); background: var(--ui-deep); }
+#app input::placeholder, #app textarea::placeholder { color: var(--ui-muted); }
+#app :is(.market-listing,.market-history article,.market-forge article,.market-item-library article,.market-inbox article,.market-sell>section,.market-sell>aside,.story-objective,.story-chapters article,.product-sections section) {
+  background: linear-gradient(145deg,#214754eb,#102c3aee);
+  color: var(--ui-ink); border-radius: 6px;
+}
+#app :is(.inventory-tile,.pet-card,.report-unit-card) {
+  background-color: var(--ui-panel); color: var(--ui-ink);
+  box-shadow: inset 0 1px 0 #d8f2eb12,0 3px 8px #06192466;
+}
+/* Reports use the same dark jade surfaces as inventory and the market. */
+#app .battle-comparison, #app .report-side, #app .report-verdict,
+#app .report-unit-card, #app .combat-result {
+  background: linear-gradient(145deg,#214754f5,#102c3af5);
+  color: var(--ui-ink); border-color: var(--ui-gold);
+}
+#app .battle-comparison :is(h2,h3,b,strong),#app .report-side :is(h2,h3,b,strong),#app .report-verdict :is(h2,h3,b,strong),#app .report-unit-card :is(h2,h3,b,strong),#app .combat-result :is(h2,h3,b,strong) { color: var(--ui-ink); }
+#app .battle-comparison small,#app .report-unit-card small { color: var(--ui-muted); }
+/* A single badge frame around the existing original illustrated navigation art. */
+#app .game-nav button > span {
+  border-color: var(--ui-gold);
+  background-color: var(--ui-deep);
+  /* Preserve each atlas background-image and its sprite coordinates. */
+  box-shadow: inset 0 0 0 2px #081e2a,0 2px 6px #04151d80;
+}
+#app .game-nav button.current > span { border-color: var(--ui-gold-bright); box-shadow: inset 0 0 0 2px #081e2a,0 0 10px #e4c67555; }
+#app .game-nav button small { color: var(--ui-ink); font-weight: 600; }
+#app .resource, #app .kingdom-brand { border-color: #c8ac6c99; background: linear-gradient(145deg,#284e5bf2,#112e3cf2); }
+#app .resource small { color: var(--ui-muted); }
+#app .resource b { color: var(--ui-ink); font-variant-numeric: tabular-nums; }
+#app .settings-gear { color: var(--ui-gold-bright); font-family: var(--ui-font); }
+#app :is(.description-curtain,.story-dialogue-curtain) { background-color: #041720d9; }
+#app .story-dialogue-curtain>section { background: linear-gradient(145deg,#214754,#0d2532); }
+#app progress { accent-color: #7ac6b3; }
+#app * { scrollbar-color: #8d835c #102b38; scrollbar-width: thin; }
+body.reduce-motion #app button { transition: none; }
+
+#app :is(.battle-report-side,.comparison-verdict) {
+  background: linear-gradient(145deg,#214754f5,#102c3af5); color: var(--ui-ink); border-color: var(--ui-gold);
+}
+#app .battle-report-side header small,#app .battle-comparison .gallery-footer,#app .battle-comparison .gallery-footer>span { color: var(--ui-muted); }
+#app .comparison-verdict>b { color: #a1e0bd; }
+#app .comparison-verdict.enemy>b { color: #ffa5a7; }
+#app .report-unit-card.fallen { color: var(--ui-muted); }
+#app .report-hp-bar { background: #091e29; border-color: var(--ui-edge); }
+
+/* The top atlas row contains tips from row two inside its lower transparent margin. */
+#app .pixel-blind-box { clip-path: var(--box-clip,none); }

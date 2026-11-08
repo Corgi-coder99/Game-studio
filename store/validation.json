@@ -1,9 +1,9 @@
 {
   "verifiedOn": "2026-11-08",
-  "sourceWebBuild": "v12-20674c0d7b78",
+  "sourceWebBuild": "v12-0e49be414c27",
   "android": {
     "artifact": "mobile/release-output/Heavenly-Mandate-unsigned.aab",
-    "sha256": "64b54fc301d62803b4940684d3bc4dfe51626b6193f84066046ab9db9189e6ad",
+    "sha256": "45c574697ad6871231c7e2129353c749349232228b488fe06bccc33b2439fe46",
     "bundletool": "1.18.3",
     "validation": "passed",
     "signed": false,

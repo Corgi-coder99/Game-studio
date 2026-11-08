@@ -1,5 +1,12 @@
 # Current release
 
+## Unified interface presentation
+
+- Shared jade, cream and antique-gold theme tokens now coordinate windows, cards, headers, action buttons, inputs, HUD resources and navigation frames. Selected tabs use gold with dark text; keyboard focus remains visible.
+- Lower-grade shard boxes clip stray pixels from the adjacent atlas row without replacing the original artwork.
+- Populated siege reports use the same dark surfaces as inventory and trading, while allied/enemy HP bars and victory/defeat colors remain distinct.
+- Existing original artwork, rarity accents, scene geometry, zoom, mobile scrolling and gameplay are preserved. This is an interface styling pass, not a claim that all sprites have been redrawn.
+
 ## Developer separation and presentation update
 
 - Studio and resource grants are removed from the player game. Settings → Save Management preserves validated backup/import/reset flows. The separate `Heavenly-Mandate-DevTools.zip` supports offline JSON editing and a loopback-only live test session for food, wood, stone, gold, jade and essence, with validation and snapshot undo. Live edits preserve ongoing battles; save restore follows normal durable-save rules.
