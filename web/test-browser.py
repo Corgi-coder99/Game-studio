@@ -34,6 +34,7 @@ with tempfile.TemporaryDirectory(prefix='Thien Menh Safari PWA ') as profile,syn
  ctx.set_offline(True);page.reload();page.wait_for_function('document.getElementById("play").getAttribute("aria-disabled")==="false"');page.locator('#play').tap();page.wait_for_selector('#app .game-nav');page.screenshot(path='/tmp/safari-pwa-first-game.png');assert not errors,errors
  # Complete first-run setup and import a funded test backup through the real player flow.
  page.locator('[data-confirm-realm]').tap()
+ if page.locator('[data-story-ack]').count():page.locator('[data-story-ack]').tap()
  fixture=json.loads(page.evaluate('localStorage.getItem("thien-menh-kingdom-v2")'));fixture['coins']=100000
  page.locator('.game-nav [data-view="settings"]').tap();page.locator('[data-view="saves"]').last.tap()
  page.once('dialog',lambda dialog:dialog.accept())

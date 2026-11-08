@@ -1,0 +1,33 @@
+{
+  "verifiedOn": "2026-11-08",
+  "sourceWebBuild": "v12-20674c0d7b78",
+  "android": {
+    "artifact": "mobile/release-output/Heavenly-Mandate-unsigned.aab",
+    "sha256": "64b54fc301d62803b4940684d3bc4dfe51626b6193f84066046ab9db9189e6ad",
+    "bundletool": "1.18.3",
+    "validation": "passed",
+    "signed": false,
+    "uploaded": false,
+    "applicationId": "vn.thienmenh.game",
+    "versionCode": 13,
+    "targetSdk": 36,
+    "compiledAgainstSdk": 35,
+    "physicalDeviceTested": false
+  },
+  "ios": {
+    "sourcePrepared": true,
+    "compiledWithXcode": false,
+    "signed": false,
+    "physicalDeviceTested": false
+  },
+  "automatedTests": 316,
+  "businessModel": {
+    "proposal": "one-time purchase",
+    "suggestedUSD": 4.99,
+    "storePriceConfigured": false,
+    "inAppPurchases": false,
+    "ads": false,
+    "subscriptions": false
+  },
+  "browserValidation": "Chromium desktop and mobile emulation; physical Safari is unverified"
+}

@@ -61,7 +61,7 @@ const englishEscape=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 const englishPattern=new RegExp('(^|[^\\p{L}\\p{N}])('+[...englishCatalog.keys()].sort((a,b)=>b.length-a.length).map(englishEscape).join('|')+')(?=$|[^\\p{L}\\p{N}])','gu');
 let englishProtectedNames=new Set();
 export function setEnglishPlayerNames(names=[]){englishProtectedNames=new Set(names.filter(n=>n&&n!=='Quân vương'));}
-export function englishText(value){const text=String(value??'');if(englishProtectedNames.has(text))return text;let result=text.replace(englishPattern,(_,prefix,key)=>prefix+englishCatalog.get(key));for(let pass=0;pass<3;pass++){const before=result;result=result.replace(englishCopyPattern,(_,prefix,key)=>prefix+englishCopyMap.get(key));if(result===before)break;}return result;}
+export function englishText(value){const text=String(value??'');if(englishProtectedNames.has(text))return text;let result=text.replace(englishPattern,(_,prefix,key)=>prefix+englishCatalog.get(key));for(let pass=0;pass<3;pass++){const before=result;result=result.replace(englishCopyPattern,(_,prefix,key)=>prefix+englishCopyMap.get(key));if(result===before)break;}return result.replace(/\bVIP\b/g,'Legacy').replace(/\bvip\b/g,'legacy');}
 const englishCopyMap=new Map(englishCopyPairs);
 const englishCopyPattern=new RegExp('(^|[^\\p{L}\\p{N}])('+[...englishCopyMap.keys()].sort((a,b)=>b.length-a.length).map(englishEscape).join('|')+')(?=$|[^\\p{L}\\p{N}])','gu');
 const englishNodeCache=new WeakMap();

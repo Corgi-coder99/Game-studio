@@ -11,7 +11,8 @@ def run(*cmd):subprocess.run([str(c) for c in cmd],check=True,cwd=root)
 sources=list((root/'mobile/android/src').rglob('*.java'))
 run('java','-m','jdk.compiler/com.sun.tools.javac.Main','-source','8','-target','8','-classpath',platform,'-d',classes,*sources)
 assets=root/'mobile/bundle'
-run(build/'aapt2','link','-I',platform,'--manifest',root/'mobile/android/AndroidManifest.xml','-A',assets,'-o',work/'base.apk')
+run(build/'aapt2','compile','--dir',root/'mobile/android/res','-o',work/'compiled-res.zip')
+run(build/'aapt2','link','-I',platform,'--manifest',root/'mobile/android/AndroidManifest.xml','-A',assets,'-o',work/'base.apk',work/'compiled-res.zip')
 jar=work/'classes.jar'
 with zipfile.ZipFile(jar,'w') as z:
  for f in classes.rglob('*.class'):z.write(f,f.relative_to(classes).as_posix())
@@ -21,7 +22,7 @@ with zipfile.ZipFile(work/'unsigned.apk','a',zipfile.ZIP_DEFLATED) as z:z.write(
 run(build/'zipalign','-f','4',work/'unsigned.apk',work/'aligned.apk')
 key=Path(args.keystore).resolve()
 if not key.exists():run('keytool','-genkeypair','-keystore',key,'-storepass','android','-keypass','android','-alias','thien-menh-test','-dname','CN=Thien Menh Local Test','-keyalg','RSA','-keysize','2048','-validity','3650')
-out=root/'Thien-Menh-v12-Android.apk'
+out=root/'mobile/release-output/Heavenly-Mandate-test.apk';out.parent.mkdir(exist_ok=True)
 run(build/'apksigner','sign','--ks',key,'--ks-pass','pass:android','--key-pass','pass:android','--ks-key-alias','thien-menh-test','--out',out,work/'aligned.apk')
 run(build/'apksigner','verify','--verbose',out)
 print(out.name,round(out.stat().st_size/1024/1024,1),'MiB; self-signed test APK; physical Bluetooth tests still required.')

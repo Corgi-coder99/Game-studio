@@ -2,6 +2,12 @@
 
 An offline-first pixel strategy game with city building, three independent world armies, turn-based combat, and a separate 999-floor Inferno Tower. Game names, new screens, repository documentation and new code comments use English. Player captions use an English presentation catalog; legacy save identifiers remain compatible.
 
+## Offline edition for a one-time mobile purchase
+
+The game now includes fourteen main-story objectives, chapter dialogue and real tower-act transitions, capacity-safe story rewards, daily player-initiated Offline Hunts, English native dialogs, earned Legacy ranks, an in-game privacy/help page, and local recovery snapshots. Existing saves migrate without losing progress. See the [paid-edition implementation and store proposal](store/README.md).
+
+Android App Bundle generation is implemented and structurally validated with Google's bundletool. It is unsigned and not a published paid app. iOS remains source requiring an approved icon, Xcode build, publisher signing and device tests. This does not make the existing public preview paid or private.
+
 ## Current release
 
 Five-hero formations, three disjoint world squads, an independent Inferno Tower team, the Celestial Auction Hall and safe Reward Inbox, achievement titles and frames, scheduled world-boss raids, world strongholds, elemental formation advice and configurable game-feel/audio are included. See [release notes](docs/current-release.md), the [element-system audit](notes/element-system-audit.md) and [asset/audio credits](CREDITS.md).
@@ -55,7 +61,7 @@ Android and iOS source projects remain under [`mobile/`](mobile/README.md). Outd
 
 ## Validation and limitations
 
-308 automated gameplay, developer-tool, localization and web-cache checks passed for the current gameplay and web-cache contracts. Touch layouts were exercised in Chromium mobile emulation in landscape and portrait; desktop, offline launch, cache repair, and restart persistence were also checked. Physical iPhone Safari and Bluetooth hardware have not been validated. Windows BAT launchers have not been run on Windows; the iOS project has not been compiled with Xcode.
+316 automated gameplay, developer-tool, localization and web-cache checks passed for the current gameplay and web-cache contracts. Touch layouts were exercised in Chromium mobile emulation in landscape and portrait; desktop, offline launch, cache repair, and restart persistence were also checked. Physical iPhone Safari and Bluetooth hardware have not been validated. Windows BAT launchers have not been run on Windows; the iOS project has not been compiled with Xcode.
 
 ## Repository policy
 

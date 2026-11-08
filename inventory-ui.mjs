@@ -5,7 +5,7 @@ import {titleCatalog} from './chronicle.mjs';
 import {characterRoster,characterById,gradeOrder} from './characters.mjs';
 import {itemById,equipmentOwner,statNames,rareStatNames} from './progression.mjs';
 import {petCatalog,petAwakenings,cosmeticCatalog,bagCatalog} from './account.mjs';
-const invFmt=n=>Number(n).toLocaleString('vi-VN',{maximumFractionDigits:3});
+const invFmt=n=>Number(n).toLocaleString('en-US',{maximumFractionDigits:3});
 const invBonusNames={...statNames,...rareStatNames,block:'Chặn đòn',reflect:'Phản sát thương',lifesteal:'Hút máu',regen:'Tái sinh HP/giây',revive:'Hồi sinh một lần',execute:'Kết liễu',healPower:'Hiệu quả hồi máu'};
 function inventoryBonusText(t,level){const f=1+(level-1)*.12;return Object.entries(t.bonuses).map(([k,v])=>`${invBonusNames[k]||k}: ${typeof v==='boolean'?'Có':v<1?invFmt(v*f*100)+'%':invFmt(v*f)}`).join(' · ');}
 function invItemGlyph(t){return itemPicture(t.slot);}

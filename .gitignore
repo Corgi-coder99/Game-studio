@@ -21,3 +21,4 @@ offline/
 
 # Generated developer HTML is delivered only in its separate current tool ZIP.
 admin/Heavenly-Mandate-DevTools.html
+mobile/release-output/

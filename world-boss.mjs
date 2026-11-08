@@ -1,7 +1,7 @@
 import {battleFeedbackEvent} from './feedback-data.mjs';
 import {assignEnemyElements} from './team-synergy.mjs';
 import {worldBossDefinitions,worldBossRules} from './world-boss-config.mjs';
-import {worldBossById,initWorldBoss,worldBossSchedule,worldBossPhase,bossHpScale} from './world-boss-data.mjs';
+import {worldBossById,initWorldBoss,worldBossSchedule,worldBossPhase,bossHpScale,offlineHuntId} from './world-boss-data.mjs';
 import {createTacticsBattle,tickTactics,tacticsHit,tacticsStatus} from './tactics.mjs';
 import {itemTemplates} from './progression.mjs';
 import {exclusiveItems} from './auction-config.mjs';
@@ -10,16 +10,16 @@ export function worldBossPower(s){const b=createTacticsBattle(s,{id:'power',name
 export class WorldBossBackend{start(){throw new Error('Implement raid entry.');}tick(){throw new Error('Implement raid simulation.');}}
 export class LocalWorldBossBackend extends WorldBossBackend{
  constructor(random=Math.random,onEvent=()=>{}){super();this.random=random;this.onEvent=onEvent;}
- start(s,id,{practice=false,now=Date.now()}={}){
+ start(s,id,{practice=false,anytime=false,now=Date.now()}={}){
   const boss=worldBossById[id];if(!boss)throw new Error('Unknown world boss.');initWorldBoss(s);initAuction(s);
-  const schedule=worldBossSchedule(boss,now),power=worldBossPower(s);if(!s.team.length)throw new Error('Prepare at least one hero.');if(!practice&&schedule.status!=='active')throw new Error(schedule.status==='lobby'?'The raid is gathering. Wait for the scheduled start.':'The boss has withdrawn. Practice is always available.');
+  const schedule=worldBossSchedule(boss,now),power=worldBossPower(s);if(!s.team.length)throw new Error('Prepare at least one hero.');if(!practice&&!anytime&&schedule.status!=='active')throw new Error(schedule.status==='lobby'?'The raid is gathering. Wait for the scheduled start.':'The boss has withdrawn. Practice is always available.');
   if(!practice&&power<boss.recommendedPower*worldBossRules.minPowerRatio)throw new Error('At least 40% of recommended power is required.');
-  const recordId=practice?'practice:'+id+':'+now:schedule.id;if(!practice&&s.worldBoss.history.some(r=>r.id===recordId))throw new Error('This appearance has already been attempted.');
+  const recordId=practice?'practice:'+id+':'+now:anytime?offlineHuntId(id,now):schedule.id;if(!practice&&s.worldBoss.history.some(r=>r.id===recordId))throw new Error(anytime?'Today’s offline hunt has already been attempted.':'This appearance has already been attempted.');
   const count=worldBossRules.npcMin+Math.floor(this.random()*(worldBossRules.npcMax-worldBossRules.npcMin+1)),npcs=Array.from({length:count},(_,i)=>({playerId:'npc_'+i,name:['Cloud Wanderer','Jade Pilgrim','Moonblade','Azure Sage','Crimson Lotus'][i%5]+' '+(i+1),power:boss.recommendedPower*(.65+this.random()*.7),damage:0,deaths:0,reviveAt:0})),average=(power+npcs.reduce((n,p)=>n+p.power,0))/(count+1),maxHp=Math.round(boss.baseHp*bossHpScale(average,boss.recommendedPower));
   const battle=createTacticsBattle(s,{id,name:boss.name,level:1,heroLevel:Math.max(1,s.heroLevels[s.team[0]]||1),enemies:['zhaoyun'],boss:true,enemyScale:1});battle.mode='worldBoss';battle.timeLimit=boss.fightDurationSec;battle.turn=null;const enemy=battle.enemies[0];enemy.name=boss.name;enemy.maxHp=maxHp;enemy.hp=maxHp;enemy.armor=100;enemy.resist=100;enemy.regen=0;enemy.revive=false;enemy.reflect=0;enemy.lifesteal=0;enemy.abilities=[];enemy.skillCosts=[];enemy.skillCooldowns=[];enemy.manaRegen=0;enemy.rageRegen=0;enemy.mana=0;enemy.rage=0;enemy.attackTimer=1e9;enemy.divinePath=null;enemy.element=boss.phases[0].element||'none';
   for(const npc of npcs)npc.dps=maxHp/(boss.fightDurationSec*count)*(worldBossRules.npcDpsMin+this.random()*(worldBossRules.npcDpsMax-worldBossRules.npcDpsMin));
   if(!practice){s.worldBoss.history.push({id:recordId,bossId:id,startedAt:now,result:'retreat',playerDamage:0,deaths:0});s.worldBoss.history=s.worldBoss.history.slice(-100);}
-  return {id:recordId,bossId:id,practice,startedAt:now,deadline:practice?now+boss.fightDurationSec*1000:schedule.endsAt,elapsed:0,maxHp,battle,npcs,playerDamage:0,deaths:0,revives:0,reviveAt:0,phase:0,nextSkill:4,warning:null,dodgeUntil:0,dodgeReadyAt:0,result:null,rewards:[],settled:false,isFinalBlow:false};
+  return {id:recordId,bossId:id,practice,startedAt:now,deadline:practice||anytime?now+boss.fightDurationSec*1000:schedule.endsAt,elapsed:0,maxHp,battle,npcs,playerDamage:0,deaths:0,revives:0,reviveAt:0,phase:0,nextSkill:4,warning:null,dodgeUntil:0,dodgeReadyAt:0,result:null,rewards:[],settled:false,isFinalBlow:false};
  }
  dodge(raid){if(raid.result||raid.elapsed<raid.dodgeReadyAt)return false;raid.dodgeUntil=raid.elapsed+2;raid.dodgeReadyAt=raid.elapsed+worldBossRules.dodgeCooldownSec;return true;}
  tick(s,raid,delta,now=Date.now()){

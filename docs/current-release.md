@@ -36,10 +36,20 @@ All artwork and synthesized audio are original. See [credits](../CREDITS.md) and
 
 Store submission remains a separate milestone: see [mobile readiness](store-readiness.md). Signing, physical-device verification and full late-game balance/art review are still required.
 
-Validation for this revision: 308 automated checks passed; the separate developer app was exercised in live and offline-edit modes. Player flows were checked at 1440×900, 926×428 and rotated 428×926. The current game ZIP was extracted to a path with spaces and served with its included Python launcher.
+Validation for this revision: 316 automated checks passed; the separate developer app was exercised in live and offline-edit modes. Player flows were checked at 1440×900, 926×428 and rotated 428×926. The current game ZIP was extracted to a path with spaces and served with its included Python launcher.
 
 ## Mailbox report correction and remaining content scope
 
 Populated siege reports now use English source copy for the overview, troop statistics, analysis, and hero detail dialogs. Advice for legacy reports is regenerated from their recorded statistics without changing stored history or rewards. Phone report cards scroll without overlapping.
 
-The art pipeline validates and synchronizes existing atlas files; it does not redraw the entire game. The five-act Story Journal is implemented, but chapter dialogue, quest progression, encounter presentation and environmental storytelling have not yet been integrated throughout the campaign. Full visual unification and full narrative integration remain unfinished. No background process is completing them automatically.
+The art pipeline validates and synchronizes existing atlas files; it does not redraw the entire game. Narrative objectives, act dialogue and tower transitions are now integrated as described below. Full visual unification, voiced or animated cinematics, and final art/balance review remain unfinished. No unattended background process completes these tasks automatically.
+
+## Offline paid-edition preparation
+
+Fourteen ordered story objectives now connect kingdom selection, city development, recruitment and tower milestones. Rewards are delivered once to the capacity-safe Reward Inbox. New-game onboarding shows the prologue; real act-boundary victories trigger conclusions and the next act’s opening. The Journal replays unlocked scenes and displays the next actionable objective. Tower encounter names match the story acts. Existing saves keep their progress and can claim earlier objectives.
+
+Scheduled raids are preserved. An additional Offline Hunt can be started once per boss per local calendar day, with normal power checks, contribution rewards, NPC allies and title events. Attempts are reserved on entry, including retreat.
+
+Legacy is the player-facing name of the existing earned VIP system; it is not sold. Spirit Supplies adds repeatable beast draw points and fruit for earned Gold, replacing the old finite gift-only restriction. Settings explains the no-ad/no-IAP/no-subscription model, local data and optional Bluetooth sharing. Native messages use English. Saves persist on page hide/visibility loss, and a verified previous snapshot supports local recovery when space permits. Reset clears active, recovery and legacy saves.
+
+`mobile/build-release.py` builds an unsigned Android AAB and runs Google bundletool validation. Pricing, signing, declarations, physical-device QA, icon/store assets and actual store review are still publisher steps; no app has been uploaded or sold. See [the implementation and price proposal](../store/README.md). These narrative changes are playable integration, not a claim that all artwork or late-game balance has received final production review.
