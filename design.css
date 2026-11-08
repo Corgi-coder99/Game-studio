@@ -276,3 +276,7 @@ html,body{overscroll-behavior:none;position:fixed;inset:0;touch-action:manipulat
 
 @media(pointer:coarse){#app .summon-card-grid{grid-template-columns:repeat(5,minmax(0,1fr))}#app .story-chapters{grid-template-columns:1fr}#app .story-chapters article{font-size:30px}}
 body.reduce-motion #app .summon-batch .pixel-tv-flash{display:none}
+
+/* Keep populated report cards separate and reachable on short landscape screens. */
+#app .report-unit-cards{grid-template-rows:repeat(3,minmax(150px,1fr));overflow-y:auto;overscroll-behavior:contain}#app .report-unit-card{overflow:hidden;flex-shrink:0}
+.touch-game #app .battle-comparison .comparison-teams{flex:none;min-height:620px}

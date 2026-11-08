@@ -36,4 +36,10 @@ All artwork and synthesized audio are original. See [credits](../CREDITS.md) and
 
 Store submission remains a separate milestone: see [mobile readiness](store-readiness.md). Signing, physical-device verification and full late-game balance/art review are still required.
 
-Validation for this revision: 307 automated checks passed; the separate developer app was exercised in live and offline-edit modes. Player flows were checked at 1440×900, 926×428 and rotated 428×926. The current game ZIP was extracted to a path with spaces and served with its included Python launcher.
+Validation for this revision: 308 automated checks passed; the separate developer app was exercised in live and offline-edit modes. Player flows were checked at 1440×900, 926×428 and rotated 428×926. The current game ZIP was extracted to a path with spaces and served with its included Python launcher.
+
+## Mailbox report correction and remaining content scope
+
+Populated siege reports now use English source copy for the overview, troop statistics, analysis, and hero detail dialogs. Advice for legacy reports is regenerated from their recorded statistics without changing stored history or rewards. Phone report cards scroll without overlapping.
+
+The art pipeline validates and synchronizes existing atlas files; it does not redraw the entire game. The five-act Story Journal is implemented, but chapter dialogue, quest progression, encounter presentation and environmental storytelling have not yet been integrated throughout the campaign. Full visual unification and full narrative integration remain unfinished. No background process is completing them automatically.
