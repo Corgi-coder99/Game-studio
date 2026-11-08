@@ -12,7 +12,7 @@ export function mountViewportScenes(main,key){
  const tabs=main.querySelector(':scope > .account-tabs'),fixed=main.querySelector(':scope > .doll-hall'),host=fixed?.querySelector('.doll-tab-content')||main;
  const roots=[...host.children].filter(n=>n!==tabs&&!n.matches('.gear-curtain'));
  if(!roots.length)return;
- const tray=document.createElement('div');tray.className='viewport-tray';const bar=document.createElement('nav');bar.className='scene-controls';bar.setAttribute('aria-label','Chuyển trang nội dung');
+ const tray=document.createElement('div');tray.className='viewport-tray';const bar=document.createElement('nav');bar.className='scene-controls';bar.setAttribute('aria-label','Content Pagination');
  roots.forEach(n=>n.remove());host.append(tray,bar);
  const pages=[];let current;
  function newPage(){current=document.createElement('section');current.className='viewport-scene';tray.append(current);pages.push(current);}
@@ -28,7 +28,7 @@ export function mountViewportScenes(main,key){
  for(let i=pages.length-1;i>=0;i--)if(!pages[i].children.length){pages[i].remove();pages.splice(i,1);}
  if(!pages.length){bar.remove();return;}
  let index=Math.min(scenePositions.get(key)||0,pages.length-1);
- function show(){pages.forEach((p,i)=>p.hidden=i!==index);bar.innerHTML=`<button data-scene-prev ${index===0?'disabled':''}>← Trước</button><span>${index+1} / ${pages.length}</span><button data-scene-next ${index===pages.length-1?'disabled':''}>Sau →</button>`;scenePositions.set(key,index);}
+ function show(){pages.forEach((p,i)=>p.hidden=i!==index);bar.innerHTML=`<button data-scene-prev ${index===0?'disabled':''}>← Previous</button><span>${index+1} / ${pages.length}</span><button data-scene-next ${index===pages.length-1?'disabled':''}>Next →</button>`;scenePositions.set(key,index);}
  bar.onclick=e=>{if(e.target.closest('[data-scene-prev]')&&index>0)index--;else if(e.target.closest('[data-scene-next]')&&index<pages.length-1)index++;else return;show();};show();
 }
 
@@ -42,7 +42,7 @@ export function fitGameResolution(){
 }
 
 
-export function navArt(id){if(id==='settings')return '<span class="settings-gear" aria-hidden="true">⚙</span>';if(id==='bag'||id==='shop')return `<span class="navigation-art navigation-painted" style="--navigation-x:${id==='bag'?0:100/3}%" role="img" aria-label="${id==='bag'?'Túi đồ':'Cửa hàng'}"></span>`;if(id==='city'||id==='skins')return `<span class="navigation-art navigation-castle" role="img" aria-label="Thành trì"></span>`;if(id==='heroes'||id==='profile')return `<span class="navigation-art navigation-hero" role="img" aria-label="Anh hùng"></span>`;if(id==='pets')return `<span class="navigation-art navigation-pet" role="img" aria-label="Thú cưng"></span>`;const item={shop:'resourcePack',bag:'resourcePack',quests:'xpTome',inheritance:'map',region:'map',summon:'summonTicket',studio:'gearTicket',runes:'coins',help:'xpTome'}[id];if(item)return `<span class="navigation-art">${itemPicture(item)}</span>`;const index=({army:9,mail:4})[id]??3;return `<span class="navigation-art navigation-skill" style="--nav-x:${index%4*100/3}%;--nav-y:${Math.floor(index/4)*100/3}%" role="img" aria-label="${id}"></span>`;}
+export function navArt(id){if(id==='settings')return '<span class="settings-gear" aria-hidden="true">⚙</span>';if(id==='bag'||id==='shop')return `<span class="navigation-art navigation-painted" style="--navigation-x:${id==='bag'?0:100/3}%" role="img" aria-label="${id==='bag'?'Túi đồ':'Cửa hàng'}"></span>`;if(id==='city'||id==='skins')return `<span class="navigation-art navigation-castle" role="img" aria-label="Thành trì"></span>`;if(id==='heroes'||id==='profile')return `<span class="navigation-art navigation-hero" role="img" aria-label="Anh hùng"></span>`;if(id==='pets')return `<span class="navigation-art navigation-pet" role="img" aria-label="Thú cưng"></span>`;const item={shop:'resourcePack',bag:'resourcePack',quests:'xpTome',inheritance:'map',region:'map',summon:'summonTicket',journal:'xpTome',runes:'coins',help:'xpTome'}[id];if(item)return `<span class="navigation-art">${itemPicture(item)}</span>`;const index=({army:9,mail:4})[id]??3;return `<span class="navigation-art navigation-skill" style="--nav-x:${index%4*100/3}%;--nav-y:${Math.floor(index/4)*100/3}%" role="img" aria-label="${id}"></span>`;}
 
 // Native scrolling can use the wrong axis inside Safari's rotated game frame.
 export function bindHeroCarouselGestures(carousel){

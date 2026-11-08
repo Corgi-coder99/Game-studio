@@ -1,0 +1,230 @@
+{
+  "version": 1,
+  "style": "Original mythic pixel art; teal and gold interface; nearest-neighbor sampling",
+  "atlases": [
+    {
+      "file": "hulao-pixel.png",
+      "width": 1536,
+      "height": 1024,
+      "maxBytes": 2466959,
+      "role": "hulao"
+    },
+    {
+      "file": "city-pixel.png",
+      "width": 1536,
+      "height": 1024,
+      "maxBytes": 2475551,
+      "role": "city"
+    },
+    {
+      "file": "battle-units-pixel.png",
+      "width": 1774,
+      "height": 887,
+      "maxBytes": 2194630,
+      "role": "battle units"
+    },
+    {
+      "file": "roster-a-pixel.png",
+      "width": 1536,
+      "height": 1024,
+      "maxBytes": 2761201,
+      "role": "roster a"
+    },
+    {
+      "file": "roster-b-pixel.png",
+      "width": 1536,
+      "height": 1024,
+      "maxBytes": 2956467,
+      "role": "roster b"
+    },
+    {
+      "file": "celestial-pets-pixel.png",
+      "width": 1983,
+      "height": 793,
+      "maxBytes": 2828750,
+      "role": "celestial pets"
+    },
+    {
+      "file": "pets-awakened-pixel.png",
+      "width": 2172,
+      "height": 724,
+      "maxBytes": 3287645,
+      "role": "pets awakened"
+    },
+    {
+      "file": "skills-pixel.png",
+      "width": 1254,
+      "height": 1254,
+      "maxBytes": 2747573,
+      "role": "skills"
+    },
+    {
+      "file": "castle-skins-pixel.png",
+      "width": 1983,
+      "height": 793,
+      "maxBytes": 3387920,
+      "role": "castle skins"
+    },
+    {
+      "file": "window-scenes-pixel.png",
+      "width": 2172,
+      "height": 724,
+      "maxBytes": 3331667,
+      "role": "window scenes"
+    },
+    {
+      "file": "inventory-icons-pixel.png",
+      "width": 1619,
+      "height": 971,
+      "maxBytes": 1909725,
+      "role": "inventory icons"
+    },
+    {
+      "file": "troops-walk-pixel.png",
+      "width": 1261,
+      "height": 1247,
+      "maxBytes": 1559364,
+      "role": "troops walk"
+    },
+    {
+      "file": "trial-tower-pixel.png",
+      "width": 1024,
+      "height": 1536,
+      "maxBytes": 3511410,
+      "role": "trial tower"
+    },
+    {
+      "file": "building-scenes-pixel.png",
+      "width": 2172,
+      "height": 724,
+      "maxBytes": 4088158,
+      "role": "building scenes"
+    },
+    {
+      "file": "living-terrain-pixel.png",
+      "width": 2172,
+      "height": 724,
+      "maxBytes": 3740436,
+      "role": "living terrain"
+    },
+    {
+      "file": "world-sites-pixel.png",
+      "width": 2172,
+      "height": 724,
+      "maxBytes": 2059825,
+      "role": "world sites"
+    },
+    {
+      "file": "equipment-rarity-pixel.png",
+      "width": 992,
+      "height": 1586,
+      "maxBytes": 2700061,
+      "role": "equipment rarity"
+    },
+    {
+      "file": "weapon-rarity-pixel.png",
+      "width": 1261,
+      "height": 1247,
+      "maxBytes": 2476924,
+      "role": "weapon rarity"
+    },
+    {
+      "file": "city-life-pixel.png",
+      "width": 1774,
+      "height": 887,
+      "maxBytes": 2284252,
+      "role": "city life"
+    },
+    {
+      "file": "element-icons-pixel.png",
+      "width": 2172,
+      "height": 724,
+      "maxBytes": 848136,
+      "role": "element icons"
+    },
+    {
+      "file": "rune-gems-pixel.png",
+      "width": 1659,
+      "height": 948,
+      "maxBytes": 3329097,
+      "role": "rune gems"
+    },
+    {
+      "file": "dragon-flight-pixel.png",
+      "width": 1659,
+      "height": 948,
+      "maxBytes": 3394566,
+      "role": "dragon flight"
+    },
+    {
+      "file": "wildlife-walk-pixel.png",
+      "width": 1448,
+      "height": 1086,
+      "maxBytes": 1522286,
+      "role": "wildlife walk"
+    },
+    {
+      "file": "province-props-pixel.png",
+      "width": 1774,
+      "height": 887,
+      "maxBytes": 2822283,
+      "role": "province props"
+    },
+    {
+      "file": "navigation-icons-pixel.png",
+      "width": 2172,
+      "height": 724,
+      "maxBytes": 1677771,
+      "role": "navigation icons"
+    },
+    {
+      "file": "village-motion-pixel.png",
+      "width": 1448,
+      "height": 1086,
+      "maxBytes": 1615431,
+      "role": "village motion"
+    },
+    {
+      "file": "summon-plaza-pixel.png",
+      "width": 1672,
+      "height": 941,
+      "maxBytes": 3613941,
+      "role": "summon plaza"
+    },
+    {
+      "file": "blind-boxes-pixel.png",
+      "width": 1774,
+      "height": 887,
+      "maxBytes": 2542788,
+      "role": "blind boxes"
+    },
+    {
+      "file": "skill-frames-pixel.png",
+      "width": 1269,
+      "height": 1240,
+      "maxBytes": 1926769,
+      "role": "skill frames"
+    },
+    {
+      "file": "city-foundation-pixel.png",
+      "width": 1774,
+      "height": 887,
+      "maxBytes": 2774407,
+      "role": "city foundation"
+    },
+    {
+      "file": "exclusive-items-pixel.png",
+      "width": 1254,
+      "height": 1254,
+      "maxBytes": 2094430,
+      "role": "exclusive items"
+    },
+    {
+      "file": "world-bosses-pixel.png",
+      "width": 1536,
+      "height": 1024,
+      "maxBytes": 3508771,
+      "role": "world bosses"
+    }
+  ]
+}

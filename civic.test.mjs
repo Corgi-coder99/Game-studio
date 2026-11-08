@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {kingdomInitial,economyTick,durableSave,migrateKingdom,validKingdomState,upgradeStructure,trainTroops} from './kingdom.mjs';
 import {productionQuote,startProduction,claimProduction,cancelProduction,populationCapacity,populationAvailable,recordCasualties,woundedTotal,startHealing,infirmaryCapacity} from './civic.mjs';
 import {researchTechnology} from './technology.mjs';
-import {sandboxMax} from './sandbox.mjs';
+import {sandboxMax} from './admin/test-fixtures.mjs';
 import {huntWildlife,worldSystemsTick,recallRegional,gatherRegional} from './world-sim.mjs';
 import {wildlifeNodes} from './wildlife.mjs';
 import {activeDeployment,deployments} from './operations.mjs';

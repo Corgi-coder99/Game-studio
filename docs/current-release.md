@@ -1,5 +1,13 @@
 # Current release
 
+## Developer separation and presentation update
+
+- Studio and resource grants are removed from the player game. Settings → Save Management preserves validated backup/import/reset flows. The separate `Heavenly-Mandate-DevTools.zip` supports offline JSON editing and a loopback-only live test session for food, wood, stone, gold, jade and essence, with validation and snapshot undo. Live edits preserve ongoing battles; save restore follows normal durable-save rules.
+- The Broken Mandate story journal has five acts, progress-derived chapter reveals, a floor-999 conclusion, and optional world-boss echoes. It requires neither VIP nor scheduled events to reach the main ending.
+- English captions cover the main screens and the hero/skill/shard/inventory description catalog; legacy notification and error copy is translated without changing save IDs. Player-entered names remain unchanged. Rune and skill effect descriptions use precise English source text.
+- Batch summon results show all cards together, rarity totals, and a short staggered reveal. Rewards remain granted exactly once before presentation. Reduce Motion disables the card animation.
+- `build-manifest.mjs` centralizes production modules and textures. Atlas imports validate PNG checksums and image data, dimensions and download budgets. The production PNGs keep their current artwork; this revision does not claim every animation has been redrawn. See [toolchain research](toolchain-research.md) and [art direction](art-direction.md).
+
 ## Gameplay
 
 - Each formation supports five heroes. Three world squads are disjoint: remove a hero from one squad before assigning that hero to another. The Inferno Tower retains its independent formation snapshot and three consecutive encounters without automatic healing between them. Old saves migrate without losing heroes, gear or resources.
@@ -20,8 +28,12 @@
 ## Delivery and limits
 
 - `docs/` is the generated Safari/PWA site. GitHub Pages should use **main /docs**. This repository does not assume Pages is enabled or publicly reachable until its settings and URL are checked.
-- `Thien-Menh-Windows.zip` is the only current desktop download. It contains the standalone HTML and standard-library Python/Windows launchers. Original artwork is embedded once; tested Z85 encoding keeps the HTML below GitHub's 100 MiB file limit. Generated bundles remove obsolete PNGs automatically. The standalone `offline/` build is kept locally and shipped inside the ZIP; its duplicate generated HTML is not tracked in Git.
+- `Thien-Menh-Windows.zip` is the current player download; `Heavenly-Mandate-DevTools.zip` is the separate developer application. It contains the standalone HTML and standard-library Python/Windows launchers. Original artwork is embedded once; tested Z85 encoding keeps the HTML below GitHub's 100 MiB file limit. Generated bundles remove obsolete PNGs automatically. The standalone `offline/` build is kept locally and shipped inside the ZIP; its duplicate generated HTML is not tracked in Git.
 - Browser tests cover desktop, landscape touch and rotated portrait layouts, purchases/claims, audio settings, five-hero assignment, templates, boss practice/dodge, stronghold combat and skip. Service-worker tests cover interrupted installs, retry, gzip, project-prefix paths and offline reopen.
 - Tests run on Linux/Chromium. Windows BAT execution, physical iPhone/Safari rendering and native Bluetooth radio connections have not been verified on hardware. Safari remains solo-only; native BLE source is retained, but this release does not include a newly signed iOS IPA or Android APK.
 
 All artwork and synthesized audio are original. See [credits](../CREDITS.md) and the [element audit](../notes/element-system-audit.md).
+
+Store submission remains a separate milestone: see [mobile readiness](store-readiness.md). Signing, physical-device verification and full late-game balance/art review are still required.
+
+Validation for this revision: 307 automated checks passed; the separate developer app was exercised in live and offline-edit modes. Player flows were checked at 1440×900, 926×428 and rotated 428×926. The current game ZIP was extracted to a path with spaces and served with its included Python launcher.

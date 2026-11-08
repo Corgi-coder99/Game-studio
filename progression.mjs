@@ -88,10 +88,11 @@ export function getCharacterStats(state,id,slot=null) {
 }
 export function describeSkill(h,level=1) {
  if(h.skill.description)return h.skill.description;
- const targetNames={self:'bản thân',allyAll:'toàn đội',weakAlly:'đồng minh yếu nhất',enemyAll:'toàn địch',enemyFront:'hàng đầu địch',enemyBack:'hàng sau địch',enemyWeak:'địch yếu nhất',enemyColumn:'một cột địch'};
- return h.skill.operations.map(op=>op.effect==='damage'?`${Math.round(op.scale*(1+.08*(level-1))*100)}% ${op.damageType==='magic'?'công phép':'công vật lý'} lên ${targetNames[op.target]}`:op.effect==='heal'?`Hồi ${Math.round(op.value*(1+.04*(level-1))*100)}% HP cho ${targetNames[op.target]}`:op.effect==='shield'?`Tạo khiên cho ${targetNames[op.target]} (bản thân ≤30%, đồng đội ≤15%)`:`${({burn:'Thiêu đốt + giảm hồi máu',stun:'Choáng',slow:'Làm chậm',manaLock:'Giảm hồi mana',immune:'Miễn sát thương',invincible:'Vô địch và ngừng tấn công',exposed:'Phá giáp',marked:'Đánh dấu',boost:'Tăng công'})[op.effect]} ${targetNames[op.target]} ${op.duration}s`).join('; ')+'.';
+ const targetNames={self:'self',allyAll:'all allies',weakAlly:'the weakest ally',enemyAll:'all enemies',enemyFront:'the enemy front line',enemyBack:'the enemy rear line',enemyWeak:'the weakest enemy',enemyColumn:'one enemy column'};
+ return h.skill.operations.map(op=>op.effect==='damage'?`${Math.round(op.scale*(1+.08*(level-1))*100)}% ${op.damageType==='magic'?'magic':'physical'} attack damage to ${targetNames[op.target]}`:op.effect==='heal'?`Restore ${Math.round(op.value*(1+.04*(level-1))*100)}% health to ${targetNames[op.target]}`:op.effect==='shield'?`Shield ${targetNames[op.target]} (self cap 30%, ally cap 15%)`:`${({burn:'Burn and reduce healing on',stun:'Stun',slow:'Slow',manaLock:'Reduce mana regeneration on',immune:'Grant damage immunity to',invincible:'Grant invincibility and prevent attacks for',exposed:'Reduce armor on',marked:'Mark',boost:'Boost attack for'})[op.effect]||op.effect} ${targetNames[op.target]} for ${op.duration}s`).join('; ')+'.';
 }
-export function passiveText(h){return Object.entries(h.passives).map(([key,value])=>`${effectDescriptions[key]}${typeof value==='number'?` Mức gốc ${Math.round(value*100)}%.`:''}`).join(' ');}
+export function passiveText(h){return Object.entries(h.passives).map(([key,value])=>`${effectDescriptions[key]}${typeof value==='number'?` Base rate: ${Math.round(value*100)}%.`:''}`).join(' ');}
+
 function ownedCheck(s,id){if(!knownHero(id)||!s.owned.includes(id))throw new Error('Bạn chưa sở hữu nhân vật này.');}
 export function heroAssignedElsewhere(s,id){return s.squads?.presets?.findIndex((p,i)=>i!==s.squads.active&&p.formation.includes(id))??-1;}
 export function assignFormation(state,id,slot) {

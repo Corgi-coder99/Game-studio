@@ -5,7 +5,7 @@ import {trainingJobs,trainingFor} from './city-rules.mjs';
 import {normalizeProgression,toggleFormation,assignFormation} from './progression.mjs';
 import {characterRoster} from './characters.mjs';
 import {recommendFormation} from './recommendations.mjs';
-import {sandboxMax} from './sandbox.mjs';
+import {sandboxMax} from './admin/test-fixtures.mjs';
 import {combatPose} from './combat-motion.mjs';
 import {castleSkins} from './skins.mjs';
 import {campaignNode} from './campaign.mjs';

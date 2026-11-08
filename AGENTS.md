@@ -1,14 +1,14 @@
 # Thiên Mệnh — Codex Legend Studio
 
-Vietnamese-first, low-cost offline pixel strategy prototype. Read docs/v5-systems.md and docs/characters.md before changing rules. Keep the existing checkout. Develop on codex/thien-menh-offline; main holds the completed release. Updating main requires explicit session authorization, which the user granted for the current release.
+English-facing offline pixel strategy game. Read docs/v5-systems.md and docs/characters.md before changing rules. Keep the existing checkout. Develop on codex/thien-menh-offline; main holds the completed release. Updating main requires explicit session authorization, which the user granted for the current release.
 
 ## Working agreement
 
 - Use one Codex session. Do not spawn agents or paid services unless explicitly requested.
 - Keep gameplay free of network AI, accounts, runtime dependencies and paid APIs. No tokens in browser code.
 - Preserve old saves through migrateKingdom. Durable saves refund all deployed surviving armies once, drop transient battles and stop automatic campaigns.
-- Original generated pixel art only; no copied Infinity Kingdom assets/UI. There are thirty active PNGs embedded once as browser-local Blob URLs by the offline builder.
-- Ship concrete playable changes and verify actual UI flows. Do not claim the Studio invokes Codex; it exports/copies data for the user's separate session.
+- Original generated pixel art only; no copied Infinity Kingdom assets/UI. There are thirty-two active PNGs embedded once as browser-local Blob URLs by the offline builder.
+- Ship concrete playable changes and verify actual UI flows. Developer tools are separate from the player game and must never imply that they invoke Codex.
 
 ## Source ownership
 
@@ -56,3 +56,5 @@ Safari/PWA: read docs/safari-pwa.md. `npm run build:web` produces the complete s
 User-authorized five-hero update: progression revision 9 supports five active heroes in each world/tower formation. This explicitly supersedes earlier four-hero limits. Keep three disjoint world squads and a separate tower snapshot; preserve old saves and ownership. Internal nine-slot coordinates remain. Elemental damage coefficients stay unchanged; follow the user's priority auction → titles → world boss → strongholds → elemental synergy.
 
 Current release modules: config/*.json is the editable source; sync-auction-config.mjs generates the browser modules. Auction, titles, world-boss, strongholds, team-synergy, formation-advisor and FeedbackManager extend the existing engines. Stronghold marches are an explicit durable-save exception: troop reservations and combat snapshots persist, and offline catch-up uses actual combat before returning survivors and inbox rewards. Other transient armies still refund once. All live PNGs must remain in both server and builder whitelists. Offline assets use tested Z85 encoding to remain below GitHub's 100 MiB limit. WebAudio motifs are original procedural audio; no third-party audio is bundled.
+
+Developer separation revision: production runtimeModules excludes sandbox and all admin code. admin/ is a separate local test workspace; never add its bridge or grant controls to player bundles. Settings owns backup/restore, story-ui owns the progress-derived five-act journal. build-manifest.mjs is the shared production list; tools/art-pipeline.mjs validates atlas replacements. Keep one current player ZIP and one separate developer-tool ZIP.

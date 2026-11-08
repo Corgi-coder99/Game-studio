@@ -18,3 +18,6 @@ Thien-Menh-*.apk
 
 # Standalone build output is shipped inside the single current Windows ZIP.
 offline/
+
+# Generated developer HTML is delivered only in its separate current tool ZIP.
+admin/Heavenly-Mandate-DevTools.html

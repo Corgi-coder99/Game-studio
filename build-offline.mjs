@@ -1,12 +1,13 @@
+import {runtimeModules,textureAssets,styleFiles} from './build-manifest.mjs';
 import {assetAlphabet,encodeAsset85,decodeAsset85} from './asset-encoding.mjs';
 import { readFile, mkdir, writeFile, readdir, unlink } from 'node:fs/promises';
 
 const root = new URL('./', import.meta.url);
-const moduleFiles=['feedback-config','feedback-data','feedback','feedback-ui','formation-save','element-config','team-synergy','warfare-config','sanctuary','stronghold-config','stronghold-data','world-boss-config','world-boss-data','title-config','titles','titles-ui','auction-config','exclusive-data','auction-data','room-client','peer-map','commerce','relocation','room','realm-ui','environment','scene-art','city-layout','civic-ui','civic','elements','city-life','operations','skill-vfx','art-cache','world-art','technology','characters','game','progression','realms','skins','chronicle','wildlife','world-data','inheritance-data','runes','mail','squads','city-rules','account','troops','viewport-ui','inventory-ui','account-ui','character-ui','inheritance-ui','strategy-ui','inheritance-combat','tactics','kingdom','inheritance-sim','hunting','world-sim','world-ui','combat-motion','region-map','campaign','campaign-ui','realm-map','inheritance-map','map','recommendations','sandbox','shop','long-ui','gallery-ui','army-ui','systems-ui','formation-advisor','advisor-ui','strongholds','stronghold-ui','world-boss','world-boss-ui','auction','auction-ui','settings-ui','english','app'];
-const assetNames=['hulao-pixel.png','city-pixel.png','battle-units-pixel.png','roster-a-pixel.png','roster-b-pixel.png','celestial-pets-pixel.png','pets-awakened-pixel.png','skills-pixel.png','castle-skins-pixel.png','window-scenes-pixel.png','inventory-icons-pixel.png','troops-walk-pixel.png','trial-tower-pixel.png','building-scenes-pixel.png','living-terrain-pixel.png','world-sites-pixel.png','equipment-rarity-pixel.png','weapon-rarity-pixel.png','city-life-pixel.png','element-icons-pixel.png','rune-gems-pixel.png','dragon-flight-pixel.png','wildlife-walk-pixel.png','province-props-pixel.png','navigation-icons-pixel.png','village-motion-pixel.png','summon-plaza-pixel.png','blind-boxes-pixel.png','skill-frames-pixel.png','city-foundation-pixel.png','exclusive-items-pixel.png','world-bosses-pixel.png'];
+const moduleFiles=runtimeModules;
+const assetNames=textureAssets;
 const [template,styles,sources,assetBytes]=await Promise.all([
  readFile(new URL('index.html',root),'utf8'),
- Promise.all(['style','pixel','immersive','rpg','account','viewport','design'].map(f=>readFile(new URL(f+'.css',root),'utf8'))),
+ Promise.all(styleFiles.map(f=>readFile(new URL(f+'.css',root),'utf8'))),
  Promise.all(moduleFiles.map(f=>readFile(new URL(f+'.mjs',root),'utf8'))),
  Promise.all(assetNames.map(f=>readFile(new URL('assets/'+f,root)))),
 ]);
@@ -22,6 +23,7 @@ let html=template.replace(/<link rel="stylesheet" href="\/(?:style|pixel|immersi
 html=html.replace('</head>','<style id="offline-style"></style></head>').replace('<script type="module" src="/app.mjs"></script>',()=>`<script>\n(() => {\n${script}\n})();\n</script>`);
 if(html.includes('src="/app.mjs"')||html.includes('href="/style.css"'))throw new Error('Offline template changed.');
 await mkdir(new URL('offline/',root),{recursive:true});
+if(Buffer.byteLength(html)>99*1024*1024)throw new Error('Standalone HTML exceeds the 99 MiB release budget. Optimize atlases before shipping.');
 await writeFile(new URL('offline/Thien-Menh.html',root),html);
 await writeFile(new URL('offline/HUONG-DAN.txt',root),await readFile(new URL('windows/HUONG-DAN.txt',root),'utf8'));
 console.log('Offline build: offline/Thien-Menh.html (all active PNGs embedded once; no network or Node.js needed)');

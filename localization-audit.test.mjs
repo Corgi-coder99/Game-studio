@@ -1,0 +1,11 @@
+import {realmSetup} from './campaign-ui.mjs';
+import test from 'node:test';import assert from 'node:assert/strict';import{kingdomInitial}from'./kingdom.mjs';import{characterRoster}from'./characters.mjs';import{renderDescription,inventoryEntries}from'./gallery-ui.mjs';import{englishText,setEnglishPlayerNames}from'./english.mjs';import{runeCatalog,runeEffectText}from'./runes.mjs';
+const vietnamese=/[À-ÖØ-öø-ỹĐđ]/;
+test('all hero, skill, shard and inventory description captions are English',()=>{const s=kingdomInitial(),keys=[];for(const h of characterRoster){keys.push('hero:'+h.id,'shard:'+h.id);for(let i=0;i<h.skills.length;i++)keys.push('skill:'+h.id+':'+i);if(h.passiveSkill)keys.push('skill:'+h.id+':passive');}for(const tab of ['resources','items','gear','longs','pets','cosmetics','manuals'])for(const e of inventoryEntries(s,tab,()=>''))keys.push(e.key);for(const key of keys){const text=englishText(renderDescription(s,key,()=>''));assert.equal(vietnamese.test(text),false,key+': '+text);}});
+test('rune descriptions retain precise English effects at all ranks and user names remain untouched',()=>{for(const node of runeCatalog)for(const rank of [1,node.maxRank])assert.equal(vietnamese.test(runeEffectText(node,rank)),false);assert.match(runeEffectText(runeCatalog.find(n=>n.id==='regen')),/Restore 0.1%/);setEnglishPlayerNames(['Quang Long']);assert.equal(englishText('Quang Long'),'Quang Long');setEnglishPlayerNames([]);assert.equal(englishText('The healer restores health.'),'The healer restores health.');});
+
+test('first-run kingdom selection has English headings, explanations and troop labels',()=>{for(const faction of ['wei','shu','wu']){const html=englishText(realmSetup(kingdomInitial(),faction));assert.equal(vietnamese.test(html),false);assert.ok(!html.includes('Wounded'));}});
+
+test('gold, jade and spear infantry retain distinct presentation labels',()=>{assert.equal(englishText('Vàng'),'Gold');assert.equal(englishText('Ngọc'),'Jade');assert.equal(englishText('Linh ngọc'),'Jade');assert.equal(englishText('Thương binh'),'Spear Infantry');});
+
+test('legacy notification translations remain English',async()=>{const {englishErrorPairs}=await import('./english-errors.mjs');for(const [source]of englishErrorPairs)assert.equal(vietnamese.test(englishText(source)),false,source);});

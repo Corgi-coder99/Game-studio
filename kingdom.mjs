@@ -28,13 +28,13 @@ bonds.push(
  {id:'moon',name:'Nhật Nguyệt Tương Phùng',ids:['houyi','change'],text:'+10% hiệu quả hồi máu; Hậu Nghệ dùng chiêu gọi Hằng Nga hồi 8% HP cho toàn đội.',lore:'Hậu Nghệ và Hằng Nga trong thần thoại Trung Hoa.'}
 );
 export const structures = [
-  { id: 'hall', name: 'Đại điện', icon: '♜', x: 8, y: 4, color: '#b7454e', text: 'Trung tâm thành trì. Mở giới hạn nâng cấp các công trình.' },
-  { id: 'farm', name: 'Nông trang', icon: '♧', x: 4, y: 12, color: '#b99f45', text: 'Giao dân, cấp thức ăn và bắt đầu một mẻ trồng trọt. Thu hoạch thủ công.' },
-  { id: 'wood', name: 'Xưởng gỗ', icon: '♠', x: 15, y: 11, color: '#628853', text: 'Điều dân và cấp thức ăn để bắt đầu khai thác gỗ. Không tự sản xuất.' },
-  { id: 'stone', name: 'Mỏ đá', icon: '◆', x: 14, y: 5, color: '#768c9c', text: 'Cấp thức ăn, giao thợ khai thác rồi nhận đá khi xong mẻ.' },
-  { id: 'barracks', name: 'Doanh trại', icon: '⚑', x: 4, y: 6, color: '#578aaa', text: 'Huấn luyện binh lính và tăng HP và ATK đội viễn chinh thêm 5% mỗi cấp.' },
-  { id: 'dragon', name: 'Điện linh long', icon: '✧', x: 12, y: 15, color: '#a478be', text: 'Linh long hồi nộ để hỗ trợ toàn đội. Nâng cấp tăng sức mạnh long tức.' },
-  {id:'infirmary',name:'Linh Dược Viện',icon:'✚',x:2,y:4,color:'#63b18a',text:'Tiếp nhận thương binh và dùng thức ăn, gỗ để cứu chữa, trả quân về dự bị.'},
+  { id: 'hall', name: 'Đại điện', icon: '♜', x: 8, y: 4, color: '#b7454e', text: 'The city center. Raises the upgrade cap for other buildings.' },
+  { id: 'farm', name: 'Nông trang', icon: '♧', x: 4, y: 12, color: '#b99f45', text: 'Assign citizens and food to start a farming batch. Collect the harvest manually.' },
+  { id: 'wood', name: 'Xưởng gỗ', icon: '♠', x: 15, y: 11, color: '#628853', text: 'Assign citizens and food to start logging. No automatic production.' },
+  { id: 'stone', name: 'Mỏ đá', icon: '◆', x: 14, y: 5, color: '#768c9c', text: 'Assign food and workers, then collect stone when the batch is complete.' },
+  { id: 'barracks', name: 'Doanh trại', icon: '⚑', x: 4, y: 6, color: '#578aaa', text: 'Trains troops and increases expedition health and attack by 5% per level.' },
+  { id: 'dragon', name: 'Điện linh long', icon: '✧', x: 12, y: 15, color: '#a478be', text: 'Dragons build energy to support the team. Upgrades increase dragon breath strength.' },
+  {id:'infirmary',name:'Linh Dược Viện',icon:'✚',x:2,y:4,color:'#63b18a',text:'Treats wounded troops using food and wood, then returns them to reserves.'},
 ];
 export const worldNodes = [
   { id: 'home', name: 'Thiên Mệnh Thành', x: 10, y: 10, type: 'home', level: 1 },
@@ -46,10 +46,10 @@ export const worldNodes = [
   { id: 'quarry', name: 'Mỏ đá Bạch Sơn', x: 8, y: 17, type: 'stone', level: 1 },
 ];
 export const troopTypes = {
-  shield: { name: 'Thuẫn binh', icon: '▣', color: '#79c2d1', beats: 'spear', text: '+12% HP · khắc Thương binh' },
-  spear: { name: 'Thương binh', icon: '⚑', color: '#b5d58a', beats: 'cavalry', text: '+5% ATK · khắc Kỵ binh' },
-  bow: { name: 'Cung binh', icon: '➶', color: '#d9b580', beats: 'shield', text: '+10% ATK · khắc Thuẫn binh' },
-  cavalry: { name: 'Kỵ binh', icon: '♞', color: '#baa8e5', beats: 'bow', text: '+15 nộ ban đầu · khắc Cung binh' },
+  shield: { name: 'Thuẫn binh', icon: '▣', color: '#79c2d1', beats: 'spear', text: '+12% health · Counters Spears' },
+  spear: { name: 'Thương binh', icon: '⚑', color: '#b5d58a', beats: 'cavalry', text: '+5% attack · Counters Cavalry' },
+  bow: { name: 'Cung binh', icon: '➶', color: '#d9b580', beats: 'shield', text: '+10% attack · Counters Shields' },
+  cavalry: { name: 'Kỵ binh', icon: '♞', color: '#baa8e5', beats: 'bow', text: '+15 starting rage · Counters Archers' },
 };
 export const combatProfiles = Object.fromEntries(heroes.map(h=>[h.id,{kind:h.skill.operations.find(o=>o.effect==='damage')?.damageType||'magic',armor:h.roles.includes('tank')?42:28,resist:h.roles.includes('mage')?35:25,crit:.05}]));
 export function calculateDamage(actor, target, factor, options = {}) {

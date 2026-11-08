@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {kingdomInitial,durableSave,migrateKingdom,validKingdomState} from './kingdom.mjs';
 import {researchTechnology,technologyCost,technologyCatalog} from './technology.mjs';
-import {sandboxMax} from './sandbox.mjs';
+import {sandboxMax} from './admin/test-fixtures.mjs';
 import {createTacticsBattle} from './tactics.mjs';
 import {gatherRegional} from './world-sim.mjs';
 import {regionalResources,activeWorldCity} from './world-data.mjs';

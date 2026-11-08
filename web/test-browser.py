@@ -32,13 +32,14 @@ with tempfile.TemporaryDirectory(prefix='Thien Menh Safari PWA ') as profile,syn
  # Delete one cached image; status must no longer claim ready, and repair fetches only that missing item.
  page.evaluate('''async()=>{for(const key of await caches.keys()){if(key.startsWith('thien-menh-safari-')){const c=await caches.open(key);await c.delete(new URL('assets/roster-a-pixel.png',location.href).href);}}}''');page.reload();assert page.locator('#play').get_attribute('aria-disabled')=='true';page.locator('#download').tap();page.wait_for_function('document.getElementById("play").getAttribute("aria-disabled")==="false"',timeout=120000);print('missing cached image is detected and repaired',flush=True)
  ctx.set_offline(True);page.reload();page.wait_for_function('document.getElementById("play").getAttribute("aria-disabled")==="false"');page.locator('#play').tap();page.wait_for_selector('#app .game-nav');page.screenshot(path='/tmp/safari-pwa-first-game.png');assert not errors,errors
- # Complete first-run setup, then use the game's explicit sandbox button to test a 100-pull batch.
- page.locator('[data-confirm-realm]').tap();page.locator('.game-nav [data-view="studio"]').tap()
- for _ in range(20):
-  target=page.locator('[data-sandbox-max="all"]')
-  if target.count() and target.is_visible():break
-  page.locator('.scene-controls [data-scene-next]').tap()
- target.tap();page.locator('.game-nav [data-view="summon"]').tap();page.locator('[data-summon="100"]').tap();assert page.locator('.summon-card').count()==100;page.locator('[data-summon-skip]').tap();page.locator('.game-nav [data-view="city"]').tap();page.screenshot(path='/tmp/safari-pwa-offline-city.png');assert json.loads(page.evaluate('localStorage.getItem("thien-menh-kingdom-v2")'))['pulls']>=100;print('game, all 100 cards and images work offline',flush=True);ctx.close()
+ # Complete first-run setup and import a funded test backup through the real player flow.
+ page.locator('[data-confirm-realm]').tap()
+ fixture=json.loads(page.evaluate('localStorage.getItem("thien-menh-kingdom-v2")'));fixture['coins']=100000
+ page.locator('.game-nav [data-view="settings"]').tap();page.locator('[data-view="saves"]').last.tap()
+ page.once('dialog',lambda dialog:dialog.accept())
+ page.locator('#import-save').set_input_files({'name':'pwa-test-save.json','mimeType':'application/json','buffer':json.dumps(fixture).encode()})
+ assert page.locator('[data-view="studio"],[data-sandbox-max]').count()==0
+ page.locator('.game-nav [data-view="summon"]').tap();page.locator('[data-summon="100"]').tap();assert page.locator('.summon-card').count()==100;page.locator('[data-summon-skip]').tap();page.locator('.game-nav [data-view="city"]').tap();page.screenshot(path='/tmp/safari-pwa-offline-city.png');assert json.loads(page.evaluate('localStorage.getItem("thien-menh-kingdom-v2")'))['pulls']>=100;print('game, all 100 cards and images work offline',flush=True);ctx.close()
 
  # A fully closed browser reopens at the cached project root, with networking disabled from the start.
  ctx=launch();ctx.set_offline(True);page=ctx.pages[0];page.on('pageerror',lambda e:errors.append(str(e)));page.goto(url);page.wait_for_function('document.getElementById("play").getAttribute("aria-disabled")==="false"');page.locator('#play').tap();page.wait_for_selector('.game-nav');assert json.loads(page.evaluate('localStorage.getItem("thien-menh-kingdom-v2")'))['pulls']>=100;assert not errors,errors;print('offline relaunch survives browser restart and preserves save',flush=True);ctx.close()

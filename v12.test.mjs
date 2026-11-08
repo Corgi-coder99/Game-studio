@@ -1,7 +1,7 @@
 import {chooseRealm} from './realms.mjs';
 import test from 'node:test';import assert from 'node:assert/strict';
 import {kingdomInitial,durableSave,validKingdomState,migrateKingdom} from './kingdom.mjs';
-import {sandboxMax} from './sandbox.mjs';import {pullCharacters} from './progression.mjs';
+import {sandboxMax} from './admin/test-fixtures.mjs';import {pullCharacters} from './progression.mjs';
 import {exchangeMaterials,assetInfo,goldLimit} from './commerce.mjs';import {startRelocation,relocationTick,strikeGhost} from './relocation.mjs';
 import {createRoom,joinRoom,roomCommand,roomTick} from './room.mjs';import {buyShardBox} from './shop.mjs';import {localSky} from './environment.mjs';
 const time12=100000;
