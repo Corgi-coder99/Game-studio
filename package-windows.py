@@ -9,11 +9,11 @@ if not game.is_file():
 archive = root / 'Thien-Menh-Windows.zip'
 with ZipFile(archive, 'w', ZIP_DEFLATED) as bundle:
     bundle.write(game, 'Thien-Menh.html')
-    for name in ['chay_game.py', 'CHOI-NGAY.bat', 'CHAY-BANG-PYTHON.bat', 'HUONG-DAN.txt']:
+    for name in ['serve_game.py', 'Play.bat', 'Serve-with-Python.bat', 'README.txt']:
         content = (root / 'windows' / name).read_text(encoding='utf-8')
         if name.endswith(('.bat', '.txt')):
             content = content.replace('\r\n', '\n').replace('\n', '\r\n')
-        # BOM helps Windows Notepad display Vietnamese correctly.
+        # UTF-8 BOM supports Windows Notepad.
         bundle.writestr(name, content.encode('utf-8-sig' if name.endswith('.txt') else 'utf-8'))
 with ZipFile(archive) as bundle:
     if bundle.testzip() is not None:

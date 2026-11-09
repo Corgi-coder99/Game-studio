@@ -1,4 +1,4 @@
-/* Golden Warring Kingdoms: Style Bible v1.0. Geometry stays in the existing layout sheets. */
+/* Celestial Pixel interface. Geometry stays in the existing layout sheets. Color ramps are UI tokens, not a source-image restriction. */
 :root {
  --ui-ink:var(--parchment-5);--ui-muted:var(--parchment-4);--ui-gold:var(--gold-3);--ui-gold-bright:var(--gold-4);
  --ui-edge:var(--ink-4);--ui-deep:var(--ink-1);--ui-panel:var(--ink-2);--ui-raised:var(--ink-3);
@@ -119,3 +119,26 @@ body.reduce-motion #app *,body.effects-minimal #app .title-rarity-5::after {anim
 #app .title-frame.rarity-5,#app .boss-lobby-grid>article {border:2px solid var(--crimson-3);outline:1px solid var(--gold-3);}
 
 #app .lord-banner {background:var(--ink-3);border-color:var(--gold-3);color:var(--parchment-5);}
+
+/* Approved detailed pixel reference: preserve source colors and readable UI. */
+:root{--ui-font:system-ui,-apple-system,"Segoe UI",sans-serif;--ui-heading:Georgia,serif;--ui-panel:#1c2539;--ui-raised:#28374b;--ui-gold:#dfae52;--ui-gold-bright:#ffe4a2;--ui-edge:#8d7149;--ui-muted:#c2c5cc;}
+#app,#app button,#app input,#app select,#app textarea,#app small,#toast{font-family:var(--ui-font)!important;}
+#app h1,#app h2,#app h3{font-family:var(--ui-heading)!important;font-weight:600;}
+#app button:where(:not(.box-preview):not(.formation-cell):not(.summon-card):not(.inventory-tile)){background:linear-gradient(#28394b,#17273a)!important;border-color:#9c7c4e;color:#f8ebcd!important;box-shadow:inset 0 1px #ffffff18,0 2px 0 #111827;}
+#app button:is(.gold-button,.primary,.selected,.current,.active,[aria-selected=true]){background:linear-gradient(#e9c678,#b58135)!important;color:#211b20!important;border-color:#ffdda0;}
+#app .hero-art,#app .character-splash-art,#app .pet-art,#app .equipment-picture,#app .elemental-dragon-art,#app .world-site-picture,#app .province-picture,#app .exclusive-art{image-rendering:pixelated;}
+#app .long-card{background:linear-gradient(145deg,#233d43,#182d3b);}
+#app .long-card.active{background:linear-gradient(145deg,#38513b,#1b343e);}
+
+#app :is(.fixed-screen,.paper-panel,.detail-panel,.description-dialog,.market-bid-dialog,.story-dialogue-curtain>section,.beginner-coach,.gear-picker){background-image:none;border-color:#9c7c4e;border-width:2px;box-shadow:inset 0 0 0 1px #edc87d35,0 8px 24px #080d1b70;}
+#app .fixed-screen{background-color:#172335;}
+#app .resource-strip{background:transparent;box-shadow:none;border:none;}
+#app .game-nav button>span{background-color:#1c2c39;border-color:#bb914f;}
+#app .resource small{font-size:15px!important;}
+#app .resource b{font-size:22px!important;}
+#app .game-nav button small{font-size:17px!important;font-weight:600;}
+#app .kingdom-brand div>b{font-size:23px!important;}
+#app .daily-cell h3{font-size:20px!important;}
+
+body:not(.reduce-motion):not(.effects-minimal) #app .formation-dragon .elemental-dragon-art{animation:dragon-cells .8s steps(1) infinite,mandate-hover 3.2s ease-in-out infinite;}
+#app .boss-entity>.elemental-dragon-art{animation:dragon-cells .8s steps(1) infinite;}

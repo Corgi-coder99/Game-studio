@@ -20,7 +20,7 @@ for(const name of imageFiles)await copyFile(new URL('mobile/bundle/assets/'+name
 const webNames=['index.html','game.html','install.css','install.js','manifest.webmanifest','app-icon.png',...imageFiles.map(n=>'assets/'+n)];
 const webFiles=await Promise.all(webNames.map(async url=>{const bytes=await readFile(new URL(url,webDest));return{url,size:bytes.byteLength,sha256:digestWeb(bytes)};}));
 const workerTemplate=await readFile(new URL('web/sw-template.js',webRoot),'utf8');
-const webVersion='v12-'+digestWeb(JSON.stringify(webFiles)+workerTemplate).slice(0,12),webSW=workerTemplate.replace('__VERSION__',JSON.stringify(webVersion)).replace('__FILES__',JSON.stringify(webFiles));
+const webVersion='v16-'+digestWeb(JSON.stringify(webFiles)+workerTemplate).slice(0,12),webSW=workerTemplate.replace('__VERSION__',JSON.stringify(webVersion)).replace('__FILES__',JSON.stringify(webFiles));
 await writeFile(new URL('sw.js',webDest),webSW);
 await writeFile(new URL('web-build.json',webDest),JSON.stringify({version:webVersion,bytes:webFiles.reduce((n,f)=>n+f.size,0),files:webFiles},null,2));
 console.log('Safari PWA: docs/index.html · '+webVersion+' · '+(webFiles.reduce((n,f)=>n+f.size,0)/1048576).toFixed(1)+' MiB');

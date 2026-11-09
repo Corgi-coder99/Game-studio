@@ -44,12 +44,12 @@ def main():
     if not 0 <= args.port <= 65535:
         parser.error('Port must be between 0 and 65535.')
     if not GAME_FILE.is_file():
-        print('Missing Thien-Menh.html. Extract the entire ZIP next to chay_game.py.', file=sys.stderr)
+        print('Missing Thien-Menh.html. Extract the entire ZIP next to serve_game.py.', file=sys.stderr)
         return 1
     try:
         server = ThreadingHTTPServer(('127.0.0.1', args.port), GameHandler)
     except OSError as error:
-        print('Cannot start local server: {}\nTry: python chay_game.py --port 8766'.format(error), file=sys.stderr)
+        print('Cannot start local server: {}\nTry: python serve_game.py --port 8766'.format(error), file=sys.stderr)
         return 1
     url = 'http://127.0.0.1:{}/'.format(server.server_port)
     print('Thien Menh - OFFLINE PIXEL EDITION', flush=True)

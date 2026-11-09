@@ -8,28 +8,32 @@ const atlasLand=[
 ];
 let realmLandscape=null,realmPropsReady=false,realmPropsSource='';
 function realmGround(){
- const props=cachedImage('/assets/province-props-pixel.png'),ready=props.complete&&props.naturalWidth;
- if(realmLandscape&&realmPropsReady===!!ready&&realmPropsSource===props.src)return realmLandscape;realmPropsSource=props.src;
- realmPropsReady=!!ready;const c=document.createElement('canvas');c.width=1050;c.height=790;const g=c.getContext('2d');g.imageSmoothingEnabled=false;
- g.fillStyle='#2B3055';g.fillRect(0,0,1050,790);
- for(let y=0;y<790;y+=8)for(let x=0;x<1050;x+=8){g.fillStyle=(x*31+y*17)%67<14?'#4B5063':'#4B5063';g.fillRect(x,y,8,4);}
+ const props=cachedImage('/assets/province-props-pixel.png'),terrain=cachedImage('/assets/living-terrain-pixel.png'),ready=!!(props.complete&&props.naturalWidth&&terrain.complete&&terrain.naturalWidth),key=props.src+'|'+terrain.src;
+ if(realmLandscape&&realmPropsReady===ready&&realmPropsSource===key)return realmLandscape;
+ realmPropsReady=ready;realmPropsSource=key;
+ const c=document.createElement('canvas');c.width=1050;c.height=790;const g=c.getContext('2d');g.imageSmoothingEnabled=false;
+ g.fillStyle='#17384c';g.fillRect(0,0,1050,790);
+ for(let i=0;i<80;i++){g.fillStyle=i%3?'#21485a':'#285264';g.fillRect((i*137)%1050,(i*83)%790,8+i%12,2);}
  const trace=points=>{g.beginPath();points.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.closePath();};
- for(const land of atlasLand){trace(land.points);g.strokeStyle='#3E8E4A';g.lineWidth=8;g.stroke();g.fillStyle=land.color;g.fill();g.save();g.clip();
-  for(let y=40;y<710;y+=7)for(let x=60;x<990;x+=7){const n=((x*73856093)^(y*19349663))>>>0;g.fillStyle=n%5===0?'#D9C79A':'#12301F';g.fillRect(x,y,7,4);}
-  for(let i=0;i<100;i++){const x=85+i*137%890,y=95+i*89%570;if(i%3===0){g.fillStyle='#4B5063';g.fillRect(x-14,y-4,30,12);g.fillStyle='#3E8E4A';g.fillRect(x-10,y-16,22,17);g.fillStyle='#A38B64';g.fillRect(x-5,y-24,12,12);g.fillStyle='#D9C79A';g.fillRect(x-2,y-25,6,5);}else if(ready){drawProvinceProp(g,i%2,x,y,42);}else{g.fillStyle='#1F5A36';g.fillRect(x-8,y-10,17,13);g.fillStyle='#3E8E4A';g.fillRect(x-4,y-17,9,12);}}
+ for(const [index,land]of atlasLand.entries()){
+  trace(land.points);g.strokeStyle='#58796a';g.lineWidth=8;g.stroke();g.fillStyle=land.color;g.fill();
+  g.save();g.clip();
+  if(terrain.complete&&terrain.naturalWidth){const panel=[1,0,2][index],sw=terrain.naturalWidth/3;g.drawImage(terrain,panel*sw,0,sw,terrain.naturalHeight,50,40,930,680);}
+  for(let i=0;i<24;i++){const x=85+(i*137)%890,y=95+(i*89)%570;if(ready)drawProvinceProp(g,i%5===0?6:index===0?0:1,x,y,30+i%12);}
   g.restore();trace(land.points);g.lineWidth=2;g.strokeStyle=land.edge;g.setLineDash([4,7]);g.stroke();g.setLineDash([]);
  }
- function river(points,width){for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],steps=Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/5);for(let j=0;j<=steps;j++){const x=Math.round((a[0]+(b[0]-a[0])*j/steps)/4)*4,y=Math.round((a[1]+(b[1]-a[1])*j/steps)/4)*4;g.fillStyle='#4B5063';g.fillRect(x-width/2-3,y-width/2-3,width+6,width+6);g.fillStyle='#8A90A6';g.fillRect(x-width/2,y-width/2,width,width);g.fillStyle='#C3C8D8';g.fillRect(x-width/2,y-width/2,width,2);}}}
+ function river(points,width){g.lineJoin='round';g.lineCap='round';g.beginPath();points.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.strokeStyle='#b8bc86';g.lineWidth=width+5;g.stroke();g.strokeStyle='#327f9d';g.lineWidth=width;g.stroke();g.strokeStyle='#6cbdc5';g.lineWidth=2;g.stroke();}
  river([[210,160],[330,155],[420,195],[535,200],[590,245],[730,240],[860,285],[935,265]],9);
  river([[230,505],[330,530],[410,480],[510,460],[625,485],[730,480],[815,430],[920,435],[960,470]],13);
  realmLandscape=c;return c;
 }
+
 export function drawRealmAtlas(ctx,state,time){
  const hits=[],ox=-520,oy=75;ctx.save();ctx.translate(ox,oy);ctx.imageSmoothingEnabled=false;ctx.drawImage(realmGround(),0,0);
  function text(value,x,y,size=16,color='#FFE9A0'){ctx.textAlign='center';ctx.font=`bold ${size*2}px "Mandate Pixel",monospace`;ctx.strokeStyle='#2B3055';ctx.lineWidth=4;ctx.strokeText(value,x,y);ctx.fillStyle=color;ctx.fillText(value,x,y);}
  const motion=state.feedback?.reduceMotion?0:time;
  // Small water glints and drifting cloud shadows add life without obscuring sites.
- for(let i=0;i<9;i++){const x=110+(i*107+motion*3)%830,y=60+i*71;ctx.fillStyle='#F6EBD0';ctx.fillRect(Math.round(x),y,64,8);ctx.fillRect(Math.round(x+14),y-7,38,7);}
+ for(let i=0;i<9;i++){const x=110+(i*107+motion*3)%830,y=60+i*71;ctx.save();ctx.globalAlpha=.12;ctx.fillStyle='#F6EBD0';ctx.fillRect(Math.round(x),y,44,5);ctx.fillRect(Math.round(x+9),y-4,28,4);ctx.restore();}
  text('WEI',575,112,26,'#F6EBD0');text('SHU',240,380,26,'#D6E6FF');text('WU',770,595,26,'#F6EBD0');
  const home=realmCities.find(c=>c.id===(state.relocation?.position?.cityId||state.account?.realm?.city)),rp=state.relocation?.position,j=state.relocation?.journey;
  if(j&&rp){ctx.strokeStyle='#FFE9A0';ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(rp.x,rp.y);ctx.lineTo(j.to.x,j.to.y);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#8FB4F2';ctx.fillRect(j.to.x-16,j.to.y-20,32,25);}

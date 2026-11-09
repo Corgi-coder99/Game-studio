@@ -1,229 +1,229 @@
 {
   "version": 1,
-  "style": "Golden Warring Kingdoms, Style Bible v1.0; 47-color runtime palette; original source atlases preserved",
+  "style": "Detailed Celestial Pixel; approved Sun Wukong reference; original full-color sprites",
   "atlases": [
     {
       "file": "hulao-pixel.png",
-      "width": 1536,
-      "height": 1024,
-      "maxBytes": 2466959,
+      "width": 1672,
+      "height": 941,
+      "maxBytes": 3167854,
       "role": "hulao"
     },
     {
       "file": "city-pixel.png",
       "width": 1536,
       "height": 1024,
-      "maxBytes": 2475551,
+      "maxBytes": 3178024,
       "role": "city"
     },
     {
       "file": "battle-units-pixel.png",
       "width": 1774,
       "height": 887,
-      "maxBytes": 2194630,
+      "maxBytes": 2771407,
       "role": "battle units"
     },
     {
       "file": "roster-a-pixel.png",
       "width": 1536,
       "height": 1024,
-      "maxBytes": 2761201,
+      "maxBytes": 3661108,
       "role": "roster a"
     },
     {
       "file": "roster-b-pixel.png",
       "width": 1536,
       "height": 1024,
-      "maxBytes": 2956467,
+      "maxBytes": 3723578,
       "role": "roster b"
     },
     {
       "file": "celestial-pets-pixel.png",
       "width": 1983,
       "height": 793,
-      "maxBytes": 2828750,
+      "maxBytes": 3235931,
       "role": "celestial pets"
     },
     {
       "file": "pets-awakened-pixel.png",
       "width": 2172,
       "height": 724,
-      "maxBytes": 3287645,
+      "maxBytes": 2028234,
       "role": "pets awakened"
     },
     {
       "file": "skills-pixel.png",
-      "width": 1254,
-      "height": 1254,
-      "maxBytes": 2747573,
+      "width": 1263,
+      "height": 1246,
+      "maxBytes": 2842694,
       "role": "skills"
     },
     {
       "file": "castle-skins-pixel.png",
       "width": 1983,
       "height": 793,
-      "maxBytes": 3387920,
+      "maxBytes": 3968640,
       "role": "castle skins"
     },
     {
       "file": "window-scenes-pixel.png",
       "width": 2172,
       "height": 724,
-      "maxBytes": 3331667,
+      "maxBytes": 3248572,
       "role": "window scenes"
     },
     {
       "file": "inventory-icons-pixel.png",
       "width": 1619,
-      "height": 971,
-      "maxBytes": 1909725,
+      "height": 972,
+      "maxBytes": 2206138,
       "role": "inventory icons"
     },
     {
       "file": "troops-walk-pixel.png",
-      "width": 1261,
-      "height": 1247,
-      "maxBytes": 1559364,
+      "width": 1265,
+      "height": 1244,
+      "maxBytes": 2176822,
       "role": "troops walk"
     },
     {
       "file": "trial-tower-pixel.png",
       "width": 1024,
       "height": 1536,
-      "maxBytes": 3511410,
+      "maxBytes": 3492307,
       "role": "trial tower"
     },
     {
       "file": "building-scenes-pixel.png",
       "width": 2172,
       "height": 724,
-      "maxBytes": 4088158,
+      "maxBytes": 3294841,
       "role": "building scenes"
     },
     {
       "file": "living-terrain-pixel.png",
       "width": 2172,
       "height": 724,
-      "maxBytes": 3740436,
+      "maxBytes": 3899321,
       "role": "living terrain"
     },
     {
       "file": "world-sites-pixel.png",
       "width": 2172,
       "height": 724,
-      "maxBytes": 2059825,
+      "maxBytes": 2153080,
       "role": "world sites"
     },
     {
       "file": "equipment-rarity-pixel.png",
       "width": 992,
       "height": 1586,
-      "maxBytes": 2700061,
+      "maxBytes": 2680211,
       "role": "equipment rarity"
     },
     {
       "file": "weapon-rarity-pixel.png",
-      "width": 1261,
-      "height": 1247,
-      "maxBytes": 2476924,
+      "width": 1254,
+      "height": 1254,
+      "maxBytes": 2641416,
       "role": "weapon rarity"
     },
     {
       "file": "city-life-pixel.png",
       "width": 1774,
       "height": 887,
-      "maxBytes": 2284252,
+      "maxBytes": 3065281,
       "role": "city life"
     },
     {
       "file": "element-icons-pixel.png",
-      "width": 2172,
-      "height": 724,
-      "maxBytes": 848136,
+      "width": 2195,
+      "height": 716,
+      "maxBytes": 1269590,
       "role": "element icons"
     },
     {
       "file": "rune-gems-pixel.png",
       "width": 1659,
       "height": 948,
-      "maxBytes": 3329097,
+      "maxBytes": 4120084,
       "role": "rune gems"
     },
     {
       "file": "dragon-flight-pixel.png",
       "width": 1659,
       "height": 948,
-      "maxBytes": 3394566,
+      "maxBytes": 3789194,
       "role": "dragon flight"
     },
     {
       "file": "wildlife-walk-pixel.png",
       "width": 1448,
       "height": 1086,
-      "maxBytes": 1522286,
+      "maxBytes": 1999292,
       "role": "wildlife walk"
     },
     {
       "file": "province-props-pixel.png",
       "width": 1774,
       "height": 887,
-      "maxBytes": 2822283,
+      "maxBytes": 2780892,
       "role": "province props"
     },
     {
       "file": "navigation-icons-pixel.png",
       "width": 2172,
       "height": 724,
-      "maxBytes": 1677771,
+      "maxBytes": 1815516,
       "role": "navigation icons"
     },
     {
       "file": "village-motion-pixel.png",
       "width": 1448,
       "height": 1086,
-      "maxBytes": 1615431,
+      "maxBytes": 2088508,
       "role": "village motion"
     },
     {
       "file": "summon-plaza-pixel.png",
       "width": 1672,
       "height": 941,
-      "maxBytes": 3613941,
+      "maxBytes": 3757372,
       "role": "summon plaza"
     },
     {
       "file": "blind-boxes-pixel.png",
       "width": 1774,
       "height": 887,
-      "maxBytes": 2542788,
+      "maxBytes": 2406435,
       "role": "blind boxes"
     },
     {
       "file": "skill-frames-pixel.png",
-      "width": 1269,
-      "height": 1240,
-      "maxBytes": 1926769,
+      "width": 1247,
+      "height": 1261,
+      "maxBytes": 2630370,
       "role": "skill frames"
     },
     {
       "file": "city-foundation-pixel.png",
       "width": 1774,
       "height": 887,
-      "maxBytes": 2774407,
+      "maxBytes": 2613013,
       "role": "city foundation"
     },
     {
       "file": "exclusive-items-pixel.png",
       "width": 1254,
       "height": 1254,
-      "maxBytes": 2094430,
+      "maxBytes": 2740440,
       "role": "exclusive items"
     },
     {
       "file": "world-bosses-pixel.png",
       "width": 1536,
       "height": 1024,
-      "maxBytes": 3508771,
+      "maxBytes": 3661198,
       "role": "world bosses"
     }
   ]

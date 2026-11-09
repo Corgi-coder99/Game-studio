@@ -8,7 +8,7 @@ for(const module of runtimeModules)files['/'+module+'.mjs']=[module+'.mjs','text
 files['/account.css']=['account.css','text/css; charset=utf-8'];
 files['/rpg.css']=['rpg.css','text/css; charset=utf-8'];
 files['/viewport.css']=['viewport.css','text/css; charset=utf-8'];
-files['/style-bible.css']=['style-bible.css','text/css; charset=utf-8'];
+files['/visual-theme.css']=['visual-theme.css','text/css; charset=utf-8'];
 files['/design.css']=['design.css','text/css; charset=utf-8'];
 const port = Number(process.env.PORT || 3000);
 for(const asset of textureAssets)files['/assets/'+asset]=['assets/'+asset,'image/png'];

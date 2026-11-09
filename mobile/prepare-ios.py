@@ -21,5 +21,5 @@ with ZipFile(out,'w',ZIP_DEFLATED) as z:
   if f.is_file():
    if args.store and f.name=='project.pbxproj':z.writestr(f.relative_to(ios).as_posix(),f.read_text().replace('INFOPLIST_FILE=ThienMenh/Info.plist;','INFOPLIST_FILE=ThienMenh/Info.plist;ASSETCATALOG_COMPILER_APPICON_NAME=AppIcon;'))
    else:z.write(f,f.relative_to(ios).as_posix())
- z.write(root/'mobile/README.md','HUONG-DAN.md')
+ z.write(root/'mobile/README.md','README.md')
 print(out.name,round(out.stat().st_size/1024/1024,1),'MiB. Open Xcode project on macOS, select Signing Team and physical iPhone/iPad.')

@@ -1,4 +1,4 @@
-import {styleAnimationFrame} from './palette-core.mjs';
+import {styleAnimationFrame} from './animation-timing.mjs';
 import {cachedImage} from './art-cache.mjs';
 import {elementNames} from './elements.mjs';
 export function runePicture(index,name){return `<span class="rune-picture" style="--rune-x:${index%7*100/6}%;--rune-y:${Math.floor(index/7)*100/3}%" role="img" aria-label="Ngọc ${name}"></span>`;}

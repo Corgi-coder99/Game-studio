@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "name": "Golden Warring Kingdoms",
-  "source": "Style Bible & Spec Godot — Thiên Mệnh · Pixel Kingdom, v1.0, 2026-11-09",
+  "name": "Detailed Celestial Pixel",
+  "source": "Owner-approved Sun Wukong pixel-art reference and art-direction sheet, 2026-11-09",
   "ramps": {
     "ink": [
       "#0E1024",
@@ -90,14 +90,6 @@
     "SSS": "#D4A72C",
     "SSR": "#B3262E"
   },
-  "referenceViewport": {
-    "height": 360,
-    "minWidth": 640,
-    "maxWidth": 800,
-    "tile": 32,
-    "iconCell": 32,
-    "iconDrawing": 24
-  },
   "animationMs": {
     "idle": [
       180,
@@ -142,5 +134,6 @@
     "path": "assets/fonts/VT323-Regular.ttf",
     "license": "SIL Open Font License 1.1",
     "testedGlyphs": "ạếữơưđ"
-  }
+  },
+  "sourceImagePolicy": "Preserve original full-color PNG pixels and alpha; no runtime quantization or fixed-height world rendering."
 }

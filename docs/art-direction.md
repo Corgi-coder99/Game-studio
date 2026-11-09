@@ -1,24 +1,36 @@
-# Heavenly Mandate art direction
+# Detailed Celestial Pixel art direction
 
-The current visual identity follows Golden Warring Kingdoms (Style Bible v1.0): Ink/Royal Blue surfaces, Parchment content, Gold/Crimson accents and distinct natural-element ramps. The prior jade theme is superseded. See [implementation and acceptance scope](style-bible-implementation.md). Historical and literary heroes share a fractured celestial world explained by The Broken Mandate story journal.
+The owner-approved Sun Wukong reference and coherent art sheet supersede the
+previous restrictive Style Bible. The game uses deliberate pixel clusters,
+dark contours, expressive chibi heroes, warm gold and crimson architecture,
+jade foliage and upper-left lighting. Different elements retain distinct hues.
 
-- Use the existing atlas cells and transparent margins. Export atlases at their approved dimensions; do not replace an atlas with a single illustration.
-- Heroes, dragons, equipment and icons use nearest-neighbor sampling. Keep one icon silhouette per function. Do not use generic currency/chest art for unrelated navigation.
-- A dragon's flight uses its real atlas frames; position and tail motion supplement those frames. Do not show an entire sheet as one creature.
-- Rarity has a stable color and increasing ornamentation. Effects support readable silhouettes and targeting. Limit full-screen flashes and preserve the Reduce Motion and minimal-effects settings.
-- Summon results are granted by the game once, then presented together as cards. Animation must never gate reward ownership or require one tap per result. Keep rates and pity visible.
-- UI panels preserve usable touch targets and scroll inside their content area. Map zoom affects the scene, not the HUD. Clamp camera bounds to the scene.
+All 32 production PNG atlases were replaced, together with the application icon.
+The inventory icon mapping was reviewed against the replacement sheet. Existing
+hero IDs, rarity, equipment, formations and save data are preserved. Building
+and character cell order remains aligned with the current renderers. The
+continent map now clips the new regional terrain into the three territories
+instead of using the old high-contrast stripe fill.
 
-`config/art-manifest.json` is the technical atlas contract. Fingerprints establish which images a package contains. They do not certify animation anatomy, aesthetic consistency, or physical-device performance; those require visual review.
+Source colors and transparency are preserved. There is no whole-image palette
+conversion, 360-pixel world postprocess or integer-scale letterboxing. Pixel art
+uses nearest-neighbor sampling; interface text remains readable system text,
+with a local pixel font retained for canvas labels. UI colors are tokens, not
+a limit on the colors allowed in source images.
 
-## Shared interface theme
+`art/reference-release.json` records every old and new atlas fingerprint, grid,
+transparency requirement and generated source filename. `config/art-manifest.json`
+records reviewed image dimensions and download budgets. `npm run check:art`
+validates PNG checksums and synchronizes production fingerprints. Rebuild player,
+web and native outputs after editing an atlas. Never copy old generated textures
+back over the editable source.
 
-The legacy layout theme in `design.css` originally owned `--ui-*` tokens: deep jade surfaces, cream text, muted blue-gray secondary text and antique gold borders. Legacy theme variables alias these tokens. Body controls use the same system font stack; major scene headings use Georgia. Geometry, uniform viewport scaling, map bounds and touch targets remain owned by the existing layout rules.
+The replacement graphics were generated from the approved art direction.
+Animation sheets contain distinct generated poses; they are not claimed to be
+hand-animated or equivalent to a full skeletal character animation system.
+Existing motion, timing, reduced-motion and quality settings remain available.
 
-Buttons share a raised jade surface; selected tabs and primary actions use gold with dark text. Disabled actions dim, keyboard focus uses a cyan outline, and hover never becomes necessary to understand an action. Reports use jade panels rather than the previous pale parchment, with distinct allied/enemy HP and victory/defeat colors. Existing navigation atlas images are preserved; theme rules must not replace their background images or sprite coordinates. Item rarity and elemental colors remain independent semantic accents.
-
-This standardizes interface chrome, not the anatomy or animation of every hero, dragon or environment. Atlas replacement still follows the technical contract above.
-
-The Three Realms overview uses a cached original procedural pixel landscape with rivers, forests and existing castle/portal atlas cells. The regional map keeps descriptions in the tap drawer rather than painting labels across resources and cities. Daily Legacy badges are original crisp-edge SVG pixel medals, winged medals, coronets and a final level-15 crown. Summon controls use ticket/Jade icons and a shared count selector; result cards flip and shimmer once, with immediate reward ownership and reduced-motion alternatives.
-
-The authoritative visual tokens now live in `config/style-bible.json` and the generated final `style-bible.css`; maintain layout and touch rules in the existing sheets. Source PNG fingerprints remain technical contracts. The renderer maps visible assets and the world canvas to the display palette without pretending the original drawings have been hand-cleaned.
+English captions are audited across all major screens, image accessibility
+labels, placeholders and tooltips. Legacy save identifiers and player-written
+names/messages are intentionally retained. Chromium desktop and touch emulation
+do not replace physical iPhone/Safari or native Android device testing.

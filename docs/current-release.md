@@ -1,14 +1,15 @@
-# Current release
+# Version 16 - Detailed Celestial Pixel
 
-## Version 15: Golden Warring Kingdoms style
+- Replaces all 32 production art atlases and the application icon in the approved detailed pixel-art family.
+- Removes whole-image palette remapping, fixed-height canvas presentation and its letterboxes; preserves zoom and touch coordinates.
+- Uses the new terrain art on the continent map and distinct inventory/chest/equipment artwork.
+- Preserves existing game rules and saves; fixes inventory atlas indices and animated dragon preview overrides.
+- Audits all major game screens, image labels, tooltips and placeholders for English; converts the desktop launchers and instructions to English.
+- Rebuilds the one current player package, the separate developer package and the Safari offline cache.
 
-- Applies the supplied Style Bible v1.0 palette and UI roles: 47 approved colors, pixel font, Ink/Royal Blue panels, Parchment text, Gold primary actions and Crimson danger actions.
-- Separates natural-element effects from grade/title frame colors. Preserves all game/save rules.
-- Adds lazy palette-mapped artwork, opaque/binary alpha, a restricted terrain ramp and a final 360-pixel world-canvas palette pass with integer presentation and corrected input/feedback coordinates. Software fallback is included.
-- Settings contains a 640×360 style lineup for side-by-side visual review. VT323 is bundled locally with its OFL license and Vietnamese glyph coverage.
-- Canonicalizes zero-valued spawn coordinates so JSON room messages do not change negative zero into a different numeric representation. No location or combat formula changes.
-- Existing DOM layouts remain responsive; full native UI pixel locking, new hand-cleaned animation sets and the document’s Godot migration stages are not claimed as completed. See [implementation scope](style-bible-implementation.md).
+Artwork is generated, including distinct sprite-sheet poses. Physical Safari and native devices are not certified by browser emulation. No signed store release or publicly hosted online server is included.
 
+## Earlier gameplay features
 
 ## Version 14: guided play and shared-world preview
 
@@ -21,20 +22,13 @@
 
 
 
-## Earlier interface baseline (superseded by the Golden theme)
-
-- Shared jade, cream and antique-gold theme tokens now coordinate windows, cards, headers, action buttons, inputs, HUD resources and navigation frames. Selected tabs use gold with dark text; keyboard focus remains visible.
-- Lower-grade shard boxes clip stray pixels from the adjacent atlas row without replacing the original artwork.
-- Populated siege reports use the same dark surfaces as inventory and trading, while allied/enemy HP bars and victory/defeat colors remain distinct.
-- Existing original artwork, rarity accents, scene geometry, zoom, mobile scrolling and gameplay are preserved. This is an interface styling pass, not a claim that all sprites have been redrawn.
-
 ## Developer separation and presentation update
 
 - Studio and resource grants are removed from the player game. Settings → Save Management preserves validated backup/import/reset flows. The separate `Heavenly-Mandate-DevTools.zip` supports offline JSON editing and a loopback-only live test session for food, wood, stone, gold, jade and essence, with validation and snapshot undo. Live edits preserve ongoing battles; save restore follows normal durable-save rules.
 - The Broken Mandate story journal has five acts, progress-derived chapter reveals, a floor-999 conclusion, and optional world-boss echoes. It requires neither VIP nor scheduled events to reach the main ending.
 - English captions cover the main screens and the hero/skill/shard/inventory description catalog; legacy notification and error copy is translated without changing save IDs. Player-entered names remain unchanged. Rune and skill effect descriptions use precise English source text.
 - Batch summon results show all cards together, rarity totals, and a short staggered reveal. Rewards remain granted exactly once before presentation. Reduce Motion disables the card animation.
-- `build-manifest.mjs` centralizes production modules and textures. Atlas imports validate PNG checksums and image data, dimensions and download budgets. The production PNGs keep their current artwork; this revision does not claim every animation has been redrawn. See [toolchain research](toolchain-research.md) and [art direction](art-direction.md).
+- `build-manifest.mjs` centralizes production modules and textures. Atlas imports validate PNG checksums and image data, dimensions and download budgets. Version 16 replaces the production PNGs with newly generated art; the runtime preserves their colors. See [toolchain research](toolchain-research.md) and [art direction](art-direction.md).
 
 ## Gameplay
 
@@ -70,7 +64,7 @@ Validation for this revision: 316 automated checks passed; the separate develope
 
 Populated siege reports now use English source copy for the overview, troop statistics, analysis, and hero detail dialogs. Advice for legacy reports is regenerated from their recorded statistics without changing stored history or rewards. Phone report cards scroll without overlapping.
 
-The art pipeline validates and synchronizes existing atlas files; it does not redraw the entire game. Narrative objectives, act dialogue and tower transitions are now integrated as described below. Full visual unification, voiced or animated cinematics, and final art/balance review remain unfinished. No unattended background process completes these tasks automatically.
+Version 16 replaces every production atlas and validates the replacement grids and transparency. Narrative objectives, act dialogue and tower transitions are integrated. Voiced cinematics, fully hand-animated hero attacks and final production balance review are not included.
 
 ## Offline paid-edition preparation
 

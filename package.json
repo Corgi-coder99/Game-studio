@@ -1,13 +1,13 @@
 {
   "name": "codex-legend-studio",
-  "version": "15.0.0",
+  "version": "16.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "node sync-auction-config.mjs && node server.mjs",
     "build:offline": "node sync-auction-config.mjs && node build-offline.mjs",
     "build:web": "node sync-auction-config.mjs && node build-web.mjs",
-    "test": "node style-bible.test.mjs && node daily-rewards.test.mjs && node premium-story.test.mjs && node localization-audit.test.mjs && node admin.test.mjs && node english.test.mjs && node asset-encoding.test.mjs && node element-system.test.mjs && node feedback.test.mjs && node strongholds.test.mjs && node world-boss.test.mjs && node auction.test.mjs && node titles.test.mjs && node game.test.mjs && node kingdom.test.mjs && node rpg.test.mjs && node account.test.mjs && node campaign.test.mjs && node world.test.mjs && node strategy.test.mjs && node inheritance.test.mjs && node recommendations.test.mjs && node squads.test.mjs && node v8.test.mjs && node technology.test.mjs && node v10.test.mjs && node civic.test.mjs && node v12.test.mjs && node city-layout.test.mjs && node web.test.mjs",
+    "test": "node reference-art.test.mjs && node daily-rewards.test.mjs && node premium-story.test.mjs && node localization-audit.test.mjs && node admin.test.mjs && node english.test.mjs && node asset-encoding.test.mjs && node element-system.test.mjs && node feedback.test.mjs && node strongholds.test.mjs && node world-boss.test.mjs && node auction.test.mjs && node titles.test.mjs && node game.test.mjs && node kingdom.test.mjs && node rpg.test.mjs && node account.test.mjs && node campaign.test.mjs && node world.test.mjs && node strategy.test.mjs && node inheritance.test.mjs && node recommendations.test.mjs && node squads.test.mjs && node v8.test.mjs && node technology.test.mjs && node v10.test.mjs && node civic.test.mjs && node v12.test.mjs && node city-layout.test.mjs && node web.test.mjs",
     "build:admin": "node build-admin.mjs",
     "check:art": "node tools/art-pipeline.mjs check",
     "start:online": "node online/server.mjs",

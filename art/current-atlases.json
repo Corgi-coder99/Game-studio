@@ -2,260 +2,260 @@
   "version": 1,
   "atlases": {
     "hulao-pixel.png": {
-      "width": 1536,
-      "height": 1024,
+      "width": 1672,
+      "height": 941,
       "depth": 8,
       "color": 2,
-      "bytes": 2349484,
-      "sha256": "6a9971e6ada1d5d6f63adebb0dad5673138b62bf0962158adf4f1ce1b74d3dc6"
+      "bytes": 3017003,
+      "sha256": "f94bed29cb8159356fcc076f5a7d85dfdd3f094794341f18dcd83dd032014712"
     },
     "city-pixel.png": {
       "width": 1536,
       "height": 1024,
       "depth": 8,
       "color": 6,
-      "bytes": 2357667,
-      "sha256": "132bc26b85178aa26fccf210ae6ace55d7fad8341b6a02a9acea12a453d7dd36"
+      "bytes": 3026689,
+      "sha256": "3c15e7af5274b24b4645c1c79b6f6b3d9317a4684a743ff13b52473388474d35"
     },
     "battle-units-pixel.png": {
       "width": 1774,
       "height": 887,
       "depth": 8,
       "color": 6,
-      "bytes": 2090123,
-      "sha256": "7773c347f411157d04feb739ea79810522975429247159742442180caba5f4ad"
+      "bytes": 2639435,
+      "sha256": "e3d48f9940d576ec8b3e0c561b41173d3a790d76fc26b0a26b654386275d0a19"
     },
     "roster-a-pixel.png": {
       "width": 1536,
       "height": 1024,
       "depth": 8,
       "color": 6,
-      "bytes": 2629715,
-      "sha256": "f019c78d37d2fe0c84b6e46eac56e75712cc4ffac2152932e5829a9100071cb6"
+      "bytes": 3486769,
+      "sha256": "d515f6450e2c593b89f4aebf1e91580430b5e1d1de5ae655aee3aa9e311436ca"
     },
     "roster-b-pixel.png": {
       "width": 1536,
       "height": 1024,
       "depth": 8,
       "color": 6,
-      "bytes": 2815682,
-      "sha256": "1230eb0eec3339842fb8952ecb7d1938a4eba375cea332490020c6a688fee8c9"
+      "bytes": 3546264,
+      "sha256": "fbc68e6868079368d8b3aa32a9ecf585050a62b791d82a7bb29eb394acbf6299"
     },
     "celestial-pets-pixel.png": {
       "width": 1983,
       "height": 793,
       "depth": 8,
       "color": 6,
-      "bytes": 2694047,
-      "sha256": "d9b4460167f997f71e1ab4b403351d5bfd778f40a59f9e10896c2041d985a4bd"
+      "bytes": 3081839,
+      "sha256": "4f76d5416e6e72bc8564c1ff1ca17585e908c0e37040a92fdfda9d056e44d5c2"
     },
     "pets-awakened-pixel.png": {
       "width": 2172,
       "height": 724,
       "depth": 8,
       "color": 6,
-      "bytes": 3131090,
-      "sha256": "99003b5be401833501592689393c0ea6c196366e8a524e48d24ab942c2a4ae44"
+      "bytes": 1931651,
+      "sha256": "f1bac9aefe423fb1c2c90c6b49f8bb91a4c7626ebbdbfba56607d82fd41ee370"
     },
     "skills-pixel.png": {
-      "width": 1254,
-      "height": 1254,
+      "width": 1263,
+      "height": 1246,
       "depth": 8,
       "color": 2,
-      "bytes": 2616736,
-      "sha256": "95dd4150012387c90d014f670923bd6ebf44dfe9b0fc0370f3ff944615df7594"
+      "bytes": 2707327,
+      "sha256": "eeb85b4c39535bc892f1023aecf9917450587d5c858ff66061776a79939652c9"
     },
     "castle-skins-pixel.png": {
       "width": 1983,
       "height": 793,
       "depth": 8,
       "color": 6,
-      "bytes": 3226590,
-      "sha256": "ecbaaec6ea37d5502eb428477e30d9123559c7d91268cb4685677b11a5d5a3db"
+      "bytes": 3779657,
+      "sha256": "2eed89539a86d0b62f20bea284670855163abb539931694bb94be6784617ef16"
     },
     "window-scenes-pixel.png": {
       "width": 2172,
       "height": 724,
       "depth": 8,
       "color": 2,
-      "bytes": 3173016,
-      "sha256": "a8caae65cba490f906e9d2360d5e09ef82acb082373f3dcc9d61864809479349"
+      "bytes": 3093878,
+      "sha256": "019b887d2e8aae99c59d10139084c0b977ddff926eb7b3dd4340e56b099adee2"
     },
     "inventory-icons-pixel.png": {
       "width": 1619,
-      "height": 971,
+      "height": 972,
       "depth": 8,
       "color": 6,
-      "bytes": 1818785,
-      "sha256": "779437c25780347a1d97ac8c35aa54c607c24d18bbd356820c0dd9637188ef05"
+      "bytes": 2101083,
+      "sha256": "87888ddfa461e0f84cf0243dc93d7c190f9f460fc488db5d0634372537e3138c"
     },
     "troops-walk-pixel.png": {
-      "width": 1261,
-      "height": 1247,
+      "width": 1265,
+      "height": 1244,
       "depth": 8,
       "color": 6,
-      "bytes": 1485108,
-      "sha256": "164d51a80b946bf3b8c762a0e56ea08edf0a36abbce920a914239c0b061e7286"
+      "bytes": 2073163,
+      "sha256": "2fa7575bbd24caa222a7e172f9adf7086ebe5ce409a42971370db35f4c09de8a"
     },
     "trial-tower-pixel.png": {
       "width": 1024,
       "height": 1536,
       "depth": 8,
       "color": 2,
-      "bytes": 3344200,
-      "sha256": "80d52f0e51aac878b256e826f7d808a0fbd54d1b881bc09c85886285b251a256"
+      "bytes": 3326006,
+      "sha256": "aabc1207250325d6d23bd782e54e9cb232cc1349992e905604539e074225007e"
     },
     "building-scenes-pixel.png": {
       "width": 2172,
       "height": 724,
       "depth": 8,
       "color": 2,
-      "bytes": 3893483,
-      "sha256": "1cd4d5c9ced164a9ee6236b767a1e729bc4de8e7f3c8b6392e62f7d21c45487f"
+      "bytes": 3137943,
+      "sha256": "48ac0a96e932060316691a2c6bd2e9be201d8195155ac77ee93a9f228647d5fc"
     },
     "living-terrain-pixel.png": {
       "width": 2172,
       "height": 724,
       "depth": 8,
       "color": 2,
-      "bytes": 3562320,
-      "sha256": "9888a5216d318378cc98db3d9ec98d29c6ecba1c0b76e6196179a7fe135f334f"
+      "bytes": 3713639,
+      "sha256": "c13adcfd3b045523522a2b7c2e678fd8332d7036749d519fdf9902487f56d41d"
     },
     "world-sites-pixel.png": {
       "width": 2172,
       "height": 724,
       "depth": 8,
       "color": 6,
-      "bytes": 1961738,
-      "sha256": "49313b9cf506347a3dd94b6a6349499b6bdb4fda724a3b5eb6401a9939817bb6"
+      "bytes": 2050552,
+      "sha256": "d6524f9d866a0e7f944e9b69cc3c40af0e0e83d2a57f26756b01811ad7cbcbfa"
     },
     "equipment-rarity-pixel.png": {
       "width": 992,
       "height": 1586,
       "depth": 8,
       "color": 6,
-      "bytes": 2571486,
-      "sha256": "7c0569b3ac593fc5687a55cb4bcbb1ae376a377796e0f613291788c61acd9363"
+      "bytes": 2552581,
+      "sha256": "67a4dcf81e75b9ef6947a1c706d946d6ca74fe00aaa8b6aff9a2f7c802d5a934"
     },
     "weapon-rarity-pixel.png": {
-      "width": 1261,
-      "height": 1247,
+      "width": 1254,
+      "height": 1254,
       "depth": 8,
       "color": 6,
-      "bytes": 2358975,
-      "sha256": "949e20598d7eab6dd97de572f2c3bc1be328ed9cccd2328eb5a7b9442d5b2ced"
+      "bytes": 2515634,
+      "sha256": "59a785871d64e8b41bd410fc6c0536b84f7eee170db122d153a0e5e3347b6549"
     },
     "city-life-pixel.png": {
       "width": 1774,
       "height": 887,
       "depth": 8,
       "color": 6,
-      "bytes": 2175478,
-      "sha256": "26c06fe1ffd88d92fe9aecbfa3c69c541598e1f8aece043040bb805cdbfe0a99"
+      "bytes": 2919315,
+      "sha256": "d6bdd6edfbcb9314ecb451a4e6a05b796405f94a4b55b536748fe3316ebc257d"
     },
     "element-icons-pixel.png": {
-      "width": 2172,
-      "height": 724,
+      "width": 2195,
+      "height": 716,
       "depth": 8,
       "color": 6,
-      "bytes": 807748,
-      "sha256": "0dcfe4dbe2c02bc4100350f0d77cf240ab36663b294a54d2205e6d90c95be09c"
+      "bytes": 1209133,
+      "sha256": "6645606de555057d608bfac764478fecd2c3dd606b25de1780eba23c7b1b216f"
     },
     "rune-gems-pixel.png": {
       "width": 1659,
       "height": 948,
       "depth": 8,
       "color": 6,
-      "bytes": 3170568,
-      "sha256": "ebb850342c0d8e932947138bebe0aa2fbd9214c450e0a48f8996a9f547a0a8f8"
+      "bytes": 3923889,
+      "sha256": "cea23239d737374a658242ce83f045d3fd271d7f8c0af5e41a80dc36a0a62262"
     },
     "dragon-flight-pixel.png": {
       "width": 1659,
       "height": 948,
       "depth": 8,
       "color": 6,
-      "bytes": 3232920,
-      "sha256": "12465fb6abefb4ce595f6a7f634e820b5fcfece61135c05a6ed8dd7b319abce1"
+      "bytes": 3608756,
+      "sha256": "c16f44b711c60cf881fb54729279c4eecbb6b5e92ac67bbda89ebc67cbb17bdd"
     },
     "wildlife-walk-pixel.png": {
       "width": 1448,
       "height": 1086,
       "depth": 8,
       "color": 6,
-      "bytes": 1449796,
-      "sha256": "cf616d1a4125aee1a50948fa9e0297d8f2e241dd95fa97b92101232ad5c26a9e"
+      "bytes": 1904087,
+      "sha256": "a28b4327bca80e2036ffd78b3b14fe8a59c8ee4ff890738e72f4f22117e07e1c"
     },
     "province-props-pixel.png": {
       "width": 1774,
       "height": 887,
       "depth": 8,
       "color": 6,
-      "bytes": 2687888,
-      "sha256": "8b861bac94d450ac971881ac5e7bbc2582b1ab19c2da01fcf89c325dc0b0a968"
+      "bytes": 2648468,
+      "sha256": "c01ad053bb1000873f575fc76fa25d6b3c34634a07b12ace22ac5a2911d3ca53"
     },
     "navigation-icons-pixel.png": {
       "width": 2172,
       "height": 724,
       "depth": 8,
       "color": 6,
-      "bytes": 1597877,
-      "sha256": "fdd4b13b9c6373e5bda10cdc8446257298bbc1dd079a781eb764136b35081ee4"
+      "bytes": 1729062,
+      "sha256": "c245e24ebb9ad988251f4641b6446af50703f6dba3a5437be07474db2041cbf4"
     },
     "village-motion-pixel.png": {
       "width": 1448,
       "height": 1086,
       "depth": 8,
       "color": 6,
-      "bytes": 1538505,
-      "sha256": "35e367bdd44f1f1c47bc8c795089853186de1ccf9adeddec22c737a94b7de617"
+      "bytes": 1989055,
+      "sha256": "74a8df9f9b1429d68d8386d9f9cfa9f8f9e63d2d7fc365165b3fe4cbd058996c"
     },
     "summon-plaza-pixel.png": {
       "width": 1672,
       "height": 941,
       "depth": 8,
       "color": 2,
-      "bytes": 3441848,
-      "sha256": "6918f8b9c5833207661f5d0d8ec1f0da9c8e18f9ee3e1cd35228bea2ebe1ea2f"
+      "bytes": 3578449,
+      "sha256": "5b01b582afd1cf0aef5f8a64e11fdc54e182bb2f6861e7205c5d59265e1702a1"
     },
     "blind-boxes-pixel.png": {
       "width": 1774,
       "height": 887,
       "depth": 8,
       "color": 6,
-      "bytes": 2421702,
-      "sha256": "4bc2a3bbbf2dfa77ee671f3cd8e029967149424761a14f8b5a4e02f0a00743ea"
+      "bytes": 2291842,
+      "sha256": "eca60f4f716f7bce02106651e137099ccc771fa1f522e8131696cbab68d3dab8"
     },
     "skill-frames-pixel.png": {
-      "width": 1269,
-      "height": 1240,
+      "width": 1247,
+      "height": 1261,
       "depth": 8,
       "color": 6,
-      "bytes": 1835018,
-      "sha256": "ac64ef73006f020c95f8209e09b27f551015ecab97fa71dcc1128916885f3a37"
+      "bytes": 2505114,
+      "sha256": "f895a3ce0465caaa40c0e0dd3039910d965f0034526660e04812ad68ddda33aa"
     },
     "city-foundation-pixel.png": {
       "width": 1774,
       "height": 887,
       "depth": 8,
       "color": 6,
-      "bytes": 2642292,
-      "sha256": "3921b2a42a4e76859984fe53e785048e8debbf4dc5aaeb86c10d55723673efdc"
+      "bytes": 2488583,
+      "sha256": "cb22252dc0270a248c8a96d8b833f5f8a9ba5fc66ebeb1b821402c5988a33210"
     },
     "exclusive-items-pixel.png": {
       "width": 1254,
       "height": 1254,
       "depth": 8,
       "color": 6,
-      "bytes": 1994695,
-      "sha256": "2a2472ea691a87391f4d9b787c0195e506aa749824405073ce7f320e6aaf0027"
+      "bytes": 2609942,
+      "sha256": "15ad85052135af2ecbcdcc60db1fc48b7470dfeaa489071b187e8f5a0033f4d1"
     },
     "world-bosses-pixel.png": {
       "width": 1536,
       "height": 1024,
       "depth": 8,
       "color": 6,
-      "bytes": 3341686,
-      "sha256": "2e03593218b4b4bb7a84dc1c30b240bb8cb8ecbbe47c6fd94df0b4becf501915"
+      "bytes": 3486855,
+      "sha256": "570fd365085fc5121e01ca9c704c15add5c06496a9728c4a5efa521cb44897c2"
     }
   }
 }

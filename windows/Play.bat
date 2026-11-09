@@ -5,8 +5,8 @@ if exist "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe" goto edge32
 if exist "%ProgramFiles%\Microsoft\Edge\Application\msedge.exe" goto edge64
 if exist "%ProgramFiles%\Google\Chrome\Application\chrome.exe" goto chrome64
 if exist "%LocalAppData%\Google\Chrome\Application\chrome.exe" goto chromeuser
-echo Hay keo tep Thien-Menh.html vao cua so Edge hoac Google Chrome.
-echo Hoac chay CHAY-BANG-PYTHON.bat neu may co Python 3.
+echo Drag Thien-Menh.html into an Edge or Google Chrome window.
+echo Or run Serve-with-Python.bat if Python 3 is installed.
 pause
 exit /b 1
 :edge32
@@ -22,6 +22,6 @@ exit /b 0
 start "" "%LocalAppData%\Google\Chrome\Application\chrome.exe" "%GAME_FILE%"
 exit /b 0
 :missing
-echo Khong tim thay Thien-Menh.html. Hay giai nen toan bo ZIP truoc.
+echo Cannot find Thien-Menh.html. Extract the entire ZIP first.
 pause
 exit /b 1

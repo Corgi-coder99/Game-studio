@@ -1,6 +1,6 @@
 # Thien Menh — Pixel Kingdom
 
-Version 15 applies the supplied Golden Warring Kingdoms Style Bible: a 47-color display palette, pixel UI/font, element/rarity semantics and a Settings style lineup. [Read implementation scope](docs/style-bible-implementation.md).
+Version 16 replaces all 32 production art atlases and the application icon with the approved detailed Celestial Pixel style. Source colors remain intact; the previous palette filter and fixed 360-pixel world postprocess are removed. The interface, captions, help and download instructions use English. See [art direction and scope](docs/art-direction.md).
 
 Version 14 added visible formation recommendations, a replayable beginner guide, mobile army/profile layout repairs, icon-based summon controls with animated card reveals, Daily Attendance Legacy progression, cleaner map labels and a server-owned shared-world preview.
 
@@ -26,7 +26,7 @@ The complete Safari installation site is generated in `docs/`. Once GitHub Pages
 
 https://corgi-coder99.github.io/Game-studio/
 
-In Safari, choose **Share → Add to Home Screen**, open the new icon while connected to Wi-Fi, and download the game until the offline-ready message appears. The game uses a landscape layout on every phone size, rotating its frame when the device is held upright. The Home Screen app provides the fullscreen experience when Safari does not support the Fullscreen API. The initial download is approximately 79 MiB. Subsequent solo sessions can run offline. Back up saves through Settings → Save Management before clearing browser storage.
+In Safari, choose **Share → Add to Home Screen**, open the new icon while connected to Wi-Fi, and download the game until the offline-ready message appears. The game uses a landscape layout on every phone size, rotating its frame when the device is held upright. The Home Screen app provides the fullscreen experience when Safari does not support the Fullscreen API. The initial download is approximately 88 MiB. Subsequent solo sessions can run offline. Back up saves through Settings → Save Management before clearing browser storage.
 
 The repository owner must select **Settings → Pages → Deploy from a branch → main → /docs**. Pages availability depends on repository visibility and plan; this README does not imply that hosting is enabled. Safari does not provide this game's Bluetooth multiplayer.
 
@@ -67,7 +67,7 @@ Android and iOS source projects remain under [`mobile/`](mobile/README.md). Outd
 
 ## Validation and limitations
 
-326 automated gameplay, developer-tool, localization and web-cache checks plus four online authority/authentication tests passed. Touch layouts were exercised in Chromium mobile emulation in landscape and portrait; desktop, offline launch, cache repair, and restart persistence were also checked. Physical iPhone Safari and Bluetooth hardware have not been validated. Windows BAT launchers have not been run on Windows; the iOS project has not been compiled with Xcode.
+327 automated gameplay, developer-tool, localization and web-cache checks plus four online authority/authentication tests passed. Touch layouts were exercised in Chromium mobile emulation in landscape and portrait; desktop, offline launch, cache repair, and restart persistence were also checked. Physical iPhone Safari and Bluetooth hardware have not been validated. Windows BAT launchers have not been run on Windows; the iOS project has not been compiled with Xcode.
 
 ## Repository policy
 

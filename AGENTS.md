@@ -1,6 +1,6 @@
 # Thien Menh — Pixel Kingdom
 
-Version 15 applies the supplied Golden Warring Kingdoms Style Bible: a 47-color display palette, pixel UI/font, element/rarity semantics and a Settings style lineup. [Read implementation scope](docs/style-bible-implementation.md).
+Version 16 follows the user-approved detailed Sun Wukong pixel-art reference. Preserve the full colors and alpha of source sprites; do not reintroduce runtime palette quantization, fixed 360-pixel world rendering or letterboxing. Use a consistent warm gold/crimson/jade art family, readable English interface and original atlas cell order. The latest reference supersedes the earlier restrictive Style Bible.
 
 Version 14 added visible formation recommendations, a replayable beginner guide, mobile army/profile layout repairs, icon-based summon controls with animated card reveals, Daily Attendance Legacy progression, cleaner map labels and a server-owned shared-world preview.
 

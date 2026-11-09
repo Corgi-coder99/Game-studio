@@ -1,15 +1,15 @@
 {
   "verifiedOn": "2026-11-09",
-  "sourceWebBuild": "v12-e56d34a20246",
+  "sourceWebBuild": "v16-cceac006fb1d",
   "android": {
     "artifact": "mobile/release-output/Heavenly-Mandate-unsigned.aab",
-    "sha256": "2e2339f9ccb4557d9fd69f41d0c0c80b2a986e91899001b9523c3795cd714ca0",
+    "sha256": "f56bbdd9c40d750d0e15b94fc814c32be83050a2e085889f9ce1a8ddf1bae94b",
     "bundletool": "1.18.3",
     "validation": "passed",
     "signed": false,
     "uploaded": false,
     "applicationId": "vn.thienmenh.game",
-    "versionCode": 15,
+    "versionCode": 16,
     "targetSdk": 36,
     "compiledAgainstSdk": 35,
     "physicalDeviceTested": false
@@ -20,7 +20,7 @@
     "signed": false,
     "physicalDeviceTested": false
   },
-  "automatedTests": 330,
+  "automatedTests": 331,
   "businessModel": {
     "proposal": "one-time purchase",
     "suggestedUSD": 4.99,
@@ -38,15 +38,31 @@
     "dockerDeploymentTested": false,
     "concurrencyLoadTested": false
   },
-  "styleBible": {
-    "version": "1.0",
-    "paletteColors": 47,
-    "font": "VT323",
-    "vietnameseGlyphsVerified": true,
-    "worldNativeHeight": 360,
-    "gpuAndCPUFallbackVerified": true,
-    "wholeDOMPixelLock": false,
-    "godotMigrationCompleted": false,
-    "sourceAtlasesHandRedrawn": false
+  "artRelease": {
+    "style": "Detailed Celestial Pixel",
+    "productionAtlasesReplaced": 32,
+    "applicationIconReplaced": true,
+    "sourceColorsPreserved": true,
+    "runtimePaletteQuantization": false,
+    "fixedHeightWorldPostprocess": false,
+    "generatedArtwork": true,
+    "handAnimatedHeroes": false,
+    "atlasGridsAndTransparencyChecked": true,
+    "englishScreensAudited": 37,
+    "browserLayouts": [
+      [
+        1440,
+        900
+      ],
+      [
+        926,
+        428
+      ],
+      [
+        428,
+        926
+      ]
+    ],
+    "physicalDeviceTested": false
   }
 }
