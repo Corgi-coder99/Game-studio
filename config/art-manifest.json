@@ -225,6 +225,13 @@
       "height": 1024,
       "maxBytes": 3661198,
       "role": "world bosses"
+    },
+    {
+      "file": "fire-dragon-motion-pixel.png",
+      "width": 1774,
+      "height": 887,
+      "maxBytes": 1351609,
+      "role": "Fire dragon launch and flight animation"
     }
   ]
 }

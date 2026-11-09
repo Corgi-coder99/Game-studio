@@ -189,7 +189,11 @@ html,body{overscroll-behavior:none;position:fixed;inset:0;touch-action:manipulat
 .touch-game #app .formation-help{display:block}
 .touch-game #app .formation-upper{display:block;min-width:0;min-height:0;overflow:hidden}
 .touch-game #app .carousel-formation .formation-stage{height:100%;padding:6px 6px 22px;display:flex;align-items:center}
-.touch-game #app .carousel-formation .formation-dragon{display:none}
+.touch-game #app .carousel-formation .formation-stage .formation-dragon{
+ position:relative;display:grid;place-items:center;left:auto;top:auto;flex:0 0 110px;width:110px;height:110px
+}
+.touch-game #app .carousel-formation .formation-dragon .elemental-dragon-art{width:100px;height:100px}
+.touch-game #app .carousel-formation .formation-stage .formation-board{flex:1;min-width:0}
 .touch-game #app .carousel-formation .formation-board{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none;transform:none}
 .touch-game #app .carousel-formation .formation-cell{height:112px;display:grid;grid-template-columns:72px minmax(0,1fr);grid-template-rows:28px 62px;gap:5px;padding:6px;align-items:center;position:relative;justify-content:stretch}
 .touch-game #app .carousel-formation .formation-cell>span[data-inspect]{grid-row:1/3}
@@ -503,3 +507,66 @@ body.reduce-motion #app .summon-card,body.effects-minimal #app .summon-card,body
 #app .guide-mentor h2 {margin:0;}
 @media(prefers-reduced-motion:no-preference){body:not(.reduce-motion):not(.effects-minimal) #app .doll-figure .character-splash-art {animation:mandate-breathe 4.2s ease-in-out infinite;transform-origin:50% 90%;}}
 @keyframes mandate-breathe {0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(-2px) scaleY(1.012)}}
+
+/* The dragon is a formation sprite. Keep its description button keyboard accessible. */
+#app .formation-stage button.formation-dragon {
+ background: transparent !important;
+ border: 0 !important;
+ box-shadow: none !important;
+ padding: 0;
+ z-index: 1;
+}
+#app .formation-stage button.formation-dragon:focus-visible {
+ outline: 2px solid #ffe9a0;
+ outline-offset: 3px;
+}
+
+/* First launch: a title scene and an accessible kingdom selection panel. */
+#app .realm-onboarding {
+ display: grid;
+ grid-template-columns: minmax(0, 1fr) minmax(0, 1.14fr);
+ align-content: center;
+ align-items: center;
+ gap: 72px;
+ padding: 72px 90px;
+ background: linear-gradient(90deg,#160e26a8 0%,#14152c29 49%,#1513299c 100%),
+  linear-gradient(0deg,#130f24df,transparent 50%),url('/assets/hulao-pixel.png') center/cover;
+}
+#app .opening-title { color: #fff2c9; text-shadow: 0 4px #391f25, 0 8px 24px #100f24; }
+#app .opening-title > span { color: #ffdc91; font-size: 21px; font-weight: bold; letter-spacing: .32em; }
+#app .realm-onboarding .opening-title h1 {
+ color: #ffe7a1;
+ font: bold 108px/.89 Georgia,serif !important;
+ margin: 24px 0 30px;
+}
+#app .realm-onboarding .opening-title p { max-width: 500px; color: #fff2d9; font-size: 24px !important; line-height: 1.45; margin: 0; }
+#app .realm-onboarding > section {
+ width: 100%;
+ padding: 32px;
+ border: 2px solid #ce9f61;
+ background: linear-gradient(150deg,#202039f5,#10182bf5);
+ box-shadow: 0 24px 65px #110b1d9e,inset 0 0 0 4px #11162a;
+}
+#app .realm-onboarding > section > h2 { font: bold 44px/1.1 Georgia,serif; color: #fff1c8; margin: 12px 0; }
+#app .realm-onboarding > section > p { font-size: 17px; line-height: 1.5; }
+#app .realm-choices button { display: grid; justify-items: center; align-content: start; gap: 7px; padding: 12px; }
+#app .realm-choices button.selected {
+ background: linear-gradient(#544336,#262940) !important;
+ outline: 2px solid #f8ce7e;
+ box-shadow: inset 0 0 22px #edb95820,0 0 14px #e6ad4d35;
+}
+#app .realm-choices .opening-crest {
+ width: 94px;
+ height: 94px;
+ background: url('/assets/castle-skins-pixel.png') var(--opening-crest-x) var(--opening-crest-y)/500% 200%;
+}
+#app .realm-choices h3 { font: bold 25px/1.05 Georgia,serif; color: #fff0c8; margin: 0; }
+#app .realm-choices b { font-size: 16px; }
+#app .realm-choices p { font-size: 14px; line-height: 1.35; margin: 0; }
+#app .realm-onboarding label,#app .realm-onboarding select,#app .realm-onboarding small { font-size: 16px; }
+.touch-game #app .realm-onboarding { gap: 34px; padding: 46px; grid-template-columns: .8fr 1.2fr; }
+.touch-game #app .realm-onboarding .opening-title h1 { font-size: 91px !important; }
+.touch-game #app .realm-onboarding > section { padding: 22px; }
+#app .story-dialogue-curtain:has([data-story-ack="embers-opening"]) {
+ background: linear-gradient(#160f2a7a,#160f2ac9),url('/assets/hulao-pixel.png') center/cover;
+}

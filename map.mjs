@@ -5,7 +5,8 @@ import {englishCanvasContext} from './english.mjs';
 import {drawWeather,drawConnectedGate} from './environment.mjs';
 import {citySites,cityGate,cityCameraLayout,regionCameraLayout} from './city-layout.mjs';
 import {drawProvinceProp,drawFlyingDragon} from './scene-art.mjs';
-import {drawAnimal} from './wildlife.mjs';
+import {realmCities} from './realms.mjs';
+import {drawAnimal,wildlifeNodes} from './wildlife.mjs';
 import {elementNames} from './elements.mjs';
 import {cityLife,drawConstructionAura,drawSkinAura} from './city-life.mjs';
 import {drawSkillVfx} from './skill-vfx.mjs';
@@ -15,10 +16,10 @@ import {cachedImage} from './art-cache.mjs';
 import {trainingFor,constructionSeconds} from './city-rules.mjs';
 let cachedCityGround=null,cachedGroundTextured=false,cachedCivicTrees=false,cachedGroundPaletteKey='';
 import {drawSecretRealm,drawHiddenGates} from './inheritance-map.mjs';
-import {activeWorldCity} from './world-data.mjs';
+import {activeWorldCity,botCities} from './world-data.mjs';
 import {drawRegionScene} from './region-map.mjs';
 import {castleSkins} from './skins.mjs';
-import { drawRealmAtlas } from './realm-map.mjs';
+import { drawRealmAtlas, drawAtlasWater } from './realm-map.mjs';
 import { structures, worldNodes, skills, troopTypes } from './kingdom.mjs';
 
 
@@ -80,7 +81,6 @@ export function mountMap(canvas, read, select) {
 
   function drawDitherShadow(x,y,rx,ry){ctx.save();ctx.fillStyle='#0E1024';for(let yy=-Math.ceil(ry/3);yy<=ry/3;yy++)for(let xx=-Math.ceil(rx/3);xx<=rx/3;xx++)if((xx*3/rx)**2+(yy*3/ry)**2<=1&&(xx+yy)%2===0)ctx.fillRect(Math.round(x+xx*3),Math.round(y+yy*3),3,3);ctx.restore();}
   function soldier(x,y,color,type='shield',phase=0,scale=1,facing=1){if(!troopSprite.complete||!troopSprite.naturalWidth)return;const row=Math.max(0,['shield','spear','bow','cavalry'].indexOf(type)),col=Math.floor(Math.abs(phase)*1.2)%4,sw=troopSprite.naturalWidth/4,sh=troopSprite.naturalHeight/4,size=42*scale;ctx.save();ctx.translate(Math.round(x),Math.round(y));ctx.scale(facing,1);ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(0,5,size*.23,size*.08,0,0,Math.PI*2);ctx.fill();ctx.drawImage(troopSprite,col*sw,row*sh,sw,sh,-size/2,-size+10,size,size);ctx.restore();}
-  function dragon(x,y,time,element,scale=1){drawFlyingDragon(ctx,element,x,y+Math.sin(time*2)*3,130*scale,time);}
 
   function spell(x,y,kind,color,progress,span=90){
     ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=4;ctx.globalAlpha=Math.max(0,1-progress*.6);
@@ -100,6 +100,7 @@ export function mountMap(canvas, read, select) {
     ctx.globalAlpha=1;
   }
   const seen=new Map(), hpBefore=new Map(), floaters=[];
+  let battleVisualKey;
   function siegeCastles(state,b,time,w,h){
     const skin=castleSkins.find(c=>c.id===state.account.equipped.city),size=Math.min(310,w*.24),locations=[{x:w*.16,side:'ally',index:skin?.artIndex??null,units:b.allies},{x:w*.84,side:'enemy',index:1,units:b.enemies}];
     for(const fort of locations){const img=fort.index!==null&&castleArt.complete&&castleArt.naturalWidth?castleArt:cityArt,index=img===castleArt?fort.index:0;if(img.complete&&img.naturalWidth){ctx.drawImage(img,index%(img===castleArt?5:3)*img.naturalWidth/(img===castleArt?5:3),Math.floor(index/(img===castleArt?5:3))*img.naturalHeight/2,img.naturalWidth/(img===castleArt?5:3),img.naturalHeight/2,fort.x-size/2,h*.4-size*.7,size,size);}const max=fort.units.reduce((n,u)=>n+u.maxHp,0),hp=fort.units.reduce((n,u)=>n+u.hp,0);rect(ctx,fort.x-size*.4,h*.4-size*.75,size*.8,9,'#2B3055');rect(ctx,fort.x-size*.4,h*.4-size*.75,size*.8*hp/max,9,fort.side==='ally'?'#3E8E4A':'#B3262E');ctx.textAlign='center';ctx.font='bold '+Math.max(9,Math.min(13,w*.01))+'px "Mandate Pixel",monospace';ctx.fillStyle='#FFE9A0';ctx.fillText(fort.side==='ally'?'THÀNH QUÂN VƯƠNG':'THÀNH BOT',fort.x,h*.4+size*.32);}
@@ -107,11 +108,34 @@ export function mountMap(canvas, read, select) {
   }
   function battleScene(state,time,w,h){
     if(!state.battle)return;const b=state.battle;
-    if(['bot','hunt'].includes(b.mode)&&terrainArt.complete&&terrainArt.naturalWidth){ctx.drawImage(terrainArt,0,terrainArt.naturalHeight*.15,terrainArt.naturalWidth/3,terrainArt.naturalHeight*.7,0,0,w,h);}else if(backdrop.complete&&backdrop.naturalWidth){const r=Math.max(w/backdrop.naturalWidth,h/backdrop.naturalHeight);ctx.drawImage(backdrop,(w-backdrop.naturalWidth*r)/2,(h-backdrop.naturalHeight*r)/2,backdrop.naturalWidth*r,backdrop.naturalHeight*r);}else rect(ctx,0,0,w,h,'#A38B64');
-    rect(ctx,0,0,w,h,'#1B1F3B');poly(ctx,[[0,h*.45],[w*.5,h*.30],[w,h*.45],[w,h],[0,h]],'#A38B64');
+    const visualKey = [b.feedbackId,b.mode,b.stage,b.encounter].join(':');
+    if (battleVisualKey !== visualKey) {
+      battleVisualKey = visualKey;
+      seen.clear();
+      hpBefore.clear();
+      floaters.length = 0;
+    }
+    const floor = Math.max(0, (b.stage || 1) - 1);
+    const encounter = Math.max(0, (b.encounter || 1) - 1);
+    const site = botCities.find(city => city.id === b.botId) || wildlifeNodes.find(node => node.id === b.wildId);
+    const region = realmCities.find(city => city.id === (site?.cityId || activeWorldCity(state)));
+    const campaign = b.mode === 'campaign';
+    const panel = campaign ? (floor + encounter) % 3 : ({shu:0,wei:1,wu:2})[region?.faction] ?? 0;
+    if (terrainArt.complete && terrainArt.naturalWidth) {
+      const tile = terrainArt.naturalWidth / 3;
+      const zoom = campaign ? .82 + (floor * 7 % 19) / 110 : .94;
+      const crop = tile * zoom;
+      const offset = campaign ? (floor * 37 % 101) / 100 : .5;
+      const sy = terrainArt.naturalHeight * .08;
+      ctx.drawImage(terrainArt, panel * tile + (tile - crop) * offset, sy, crop,
+        terrainArt.naturalHeight - sy, 0, 0, w, h);
+    } else if (backdrop.complete && backdrop.naturalWidth) {
+      ctx.drawImage(backdrop, 0, 0, w, h);
+    } else rect(ctx, 0, 0, w, h, '#506c45');
+    rect(ctx, 0, 0, w, h, '#12213730');
 
     const position=u=>{const row=Math.floor(u.slot/3),col=u.slot%3;return{x:w*(u.side==='ally'?[.4,.25,.1][row]:[.6,.75,.9][row]),y:h*(.32+col*.15)};};
-    for(const side of ['ally','enemy'])for(let slot=0;slot<9;slot++){const p=position({side,slot}),r=Math.min(55,w*.035);poly(ctx,[[p.x-r,p.y+12],[p.x,p.y-r*.35],[p.x+r,p.y+12],[p.x,p.y+r*.6]],side==='ally'?'#C3C8D8':'#F0C8A0');}
+    for(const side of ['ally','enemy'])for(let slot=0;slot<9;slot++){const p=position({side,slot}),r=Math.min(55,w*.035);poly(ctx,[[p.x-r,p.y+12],[p.x,p.y-r*.35],[p.x+r,p.y+12],[p.x,p.y+r*.6]],side==='ally'?'#c3dfff4a':'#ffd8a64a');}
     const fighters=[...b.allies,...b.enemies];canvas.feedbackPositions=Object.fromEntries(fighters.map(u=>[u.key,{...position(u),y:position(u).y-70}]));
     for(const e of b.events){if(!seen.has(e.serial))seen.set(e.serial,time);}
     if(seen.size>250)for(const [id,t]of seen)if(time-t>4)seen.delete(id);
@@ -140,14 +164,45 @@ export function mountMap(canvas, read, select) {
       if(e.skillId){drawSkillVfx(ctx,e,age,ap,fighters.filter(u=>e.targets?.includes(u.key)).map(position),w,h);continue;}
       drawSkillVfx(ctx,e.kind==='attack'?{...e,skillId:'strike-'+e.actor,skillName:'Trảm',kind:'slash'}:e,age,ap,fighters.filter(u=>e.targets?.includes(u.key)).map(position),w,h);
     }
-    const orbit=time*.6,dx=w*(.26+Math.cos(orbit)*.14),dy=h*(.19+Math.sin(orbit)*.025);ctx.save();ctx.globalAlpha=.78;ctx.translate(dx,dy);ctx.rotate(Math.sin(orbit)*.12);dragon(0,0,time,b.dragon||state.dragon,.7);ctx.restore();if(b.dragonEnergy<12){ctx.strokeStyle='#D6E6FF';ctx.lineWidth=3;for(const u of b.allies.filter(u=>u.hp>0)){const p=position(u);ctx.beginPath();ctx.ellipse(p.x,p.y+12,50,20,0,0,7);ctx.stroke();}}
+    const motion = state.feedback?.reduceMotion ? 0 : time;
+    const orbit = motion * .85;
+    const blessing = b.events.findLast(event => event.kind === 'dragon');
+    const age = blessing ? time - seen.get(blessing.serial) : Infinity;
+    const pulse = Math.max(0, 1 - age / 1.5);
+    const allies = b.allies.filter(unit => unit.hp > 0);
+    const formation = allies.map(position);
+    const low = Math.min(h * .32, ...formation.map(p => p.y));
+    const high = Math.max(h * .47, ...formation.map(p => p.y));
+    const dx = w * (.25 + Math.cos(orbit) * .18);
+    const dy = (low + high) / 2 - h * (.12 + pulse * .07) + Math.sin(orbit) * (high - low) * .42;
+    drawFlyingDragon(ctx, b.dragon || state.dragon, dx, dy, Math.min(195, w * .12), motion, {
+      yaw: orbit + Math.PI / 2,
+      pitch: Math.cos(orbit) * .055
+    });
+    if (pulse > 0) {
+      ctx.save();
+      ctx.globalAlpha = pulse;
+      ctx.strokeStyle = '#ffe5a6';
+      ctx.lineWidth = 3;
+      for (const unit of allies) {
+        const p = position(unit), radius = 38 + (1 - pulse) * 28;
+        ctx.beginPath();
+        ctx.ellipse(p.x, p.y + 12, radius, radius * .32, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        for (let i = 0; i < 8; i++) {
+          const angle = i * Math.PI / 4;
+          rect(ctx, p.x + Math.cos(angle) * radius, p.y - (1 - pulse) * 75 + Math.sin(angle) * 13, 4, 4, '#fff3c3');
+        }
+      }
+      ctx.restore();
+    }
   }
-  function transform(w,h,city){if(city){const layout=cityCameraLayout(w,h,camera,matchMedia('(pointer:coarse)').matches);camera.x=layout.x;camera.y=layout.y;camera.zoom=layout.zoom;return layout;}const view=read().view;if(view==='region'){const layout=regionCameraLayout(w,h,camera);camera.x=layout.x;camera.y=layout.y;camera.zoom=layout.zoom;return layout;}const fit=city?Math.min((w-220)/3100,(h-210)/1750):view==='region'?Math.min((w-320)/1550,(h-250)/1100):Math.min((w-240)/1060,(h-230)/800);const z=fit*camera.zoom;const mx=city?0:view==='world'?-10:0,my=city?570:view==='world'?470:370;const maxX=Math.max(80,(1700*z-(w-300))/2+80),maxY=Math.max(60,(1000*z-(h-250))/2+60);camera.x=Math.max(-maxX,Math.min(maxX,camera.x));camera.y=Math.max(-maxY,Math.min(maxY,camera.y));return{z,ox:w/2-mx*z+camera.x,oy:h/2+35-my*z+camera.y};}
+  function transform(w,h,city){if(city){const layout=cityCameraLayout(w,h,camera,matchMedia('(pointer:coarse)').matches);camera.x=layout.x;camera.y=layout.y;camera.zoom=layout.zoom;return layout;}const view=read().view;if(view==='region'){const layout=regionCameraLayout(w,h,camera);camera.x=layout.x;camera.y=layout.y;camera.zoom=layout.zoom;return layout;}const fit=city?Math.min((w-220)/3100,(h-210)/1750):view==='region'?Math.min((w-320)/1550,(h-250)/1100):Math.min((w-28)/940,(h-92)/680);const z=fit*camera.zoom;const mx=city?0:view==='world'?-10:0,my=city?570:view==='world'?470:370;const maxX=Math.max(80,(1700*z-(w-300))/2+80),maxY=Math.max(60,(1000*z-(h-250))/2+60);camera.x=Math.max(-maxX,Math.min(maxX,camera.x));camera.y=Math.max(-maxY,Math.min(maxY,camera.y));return{z,ox:w/2-mx*z+camera.x,oy:h/2-my*z+camera.y};}
   function setMapZoom(value,anchor=null){const w=canvas.clientWidth,h=canvas.clientHeight,city=read().view==='city',bounded=['city','region'].includes(read().view),before=transform(w,h,city);camera.zoom=Math.max(bounded?1:.6,Math.min(bounded?3:2.6,value));if(anchor){const worldX=(anchor.x-before.ox)/before.z,worldY=(anchor.y-before.oy)/before.z,after=transform(w,h,city);camera.x+=anchor.x-(worldX*after.z+after.ox);camera.y+=anchor.y-(worldY*after.z+after.oy);}transform(w,h,city);}
   function draw(ms){if(disposed)return;if(read().view==='combat'&&feedback.isHitStopped()){frame=requestAnimationFrame(draw);return;}if(ms-lastFrame<(read().view==='combat'?16:33)){frame=requestAnimationFrame(draw);return;}lastFrame=ms;const{state,view,selected,motionDelta=0}=read(),time=ms/1000,w=canvas.clientWidth,h=canvas.clientHeight,city=view==='city';ctx.setTransform(pixelRatio,0,0,pixelRatio,0,0);ctx.imageSmoothingEnabled=false;hits.length=0;
     if(view==='combat'){battleScene(state,time,w,h);frame=requestAnimationFrame(draw);return;}
     if(view==='region'){rect(ctx,0,0,w,h,'#6B739E');const{z,ox,oy}=transform(w,h,false);ctx.save();ctx.translate(ox,oy);ctx.scale(z,z);if(state.inheritance.activeRealm)hits.push(...drawSecretRealm(ctx,state,time,{fighterArt,fighterA,fighterB}));else{hits.push(...drawRegionScene(ctx,state,time,cityArt,castleArt,z,motionDelta));hits.push(...drawHiddenGates(ctx,state,time,activeWorldCity(state)));}ctx.restore();drawWeather(ctx,w,h,time);frame=requestAnimationFrame(draw);return;}
-    if(view==='world'){rect(ctx,0,0,w,h,'#2B3055');const{z,ox,oy}=transform(w,h,false);ctx.save();ctx.translate(ox,oy);ctx.scale(z,z);hits.push(...drawRealmAtlas(ctx,state,time));ctx.restore();frame=requestAnimationFrame(draw);return;}
+    if(view==='world'){drawAtlasWater(ctx,w,h);const{z,ox,oy}=transform(w,h,false);ctx.save();ctx.translate(ox,oy);ctx.scale(z,z);hits.push(...drawRealmAtlas(ctx,state,time));ctx.restore();frame=requestAnimationFrame(draw);return;}
     const foundation=cachedImage('/assets/city-foundation-pixel.png'),groundKey=terrainArt.src+'|'+foundation.src;if(city&&terrainArt.complete&&terrainArt.naturalWidth&&(!cachedGroundTextured||!cachedCivicTrees&&foundation.complete||cachedGroundPaletteKey!==groundKey)){cityGround=cachedCityGround=bakeGround(true);cachedGroundPaletteKey=groundKey;}rect(ctx,0,0,w,h,city?'#7BC25F':'#7BC25F');const layout=transform(w,h,city),{z,ox,oy}=layout;ctx.save();ctx.translate(ox,oy);ctx.scale(z,z);if(city&&terrainArt.complete&&terrainArt.naturalWidth){const t=layout.terrain;ctx.drawImage(terrainArt,0,0,terrainArt.naturalWidth/3,terrainArt.naturalHeight,t.x,t.y,t.width,t.height);}ctx.drawImage(cityGround,-2048,-640);
     if(city){cityLife(ctx,iso,time,state,'ground');
       // Houses and civic ornaments make the scene a continuous inhabited city.

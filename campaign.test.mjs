@@ -4,6 +4,21 @@ import {kingdomInitial,validKingdomState,durableSave,dispatchMarch} from './king
 import {campaignNode,campaignReward,startCampaign,campaignTick,stopCampaign} from './campaign.mjs';
 import {chooseRealm,realmBonus,realmFactions,realmCities} from './realms.mjs';
 import {createTacticsBattle} from './tactics.mjs';
+import {selectLong} from './elements.mjs';
+
+test('sanctuary selection equips the squad and next tower floor while preserving the running floor',()=>{
+ let s=selectLong(kingdomInitial(),'Thủy');
+ assert.equal(s.squads.presets[s.squads.active].dragon,'Thủy');
+ s=startCampaign(s,1);
+ assert.equal(s.battle.dragon,'Thủy');
+ s=selectLong(s,'Mộc');
+ s.battle.winner='ally';
+ s=campaignTick(s,0);
+ assert.equal(s.battle.encounter,2);
+ assert.equal(s.battle.dragon,'Thủy');
+ s=stopCampaign(s);
+ assert.equal(startCampaign(s,1).battle.dragon,'Mộc');
+});
 
 function win(state){const s=structuredClone(state);let next=s;for(let wave=0;wave<3;wave++){for(const u of next.battle.enemies)u.hp=0;next=campaignTick(next,.1);}return next;}
 test('all 999 campaign stages have legal unique enemies and increasing rewards/difficulty',()=>{let last=0;for(let stage=1;stage<=999;stage++){const node=campaignNode(stage),r=campaignReward(stage);assert.ok(node.enemies.length>=3&&node.enemies.length<=9);assert.equal(new Set(node.enemies).size,node.enemies.length);assert.ok(node.heroLevel>=1&&node.heroLevel<=60);assert.ok(r.playerXP>last);last=r.playerXP;}assert.throws(()=>campaignNode(0));assert.throws(()=>campaignNode(1000));assert.throws(()=>campaignNode(1.5));assert.ok(campaignNode(999).enemyScale>campaignNode(1).enemyScale);});

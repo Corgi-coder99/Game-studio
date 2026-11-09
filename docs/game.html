@@ -254,7 +254,11 @@ html,body{overscroll-behavior:none;position:fixed;inset:0;touch-action:manipulat
 .touch-game #app .formation-help{display:block}
 .touch-game #app .formation-upper{display:block;min-width:0;min-height:0;overflow:hidden}
 .touch-game #app .carousel-formation .formation-stage{height:100%;padding:6px 6px 22px;display:flex;align-items:center}
-.touch-game #app .carousel-formation .formation-dragon{display:none}
+.touch-game #app .carousel-formation .formation-stage .formation-dragon{
+ position:relative;display:grid;place-items:center;left:auto;top:auto;flex:0 0 110px;width:110px;height:110px
+}
+.touch-game #app .carousel-formation .formation-dragon .elemental-dragon-art{width:100px;height:100px}
+.touch-game #app .carousel-formation .formation-stage .formation-board{flex:1;min-width:0}
 .touch-game #app .carousel-formation .formation-board{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:none;transform:none}
 .touch-game #app .carousel-formation .formation-cell{height:112px;display:grid;grid-template-columns:72px minmax(0,1fr);grid-template-rows:28px 62px;gap:5px;padding:6px;align-items:center;position:relative;justify-content:stretch}
 .touch-game #app .carousel-formation .formation-cell>span[data-inspect]{grid-row:1/3}
@@ -569,6 +573,69 @@ body.reduce-motion #app .summon-card,body.effects-minimal #app .summon-card,body
 @media(prefers-reduced-motion:no-preference){body:not(.reduce-motion):not(.effects-minimal) #app .doll-figure .character-splash-art {animation:mandate-breathe 4.2s ease-in-out infinite;transform-origin:50% 90%;}}
 @keyframes mandate-breathe {0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(-2px) scaleY(1.012)}}
 
+/* The dragon is a formation sprite. Keep its description button keyboard accessible. */
+#app .formation-stage button.formation-dragon {
+ background: transparent !important;
+ border: 0 !important;
+ box-shadow: none !important;
+ padding: 0;
+ z-index: 1;
+}
+#app .formation-stage button.formation-dragon:focus-visible {
+ outline: 2px solid #ffe9a0;
+ outline-offset: 3px;
+}
+
+/* First launch: a title scene and an accessible kingdom selection panel. */
+#app .realm-onboarding {
+ display: grid;
+ grid-template-columns: minmax(0, 1fr) minmax(0, 1.14fr);
+ align-content: center;
+ align-items: center;
+ gap: 72px;
+ padding: 72px 90px;
+ background: linear-gradient(90deg,#160e26a8 0%,#14152c29 49%,#1513299c 100%),
+  linear-gradient(0deg,#130f24df,transparent 50%),url('assets/hulao-pixel.png') center/cover;
+}
+#app .opening-title { color: #fff2c9; text-shadow: 0 4px #391f25, 0 8px 24px #100f24; }
+#app .opening-title > span { color: #ffdc91; font-size: 21px; font-weight: bold; letter-spacing: .32em; }
+#app .realm-onboarding .opening-title h1 {
+ color: #ffe7a1;
+ font: bold 108px/.89 Georgia,serif !important;
+ margin: 24px 0 30px;
+}
+#app .realm-onboarding .opening-title p { max-width: 500px; color: #fff2d9; font-size: 24px !important; line-height: 1.45; margin: 0; }
+#app .realm-onboarding > section {
+ width: 100%;
+ padding: 32px;
+ border: 2px solid #ce9f61;
+ background: linear-gradient(150deg,#202039f5,#10182bf5);
+ box-shadow: 0 24px 65px #110b1d9e,inset 0 0 0 4px #11162a;
+}
+#app .realm-onboarding > section > h2 { font: bold 44px/1.1 Georgia,serif; color: #fff1c8; margin: 12px 0; }
+#app .realm-onboarding > section > p { font-size: 17px; line-height: 1.5; }
+#app .realm-choices button { display: grid; justify-items: center; align-content: start; gap: 7px; padding: 12px; }
+#app .realm-choices button.selected {
+ background: linear-gradient(#544336,#262940) !important;
+ outline: 2px solid #f8ce7e;
+ box-shadow: inset 0 0 22px #edb95820,0 0 14px #e6ad4d35;
+}
+#app .realm-choices .opening-crest {
+ width: 94px;
+ height: 94px;
+ background: url('assets/castle-skins-pixel.png') var(--opening-crest-x) var(--opening-crest-y)/500% 200%;
+}
+#app .realm-choices h3 { font: bold 25px/1.05 Georgia,serif; color: #fff0c8; margin: 0; }
+#app .realm-choices b { font-size: 16px; }
+#app .realm-choices p { font-size: 14px; line-height: 1.35; margin: 0; }
+#app .realm-onboarding label,#app .realm-onboarding select,#app .realm-onboarding small { font-size: 16px; }
+.touch-game #app .realm-onboarding { gap: 34px; padding: 46px; grid-template-columns: .8fr 1.2fr; }
+.touch-game #app .realm-onboarding .opening-title h1 { font-size: 91px !important; }
+.touch-game #app .realm-onboarding > section { padding: 22px; }
+#app .story-dialogue-curtain:has([data-story-ack="embers-opening"]) {
+ background: linear-gradient(#160f2a7a,#160f2ac9),url('assets/hulao-pixel.png') center/cover;
+}
+
 /* Generated: node tools/sync-visual-theme.mjs. Font: VT323, SIL OFL 1.1.
 Copyright 2011, The VT323 Project Authors (peter.hull@oikoi.com)
 
@@ -820,6 +887,9 @@ function styleAnimationFrame(action,ageMs){const durations=visualTheme.animation
 
 // Translate historical system notices before the generic UI catalog replaces names.
 const mailPhrases=[
+ ['Chiến lợi và tài nguyên đang chờ nhận trong Hộp thư → Chiến lợi bí cảnh.','Resources are ready to claim under Hidden Realm Rewards.'],
+ ['Chiến lợi và bí kíp ','Loot and the martial manual '],
+ [' đang chờ nhận trong Hộp thư → Chiến lợi bí cảnh.',' are ready to claim under Hidden Realm Rewards.'],
  ['Hình ảo đã chịu đủ 5 lượt tấn công. Thành ở nguyên chỗ cũ; khóa di chuyển 60 giây.','The destination ghost took five attacks. The city stays at its origin; travel is blocked for 60 seconds.'],
  [' đã bị đánh bại',' was defeated'],
  ['Thành đã đến','The city arrived at'],['các thành địa phương mới đã xuất hiện.','new local cities have appeared.'],
@@ -831,7 +901,10 @@ const mailPhrases=[
  [' chặn cuộc tập kích của ',' intercepted a raid by '],[' tập kích ngoại vi, lấy ',' raided the outskirts and took '],[' (đồng minh đã bảo vệ một nửa).',' (allies protected half).'],['Giao chiến với ','Battle against '],['Thu thập +','Gathered +'],['kế hoạch ','plan '],[' quân, ',' troops, '],[' công trình.',' buildings.'],['Đội ','Army '],[' lương',' Food'],[' gỗ',' Wood'],[' đá',' Stone'],[' giây',' seconds'],[' lượt.',' hits.'],
  ['tập kích','raid'],['tổn thất','losses'],['bảo vệ','protected'],['thiệt hại','damage'],['chiến thắng','victory'],['thất bại','defeat']
 ].sort((a,b)=>b[0].length-a[0].length);
-function mailNoticeText(value){let text=String(value);for(const [from,to]of mailPhrases){const escaped=from.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),boundary=/[\p{L}\p{N}]$/u.test(from)?'(?=$|[^\\p{L}\\p{N}])':'';text=text.replace(new RegExp(escaped+boundary,'gu'),()=>to);}return text;}
+function mailNoticeText(value){let text=String(value);for(const [from,to]of mailPhrases){const escaped=from.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),boundary=/[\p{L}\p{N}]$/u.test(from)?'(?=$|[^\\p{L}\\p{N}])':'';text=text.replace(new RegExp(escaped+boundary,'gu'),()=>to);}return text.replace(/: plan (gather|train|build|defend|scout|raid), (\d+) troops, (\d+) buildings\.$/,(_,plan,troops,buildings)=>
+  ': '+({gather:'Gathering resources',train:'Training troops',build:'Building',defend:'Fortifying defenses',scout:'Scouting',raid:'Preparing a raid'})[plan]+
+  ' · '+troops+' troops · '+buildings+' buildings.');
+}
 
 const onlineEscape=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function createOnlineClient({changed,notify}){let snapshot=null,available=false,pending=false,closed=false,timer=null,sequence=0,drawCount=10;
@@ -1162,7 +1235,27 @@ function runePicture(index,name){return `<span class="rune-picture" style="--run
 function provincePicture(index,name='Cảnh quan'){return `<span class="province-picture" style="--province-x:${index%4*100/3}%;--province-y:${Math.floor(index/4)*100}%" role="img" aria-label="${name}"></span>`;}
 function drawProvinceProp(ctx,index,x,y,width){const img=cachedImage('assets/province-props-pixel.png');if(!img.complete||!img.naturalWidth)return;const sw=img.naturalWidth/4,sh=img.naturalHeight/2;ctx.drawImage(img,index%4*sw,Math.floor(index/4)*sh,sw,sh,x-width/2,y-width+12,width,width);}
 function dragonFrame(time){return styleAnimationFrame('idle',Math.max(0,time)*1000);}
-function drawFlyingDragon(ctx,element,x,y,size,time){const img=cachedImage('assets/dragon-flight-pixel.png');if(!img.complete||!img.naturalWidth)return;const sw=img.naturalWidth/7,sh=img.naturalHeight/4,index=Math.max(0,elementNames.indexOf(element));ctx.save();ctx.translate(x,y+Math.sin(time*Math.PI*2.5)*size*.025);ctx.rotate(Math.sin(time*2.1)*.035);const frame=dragonFrame(time);for(let strip=0;strip<24;strip++){const t=strip/24,offset=Math.sin(time*7-t*5)*size*.014*(1-t);ctx.drawImage(img,index*sw+t*sw,frame*sh,sw/24,sh,-size/2+t*size,-size/2+offset,size/24+.3,size);}ctx.restore();}
+// Each element uses the same painted poses with its own flight palette.
+const dragonFlightFilters=['none','hue-rotate(186deg)','hue-rotate(76deg) saturate(.64)','sepia(.48) saturate(.82)','grayscale(1) brightness(1.23)','sepia(.6) brightness(1.34)','hue-rotate(260deg) brightness(.75)'];
+function drawFlyingDragon(ctx,element,x,y,size,time,{yaw=0,pitch=0,launch=1}={}){
+ const column=Math.max(0,elementNames.indexOf(element));
+ const atlas=cachedImage('assets/fire-dragon-motion-pixel.png');
+ if(!atlas.complete||!atlas.naturalWidth)return;
+ const heading=Math.cos(yaw),direction=heading<0?1:-1;
+ const flightFrame=Math.floor(time*7)%4;
+ const launchFrame=Math.min(3,Math.floor(launch*4));
+ const frame=launch<1?launchFrame:4+flightFrame;
+ const sw=atlas.naturalWidth/4,sh=atlas.naturalHeight/2;
+ ctx.save();
+ ctx.translate(Math.round(x),Math.round(y));
+ ctx.rotate(pitch*direction);
+ ctx.scale(direction,1);
+ ctx.imageSmoothingEnabled=false;
+ ctx.filter=dragonFlightFilters[column];
+ const width=size*1.28,height=width*sh/sw;
+ ctx.drawImage(atlas,frame%4*sw,Math.floor(frame/4)*sh,sw,sh,-width/2,-height/2,width,height);
+ ctx.restore();
+}
 function drawCivilian(ctx,row,x,y,size,time,facing=1){const img=cachedImage('assets/village-motion-pixel.png');if(!img.complete||!img.naturalWidth)return;const sw=img.naturalWidth/4,sh=img.naturalHeight/3,frame=Math.floor(Math.max(0,time)*6)%4;ctx.save();ctx.translate(x,y);ctx.scale(facing,1);ctx.drawImage(img,frame*sw,row*sh,sw,sh,-size/2,-size,size,size);ctx.restore();}
 
 const cityGate={x:12,y:28,size:240};
@@ -1218,7 +1311,12 @@ const dragonCatalog=elementNames.map((element,i)=>({element,index:i,vip:i===5?13
 function canUseDragon(s,e){const d=dragonCatalog.find(d=>d.element===e);return Boolean(d&&(!d.vip||s.account?.claimedVip?.includes(d.vip)));}
 function initDragonSanctuary(s){s.dragonSanctuary??={ranks:{},fragments:{}};return s;}
 function validDragonSanctuary(s){const d=s.dragonSanctuary;if(d===undefined)return true;const plain=v=>v&&typeof v==='object'&&!Array.isArray(v);return plain(d)&&['ranks','fragments'].every(k=>plain(d[k])&&Object.entries(d[k]).every(([e,n])=>elementNames.includes(e)&&Number.isInteger(n)&&n>=0&&n<=(k==='ranks'?10:9999999)&&(k!=='ranks'||!n||canUseDragon(s,e))));}
-function selectLong(state,e){if(!canUseDragon(state,e))throw new Error('Nhận quà VIP tương ứng trước khi dùng long linh này.');const s=structuredClone(state);s.dragon=e;return s;}
+function selectLong(state,e){if(!canUseDragon(state,e))throw new Error('Nhận quà VIP tương ứng trước khi dùng long linh này.');const s=structuredClone(state);s.dragon=e;
+ const preset=s.squads?.presets[s.squads.active];
+ if(preset)preset.dragon=e;
+ // The pending selection applies to the next floor. A running floor owns its dragon snapshot.
+ if(s.campaign)s.campaign.dragon=e;
+ return s;}
 function upgradeLong(state,e){const s=initDragonSanctuary(structuredClone(state)),rank=s.dragonSanctuary.ranks[e]||0,cost=40*(rank+1);if(!canUseDragon(s,e)||rank>=10||(s.dragonSanctuary.fragments[e]||0)<cost)throw new Error('Chưa mở long linh, thiếu mảnh hoặc đã tối đa.');s.dragonSanctuary.fragments[e]-=cost;s.dragonSanctuary.ranks[e]=rank+1;return s;}
 
 function drawCityDecoration(ctx,index,x,y,width){const img=cachedImage('assets/city-life-pixel.png');if(!img.complete||!img.naturalWidth)return;const sw=img.naturalWidth/4,sh=img.naturalHeight/2,h=width*sh/sw;ctx.drawImage(img,index%4*sw,Math.floor(index/4)*sh,sw,sh,x-width/2,y-h+12,width,h);}
@@ -1229,7 +1327,20 @@ function cityLife(ctx,iso,time,state,layer){if(layer==='market'){const p=citySit
  // Four-frame workers only harvest after an actual production order.
  for(const [k,j]of Object.entries(state.production?.jobs||{})){if(!j)continue;const site=citySites.find(s=>s.id===k),home=cityHomes[k==='farm'?0:k==='wood'?2:3],p=(time*.11)%1,[x,y]=iso(home[0]+(site.x-home[0])*p,home[1]+(site.y-home[1])*p);drawCivilian(ctx,0,x,y,36,time,site.x>=home[0]?1:-1);const[a,b]=iso(site.x,site.y);for(let i=0;i<Math.min(4,Math.ceil(j.workers/8));i++)drawCivilian(ctx,Date.now()<j.endsAt?1:0,a+(i-1.5)*22,b+30,37,time+i*.15);}
  for(let i=0;i<18;i++){const p=(time*.05+i*.21)%1,[x,y]=iso(12,2+p*25);drawCivilian(ctx,0,x,y,29,time+i,i%2?1:-1);}
- const site=citySites.find(s=>s.id==='dragon'),[dx,dy]=iso(site.x,site.y),flying=Math.floor(time/18)%2===0,size=flying?145:105,x=dx+(flying?Math.sin(time*.23)*170:90),y=dy-(flying?155+Math.cos(time*.27)*35:25);drawFlyingDragon(ctx,state.dragon,x,y-size*.3,size,time);
+ const site = citySites.find(s => s.id === 'dragon'), [dx,dy] = iso(site.x,site.y);
+ const motion = state.feedback?.reduceMotion ? 0 : time;
+ const cycle = motion % 24;
+ const climb = Math.min(1,Math.max(0,(cycle-1)/2));
+ const landing = Math.min(1,Math.max(0,(cycle-21)/3));
+ const lift = Math.sin(climb*Math.PI/2)*(1-landing*landing);
+ const angle = Math.max(0,Math.min(1,(cycle-3)/18))*Math.PI*2;
+ const x = dx + Math.sin(angle)*490;
+ const y = dy-48-lift*(360+(1-Math.cos(angle))*60);
+ drawFlyingDragon(ctx,state.dragon,x,y,145+lift*45,motion,{
+  yaw:angle,
+  pitch:Math.sin(angle)*.055,
+  launch:climb===0?0:climb*(1-landing)
+ });
  for(let i=0;i<2;i++){const x=-800+((time*28+i*720)%1800),y=100+Math.sin(time*.2+i)*30;drawCivilian(ctx,2,x,y,65,time+i);}}
 
 function drawSkinAura(ctx,index,x,y,size,time){if(!index)return;const colors=['#C3C8D8','#8FB4F2','#FFE9A0','#D6E6FF','#C4EE8F','#8FB4F2','#F2C14E','#FFE9A0','#E9ECF5','#C07BFF'],color=colors[index]||colors[1],r=size*.45;ctx.save();ctx.globalCompositeOperation='lighter';ctx.strokeStyle=color;ctx.globalAlpha=.5;ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(x,y+12,r,r*.36,0,0,7);ctx.stroke();if(index>=6){const g=ctx.createLinearGradient(x,y+10,x,y-size*1.2);g.addColorStop(0,color+'88');g.addColorStop(1,color+'00');ctx.fillStyle=g;for(let i=0;i<18;i++){const a=time*.25+i*1.256,dx=Math.cos(a)*r*.75;ctx.beginPath();ctx.moveTo(x+dx-8,y);ctx.lineTo(x+dx+8,y);ctx.lineTo(x+dx*1.3+25,y-size*(.9+Math.sin(a)*.15));ctx.lineTo(x+dx*1.3-25,y-size*(.9+Math.sin(a)*.15));ctx.fill();}}for(let i=0;i<14;i++){const a=i*2.399+time*.4,q=(time*.25+i*.12)%1;ctx.globalAlpha=(1-q)*.8;ctx.fillStyle=color;ctx.fillRect(x+Math.cos(a)*r,y-Math.sin(q*Math.PI/2)*size*.85,3,5);}ctx.restore();}
@@ -1964,7 +2075,7 @@ const inheritNumber=n=>Math.floor(n).toLocaleString('en-US');
 function inheritancePage(s){const v=s.inheritance;return `<section class="page-title"><div><span class="eyebrow">BÍ CẢNH · ĐẠO THỐNG TRUYỀN THỪA</span><h1>Tầm tiên, vấn đạo.</h1><p>Thu thập ngoài thành để tìm mảnh bản đồ. Mảnh chỉ đúng cổng ẩn gần cổng không gian; thắng BOSS rồi nhận toàn bộ chiến lợi qua Hộp thư.</p></div><button class="outline-button" data-view="region">Đi thu thập tài nguyên</button></section><div class="inheritance-summary"><span>Mảnh bản đồ: ${v.fragments.length}/6</span><span>Bí cảnh đã tìm: ${v.discovered.length}/6</span><span>BOSS đã thắng: ${v.cleared.length}/6</span><span>Bí kíp đã nhận: ${v.manuals.length}/6</span></div><section class="secret-realms-grid">${secretRealms.map(r=>{const found=v.discovered.includes(r.id),cleared=v.cleared.includes(r.id),book=inheritanceManuals.find(m=>m.id===r.manualId);return `<article class="secret-realm-card ${found?'discovered':'undiscovered'}"><span class="secret-gate-icon">⌘</span><span class="eyebrow">BÍ CẢNH ${found?'ĐÃ HIỆN':'ẨN GIẤU'}</span><h2>${r.name}</h2><p>${found?'Cổng gần '+realmCities.find(c=>c.id===r.cityId).name+' · Tọa độ ('+r.x+', '+r.y+').':'Chưa xác định vị trí. Khám phá các điểm tài nguyên để tìm mảnh bản đồ.'}</p><small>BOSS: ${r.bossName} · Cấp ${r.level}<br>Truyền thừa: ${book.name}</small><button class="${found?'gold-button':'outline-button'} full" data-enter-secret="${r.id}" ${!found||s.march||s.worldAI.expedition||s.battle&&!s.battle.winner?'disabled':''}>${!found?'Cần mảnh bản đồ':cleared?'Qua cổng · BOSS đã thắng':'Qua cổng ẩn'}</button></article>`;}).join('')}</section><section class="manual-library"><h2>Bí kíp kỹ năng truyền thừa</h2><p>Một bí kíp đã học mở dùng cho mọi tướng. Mỗi tướng có một ô truyền thừa riêng, có thể dùng cùng bí kíp trên nhiều tướng. Không thay thế 3–4 chiêu chủ động hoặc bị động VIP.</p><div>${inheritanceManuals.map(m=>{const own=v.manuals.includes(m.id);return `<article class="manual-card ${own?'owned':''}"><div class="manual-card-heading">${skillIcon(m)}<div><h3>${m.name}</h3><small>Ô truyền thừa · ${Math.round(m.cost*100)} mana/nộ · Hồi ${m.cooldown}s</small></div></div><p>${m.description}</p><b>${own?'✓ Đã học':'Chưa nhận bí kíp'}</b>${own?`<label>Truyền thừa cho<select id="manual-hero-${m.id}">${s.owned.map(id=>`<option value="${id}">${characterById[id].name}</option>`).join('')}</select></label><button class="gold-button full" data-teach-manual="${m.id}" ${s.march||s.worldAI.expedition||s.battle&&!s.battle.winner?'disabled':''}>Gắn vào ô truyền thừa</button>`:'<button class="outline-button full" data-view="mail" data-open-parcels>Kiểm tra chiến lợi trong hộp thư</button>'}</article>`;}).join('')}</div></section>`;}
 function secretPanel(s){const r=secretRealms.find(r=>r.id===s.inheritance.activeRealm),manual=inheritanceManuals.find(m=>m.id===r.manualId),busy=s.march||s.worldAI.expedition||s.battle&&!s.battle.winner;return `<span class="eyebrow">BÍ CẢNH · CỔNG ẨN</span><h2>${r.name}</h2><div class="secret-gate-icon">⌘</div><p>Vị trí: gần ${realmCities.find(c=>c.id===r.cityId).name} (${r.x}, ${r.y}).</p><h3>${r.bossName} · Cấp ${r.level}</h3><p>BOSS trấn giữ ${manual.name}. Toàn bộ vật phẩm, EXP và bí kíp được gửi vào chiến lợi trong hộp thư sau khi thắng, chưa cộng ngay vào túi.</p>${skillIcon(manual)}<p>${manual.description}</p><button class="gold-button full" data-secret-boss="${r.id}" ${busy?'disabled':''}>Thách đấu BOSS</button>${s.battle?.mode==='secret'&&!s.battle.winner?'<button class="outline-button full" data-view="combat">Tiếp tục trận BOSS</button>':''}<button class="outline-button full" data-leave-secret ${busy?'disabled':''}>Rời bí cảnh qua cổng</button><button class="outline-button full" data-view="mail" data-open-parcels>Chiến lợi bí cảnh trong hộp thư</button><button class="text-button" data-view="inheritance">Mảnh bản đồ & bí kíp</button>`;}
 function inheritanceInventory(s){const v=s.inheritance;return `<section class="paper-panel"><h2>Mảnh bản đồ đã tìm</h2>${v.fragments.length?v.fragments.map(id=>{const r=secretRealms.find(r=>r.id===id);return `<div class="fragment-row"><b>Mảnh bản đồ · ${r.name} · ×1</b><p>Chỉ chính xác cổng ẩn gần ${realmCities.find(c=>c.id===r.cityId).name} tại (${r.x}, ${r.y}). Không tiêu hao khi dùng.</p><button class="outline-button" data-enter-secret="${r.id}">Đến cổng</button></div>`;}).join(''):'<p>Chưa tìm thấy mảnh. Các mảnh được giấu trong điểm thu thập trên bản đồ khu vực.</p>'}</section><section class="paper-panel"><h2>Bí kíp đã nhận</h2>${v.manuals.length?v.manuals.map(id=>{const m=inheritanceManuals.find(m=>m.id===id);return `<div class="fragment-row">${skillIcon(m)}<h3>${m.name} · ×1</h3><p>${m.description}</p></div>`;}).join(''):'<p>Chưa có bí kíp. Phải thắng BOSS và nhận chiến lợi qua hộp thư.</p>'}<button class="gold-button" data-view="inheritance">Thư viện & ô truyền thừa</button></section>`;}
-function secretParcelPage(s){const parcels=s.mailbox.parcels||[];return `<section class="secret-parcels"><h2>Chiến lợi bí cảnh</h2><p>Vật phẩm BOSS chỉ vào túi sau khi nhận tại đây. Bí kíp là phần thưởng lần đầu; đánh lại vẫn nhận tài nguyên qua thư.</p>${parcels.slice().reverse().map(p=>{const r=secretRealms.find(r=>r.id===p.realmId),m=inheritanceManuals.find(m=>m.id===p.manualId);return `<article class="secret-parcel ${p.claimed?'claimed':''}"><div><span class="eyebrow">CHIẾN LỢI #${p.id}</span><h3>${r.name}</h3>${m?`<div class="manual-card-heading">${skillIcon(m)}<b>${m.name} · ×1</b></div>`:''}<p>${inheritNumber(p.reward.coins)} ngọc · ${inheritNumber(p.reward.food)} lương · ${inheritNumber(p.reward.wood)} gỗ · ${inheritNumber(p.reward.stone)} đá · ${p.reward.essence} tinh hoa<br>${p.reward.playerXP} EXP quân vương · ${p.reward.heroXP} EXP cho từng tướng tham chiến.</p></div><button class="${p.claimed?'outline-button':'gold-button'}" data-claim-secret-parcel="${p.id}" ${p.claimed?'disabled':''}>${p.claimed?'✓ Đã nhận':'Nhận toàn bộ chiến lợi'}</button></article>`;}).join('')||'<div class="paper-panel"><p>Chưa có chiến lợi. Tìm mảnh bản đồ, vượt cổng ẩn và đánh bại BOSS để nhận thư.</p><button class="outline-button" data-view="inheritance">Khám phá bí cảnh</button></div>'}</section>`;}
+function secretParcelPage(s){const parcels=s.mailbox.parcels||[];return `<section class="secret-parcels"><h2>Hidden Realm Rewards</h2><p>Claim boss rewards here to add them to your inventory. The first victory grants a martial manual. Repeat victories grant resources.</p>${parcels.slice().reverse().map(p=>{const r=secretRealms.find(r=>r.id===p.realmId),m=inheritanceManuals.find(m=>m.id===p.manualId);return `<article class="secret-parcel ${p.claimed?'claimed':''}"><div><span class="eyebrow">REWARD #${p.id}</span><h3>${r.name}</h3>${m?`<div class="manual-card-heading">${skillIcon(m)}<b>${m.name} · ×1</b></div>`:''}<p>${inheritNumber(p.reward.coins)} Jade · ${inheritNumber(p.reward.food)} Food · ${inheritNumber(p.reward.wood)} Wood · ${inheritNumber(p.reward.stone)} Stone · ${p.reward.essence} Essence<br>${p.reward.playerXP} Player XP · ${p.reward.heroXP} XP per participating hero.</p></div><button class="${p.claimed?'outline-button':'gold-button'}" data-claim-secret-parcel="${p.id}" ${p.claimed?'disabled':''}>${p.claimed?'✓ Claimed':'Claim All Rewards'}</button></article>`;}).join('')||'<div class="paper-panel"><p>No rewards yet. Find a map fragment, enter the hidden portal and defeat its boss to earn a reward.</p><button class="outline-button" data-view="inheritance">Explore Hidden Realms</button></div>'}</section>`;}
 
 const strategyFmt=n=>Math.floor(n).toLocaleString('en-US');
 const strategyEsc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -2414,15 +2525,19 @@ function instantRecallDefense(state,index){const s=structuredClone(state),e=acti
 
 const worldEscape=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const worldFmt=n=>Math.floor(n).toLocaleString('en-US');
-const aiPlanNames={gather:'Thu thập',train:'Huấn luyện',build:'Xây dựng',defend:'Củng cố phòng thủ',scout:'Trinh sát',raid:'Tập kích'};
-function regionToolbar(s,speed=1){if(s.inheritance.activeRealm){const r=secretRealms.find(r=>r.id===s.inheritance.activeRealm);return `<div class="region-heading"><b>${r.name}</b><small>BOSS ${r.bossName} · Cấp ${r.level}</small></div><div class="region-shortcuts"><button data-region-select="home">Thách đấu BOSS</button><button data-leave-secret>Rời bí cảnh</button><button data-speed>Tốc độ ×${speed}</button><button data-view="mail" data-open-parcels>Chiến lợi trong hộp thư</button></div>`;}const city=realmCities.find(c=>c.id===activeWorldCity(s)),e=activeDeployment(s);return `<div class="region-heading"><b>${city.name} · ${realmFactions[city.faction].name}</b><small>Heavenly Timing: ${heavenlyTiming().element} dominant · ${Math.ceil(heavenlyTiming().remainingMs/60000)} min</small><small>${e?'Đội khu vực: '+({marching:'Hành quân',gathering:'Thu thập',combat:'Công thành',returning:'Trở về'})[e.stage]:'Chọn mỏ tài nguyên, đàn thú, thành BOT hoặc cổng dịch chuyển'}</small></div><div class="region-shortcuts"><button data-region-select="portal">⌘ Cổng không gian</button><button data-view="relocation">Di chuyển thành</button><button data-view="world">⌖ Lãnh thổ Tam Quốc</button><button data-view="quests">▤ Nhiệm vụ & quà</button><button data-view="skins">♜ Skin thành</button><button data-view="squads">⚑ Ba đạo quân</button><button data-view="mail">✉ Hộp thư chiến tuyến</button><button data-speed>Tốc độ ×${speed}</button></div>`;}
-function regionPanel(s,id){if(s.inheritance.activeRealm)return secretPanel(s);if(id.startsWith('secret:')){const r=secretRealms.find(r=>r.id===id.slice(7));return `<h2>Cổng ẩn · ${r.name}</h2><p>Tọa độ (${r.x}, ${r.y}) đã được xác nhận bằng mảnh bản đồ.</p><button class="gold-button full" data-enter-secret="${r.id}">Vượt cổng vào bí cảnh</button>`;}const city=activeWorldCity(s),w=s.worldAI,e=activeDeployment(s),busy=selectedSquadBusy(s),node=regionalResources.find(n=>n.id===id),bot=w.bots.find(b=>b.id===id),base=bot&&botCities.find(b=>b.id===id);let panel='';
- if(id==='portal')panel=`<button class="map-object-picture" data-description="portal:world">${itemPicture('portal')}</button><h2>Cổng không gian</h2><button class="gold-button full" data-view="relocation">Di chuyển toàn thành tới tọa độ</button><p>Dịch chuyển khu vực quan sát và xuất quân đến các thành trên lãnh thổ. Quốc gia và thành gốc được giữ nguyên.</p><label>Điểm đến<select id="portal-city">${realmCities.filter(c=>c.id!==city).map(c=>`<option value="${c.id}">${c.name} · ${realmFactions[c.faction].name}</option>`).join('')}${secretRealms.filter(r=>s.inheritance.discovered.includes(r.id)).map(r=>`<option value="secret:${r.id}">CỔNG ẨN · ${r.name}</option>`).join('')}</select></label><button class="gold-button full" data-teleport ${busy||w.clock<w.portalReadyAt?'disabled':''}>${w.clock<w.portalReadyAt?'Hồi cổng '+Math.ceil(w.portalReadyAt-w.clock)+'s':'Dịch chuyển miễn phí'}</button>`;
- else if(id.startsWith('wild-')){const animal=wildlifeNodes.find(n=>n.id===id),stock=animal&&w.wild[id];if(!animal||!stock)return '';panel=`<div class="map-object-picture">${wildlifeArt(animal.species)}</div><h2>${animal.name} · Cấp ${animal.level}</h2><p>${stock.remaining-stock.reserved} con chưa được giao săn · Thắng trận nhận ${animal.food} thức ăn trước buff. Hết đàn sẽ hồi sau 90 giây chơi.</p><p>Đội hình chiến đấu theo lượt. Có thể bị thương; cứu quân tại Linh Dược Viện. Đi săn dùng một trong ba đội thế giới, chạy tháp vẫn độc lập.</p><button data-view="squads">Chọn đội ${s.squads.active+1}</button><button class="gold-button full" data-hunt-wildlife="${id}" ${busy||stock.remaining<=stock.reserved||squadMarchUnits(s)<60?'disabled':''}>Xuất quân săn bắt · ${squadMarchUnits(s)} quân</button>`;}
- else if(node){const stock=w.nodes[node.id];panel=`<button class="map-object-picture" data-description="node:${node.id}">${worldSiteArt(node.kind)}</button><h2>${({food:'Cánh đồng',wood:'Rừng trúc',stone:'Mỏ đá'})[node.kind]} cấp ${node.level}</h2><p>Còn ${worldFmt(stock.remaining)} ${({food:'lương',wood:'gỗ',stone:'đá'})[node.kind]}. Thu tối đa ${node.level*500}/lượt trước buff linh thú. Cạn sẽ tái tạo sau 60s thời gian chơi.</p><button data-view="squads">Chọn đội ${s.squads.active+1} · ${deployments(s).length}/3 đang triển khai</button><button class="gold-button full" data-gather-region="${node.id}" ${busy||!stock.remaining||s.regiments[s.troopType]<60?'disabled':''}>Gửi 60 quân thu thập</button>`;}
- else if(bot)panel=`<span class="eyebrow">THÀNH BOT · AI OFFLINE</span><h2>${bot.generatedName||base.name}</h2><p>Cấp ${bot.level}/100 · ${realmFactions[base.faction].name}</p><dl class="bot-info"><div><dt>Quân số</dt><dd>${bot.troops}</dd></div><div><dt>Công trình</dt><dd>${bot.buildings}</dd></div><div><dt>Kế hoạch</dt><dd>${aiPlanNames[bot.plan]}</dd></div><div><dt>Quan hệ</dt><dd>${bot.relation}${bot.relation>=20?' · Đồng minh':bot.relation<=-40?' · Thù địch':''}</dd></div></dl><p>AI tự thu thập, xây, luyện quân và đổi binh chủng sau thất bại. Thù địch cao có thể tập kích ngoại vi khi đủ quân; kết giao để được hỗ trợ.</p><button class="gold-button full" data-attack-bot="${bot.id}" ${busy||squadMarchUnits(s)<60?'disabled':''}>Công thành · ${squadMarchUnits(s)} quân</button><button class="outline-button full" data-view="allocation">Phân bổ & tự điền quân</button><div class="bot-diplomacy"><button data-bot-action="scout" data-bot-id="${bot.id}">Trinh sát</button><button data-bot-action="trade" data-bot-id="${bot.id}" ${s.resources.wood<100?'disabled':''}>Đổi 100 gỗ → 120 lương</button><button data-bot-action="gift" data-bot-id="${bot.id}" ${s.resources.food<200?'disabled':''}>Kết giao · 200 lương</button></div>`;
- else panel=`<h2>Thành quân vương</h2>${castleSkinArt(s.account.equipped.city)}<p>Đại điện cấp ${s.levels.hall} · ${s.account.name}</p><button class="gold-button full" data-view="city">Vào thành</button><button class="outline-button full" data-view="skins">Skin & hiệu ứng</button>`;
- return panel+`${id==='home'||bot?`<section class="subpanel"><h3>City Attack & Defense</h3><p>Merit: ${s.worldBoss.merit} · Reserve troops: ${s.troops}</p>${bot?`<p>Enemy defense: ${bot.troops} troops. Resources can be looted only after defenders are depleted.</p>`:''}${s.squads.presets.map((p,i)=>{const job=activeDeployment(s,i);return `<p>Squad ${i+1}: ${p.formation.filter(Boolean).length}/5 heroes · ${job?job.kind+' / '+job.stage:'Available'}</p><button data-activate-squad="${i}">Select Squad ${i+1}</button>`;}).join('')}${id==='home'?'<button data-station-defense>Station Selected Squad in Defense</button>':''}<button data-view="squads">Manage Armies / Instant Recall</button></section>`:''}${e?`<section class="subpanel"><b>Đội ${e.units} quân · ${e.kind==='hunt'&&e.stage==='combat'?'Đang săn thú':({marching:'Đang hành quân',gathering:'Đang thu thập',combat:'Đang công thành',guarding:'Đang trấn thủ',returning:'Đang trở về'})[e.stage]}</b><button class="outline-button full" data-recall-region>Thu hồi đội</button>${e.stage==='combat'?`<button class="gold-button full" data-watch-squad="${e.squadId}">${e.kind==='hunt'?'Mở trận săn':'Mở công thành'}</button>`:''}</section>`:''}<section class="subpanel"><h3>Quanh ${realmCities.find(c=>c.id===city).name}</h3><div class="region-entity-list"><button data-region-select="home">♜ Thành của bạn</button>${regionalResources.filter(n=>n.cityId===city).map(n=>`<button data-region-select="${n.id}">${({food:'♧ Lương',wood:'♠ Gỗ',stone:'◆ Đá'})[n.kind]} · Lv.${n.level}</button>`).join('')}${wildlifeNodes.filter(n=>n.cityId===city).map(n=>`<button data-region-select="${n.id}">${n.name} · Lv.${n.level} · Săn thức ăn</button>`).join('')}${botCities.filter(b=>b.cityId===city).map(b=>`<button data-region-select="${b.id}">⚑ ${b.name} · Lv.${w.bots.find(t=>t.id===b.id).level}</button>`).join('')}<button data-region-select="portal">⌘ Cổng không gian</button></div></section><section class="subpanel"><h3>Tin trong vùng</h3>${w.events.slice(-6).reverse().map(t=>`<p class="world-event">${worldEscape(t)}</p>`).join('')||'<p>BOT đang chuẩn bị kinh tế và quân đội.</p>'}</section>`;
+const aiPlanNames={gather:'Gather',train:'Train',build:'Build',defend:'Fortify Defenses',scout:'Scout',raid:'Raid'};
+function regionToolbar(s,speed=1){if(s.inheritance.activeRealm){const r=secretRealms.find(r=>r.id===s.inheritance.activeRealm);return `<div class="region-heading"><b>${r.name}</b><small>BOSS ${r.bossName} · Level ${r.level}</small></div><div class="region-shortcuts"><button data-region-select="home">Challenge Boss</button><button data-leave-secret>Leave Hidden Realm</button><button data-speed>Speed ×${speed}</button><button data-view="mail" data-open-parcels>Rewards in Mailbox</button></div>`;}const city=realmCities.find(c=>c.id===activeWorldCity(s)),e=activeDeployment(s);return `<div class="region-heading"><b>${city.name} · ${realmFactions[city.faction].name}</b><small>Heavenly Timing: ${heavenlyTiming().element} dominant · ${Math.ceil(heavenlyTiming().remainingMs/60000)} min</small><small>${e?'Regional Squad: '+({marching:'Marching',gathering:'Gather',combat:'Besiege',returning:'Returning'})[e.stage]:'Select a resource site, a herd, an AI city or a portal'}</small></div><div class="region-shortcuts"><button data-region-select="portal">⌘ Portal</button><button data-view="relocation">Relocate City</button><button data-view="world">⌖ Three Kingdoms</button><button data-view="quests">▤ Missions & Rewards</button><button data-view="skins">♜ City Skins</button><button data-view="squads">⚑ World Squads</button><button data-view="mail">✉ Battle Mailbox</button><button data-speed>Speed ×${speed}</button></div>`;}
+function regionPanel(s,id){if(s.inheritance.activeRealm)return secretPanel(s);if(id.startsWith('secret:')){const r=secretRealms.find(r=>r.id===id.slice(7));return `<h2>Hidden Gate · ${r.name}</h2><p>Map fragments revealed coordinates (${r.x}, ${r.y}).</p><button class="gold-button full" data-enter-secret="${r.id}">Enter Hidden Realm</button>`;}const city=activeWorldCity(s),w=s.worldAI,e=activeDeployment(s),busy=selectedSquadBusy(s),node=regionalResources.find(n=>n.id===id),bot=w.bots.find(b=>b.id===id),base=bot&&botCities.find(b=>b.id===id);let panel='';
+ if(id==='portal')panel=`<button class="map-object-picture" data-description="portal:world">${itemPicture('portal')}</button><h2>Portal</h2><button class="gold-button full" data-view="relocation">Relocate Your City</button><p>Travel to another region to scout and deploy troops. Your home city and faction stay the same.</p><label>Destination<select id="portal-city">${realmCities.filter(c=>c.id!==city).map(c=>`<option value="${c.id}">${c.name} · ${realmFactions[c.faction].name}</option>`).join('')}${secretRealms.filter(r=>s.inheritance.discovered.includes(r.id)).map(r=>`<option value="secret:${r.id}">HIDDEN GATE · ${r.name}</option>`).join('')}</select></label><button class="gold-button full" data-teleport ${busy||w.clock<w.portalReadyAt?'disabled':''}>${w.clock<w.portalReadyAt?'Portal ready in '+Math.ceil(w.portalReadyAt-w.clock)+'s':'Travel for Free'}</button>`;
+ else if(id.startsWith('wild-')){const animal=wildlifeNodes.find(n=>n.id===id),stock=animal&&w.wild[id];if(!animal||!stock)return '';panel=`<div class="map-object-picture">${wildlifeArt(animal.species)}</div><h2>${animal.name} · Level ${animal.level}</h2><p>${stock.remaining-stock.reserved} available to hunt. A successful hunt yields ${animal.food} food before bonuses. Depleted herds return after 90 seconds of active play.</p><p>Hunts are turn based and use one world squad. Heal wounded troops at the Infirmary. Tower battles use a separate squad.</p><button data-view="squads">Select Squad ${s.squads.active+1}</button><button class="gold-button full" data-hunt-wildlife="${id}" ${busy||stock.remaining<=stock.reserved||squadMarchUnits(s)<60?'disabled':''}>Send Hunting Party · ${squadMarchUnits(s)} troops</button>`;}
+ else if(node){
+  const stock=w.nodes[node.id], resource=node.kind;
+  const siteName={food:'Farmland',wood:'Bamboo Forest',stone:'Quarry'}[resource];
+  panel=`<button class="map-object-picture" data-description="node:${node.id}">${worldSiteArt(resource)}</button><h2>${siteName} Level ${node.level}</h2><p>${worldFmt(stock.remaining)} ${resource} remaining. Each trip gathers up to ${worldFmt(node.level*500)} before spirit beast bonuses. Depleted sites replenish after 60 seconds of active play.</p><button data-view="squads">Select Squad ${s.squads.active+1} · ${deployments(s).length}/3 deployed</button><button class="gold-button full" data-gather-region="${node.id}" ${busy||!stock.remaining||s.regiments[s.troopType]<60?'disabled':''}>Send 60 Troops to Gather</button>`;
+ }
+ else if(bot)panel=`<span class="eyebrow">AI CITY · OFFLINE</span><h2>${bot.generatedName||base.name}</h2><p>Cấp ${bot.level}/100 · ${realmFactions[base.faction].name}</p><dl class="bot-info"><div><dt>Troops</dt><dd>${bot.troops}</dd></div><div><dt>Buildings</dt><dd>${bot.buildings}</dd></div><div><dt>Plan</dt><dd>${aiPlanNames[bot.plan]}</dd></div><div><dt>Relations</dt><dd>${bot.relation}${bot.relation>=20?' · Ally':bot.relation<=-40?' · Hostile':''}</dd></div></dl><p>AI cities gather resources, build, train and change troop types after defeats. Hostile cities may raid when they have enough troops. Befriend them to gain support.</p><button class="gold-button full" data-attack-bot="${bot.id}" ${busy||squadMarchUnits(s)<60?'disabled':''}>Besiege · ${squadMarchUnits(s)} troops</button><button class="outline-button full" data-view="allocation">Troop Allocation & Auto Fill</button><div class="bot-diplomacy"><button data-bot-action="scout" data-bot-id="${bot.id}">Scout</button><button data-bot-action="trade" data-bot-id="${bot.id}" ${s.resources.wood<100?'disabled':''}>Trade 100 Wood for 120 Food</button><button data-bot-action="gift" data-bot-id="${bot.id}" ${s.resources.food<200?'disabled':''}>Offer Friendship · 200 Food</button></div>`;
+ else panel=`<h2>Your City</h2>${castleSkinArt(s.account.equipped.city)}<p>Grand Hall Level ${s.levels.hall} · ${s.account.name}</p><button class="gold-button full" data-view="city">Enter City</button><button class="outline-button full" data-view="skins">City Skins & Effects</button>`;
+ return panel+`${id==='home'||bot?`<section class="subpanel"><h3>City Attack & Defense</h3><p>Merit: ${s.worldBoss.merit} · Reserve troops: ${s.troops}</p>${bot?`<p>Enemy defense: ${bot.troops} troops. Resources can be looted only after defenders are depleted.</p>`:''}${s.squads.presets.map((p,i)=>{const job=activeDeployment(s,i);return `<p>Squad ${i+1}: ${p.formation.filter(Boolean).length}/5 heroes · ${job?job.kind+' / '+job.stage:'Available'}</p><button data-activate-squad="${i}">Select Squad ${i+1}</button>`;}).join('')}${id==='home'?'<button data-station-defense>Station Selected Squad in Defense</button>':''}<button data-view="squads">Manage Armies / Instant Recall</button></section>`:''}${e?`<section class="subpanel"><b>${e.units} troops · ${e.kind==='hunt'&&e.stage==='combat'?'Hunting':({marching:'Marching',gathering:'Gathering',combat:'Besieging',guarding:'Defending',returning:'Returning'})[e.stage]}</b><button class="outline-button full" data-recall-region>Recall Squad</button>${e.stage==='combat'?`<button class="gold-button full" data-watch-squad="${e.squadId}">${e.kind==='hunt'?'Watch Hunt':'Watch Siege'}</button>`:''}</section>`:''}<section class="subpanel"><h3>Around ${realmCities.find(c=>c.id===city).name}</h3><div class="region-entity-list"><button data-region-select="home">♜ Your City</button>${regionalResources.filter(n=>n.cityId===city).map(n=>`<button data-region-select="${n.id}">${({food:'♧ Food',wood:'♠ Wood',stone:'◆ Stone'})[n.kind]} · Lv.${n.level}</button>`).join('')}${wildlifeNodes.filter(n=>n.cityId===city).map(n=>`<button data-region-select="${n.id}">${n.name} · Lv.${n.level} · Hunt for Food</button>`).join('')}${botCities.filter(b=>b.cityId===city).map(b=>`<button data-region-select="${b.id}">⚑ ${b.name} · Lv.${w.bots.find(t=>t.id===b.id).level}</button>`).join('')}<button data-region-select="portal">⌘ Portal</button></div></section><section class="subpanel"><h3>Regional News</h3>${w.events.slice(-6).reverse().map(t=>`<p class="world-event">${worldEscape(t)}</p>`).join('')||'<p>Local AI cities are building their economies and armies.</p>'}</section>`;
 }
 function questsPage(s){const c=s.chronicle;return `<section class="page-title"><div><span class="eyebrow">QUÂN VƯƠNG CHIẾU LỆNH</span><h1>Nhiệm vụ & dấu ấn.</h1><p>Chơi tích lũy ${Math.floor(c.onlineSeconds/60)} phút. Thắng liên tiếp ${c.stats.winStreak}; thua liên tiếp ${c.stats.lossStreak}. Các kỷ lục được giữ khi chuỗi kết thúc.</p></div><button class="outline-button" data-view="region">Bản đồ khu vực</button></section><section class="paper-panel"><h2>Quà thời gian chơi</h2><p>Chỉ cộng lúc game đang mở và tab hiển thị. Quà chủ yếu là lương, gỗ, đá xây thành; nhận một lần cho mỗi mốc.</p><div class="time-gifts">${timeGiftMinutes.map(m=>{const done=c.claimedTime.includes(m),ready=c.onlineSeconds>=m*60,r=timeGiftReward(m);return `<article><b>${m<60?m+' phút':m/60+' giờ'}</b><p>${worldFmt(r.food)} lương · ${worldFmt(r.wood)} gỗ · ${worldFmt(r.stone)} đá</p><button class="${ready&&!done?'gold-button':'outline-button'}" data-time-gift="${m}" ${!ready||done?'disabled':''}>${done?'✓ Đã nhận':ready?'Nhận quà':'Còn '+Math.ceil((m*60-c.onlineSeconds)/60)+' phút'}</button></article>`;}).join('')}</div></section><section class="quest-board"><h2>Bảng nhiệm vụ</h2>${questCatalog.map(q=>{const progress=questProgress(s,q),done=c.claimedQuests.includes(q.id),ready=progress>=q.target;return `<article class="quest-row ${ready&&!done?'claimable':''}"><div><h3>${q.name}</h3><p>${worldFmt(Math.min(progress,q.target))} / ${worldFmt(q.target)} · ${worldFmt(q.resource)} lương/gỗ, ${worldFmt(q.resource*.7)} đá, ${worldFmt(q.resource*.05)} ngọc${q.title?' · Danh hiệu '+titleCatalog[q.title]:''}${q.skin?' · Skin '+castleSkins.find(c=>c.id===q.skin).name:''}</p><progress value="${progress}" max="${q.target}"></progress></div><button class="${ready&&!done?'gold-button':'outline-button'}" data-claim-quest="${q.id}" ${done||!ready?'disabled':''}>${done?'✓ Đã nhận':ready?'Nhận thưởng':'Đang thực hiện'}</button></article>`;}).join('')}</section><section class="paper-panel title-gallery"><h2>Danh hiệu quân vương</h2><p>Danh hiệu là dấu ấn thành tích; không có buff cộng dồn.</p><div>${Object.entries(titleCatalog).map(([id,name])=>`<article><span>♛</span><h3>${name}</h3><button class="outline-button" data-title="${id}" ${!c.titles.includes(id)?'disabled':''}>${c.equippedTitle===id?'✓ Đang dùng':c.titles.includes(id)?'Trang bị':'Chưa mở'}</button></article>`).join('')}</div></section>`;}
 function skinsPage(s){return `<section class="page-title"><div><span class="eyebrow">THÀNH TRÌ · NGOẠI HÌNH & ĐẶC QUYỀN</span><h1>Tiên thành vạn tượng.</h1><p>Chỉ skin đang trang bị cho hiệu ứng. Sở hữu nhiều skin không cộng dồn buff. Skin nhiệm vụ và VIP 13–15 có thiết kế, nguồn nhận riêng.</p></div><button class="outline-button" data-view="quests">Nhiệm vụ nhận skin</button></section><div class="skin-gallery">${castleSkins.map(c=>{const own=s.account.cosmetics.includes(c.id),active=s.account.equipped.city===c.id;return `<article class="skin-card ${c.vip?'exclusive-skin':''} ${active?'active':''}">${castleSkinArt(c.id)}<span class="eyebrow">${c.vip?'VIP '+c.vip+' ĐỘC QUYỀN':'TIÊN THÀNH'}</span><h2>${c.name}</h2><p>${skinEffectText(c)}</p><small>${c.source}</small><button class="${active?'gold-button':'outline-button'} full" data-cosmetic="${c.id}" ${!own?'disabled':''}>${active?'✓ Đang sử dụng':own?'Trang bị skin':'Chưa sở hữu'}</button></article>`;}).join('')}</div>`;}
@@ -2460,7 +2575,7 @@ function campaignReward(stage,first=true){return{coins:20+stage*2,food:100+stage
 function startCampaign(state,stage){if(!state.team.length||state.team.length>5)throw new Error('Xếp từ 1 đến 5 tướng trước.');if(state.campaignBattle&&!state.campaignBattle.winner)throw new Error('Tháp đang chạy.');if(stage>state.campaign.unlocked)throw new Error('Chưa mở màn này.');const s=structuredClone(state),node=campaignNode(stage);s.campaign.formation??=[...s.formation];s.campaign.dragon??=s.dragon;const tower={...s,formation:s.campaign.formation,team:s.campaign.formation.filter(Boolean),dragon:s.campaign.dragon};if(!tower.team.length)throw new Error('Đội chạy tháp đang trống.');s.battle=createTacticsBattle(tower,node,activeBonds(tower.team).map(b=>b.id),elementalResonance(tower.team));s.battle.mode='campaign';s.battle.encounter=1;s.battle.stage=stage;s.battle.rewarded=false;s.battle.nextIn=1.5;s.campaign.lastStage=stage;s.paused=false;s.campaign.paused=false;s.campaignBattle=s.battle;return s;}
 function campaignTick(state,delta){const foreground=state.battle,show=foreground?.mode==='campaign';let s=structuredClone(state),b=s.campaignBattle||s.battle;s.battle=b;if(!b||b.mode!=='campaign'||(s.campaign.paused||show&&s.paused))return s;const dt=Math.max(0,Math.min(5,delta));if(!b.winner){s.battle=tickTactics(b,dt,s.autoSkill,s.campaign.dragon||s.dragon,s.levels.dragon);b=s.battle;}
  if(b.winner==='ally'&&(b.encounter||1)<3){
-  const tower={...s,formation:s.campaign.formation,team:s.campaign.formation.filter(Boolean),dragon:s.campaign.dragon},next=createTacticsBattle(tower,campaignNode(b.stage,(b.encounter||1)+1),activeBonds(tower.team).map(x=>x.id),elementalResonance(tower.team));
+  const tower={...s,formation:s.campaign.formation,team:s.campaign.formation.filter(Boolean),dragon:b.dragon||s.campaign.dragon},next=createTacticsBattle(tower,campaignNode(b.stage,(b.encounter||1)+1),activeBonds(tower.team).map(x=>x.id),elementalResonance(tower.team));
   // Preserve combatants, spent resources and fallen heroes; only the enemy wave changes.
   next.serial=b.serial;next.allies=structuredClone(b.allies);next.dragonEnergy=b.dragonEnergy;next.dragon=b.dragon;next.dragonRank=b.dragonRank;
   next.mode='campaign';next.stage=b.stage;next.encounter=(b.encounter||1)+1;next.rewarded=false;next.nextIn=1.5;
@@ -2475,7 +2590,7 @@ function stopCampaign(state){const s=structuredClone(state);s.campaign.autoAdvan
 
 function setTowerFormation(state){if(state.campaignBattle&&!state.campaignBattle.winner)throw new Error('Dừng tháp trước khi đổi đội tháp.');const s=structuredClone(state);if(!s.team.length)throw new Error('Chọn từ 1 đến 5 tướng.');s.campaign.formation=[...s.formation];s.campaign.dragon=s.dragon;return s;}
 
-function realmSetup(s,faction='shu'){const f=realmFactions[faction],names={wei:'Cao Wei',shu:'Shu Han',wu:'Eastern Wu'},troops={wei:'Cavalry',shu:'Spear Infantry',wu:'Archers'};return `<div class="realm-onboarding" role="dialog" aria-modal="true" aria-label="Choose Kingdom and Starting City"><section><span class="eyebrow">HEAVENLY MANDATE · FOUND YOUR REFUGE</span><h1>Choose Where Your Story Begins</h1><p>Choose a kingdom and starting city for this save. Your kingdom determines your favored troop type and starting map position.</p><div class="realm-choices">${Object.entries(realmFactions).map(([id,r])=>`<button data-pick-realm="${id}" class="${faction===id?'selected':''}" style="--realm:${r.color}"><span>♜</span><h2>${names[id]}</h2><b>${troops[id]}</b><p>+15% health and physical attack for ${troops[id].toLowerCase()} in battle.</p></button>`).join('')}</div><label>Starting City<select id="realm-start-city">${realmCities.filter(c=>c.faction===faction).map(c=>`<option value="${c.id}" ${c.id===f.capital?'selected':''}>${c.name}</option>`).join('')}</select></label><button class="gold-button full" data-confirm-realm>Raise the Banner of ${names[faction]}</button><small>This choice is saved once. Change your name and portrait in your profile; export a JSON backup to protect your progress.</small></section></div>`;}
+function realmSetup(s,faction='shu'){const f=realmFactions[faction],names={wei:'Cao Wei',shu:'Shu Han',wu:'Eastern Wu'},troops={wei:'Cavalry',shu:'Spear Infantry',wu:'Archers'};return `<div class="realm-onboarding" role="dialog" aria-modal="true" aria-labelledby="opening-title"><header class="opening-title"><span>THE THREE KINGDOMS</span><h1 id="opening-title">Heavenly<br>Mandate</h1><p>Three kingdoms stand divided. Raise a banner and build a refuge of your own.</p></header><section><span class="eyebrow">PROLOGUE · FOUND YOUR REFUGE</span><h2>Choose Your Kingdom</h2><p>Choose a kingdom and starting city for this save. Your kingdom determines your favored troop type and starting map position.</p><div class="realm-choices">${Object.entries(realmFactions).map(([id,r])=>`<button data-pick-realm="${id}" class="${faction===id?'selected':''}" aria-pressed="${faction===id}" style="--realm:${r.color}"><span class="opening-crest" aria-hidden="true" style="--opening-crest-x:${({shu:100,wei:0,wu:25})[id]}%;--opening-crest-y:${id==='shu'?0:100}%"></span><h3>${names[id]}</h3><b>${troops[id]}</b><p>+15% health and physical attack for ${troops[id].toLowerCase()} in battle.</p></button>`).join('')}</div><label>Starting City<select id="realm-start-city">${realmCities.filter(c=>c.faction===faction).map(c=>`<option value="${c.id}" ${c.id===f.capital?'selected':''}>${c.name}</option>`).join('')}</select></label><button class="gold-button full" data-confirm-realm>Raise the Banner of ${names[faction]}</button><small>This choice is saved once. Change your name and portrait in your profile; export a JSON backup to protect your progress.</small></section></div>`;}
 
 function campaignPage(s,chapter=0){const c=s.campaign,start=chapter*25+1,end=Math.min(999,start+24),next=campaignNode(c.unlocked),reward=campaignReward(c.unlocked,c.unlocked>c.cleared);return `<section class="page-title"><div><span class="eyebrow">CHIẾN DỊCH CỬU CHÂU · PVE 1 → 999</span><h1>Tháp Luyện Ngục.</h1><p>Đã vượt ${c.cleared}/999 màn · ${c.runs} chiến thắng. Thưởng tự nhận sau boss đợt 3; lần đầu qua mốc có thêm vật phẩm.</p></div><button class="outline-button" data-view="heroes">Xếp đội ${s.team.length}/4</button></section><div class="campaign-banner"><div><span class="eyebrow">MỤC TIÊU TIẾP THEO</span><h2>${next.name}</h2><p>${next.enemies.length} tướng địch · Cấp ${next.heroLevel} · ${next.stage%10===0?'BOSS · Tăng sức mạnh':'Giao chiến'} · Không tiêu hao quân dự bị.</p><p>Thưởng: ◈ ${reward.coins} ngọc · ${reward.playerXP} EXP người chơi · ${reward.heroXP} EXP/tướng · ${reward.food} lương · ${reward.wood} gỗ · ${reward.stone} đá</p></div><button class="gold-button" data-campaign-start="${c.unlocked}" ${s.campaignBattle&&!s.campaignBattle.winner?'disabled':''}>Xuất trận màn ${c.unlocked}</button></div><div class="campaign-settings"><button class="outline-button ${c.autoAdvance?'enabled':''}" data-campaign-auto>Tự nối màn: ${c.autoAdvance?'BẬT':'TẮT'}</button><button class="outline-button ${c.autoReplay?'enabled':''}" data-campaign-repeat>Cày lại màn: ${c.autoReplay?'BẬT':'TẮT'}</button>${s.battle?.mode==='campaign'&&!s.battle.winner?'<button class="gold-button" data-view="combat">Tiếp tục trận đang chạy</button><button class="outline-button" data-campaign-stop>Dừng chiến dịch</button>':''}<p>Tự nối màn dừng khi thua hoặc hoàn tất 999. Trong trận có ×1/×2/×4, tự dùng chiêu và tạm dừng. Mốc 5/10/25 tặng rương/vé; mỗi 100 màn có thần trang SSR lần đầu.</p></div><div class="campaign-chapters"><button data-campaign-chapter="${chapter-1}" ${chapter===0?'disabled':''}>← Trước</button><label>Chương<select id="campaign-chapter">${Array.from({length:40},(_,n)=>`<option value="${n}" ${n===chapter?'selected':''}>${n+1} · Màn ${n*25+1}–${Math.min(999,(n+1)*25)}</option>`).join('')}</select></label><button data-campaign-chapter="${chapter+1}" ${end===999?'disabled':''}>Sau →</button></div><div class="campaign-stages">${Array.from({length:end-start+1},(_,n)=>start+n).map(stage=>`<button data-campaign-start="${stage}" class="${stage<=c.cleared?'cleared':stage===c.unlocked?'current':'locked'} ${stage%10===0?'boss':''}" ${stage>c.unlocked||s.campaignBattle&&!s.campaignBattle.winner?'disabled':''}><span>${stage%10===0?'♛':'⚔'}</span><b>${stage}</b><small>${stage<=c.cleared?'✓ Đã vượt':stage===c.unlocked?'Xuất trận':'Chưa mở'}</small></button>`).join('')}</div>`;}
 
@@ -2485,13 +2600,71 @@ const atlasLand=[
  {color:'#7BC25F',edge:'#C4EE8F',points:[[510,400],[560,355],[680,385],[820,390],[905,340],[965,405],[970,525],[935,590],[870,675],[740,645],[660,695],[545,650],[545,585],[490,515]]}
 ];
 let realmLandscape=null,realmPropsReady=false,realmPropsSource='';
+function drawAtlasWater(ctx,width,height){
+ const water=ctx.createLinearGradient(0,0,0,height);
+ water.addColorStop(0,'#17384c');
+ water.addColorStop(1,'#28596a');
+ ctx.fillStyle=water;
+ ctx.fillRect(0,0,width,height);
+ for(let i=0;i<125;i++){
+  ctx.fillStyle=i%3?'#89c9cd16':'#9bd5d72b';
+  ctx.fillRect((i*137)%width,(i*83)%height,8+i%14,2);
+ }
+}
+
+function drawConfluence(ground,terrain,propsReady){
+ const x=530,y=397,radius=151;
+ if(terrain.complete&&terrain.naturalWidth){
+  const mix=document.createElement('canvas');
+  mix.width=mix.height=radius*2;
+  const ctx=mix.getContext('2d');
+  const tile=terrain.naturalWidth/3;
+  for(const [panel,top] of [[1,0],[0,1],[2,2]]){
+   ctx.globalAlpha=1/(top+1);
+   ctx.drawImage(terrain,(panel+.16)*tile,terrain.naturalHeight*.38,tile*.68,
+    terrain.naturalHeight*.49,0,0,mix.width,mix.height);
+  }
+  ctx.globalAlpha=1;
+  ctx.globalCompositeOperation='destination-in';
+  const fade=ctx.createRadialGradient(radius,radius,24,radius,radius,radius);
+  fade.addColorStop(0,'#000');
+  fade.addColorStop(.46,'#000c');
+  fade.addColorStop(1,'#0000');
+  ctx.fillStyle=fade;
+  ctx.fillRect(0,0,mix.width,mix.height);
+  ground.drawImage(mix,x-radius,y-radius);
+ }
+ ground.beginPath();
+ const shore=[[-86,-15],[-73,-38],[-42,-49],[-21,-43],[9,-60],[36,-50],[49,-30],
+  [74,-27],[87,-4],[72,19],[51,28],[36,51],[3,53],[-19,43],[-47,54],[-69,37],[-65,18],[-85,7]];
+ shore.forEach(([dx,dy],i)=>i?ground.lineTo(x+dx,y+dy):ground.moveTo(x+dx,y+dy));
+ ground.closePath();
+ ground.fillStyle='#648459';
+ ground.strokeStyle='#48989b';
+ ground.lineWidth=11;
+ ground.stroke();
+ ground.fill();
+ ground.save();
+ ground.clip();
+ if(terrain.complete&&terrain.naturalWidth){
+  const tile=terrain.naturalWidth/3;
+  ground.drawImage(terrain,tile*2.34,terrain.naturalHeight*.51,tile*.42,
+   terrain.naturalHeight*.43,x-90,y-64,180,128);
+  ground.fillStyle='#b6a47030';
+  ground.fillRect(x-90,y-64,180,128);
+ }
+ ground.restore();
+ if(propsReady){
+  drawProvinceProp(ground,0,x-49,y+18,44);
+  drawProvinceProp(ground,1,x+42,y+17,40);
+  drawProvinceProp(ground,6,x-22,y+44,34);
+ }
+}
 function realmGround(){
  const props=cachedImage('assets/province-props-pixel.png'),terrain=cachedImage('assets/living-terrain-pixel.png'),ready=!!(props.complete&&props.naturalWidth&&terrain.complete&&terrain.naturalWidth),key=props.src+'|'+terrain.src;
  if(realmLandscape&&realmPropsReady===ready&&realmPropsSource===key)return realmLandscape;
  realmPropsReady=ready;realmPropsSource=key;
  const c=document.createElement('canvas');c.width=1050;c.height=790;const g=c.getContext('2d');g.imageSmoothingEnabled=false;
- g.fillStyle='#17384c';g.fillRect(0,0,1050,790);
- for(let i=0;i<80;i++){g.fillStyle=i%3?'#21485a':'#285264';g.fillRect((i*137)%1050,(i*83)%790,8+i%12,2);}
  const trace=points=>{g.beginPath();points.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.closePath();};
  for(const [index,land]of atlasLand.entries()){
   trace(land.points);g.strokeStyle='#58796a';g.lineWidth=8;g.stroke();g.fillStyle=land.color;g.fill();
@@ -2503,6 +2676,7 @@ function realmGround(){
  function river(points,width){g.lineJoin='round';g.lineCap='round';g.beginPath();points.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.strokeStyle='#b8bc86';g.lineWidth=width+5;g.stroke();g.strokeStyle='#327f9d';g.lineWidth=width;g.stroke();g.strokeStyle='#6cbdc5';g.lineWidth=2;g.stroke();}
  river([[210,160],[330,155],[420,195],[535,200],[590,245],[730,240],[860,285],[935,265]],9);
  river([[230,505],[330,530],[410,480],[510,460],[625,485],[730,480],[815,430],[920,435],[960,470]],13);
+ drawConfluence(g,terrain,ready);
  realmLandscape=c;return c;
 }
 
@@ -2512,13 +2686,12 @@ function drawRealmAtlas(ctx,state,time){
  const motion=state.feedback?.reduceMotion?0:time;
  // Small water glints and drifting cloud shadows add life without obscuring sites.
  for(let i=0;i<9;i++){const x=110+(i*107+motion*3)%830,y=60+i*71;ctx.save();ctx.globalAlpha=.12;ctx.fillStyle='#F6EBD0';ctx.fillRect(Math.round(x),y,44,5);ctx.fillRect(Math.round(x+9),y-4,28,4);ctx.restore();}
- text('WEI',575,112,26,'#F6EBD0');text('SHU',240,380,26,'#D6E6FF');text('WU',770,595,26,'#F6EBD0');
+ text('WEI',765,170,26,'#F6EBD0');text('SHU',240,380,26,'#D6E6FF');text('WU',770,595,26,'#F6EBD0');
  const home=realmCities.find(c=>c.id===(state.relocation?.position?.cityId||state.account?.realm?.city)),rp=state.relocation?.position,j=state.relocation?.journey;
  if(j&&rp){ctx.strokeStyle='#FFE9A0';ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(rp.x,rp.y);ctx.lineTo(j.to.x,j.to.y);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#8FB4F2';ctx.fillRect(j.to.x-16,j.to.y-20,32,25);}
  const art=cachedImage('assets/castle-skins-pixel.png');
  for(const city of realmCities){const selected=home?.id===city.id,f=realmFactions[city.faction];if(art.complete&&art.naturalWidth){const index=city.faction==='shu'?4:city.faction==='wei'?5:6,sw=art.naturalWidth/5,sh=art.naturalHeight/2;ctx.drawImage(art,index%5*sw,Math.floor(index/5)*sh,sw,sh,city.x-33,city.y-53,66,66);}else{ctx.fillStyle=f.color;ctx.fillRect(city.x-18,city.y-25,36,28);}
   if(selected){ctx.strokeStyle='#FFE9A0';ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(city.x,city.y-7,36+Math.sin(motion*2)*2,27,0,0,Math.PI*2);ctx.stroke();}text(city.name,city.x,city.y+26,13);hits.push({id:city.id,type:'realmCity',x:city.x+ox-42,y:city.y+oy-52,w:84,h:93});}
- text('THREE REALMS · THE FRACTURED MANDATE',520,741,17,'#F6EBD0');
  for(const n of state.strongholds?.sites||[])if(n.guardianEvent===state.worldBoss.guardEvent&&['alive','occupied'].includes(n.status)){ctx.fillStyle='#FF9B54';ctx.fillRect(n.globalX-6,n.globalY-10,12,14);hits.push({id:n.id,type:'stronghold',x:ox+n.globalX-18,y:oy+n.globalY-25,w:36,h:36});}
  const portal=cachedImage('assets/world-sites-pixel.png');if(portal.complete&&portal.naturalWidth){const sw=portal.naturalWidth/5;ctx.drawImage(portal,3*sw,0,sw,portal.naturalHeight,496,341,70,70);}else{ctx.strokeStyle='#E8BC8A';ctx.strokeRect(505,360,50,40);}text('BOSS SANCTUARY',530,428,13,'#FFE9A0');hits.push({id:'world-boss',type:'worldBoss',x:ox+490,y:oy+330,w:85,h:105});ctx.restore();return hits;
 }
@@ -2587,7 +2760,6 @@ function mountMap(canvas, read, select) {
 
   function drawDitherShadow(x,y,rx,ry){ctx.save();ctx.fillStyle='#0E1024';for(let yy=-Math.ceil(ry/3);yy<=ry/3;yy++)for(let xx=-Math.ceil(rx/3);xx<=rx/3;xx++)if((xx*3/rx)**2+(yy*3/ry)**2<=1&&(xx+yy)%2===0)ctx.fillRect(Math.round(x+xx*3),Math.round(y+yy*3),3,3);ctx.restore();}
   function soldier(x,y,color,type='shield',phase=0,scale=1,facing=1){if(!troopSprite.complete||!troopSprite.naturalWidth)return;const row=Math.max(0,['shield','spear','bow','cavalry'].indexOf(type)),col=Math.floor(Math.abs(phase)*1.2)%4,sw=troopSprite.naturalWidth/4,sh=troopSprite.naturalHeight/4,size=42*scale;ctx.save();ctx.translate(Math.round(x),Math.round(y));ctx.scale(facing,1);ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(0,5,size*.23,size*.08,0,0,Math.PI*2);ctx.fill();ctx.drawImage(troopSprite,col*sw,row*sh,sw,sh,-size/2,-size+10,size,size);ctx.restore();}
-  function dragon(x,y,time,element,scale=1){drawFlyingDragon(ctx,element,x,y+Math.sin(time*2)*3,130*scale,time);}
 
   function spell(x,y,kind,color,progress,span=90){
     ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=4;ctx.globalAlpha=Math.max(0,1-progress*.6);
@@ -2607,6 +2779,7 @@ function mountMap(canvas, read, select) {
     ctx.globalAlpha=1;
   }
   const seen=new Map(), hpBefore=new Map(), floaters=[];
+  let battleVisualKey;
   function siegeCastles(state,b,time,w,h){
     const skin=castleSkins.find(c=>c.id===state.account.equipped.city),size=Math.min(310,w*.24),locations=[{x:w*.16,side:'ally',index:skin?.artIndex??null,units:b.allies},{x:w*.84,side:'enemy',index:1,units:b.enemies}];
     for(const fort of locations){const img=fort.index!==null&&castleArt.complete&&castleArt.naturalWidth?castleArt:cityArt,index=img===castleArt?fort.index:0;if(img.complete&&img.naturalWidth){ctx.drawImage(img,index%(img===castleArt?5:3)*img.naturalWidth/(img===castleArt?5:3),Math.floor(index/(img===castleArt?5:3))*img.naturalHeight/2,img.naturalWidth/(img===castleArt?5:3),img.naturalHeight/2,fort.x-size/2,h*.4-size*.7,size,size);}const max=fort.units.reduce((n,u)=>n+u.maxHp,0),hp=fort.units.reduce((n,u)=>n+u.hp,0);rect(ctx,fort.x-size*.4,h*.4-size*.75,size*.8,9,'#2B3055');rect(ctx,fort.x-size*.4,h*.4-size*.75,size*.8*hp/max,9,fort.side==='ally'?'#3E8E4A':'#B3262E');ctx.textAlign='center';ctx.font='bold '+Math.max(9,Math.min(13,w*.01))+'px "Mandate Pixel",monospace';ctx.fillStyle='#FFE9A0';ctx.fillText(fort.side==='ally'?'THÀNH QUÂN VƯƠNG':'THÀNH BOT',fort.x,h*.4+size*.32);}
@@ -2614,11 +2787,34 @@ function mountMap(canvas, read, select) {
   }
   function battleScene(state,time,w,h){
     if(!state.battle)return;const b=state.battle;
-    if(['bot','hunt'].includes(b.mode)&&terrainArt.complete&&terrainArt.naturalWidth){ctx.drawImage(terrainArt,0,terrainArt.naturalHeight*.15,terrainArt.naturalWidth/3,terrainArt.naturalHeight*.7,0,0,w,h);}else if(backdrop.complete&&backdrop.naturalWidth){const r=Math.max(w/backdrop.naturalWidth,h/backdrop.naturalHeight);ctx.drawImage(backdrop,(w-backdrop.naturalWidth*r)/2,(h-backdrop.naturalHeight*r)/2,backdrop.naturalWidth*r,backdrop.naturalHeight*r);}else rect(ctx,0,0,w,h,'#A38B64');
-    rect(ctx,0,0,w,h,'#1B1F3B');poly(ctx,[[0,h*.45],[w*.5,h*.30],[w,h*.45],[w,h],[0,h]],'#A38B64');
+    const visualKey = [b.feedbackId,b.mode,b.stage,b.encounter].join(':');
+    if (battleVisualKey !== visualKey) {
+      battleVisualKey = visualKey;
+      seen.clear();
+      hpBefore.clear();
+      floaters.length = 0;
+    }
+    const floor = Math.max(0, (b.stage || 1) - 1);
+    const encounter = Math.max(0, (b.encounter || 1) - 1);
+    const site = botCities.find(city => city.id === b.botId) || wildlifeNodes.find(node => node.id === b.wildId);
+    const region = realmCities.find(city => city.id === (site?.cityId || activeWorldCity(state)));
+    const campaign = b.mode === 'campaign';
+    const panel = campaign ? (floor + encounter) % 3 : ({shu:0,wei:1,wu:2})[region?.faction] ?? 0;
+    if (terrainArt.complete && terrainArt.naturalWidth) {
+      const tile = terrainArt.naturalWidth / 3;
+      const zoom = campaign ? .82 + (floor * 7 % 19) / 110 : .94;
+      const crop = tile * zoom;
+      const offset = campaign ? (floor * 37 % 101) / 100 : .5;
+      const sy = terrainArt.naturalHeight * .08;
+      ctx.drawImage(terrainArt, panel * tile + (tile - crop) * offset, sy, crop,
+        terrainArt.naturalHeight - sy, 0, 0, w, h);
+    } else if (backdrop.complete && backdrop.naturalWidth) {
+      ctx.drawImage(backdrop, 0, 0, w, h);
+    } else rect(ctx, 0, 0, w, h, '#506c45');
+    rect(ctx, 0, 0, w, h, '#12213730');
 
     const position=u=>{const row=Math.floor(u.slot/3),col=u.slot%3;return{x:w*(u.side==='ally'?[.4,.25,.1][row]:[.6,.75,.9][row]),y:h*(.32+col*.15)};};
-    for(const side of ['ally','enemy'])for(let slot=0;slot<9;slot++){const p=position({side,slot}),r=Math.min(55,w*.035);poly(ctx,[[p.x-r,p.y+12],[p.x,p.y-r*.35],[p.x+r,p.y+12],[p.x,p.y+r*.6]],side==='ally'?'#C3C8D8':'#F0C8A0');}
+    for(const side of ['ally','enemy'])for(let slot=0;slot<9;slot++){const p=position({side,slot}),r=Math.min(55,w*.035);poly(ctx,[[p.x-r,p.y+12],[p.x,p.y-r*.35],[p.x+r,p.y+12],[p.x,p.y+r*.6]],side==='ally'?'#c3dfff4a':'#ffd8a64a');}
     const fighters=[...b.allies,...b.enemies];canvas.feedbackPositions=Object.fromEntries(fighters.map(u=>[u.key,{...position(u),y:position(u).y-70}]));
     for(const e of b.events){if(!seen.has(e.serial))seen.set(e.serial,time);}
     if(seen.size>250)for(const [id,t]of seen)if(time-t>4)seen.delete(id);
@@ -2647,14 +2843,45 @@ function mountMap(canvas, read, select) {
       if(e.skillId){drawSkillVfx(ctx,e,age,ap,fighters.filter(u=>e.targets?.includes(u.key)).map(position),w,h);continue;}
       drawSkillVfx(ctx,e.kind==='attack'?{...e,skillId:'strike-'+e.actor,skillName:'Trảm',kind:'slash'}:e,age,ap,fighters.filter(u=>e.targets?.includes(u.key)).map(position),w,h);
     }
-    const orbit=time*.6,dx=w*(.26+Math.cos(orbit)*.14),dy=h*(.19+Math.sin(orbit)*.025);ctx.save();ctx.globalAlpha=.78;ctx.translate(dx,dy);ctx.rotate(Math.sin(orbit)*.12);dragon(0,0,time,b.dragon||state.dragon,.7);ctx.restore();if(b.dragonEnergy<12){ctx.strokeStyle='#D6E6FF';ctx.lineWidth=3;for(const u of b.allies.filter(u=>u.hp>0)){const p=position(u);ctx.beginPath();ctx.ellipse(p.x,p.y+12,50,20,0,0,7);ctx.stroke();}}
+    const motion = state.feedback?.reduceMotion ? 0 : time;
+    const orbit = motion * .85;
+    const blessing = b.events.findLast(event => event.kind === 'dragon');
+    const age = blessing ? time - seen.get(blessing.serial) : Infinity;
+    const pulse = Math.max(0, 1 - age / 1.5);
+    const allies = b.allies.filter(unit => unit.hp > 0);
+    const formation = allies.map(position);
+    const low = Math.min(h * .32, ...formation.map(p => p.y));
+    const high = Math.max(h * .47, ...formation.map(p => p.y));
+    const dx = w * (.25 + Math.cos(orbit) * .18);
+    const dy = (low + high) / 2 - h * (.12 + pulse * .07) + Math.sin(orbit) * (high - low) * .42;
+    drawFlyingDragon(ctx, b.dragon || state.dragon, dx, dy, Math.min(195, w * .12), motion, {
+      yaw: orbit + Math.PI / 2,
+      pitch: Math.cos(orbit) * .055
+    });
+    if (pulse > 0) {
+      ctx.save();
+      ctx.globalAlpha = pulse;
+      ctx.strokeStyle = '#ffe5a6';
+      ctx.lineWidth = 3;
+      for (const unit of allies) {
+        const p = position(unit), radius = 38 + (1 - pulse) * 28;
+        ctx.beginPath();
+        ctx.ellipse(p.x, p.y + 12, radius, radius * .32, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        for (let i = 0; i < 8; i++) {
+          const angle = i * Math.PI / 4;
+          rect(ctx, p.x + Math.cos(angle) * radius, p.y - (1 - pulse) * 75 + Math.sin(angle) * 13, 4, 4, '#fff3c3');
+        }
+      }
+      ctx.restore();
+    }
   }
-  function transform(w,h,city){if(city){const layout=cityCameraLayout(w,h,camera,matchMedia('(pointer:coarse)').matches);camera.x=layout.x;camera.y=layout.y;camera.zoom=layout.zoom;return layout;}const view=read().view;if(view==='region'){const layout=regionCameraLayout(w,h,camera);camera.x=layout.x;camera.y=layout.y;camera.zoom=layout.zoom;return layout;}const fit=city?Math.min((w-220)/3100,(h-210)/1750):view==='region'?Math.min((w-320)/1550,(h-250)/1100):Math.min((w-240)/1060,(h-230)/800);const z=fit*camera.zoom;const mx=city?0:view==='world'?-10:0,my=city?570:view==='world'?470:370;const maxX=Math.max(80,(1700*z-(w-300))/2+80),maxY=Math.max(60,(1000*z-(h-250))/2+60);camera.x=Math.max(-maxX,Math.min(maxX,camera.x));camera.y=Math.max(-maxY,Math.min(maxY,camera.y));return{z,ox:w/2-mx*z+camera.x,oy:h/2+35-my*z+camera.y};}
+  function transform(w,h,city){if(city){const layout=cityCameraLayout(w,h,camera,matchMedia('(pointer:coarse)').matches);camera.x=layout.x;camera.y=layout.y;camera.zoom=layout.zoom;return layout;}const view=read().view;if(view==='region'){const layout=regionCameraLayout(w,h,camera);camera.x=layout.x;camera.y=layout.y;camera.zoom=layout.zoom;return layout;}const fit=city?Math.min((w-220)/3100,(h-210)/1750):view==='region'?Math.min((w-320)/1550,(h-250)/1100):Math.min((w-28)/940,(h-92)/680);const z=fit*camera.zoom;const mx=city?0:view==='world'?-10:0,my=city?570:view==='world'?470:370;const maxX=Math.max(80,(1700*z-(w-300))/2+80),maxY=Math.max(60,(1000*z-(h-250))/2+60);camera.x=Math.max(-maxX,Math.min(maxX,camera.x));camera.y=Math.max(-maxY,Math.min(maxY,camera.y));return{z,ox:w/2-mx*z+camera.x,oy:h/2-my*z+camera.y};}
   function setMapZoom(value,anchor=null){const w=canvas.clientWidth,h=canvas.clientHeight,city=read().view==='city',bounded=['city','region'].includes(read().view),before=transform(w,h,city);camera.zoom=Math.max(bounded?1:.6,Math.min(bounded?3:2.6,value));if(anchor){const worldX=(anchor.x-before.ox)/before.z,worldY=(anchor.y-before.oy)/before.z,after=transform(w,h,city);camera.x+=anchor.x-(worldX*after.z+after.ox);camera.y+=anchor.y-(worldY*after.z+after.oy);}transform(w,h,city);}
   function draw(ms){if(disposed)return;if(read().view==='combat'&&feedback.isHitStopped()){frame=requestAnimationFrame(draw);return;}if(ms-lastFrame<(read().view==='combat'?16:33)){frame=requestAnimationFrame(draw);return;}lastFrame=ms;const{state,view,selected,motionDelta=0}=read(),time=ms/1000,w=canvas.clientWidth,h=canvas.clientHeight,city=view==='city';ctx.setTransform(pixelRatio,0,0,pixelRatio,0,0);ctx.imageSmoothingEnabled=false;hits.length=0;
     if(view==='combat'){battleScene(state,time,w,h);frame=requestAnimationFrame(draw);return;}
     if(view==='region'){rect(ctx,0,0,w,h,'#6B739E');const{z,ox,oy}=transform(w,h,false);ctx.save();ctx.translate(ox,oy);ctx.scale(z,z);if(state.inheritance.activeRealm)hits.push(...drawSecretRealm(ctx,state,time,{fighterArt,fighterA,fighterB}));else{hits.push(...drawRegionScene(ctx,state,time,cityArt,castleArt,z,motionDelta));hits.push(...drawHiddenGates(ctx,state,time,activeWorldCity(state)));}ctx.restore();drawWeather(ctx,w,h,time);frame=requestAnimationFrame(draw);return;}
-    if(view==='world'){rect(ctx,0,0,w,h,'#2B3055');const{z,ox,oy}=transform(w,h,false);ctx.save();ctx.translate(ox,oy);ctx.scale(z,z);hits.push(...drawRealmAtlas(ctx,state,time));ctx.restore();frame=requestAnimationFrame(draw);return;}
+    if(view==='world'){drawAtlasWater(ctx,w,h);const{z,ox,oy}=transform(w,h,false);ctx.save();ctx.translate(ox,oy);ctx.scale(z,z);hits.push(...drawRealmAtlas(ctx,state,time));ctx.restore();frame=requestAnimationFrame(draw);return;}
     const foundation=cachedImage('assets/city-foundation-pixel.png'),groundKey=terrainArt.src+'|'+foundation.src;if(city&&terrainArt.complete&&terrainArt.naturalWidth&&(!cachedGroundTextured||!cachedCivicTrees&&foundation.complete||cachedGroundPaletteKey!==groundKey)){cityGround=cachedCityGround=bakeGround(true);cachedGroundPaletteKey=groundKey;}rect(ctx,0,0,w,h,city?'#7BC25F':'#7BC25F');const layout=transform(w,h,city),{z,ox,oy}=layout;ctx.save();ctx.translate(ox,oy);ctx.scale(z,z);if(city&&terrainArt.complete&&terrainArt.naturalWidth){const t=layout.terrain;ctx.drawImage(terrainArt,0,0,terrainArt.naturalWidth/3,terrainArt.naturalHeight,t.x,t.y,t.width,t.height);}ctx.drawImage(cityGround,-2048,-640);
     if(city){cityLife(ctx,iso,time,state,'ground');
       // Houses and civic ornaments make the scene a continuous inhabited city.
@@ -2719,7 +2946,7 @@ const spiritSupplies={summon:{name:'Spirit Beast Summon Point',bag:'petGachaPoin
 function buySpiritSupply(state,id){const offer=Object.hasOwn(spiritSupplies,id)&&spiritSupplies[id];if(!offer)throw new Error('Unknown spirit supply.');const s=normalizeAccount(state);if(s.account.bag[offer.bag]+offer.amount>9999999)throw new Error('Inventory full. Spend supplies before buying more.');payGold(s,offer.gold);s.account.bag[offer.bag]+=offer.amount;return s;}
 function spiritSuppliesPage(s){return `<section class="fixed-screen shop-screen"><header class="gallery-heading"><h1>Spirit Supplies</h1><span>${s.commerce.gold.toLocaleString('en-US')} Gold · Earned through play</span>${shopNavigation('supplies')}</header><p>Repeatable supplies for the offline edition. Earn Gold by raiding or exchanging materials. These purchases never use real money. Summon points remain non-tradable.</p><div class="shop-fragment-grid">${Object.entries(spiritSupplies).map(([id,o])=>`<article>${itemPicture(o.bag)}<h2>${o.name}</h2><p>Owned: ${s.account.bag[o.bag]}</p><button data-buy-spirit-supply="${id}" ${s.commerce.gold<o.gold||s.account.bag[o.bag]+o.amount>9999999?'disabled':''}>Buy · ${o.gold.toLocaleString('en-US')} Gold</button></article>`).join('')}</div><button data-view="pets">Open Spirit Beast Sanctuary</button></section>`;}
 
-function longSanctuaryPage(s){return `<section class="fixed-screen long-sanctuary"><header class="gallery-heading"><h1>Điện Long Linh</h1><span>Chỉ ${s.dragon} Long đang chọn hỗ trợ đội ${s.squads.active+1}. Sở hữu nhiều long không cộng dồn.</span><button data-building-management="dragon">Quản lý công trình</button><button data-shop-tab="longs">Mua mảnh long</button><button data-view="city">Về thành</button></header><div class="long-gallery">${dragonCatalog.map(d=>{const owned=canUseDragon(s,d.element),rank=s.dragonSanctuary.ranks[d.element]||0,cost=40*(rank+1),frags=s.dragonSanctuary.fragments[d.element]||0;return `<article class="long-card ${s.dragon===d.element?'active':''}"><button data-description="dragon:${d.element}">${elementalDragonArt(d.element)}${elementIcon(d.element)}</button><div><h3>${d.name} ${d.vip?'· VIP '+d.vip:''}</h3><p>${d.text}</p><small>Cấp ${rank}/10 · Sức mạnh +${rank*5}% · ${frags} mảnh</small></div><footer><button data-dragon="${d.element}" ${!owned||selectedSquadBusy(s)?'disabled':''}>${!owned?'Nhận quà VIP '+d.vip:s.dragon===d.element?'Đang đồng hành':'Chọn duy nhất'}</button><button data-upgrade-long="${d.element}" ${!owned||selectedSquadBusy(s)||rank===10||frags<cost?'disabled':''}>${rank===10?'Đã tối đa':'Nâng · '+cost+' mảnh'}</button></footer></article>`;}).join('')}</div><footer>Long linh của đội đang triển khai và đội tháp được chốt lúc xuất trận. Nâng cấp có hiệu lực từ trận tiếp theo.</footer></section>`;}
+function longSanctuaryPage(s){return `<section class="fixed-screen long-sanctuary"><header class="gallery-heading"><h1>Điện Long Linh</h1><span>Chỉ ${s.dragon} Long đang chọn hỗ trợ đội ${s.squads.active+1}. Sở hữu nhiều long không cộng dồn.</span><button data-building-management="dragon">Quản lý công trình</button><button data-shop-tab="longs">Mua mảnh long</button><button data-view="city">Về thành</button></header><div class="long-gallery">${dragonCatalog.map(d=>{const owned=canUseDragon(s,d.element),rank=s.dragonSanctuary.ranks[d.element]||0,cost=40*(rank+1),frags=s.dragonSanctuary.fragments[d.element]||0;return `<article class="long-card ${s.dragon===d.element?'active':''}"><button data-description="dragon:${d.element}">${elementalDragonArt(d.element)}${elementIcon(d.element)}</button><div><h3>${d.name} ${d.vip?'· VIP '+d.vip:''}</h3><p>${d.text}</p><small>Cấp ${rank}/10 · Sức mạnh +${rank*5}% · ${frags} mảnh</small></div><footer><button data-dragon="${d.element}" ${!owned||selectedSquadBusy(s)?'disabled':''}>${!owned?'Nhận quà VIP '+d.vip:s.dragon===d.element?'Đang đồng hành':'Chọn duy nhất'}</button><button data-upgrade-long="${d.element}" ${!owned||selectedSquadBusy(s)||rank===10||frags<cost?'disabled':''}>${rank===10?'Đã tối đa':'Nâng · '+cost+' mảnh'}</button></footer></article>`;}).join('')}</div><footer>Your selection equips the active squad and the next Tower battle. Battles already underway keep their original dragon.</footer></section>`;}
 
 const galleryNumber=n=>Number(n||0).toLocaleString('en-US');
 const galleryStatNames={...statNames,...rareStatNames,block:'Chặn đòn',reflect:'Phản sát thương',lifesteal:'Hút máu',regen:'Hồi HP/giây',revive:'Hồi sinh',execute:'Kết liễu',healPower:'Hiệu quả hồi máu'};
@@ -6520,7 +6747,7 @@ function unitRow(unit, enemy = false) {
 function battleLocation(b){if(b.mode==='stronghold')return{name:b.strongholdName||'World Stronghold'};return b.mode==='secret'?{name:secretRealms.find(r=>r.id===b.secretId).bossName}:b.mode==='campaign'?campaignNode(b.stage,b.encounter||1):b.mode==='hunt'?wildlifeNodes.find(t=>t.id===b.wildId):b.mode==='bot'?botCities.find(t=>t.id===b.botId):worldNodes.find(t=>t.id===b.nodeId)||{name:b.nodeId||'Battle'};}
 function battlePanel() {
   const b = state.battle, node = battleLocation(b), event = b.events.findLast(e => e.kind !== 'attack' && b.clock - e.at < 2);
-  return `<div class="panel-heading"><span class="eyebrow">GIAO CHIẾN · ${b.clock}s / 180s</span><button class="mini-button" data-pause>${state.paused ? '▶ Tiếp tục' : 'Ⅱ Tạm dừng'}</button></div><h2>${b.winner ? b.winner === 'ally' ? 'Chiến thắng!' : b.winner === 'retreat' ? 'Đã rút quân' : 'Thất bại' : node.name}</h2>${b.winner ? `<div class="${b.winner === 'ally' ? 'success-note' : 'warning-note'}">${b.winner === 'ally' ? b.mode==='campaign'?'Đã tự nhận thưởng chiến dịch và mở màn tiếp theo.':'Đã nhận linh ngọc và tài nguyên. Quân sống sót đang trở về.' : 'Quân sống sót đang trở về. Hãy nâng doanh trại, đổi linh long hoặc đội hình.'}</div>` : '<p>Hai phe hành động theo thứ tự ô đội hình. Chọn kỹ năng để xếp cho lượt tới của tướng; cần đủ mana/nộ và hết hồi chiêu.</p>'}<div class="damage-summary"><b>Báo cáo sát thương cả trận</b><p>Vật lý: ${b.damageStats?.physical||0} · Phép: ${b.damageStats?.magic||0}<br>Chuẩn: ${b.damageStats?.pure||0}<br>Khiên hấp thụ: ${b.damageStats?.absorbed||0} · Bạo kích: ${b.damageStats?.criticals||0}<br>Chặn: ${fmt(b.damageStats?.blocked||0)} · Phản: ${fmt(b.damageStats?.reflected||0)} · Hồi: ${fmt(b.damageStats?.healing||0)}<br>THẦN: ${b.damageStats?.divine||0} · Buff bị xóa: ${b.damageStats?.dispelled||0}<br>Hồi sinh: ${b.damageStats?.revives||0} · Kết liễu: ${b.damageStats?.executions||0}</p><small>Damage = Công × hệ số × 100/(100+phòng thủ) × lực lượng còn lại × buff/khắc chế; bạo kích ×1,5. Công thức của bản thử.</small></div><div class="battle-enemies">${b.enemies.map(u => unitRow(u, true)).join('')}</div><div class="battle-separator">⚔ ĐỘI VIỄN CHINH ⚔</div><div class="battle-allies">${b.allies.map(u => unitRow(u)).join('')}</div><div class="battle-controls"><button class="outline-button ${state.autoSkill ? 'enabled' : ''}" data-auto aria-pressed="${state.autoSkill}">Tự dùng kỹ năng: ${state.autoSkill ? 'BẬT' : 'TẮT'}</button><span class="dragon-energy">${elementalDragonArt(state.dragon)} ${state.dragon} long ${b.dragonEnergy}%</span></div>${event ? `<div class="skill-announcement fx-${event.kind}" role="status">${event.text}</div>` : ''}<div class="combat-bonds">${activeBonds(state.team).map(b => `<span>⛓ ${b.name}</span>`).join('')}</div><details class="combat-log"><summary>Nhật ký trận đấu</summary>${b.log.slice(-12).map(l => `<p>${l}</p>`).join('')}</details>${state.march && state.march.stage !== 'returning' ? '<button class="text-button" data-recall>Rút quân về thành</button>' : ''}`;
+  return `<div class="panel-heading"><span class="eyebrow">GIAO CHIẾN · ${b.clock}s / 180s</span><button class="mini-button" data-pause>${state.paused ? '▶ Tiếp tục' : 'Ⅱ Tạm dừng'}</button></div><h2>${b.winner ? b.winner === 'ally' ? 'Chiến thắng!' : b.winner === 'retreat' ? 'Đã rút quân' : 'Thất bại' : node.name}</h2>${b.winner ? `<div class="${b.winner === 'ally' ? 'success-note' : 'warning-note'}">${b.winner === 'ally' ? b.mode==='campaign'?'Đã tự nhận thưởng chiến dịch và mở màn tiếp theo.':'Đã nhận linh ngọc và tài nguyên. Quân sống sót đang trở về.' : 'Quân sống sót đang trở về. Hãy nâng doanh trại, đổi linh long hoặc đội hình.'}</div>` : '<p>Hai phe hành động theo thứ tự ô đội hình. Chọn kỹ năng để xếp cho lượt tới của tướng; cần đủ mana/nộ và hết hồi chiêu.</p>'}<div class="damage-summary"><b>Báo cáo sát thương cả trận</b><p>Vật lý: ${b.damageStats?.physical||0} · Phép: ${b.damageStats?.magic||0}<br>Chuẩn: ${b.damageStats?.pure||0}<br>Khiên hấp thụ: ${b.damageStats?.absorbed||0} · Bạo kích: ${b.damageStats?.criticals||0}<br>Chặn: ${fmt(b.damageStats?.blocked||0)} · Phản: ${fmt(b.damageStats?.reflected||0)} · Hồi: ${fmt(b.damageStats?.healing||0)}<br>THẦN: ${b.damageStats?.divine||0} · Buff bị xóa: ${b.damageStats?.dispelled||0}<br>Hồi sinh: ${b.damageStats?.revives||0} · Kết liễu: ${b.damageStats?.executions||0}</p><small>Damage = Công × hệ số × 100/(100+phòng thủ) × lực lượng còn lại × buff/khắc chế; bạo kích ×1,5. Công thức của bản thử.</small></div><div class="battle-enemies">${b.enemies.map(u => unitRow(u, true)).join('')}</div><div class="battle-separator">⚔ ĐỘI VIỄN CHINH ⚔</div><div class="battle-allies">${b.allies.map(u => unitRow(u)).join('')}</div><div class="battle-controls"><button class="outline-button ${state.autoSkill ? 'enabled' : ''}" data-auto aria-pressed="${state.autoSkill}">Tự dùng kỹ năng: ${state.autoSkill ? 'BẬT' : 'TẮT'}</button><span class="dragon-energy">${elementalDragonArt(b.dragon||state.dragon)} ${b.dragon||state.dragon} long ${b.dragonEnergy}%</span></div>${event ? `<div class="skill-announcement fx-${event.kind}" role="status">${event.text}</div>` : ''}<div class="combat-bonds">${activeBonds(state.team).map(b => `<span>⛓ ${b.name}</span>`).join('')}</div><details class="combat-log"><summary>Nhật ký trận đấu</summary>${b.log.slice(-12).map(l => `<p>${l}</p>`).join('')}</details>${state.march && state.march.stage !== 'returning' ? '<button class="text-button" data-recall>Rút quân về thành</button>' : ''}`;
 }
 function realmLegend(){return `<div class="realm-legend">${Object.entries(realmFactions).map(([id,f])=>`<span style="--realm:${f.color}">● ${f.name} · ${f.troopName}</span>`).join('')}</div>`;}
 function nodePanel() {

@@ -1,6 +1,33 @@
 import {realmSetup} from './campaign-ui.mjs';
 import test from 'node:test';import assert from 'node:assert/strict';import{kingdomInitial}from'./kingdom.mjs';import{characterRoster}from'./characters.mjs';import{renderDescription,inventoryEntries}from'./gallery-ui.mjs';import{englishText,setEnglishPlayerNames}from'./english.mjs';import{runeCatalog,runeEffectText}from'./runes.mjs';
 const vietnamese=/[À-ÖØ-öø-ỹĐđ]/;
+test('mailbox renders legacy notices and empty or populated rewards in English',async()=>{
+ const {mailPage}=await import('./strategy-ui.mjs');
+ const {secretRealms}=await import('./inheritance-data.mjs');
+ const s=kingdomInitial(),realm=secretRealms[0];
+ const render=tab=>englishText(mailPage(s,()=>'',null,tab));
+ assert.equal(vietnamese.test(render('parcels')),false);
+ s.mailbox.notices.push({id:1,title:'Tin chiến tuyến',text:'Trấn Thanh Phong: kế hoạch gather, 90 quân, 2 công trình.',read:false});
+ assert.match(render('notices'),/Gathering resources · 90 troops · 2 buildings/);
+ assert.equal(vietnamese.test(render('notices')),false);
+ s.mailbox.parcels.push({id:2,realmId:realm.id,manualId:realm.manualId,
+  reward:{coins:100,food:200,wood:300,stone:400,essence:5,playerXP:6,heroXP:7},claimed:false});
+ assert.match(render('parcels'),/Claim All Rewards/);
+ assert.equal(vietnamese.test(render('parcels')),false);
+ s.mailbox.parcels[0].claimed=true;
+ assert.match(render('parcels'),/✓ Claimed/);
+});
+test('regional site panels use English in complete sentences',async()=>{
+ const {regionPanel,regionToolbar}=await import('./world-ui.mjs');
+ const s=kingdomInitial();
+ const ids=['portal','home',...Object.keys(s.worldAI.nodes),...Object.keys(s.worldAI.wild),...s.worldAI.bots.map(b=>b.id)];
+ for(const id of ids)assert.equal(vietnamese.test(englishText(regionPanel(s,id))),false,id);
+ assert.equal(vietnamese.test(englishText(regionToolbar(s))),false);
+ const wood=Object.keys(s.worldAI.nodes).find(id=>id.endsWith('-1'));
+ const panel=regionPanel(s,wood);
+ assert.match(panel,/Each trip gathers up to 1,000 before spirit beast bonuses/);
+ assert.match(panel,/Send 60 Troops to Gather/);
+});
 test('all hero, skill, shard and inventory description captions are English',()=>{const s=kingdomInitial(),keys=[];for(const h of characterRoster){keys.push('hero:'+h.id,'shard:'+h.id);for(let i=0;i<h.skills.length;i++)keys.push('skill:'+h.id+':'+i);if(h.passiveSkill)keys.push('skill:'+h.id+':passive');}for(const tab of ['resources','items','gear','longs','pets','cosmetics','manuals'])for(const e of inventoryEntries(s,tab,()=>''))keys.push(e.key);for(const key of keys){const text=englishText(renderDescription(s,key,()=>''));assert.equal(vietnamese.test(text),false,key+': '+text);}});
 test('rune descriptions retain precise English effects at all ranks and user names remain untouched',()=>{for(const node of runeCatalog)for(const rank of [1,node.maxRank])assert.equal(vietnamese.test(runeEffectText(node,rank)),false);assert.match(runeEffectText(runeCatalog.find(n=>n.id==='regen')),/Restore 0.1%/);setEnglishPlayerNames(['Quang Long']);assert.equal(englishText('Quang Long'),'Quang Long');setEnglishPlayerNames([]);assert.equal(englishText('The healer restores health.'),'The healer restores health.');});
 

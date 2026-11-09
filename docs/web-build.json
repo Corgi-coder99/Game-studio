@@ -1,26 +1,26 @@
 {
-  "version": "v16-cceac006fb1d",
-  "bytes": 92240184,
+  "version": "v16-68d88dff0d54",
+  "bytes": 93231166,
   "files": [
     {
       "url": "index.html",
-      "size": 2217,
-      "sha256": "370f205eddab240ce792aefa3f8fe96e8d987d286ae53e6e2d450e1db1c111e4"
+      "size": 2218,
+      "sha256": "3431cf2a3398bbc7bb560a78ded975f440b2ef6e2666c3992857976284e456cf"
     },
     {
       "url": "game.html",
-      "size": 1287699,
-      "sha256": "a987b83d14ca87c94c12794c05688a1289026776d3f9dd7cb03c853a91966edf"
+      "size": 1302976,
+      "sha256": "86371d74419bb2cc2e38982178856520ea89534f11776b819fe3c1ba7f35b09e"
     },
     {
       "url": "install.css",
-      "size": 2247,
-      "sha256": "f728d174877341658662621e6598bfbf8b11f15191964b3f4bf5f7228e8e6192"
+      "size": 2251,
+      "sha256": "746fb5170371473a28a02ccb54a0cb7d7ee365eeda8a6a6ec8417098a1a31997"
     },
     {
       "url": "install.js",
-      "size": 4138,
-      "sha256": "f9491cc4e50079ac9c2044c0cf117b3cacf94147c94ea9399aa0c6d437d4392a"
+      "size": 4152,
+      "sha256": "fc233215ebdfd795980d60baad0f584c39f3a5336e83ede1f73648950f8a4c7f"
     },
     {
       "url": "manifest.webmanifest",
@@ -49,8 +49,8 @@
     },
     {
       "url": "assets/castle-skins-pixel.png",
-      "size": 3779657,
-      "sha256": "2eed89539a86d0b62f20bea284670855163abb539931694bb94be6784617ef16"
+      "size": 3403734,
+      "sha256": "938a5fd8d04bee8fb4738757b2599f85cfcc1ab9ce463936f3411b1705c6d7df"
     },
     {
       "url": "assets/celestial-pets-pixel.png",
@@ -91,6 +91,11 @@
       "url": "assets/exclusive-items-pixel.png",
       "size": 2609942,
       "sha256": "15ad85052135af2ecbcdcc60db1fc48b7470dfeaa489071b187e8f5a0033f4d1"
+    },
+    {
+      "url": "assets/fire-dragon-motion-pixel.png",
+      "size": 1351609,
+      "sha256": "38aea1f64a239d450d19f36c15b5009bb1aa6bd7b8edeea12b7a6c86ecf16950"
     },
     {
       "url": "assets/hulao-pixel.png",

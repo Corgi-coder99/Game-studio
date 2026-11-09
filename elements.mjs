@@ -6,5 +6,10 @@ export const dragonCatalog=elementNames.map((element,i)=>({element,index:i,vip:i
 export function canUseDragon(s,e){const d=dragonCatalog.find(d=>d.element===e);return Boolean(d&&(!d.vip||s.account?.claimedVip?.includes(d.vip)));}
 export function initDragonSanctuary(s){s.dragonSanctuary??={ranks:{},fragments:{}};return s;}
 export function validDragonSanctuary(s){const d=s.dragonSanctuary;if(d===undefined)return true;const plain=v=>v&&typeof v==='object'&&!Array.isArray(v);return plain(d)&&['ranks','fragments'].every(k=>plain(d[k])&&Object.entries(d[k]).every(([e,n])=>elementNames.includes(e)&&Number.isInteger(n)&&n>=0&&n<=(k==='ranks'?10:9999999)&&(k!=='ranks'||!n||canUseDragon(s,e))));}
-export function selectLong(state,e){if(!canUseDragon(state,e))throw new Error('Nhận quà VIP tương ứng trước khi dùng long linh này.');const s=structuredClone(state);s.dragon=e;return s;}
+export function selectLong(state,e){if(!canUseDragon(state,e))throw new Error('Nhận quà VIP tương ứng trước khi dùng long linh này.');const s=structuredClone(state);s.dragon=e;
+ const preset=s.squads?.presets[s.squads.active];
+ if(preset)preset.dragon=e;
+ // The pending selection applies to the next floor. A running floor owns its dragon snapshot.
+ if(s.campaign)s.campaign.dragon=e;
+ return s;}
 export function upgradeLong(state,e){const s=initDragonSanctuary(structuredClone(state)),rank=s.dragonSanctuary.ranks[e]||0,cost=40*(rank+1);if(!canUseDragon(s,e)||rank>=10||(s.dragonSanctuary.fragments[e]||0)<cost)throw new Error('Chưa mở long linh, thiếu mảnh hoặc đã tối đa.');s.dragonSanctuary.fragments[e]-=cost;s.dragonSanctuary.ranks[e]=rank+1;return s;}

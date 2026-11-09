@@ -70,8 +70,8 @@
       "height": 793,
       "depth": 8,
       "color": 6,
-      "bytes": 3779657,
-      "sha256": "2eed89539a86d0b62f20bea284670855163abb539931694bb94be6784617ef16"
+      "bytes": 3403734,
+      "sha256": "938a5fd8d04bee8fb4738757b2599f85cfcc1ab9ce463936f3411b1705c6d7df"
     },
     "window-scenes-pixel.png": {
       "width": 2172,
@@ -256,6 +256,14 @@
       "color": 6,
       "bytes": 3486855,
       "sha256": "570fd365085fc5121e01ca9c704c15add5c06496a9728c4a5efa521cb44897c2"
+    },
+    "fire-dragon-motion-pixel.png": {
+      "width": 1774,
+      "height": 887,
+      "depth": 8,
+      "color": 6,
+      "bytes": 1351609,
+      "sha256": "38aea1f64a239d450d19f36c15b5009bb1aa6bd7b8edeea12b7a6c86ecf16950"
     }
   }
 }
