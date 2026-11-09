@@ -63,7 +63,7 @@ Keep `assets/` as the editable source assets and `docs/` as the generated hostin
 
 ## Native mobile projects
 
-Android and iOS source projects remain under [`mobile/`](mobile/README.md). Outdated APK and iOS project ZIP downloads have been removed. Rebuild from current sources before distributing a native app. iOS installation requires Apple signing and an appropriate build/distribution workflow; the repository is not an installable IPA. See [iPhone distribution options](mobile/IOS-DISTRIBUTION.md) for Home Screen installation, TestFlight, and hosted macOS builds.
+Get the current [Android test APK and iOS Xcode project](mobile/README.md#current-mobile-downloads--161). The APK is self-signed for testing. The iOS project requires a macOS build and Apple signing before device installation. See [iPhone distribution options](mobile/IOS-DISTRIBUTION.md) for Home Screen installation, TestFlight, and hosted macOS builds.
 
 ## Validation and limitations
 

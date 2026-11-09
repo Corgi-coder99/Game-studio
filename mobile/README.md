@@ -2,13 +2,20 @@
 
 Android WebView and iOS WKWebView source projects share the offline game bundle and platform-specific Bluetooth LE bridges. Current store preparation, proposed one-time pricing and remaining submission steps are documented in [store/README.md](../store/README.md). An unsigned Android App Bundle has been built and structurally validated; it is not a signed or published paid app.
 
+## Current mobile downloads · 16.1
+
+- [Android test APK](downloads/Heavenly-Mandate-Android-16.1-test.apk) uses a self-signed test certificate. Export a save backup before replacing an older build signed with a different key.
+- [iOS Xcode source](downloads/Heavenly-Mandate-iOS-16.1-Source.zip) includes the current offline game and sprites. Build and sign it on a Mac to install on an iPhone or iPad.
+
+Both packages use the current player game, including the English mailbox, dragon animation and dragon selection fixes. Physical-device and Bluetooth tests are pending.
+
 ## Android
 
 Generate the current game bundle first, then build with a JDK, an official Android 35 or newer platform, and the supported build tools:
 
 ```sh
 npm run build:offline
-python3 mobile/build-android.py --sdk /path/to/sdk/extracted --keystore /private/path/test.keystore
+python3 mobile/build-android.py --sdk /path/to/sdk --keystore /private/path/test.keystore
 ```
 
 Keep signing keys outside Git and reuse the same private key for compatible updates. The previous test APK was compiled and signature-verified, but physical-device behavior and Bluetooth interoperability were not validated. Newly generated APKs are ignored build outputs until explicitly prepared for distribution.
