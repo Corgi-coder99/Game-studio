@@ -1,3 +1,4 @@
+import './tools/sync-style-bible.mjs';
 import {readFile,writeFile} from 'node:fs/promises';
 const items=JSON.parse(await readFile(new URL('config/items_exclusive.json',import.meta.url),'utf8')),rules=JSON.parse(await readFile(new URL('config/auction_drops.json',import.meta.url),'utf8'));
 await writeFile(new URL('auction-config.mjs',import.meta.url),'// Generated from config/*.json. Edit the JSON sources, then run sync-auction-config.mjs.\nexport const exclusiveItems='+JSON.stringify(items)+';\nexport const auctionRules='+JSON.stringify(rules)+';\n');

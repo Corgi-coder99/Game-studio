@@ -1,6 +1,8 @@
 # Thien Menh — Pixel Kingdom
 
-Version 14 adds visible formation recommendations, a replayable beginner guide, mobile army/profile layout repairs, icon-based summon controls with animated card reveals, Daily Attendance Legacy progression, cleaner map labels and a server-owned shared-world preview.
+Version 15 applies the supplied Golden Warring Kingdoms Style Bible: a 47-color display palette, pixel UI/font, element/rarity semantics and a Settings style lineup. [Read implementation scope](docs/style-bible-implementation.md).
+
+Version 14 added visible formation recommendations, a replayable beginner guide, mobile army/profile layout repairs, icon-based summon controls with animated card reveals, Daily Attendance Legacy progression, cleaner map labels and a server-owned shared-world preview.
 
 Run `npm run start:online` for the local account server. See [online deployment and scope](online/README.md) and [planning budget](docs/online-budget.md). This server is not publicly deployed; GitHub Pages remains the solo preview. Native store packages are not signed or published.
 
@@ -65,7 +67,7 @@ Android and iOS source projects remain under [`mobile/`](mobile/README.md). Outd
 
 ## Validation and limitations
 
-320 automated gameplay, developer-tool, localization and web-cache checks plus four online authority/authentication tests passed. Touch layouts were exercised in Chromium mobile emulation in landscape and portrait; desktop, offline launch, cache repair, and restart persistence were also checked. Physical iPhone Safari and Bluetooth hardware have not been validated. Windows BAT launchers have not been run on Windows; the iOS project has not been compiled with Xcode.
+326 automated gameplay, developer-tool, localization and web-cache checks plus four online authority/authentication tests passed. Touch layouts were exercised in Chromium mobile emulation in landscape and portrait; desktop, offline launch, cache repair, and restart persistence were also checked. Physical iPhone Safari and Bluetooth hardware have not been validated. Windows BAT launchers have not been run on Windows; the iOS project has not been compiled with Xcode.
 
 ## Repository policy
 

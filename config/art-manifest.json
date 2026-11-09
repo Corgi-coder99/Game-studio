@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "style": "Original mythic pixel art; teal and gold interface; nearest-neighbor sampling",
+  "style": "Golden Warring Kingdoms, Style Bible v1.0; 47-color runtime palette; original source atlases preserved",
   "atlases": [
     {
       "file": "hulao-pixel.png",

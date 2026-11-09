@@ -19,7 +19,7 @@ for(const name of assetNames)for(const quote of ["'",'"'])script=script.replaceA
 const images=Object.fromEntries(assetNames.map((name,i)=>[name,encodeAsset85(assetBytes[i])]));
 const prelude=`const assetAlphabet=${JSON.stringify(assetAlphabet)};const decodeAsset85=${decodeAsset85.toString()};\nconst offlineImageData=${JSON.stringify(images)};\nconst offlineAssetUrls={};\nfor(const [name,data] of Object.entries(offlineImageData)){const bytes=decodeAsset85(data);offlineAssetUrls[name]=URL.createObjectURL(new Blob([bytes],{type:'image/png'}));}\nlet offlineCss=${JSON.stringify(styles.join('\n'))};\nfor(const [name,url]of Object.entries(offlineAssetUrls))offlineCss=offlineCss.replaceAll('/assets/'+name,url);\ndocument.getElementById('offline-style').textContent=offlineCss;\n`;
 script=(prelude+script).replace(/<\/script/gi,'<\\/script');
-let html=template.replace(/<link rel="stylesheet" href="\/(?:style|pixel|immersive|rpg|account|viewport|design)\.css">/g,'');
+let html=template.replace(/<link rel="stylesheet" href="\/(?:style|pixel|immersive|rpg|account|viewport|design|style-bible)\.css">/g,'');
 html=html.replace('</head>','<style id="offline-style"></style></head>').replace('<script type="module" src="/app.mjs"></script>',()=>`<script>\n(() => {\n${script}\n})();\n</script>`);
 if(html.includes('src="/app.mjs"')||html.includes('href="/style.css"'))throw new Error('Offline template changed.');
 await mkdir(new URL('offline/',root),{recursive:true});
@@ -29,7 +29,7 @@ await writeFile(new URL('offline/HUONG-DAN.txt',root),await readFile(new URL('wi
 console.log('Offline build: offline/Thien-Menh.html (all active PNGs embedded once; no network or Node.js needed)');
 // Native packages load local PNGs directly, avoiding the memory cost of a large embedded asset script.
 let nativeScript=sources.map(combine).join('\n').replaceAll('/assets/','assets/').replace(/<\/script/gi,'<\\/script');
-let nativeHtml=template.replace(/<link rel="stylesheet" href="\/(?:style|pixel|immersive|rpg|account|viewport|design)\.css">/g,'');
+let nativeHtml=template.replace(/<link rel="stylesheet" href="\/(?:style|pixel|immersive|rpg|account|viewport|design|style-bible)\.css">/g,'');
 nativeHtml=nativeHtml.replace('</head>','<style>'+styles.join('\n').replaceAll('/assets/','assets/')+'</style></head>').replace('<script type="module" src="/app.mjs"></script>',()=>'<script>(()=>{\n'+nativeScript+'\n})();</script>');
 await mkdir(new URL('mobile/bundle/assets/',root),{recursive:true});
 await writeFile(new URL('mobile/bundle/index.html',root),nativeHtml);

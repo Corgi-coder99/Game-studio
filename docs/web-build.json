@@ -1,6 +1,6 @@
 {
-  "version": "v12-2d32398ec763",
-  "bytes": 83224169,
+  "version": "v12-e56d34a20246",
+  "bytes": 83466249,
   "files": [
     {
       "url": "index.html",
@@ -9,13 +9,13 @@
     },
     {
       "url": "game.html",
-      "size": 1062488,
-      "sha256": "cdfdc1c86853268d9a1707bb67bcb5c0f71cbc56e32ec29abb3ec37f6aa20b83"
+      "size": 1304187,
+      "sha256": "9531323cfef8bdcef3f82402001f3dceb3b7f94a54eaaa935ef40b86ba3de4f1"
     },
     {
       "url": "install.css",
-      "size": 1866,
-      "sha256": "d2108408be7fffc88ad57e4f5fdf552c4f3ed5d3b076f554c772e9e9e2599a5a"
+      "size": 2247,
+      "sha256": "f728d174877341658662621e6598bfbf8b11f15191964b3f4bf5f7228e8e6192"
     },
     {
       "url": "install.js",
@@ -25,7 +25,7 @@
     {
       "url": "manifest.webmanifest",
       "size": 482,
-      "sha256": "ab4acbb042df18e722e423e7e46534b80add33116666897b5b038a9fd38d7108"
+      "sha256": "14bebc1e13a56c4f83516c6a668b2bf54adb7678ba9680b9aad082543e3fb40c"
     },
     {
       "url": "app-icon.png",

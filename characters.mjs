@@ -1,6 +1,6 @@
 export const gradeOrder = ['SSR','SSS','SS','S','A','B','C','D'];
-export const gradeColors = { SSR:'#bdf8ff', SSS:'#ffb43b', SS:'#ffd34e', S:'#ff535b', A:'#ff983d', B:'#bd85ff', C:'#2456b8', D:'#61cf71' };
-export const gradePaints={SSR:'linear-gradient(115deg,#ff536e,#ffcf4e,#62e1a6,#55c8ff,#ba83ff)',SSS:'linear-gradient(115deg,#c92137,#ff5f47,#ffd65a,#b27b12)',SS:'#ffd34e',S:'#ff535b',A:'#ff983d',B:'#bd85ff',C:'#2456b8',D:'#61cf71'};
+export const gradeColors = {"D": "#8A90A6", "C": "#C3C8D8", "B": "#2F4EA2", "A": "#4C7BD6", "S": "#7A3FB0", "SS": "#C07BFF", "SSS": "#D4A72C", "SSR": "#B3262E"};
+export const gradePaints = {...gradeColors};
 export const archetypeLabels={fighter:'Fighter',tank:'Tank',assassin:'Assassin',support:'Support',mage:'Mage',archer:'Archer'};
 export const effectDescriptions={block:'Blocks up to 70% of damage after defense.',reflect:'Reflects up to 50% of health actually lost; reflected damage cannot chain.',lifesteal:'Restores up to 50% of damage actually dealt, capped by maximum health.',regen:'Regenerates health each second while below 50% health.',revive:'Revives once per battle with 30% maximum health.',execute:'Executes targets below 10% health unless protected by damage immunity or invincibility.',heal:'Restores health; burning reduces healing received.',burn:'Deals magic damage over time and reduces healing by 50%.',stun:'Prevents normal attacks and skills for the stun duration.',slow:'Reduces attack speed by 35%.',manaLock:'Reduces mana regeneration by 50%; does not affect rage.',immune:'Prevents damage but does not block negative status effects.',invincible:'Clears and blocks negative effects and prevents damage; the hero cannot attack or deal damage.',shield:'Shields do not stack: capped at 30% of the caster’s maximum health or 15% of another recipient’s.',exposed:'Reduces physical resistance by 25%.',marked:'Increases damage received by 25%.',boost:'Increases physical and magic attack by 20%.'};
 
@@ -74,7 +74,7 @@ const rows = [
 
 ];
 const legacy = [
- [118,32,'猴','#ec9860','Tề Thiên Đại Thánh','SSR'],[145,26,'義','#7fb49a','Võ Thánh','SSR'],[105,27,'蓮','#e8939f','Tam Thái Tử','SR'],[100,28,'龍','#93b8db','Ngọa Long','SR'],[120,24,'眼','#b2a1d7','Nhị Lang Thần','SR'],[108,22,'槍','#b7c8c3','Thường Sơn Tử Long','R'],[150,16,'豬','#c5a58a','Thiên Bồng Nguyên Soái','R'],[95,25,'月','#cfacd1','Bế Nguyệt','R'],
+ [118,32,'猴','#FF9B54','Tề Thiên Đại Thánh','SSR'],[145,26,'義','#8A90A6','Võ Thánh','SSR'],[105,27,'蓮','#E8BC8A','Tam Thái Tử','SR'],[100,28,'龍','#8FB4F2','Ngọa Long','SR'],[120,24,'眼','#C3C8D8','Nhị Lang Thần','SR'],[108,22,'槍','#C3C8D8','Thường Sơn Tử Long','R'],[150,16,'豬','#D49A72','Thiên Bồng Nguyên Soái','R'],[95,25,'月','#C3C8D8','Bế Nguyệt','R'],
 ];
 export const characterRoster = rows.map((row,index)=>{
   const [id,name,grade,roles,faction,originalElement,weapon,skillName,operations,passives,resourceOverride]=row;

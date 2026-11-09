@@ -1,64 +1,74 @@
-# Thiên Mệnh — Codex Legend Studio
+# Thien Menh — Pixel Kingdom
 
-English-facing offline pixel strategy game. Read docs/v5-systems.md and docs/characters.md before changing rules. Keep the existing checkout. Develop on codex/thien-menh-offline; main holds the completed release. Updating main requires explicit session authorization, which the user granted for the current release.
+Version 15 applies the supplied Golden Warring Kingdoms Style Bible: a 47-color display palette, pixel UI/font, element/rarity semantics and a Settings style lineup. [Read implementation scope](docs/style-bible-implementation.md).
 
-## Working agreement
+Version 14 added visible formation recommendations, a replayable beginner guide, mobile army/profile layout repairs, icon-based summon controls with animated card reveals, Daily Attendance Legacy progression, cleaner map labels and a server-owned shared-world preview.
 
-- Use one Codex session. Do not spawn agents or paid services unless explicitly requested.
-- Keep gameplay free of network AI, accounts, runtime dependencies and paid APIs. No tokens in browser code.
-- Preserve old saves through migrateKingdom. Durable saves refund all deployed surviving armies once, drop transient battles and stop automatic campaigns.
-- Original generated pixel art only; no copied Infinity Kingdom assets/UI. There are thirty-two active PNGs embedded once as browser-local Blob URLs by the offline builder.
-- Ship concrete playable changes and verify actual UI flows. Developer tools are separate from the player game and must never imply that they invoke Codex.
+Run `npm run start:online` for the local account server. See [online deployment and scope](online/README.md) and [planning budget](docs/online-budget.md). This server is not publicly deployed; GitHub Pages remains the solo preview. Native store packages are not signed or published.
 
-## Source ownership
+An offline-first pixel strategy game with city building, three independent world armies, turn-based combat, and a separate 999-floor Inferno Tower. Game names, new screens, repository documentation and new code comments use English. Player captions use an English presentation catalog; legacy save identifiers remain compatible.
 
-- characters.mjs: 61 heroes, 202 base active skills, 5 VIP passives. game.mjs retains v1 compatibility.
-- progression.mjs: hero levels, per-skill ranks, equipment, hero gacha, 3×3 formation.
-- tactics.mjs: actual combat, status caps, per-unit counters and ability snapshots. Enemy states must not inherit player gear, runes or manuals.
-- account.mjs: profile, level100, VIP15, milestone/VIP gifts, pet/gear draws, stars, cosmetics. Only VIP gift claims issue pet draw points.
-- kingdom.mjs: economy/build/train/old world marches/save migration. campaign.mjs: stages1..999 and auto/replay.
-- realms.mjs/realm-map.mjs: country/city selection and territory. world-data.mjs/region-map.mjs/world-sim.mjs: 27 rule-based AI towns, 54 harvest nodes, portals, regional armies and sieges.
-- chronicle.mjs: active-play timer, missions, win/loss streaks and titles. skins.mjs: only equipped owned skin gives bonuses, not collection stacking. troops.mjs: unit level follows player level to100.
-- runes.mjs: 26 nodes, milestone gift points, level gates, conservation of earned/spent/refunded points; effects must work in tactics, not only text.
-- mail.mjs: 60 battle reports, 40 notices, pending secret treasure parcels. Record once on settlement and escape imported strings in UI. Include dragons and added abilities in analytics.
-- inheritance-data/sim/combat/ui/map.mjs: six map fragments/hidden realms/universal manuals, one extra active slot per hero. Boss rewards go exclusively into claimable mail parcels. Never prune unclaimed parcels or grant duplicate manuals/claims.
-- app.mjs and *-ui.mjs: interaction/persistence. map.mjs: city/battle canvas. CSS: style/pixel/immersive/rpg/account.
+## Offline edition for a one-time mobile purchase
 
-## Required verification and delivery
+The game now includes fourteen main-story objectives, chapter dialogue and real tower-act transitions, capacity-safe story rewards, daily player-initiated Offline Hunts, English native dialogs, earned Legacy ranks, an in-game privacy/help page, and local recovery snapshots. Existing saves migrate without losing progress. See the [paid-edition implementation and store proposal](store/README.md).
+
+Android App Bundle generation is implemented and structurally validated with Google's bundletool. It is unsigned and not a published paid app. iOS remains source requiring an approved icon, Xcode build, publisher signing and device tests. This does not make the existing public preview paid or private.
+
+## Current release
+
+Five-hero formations, three disjoint world squads, an independent Inferno Tower team, the Celestial Auction Hall and safe Reward Inbox, achievement titles and frames, scheduled world-boss raids, world strongholds, elemental formation advice and configurable game-feel/audio are included. See [release notes](docs/current-release.md), the [element-system audit](notes/element-system-audit.md) and [asset/audio credits](CREDITS.md).
+
+One current player package and one separate developer-tool package are maintained. Historical downloads, screenshots, unused atlases, and outdated native packages have been removed from the current tree. Previous commits remain available in Git history.
+
+## Play on iPhone or iPad
+
+The complete Safari installation site is generated in `docs/`. Once GitHub Pages is enabled, open:
+
+https://corgi-coder99.github.io/Game-studio/
+
+In Safari, choose **Share → Add to Home Screen**, open the new icon while connected to Wi-Fi, and download the game until the offline-ready message appears. The game uses a landscape layout on every phone size, rotating its frame when the device is held upright. The Home Screen app provides the fullscreen experience when Safari does not support the Fullscreen API. The initial download is approximately 79 MiB. Subsequent solo sessions can run offline. Back up saves through Settings → Save Management before clearing browser storage.
+
+The repository owner must select **Settings → Pages → Deploy from a branch → main → /docs**. Pages availability depends on repository visibility and plan; this README does not imply that hosting is enabled. Safari does not provide this game's Bluetooth multiplayer.
+
+## Download for desktop
+
+Download [Thien-Menh-Windows.zip](Thien-Menh-Windows.zip), extract it, and open `Thien-Menh.html` in Chrome or Edge. The package also includes Windows launchers and an optional standard-library Python server. Direct HTML play requires neither Node.js nor Python.
+
+## Separate developer application
+
+Download [Heavenly-Mandate-DevTools.zip](Heavenly-Mandate-DevTools.zip). It edits validated JSON test saves and supports a live localhost test game. Studio and debug grants have been removed from the player game. See [developer instructions](admin/README.md). For live mode, extract its folder beside the current game ZIP and run the Python launcher; offline save editing needs only the included HTML.
+
+The [Story Journal](docs/current-release.md) follows The Broken Mandate through five acts with a floor-999 ending. See the [pixel-art toolchain research](docs/toolchain-research.md), [art direction](docs/art-direction.md), and [mobile distribution checklist](docs/store-readiness.md). Native store signing and physical-device testing are still required.
+
+## Develop and build
+
+Requires Node.js 22 or newer; packaging requires Python 3. No npm dependencies are required.
 
 ```sh
 npm test
 npm run dev
-npm run build:offline
+npm run build:web
 python3 package-windows.py
+npm run build:admin
+python3 package-admin.py
+npm run check:art
 ```
 
-248 meaningful tests cover gameplay, save invariants and web cache contracts. Exercise changed browser flows (desktop/mobile). Test the delivered ZIP extracted to a path with spaces, Python server GET/HEAD/404, offline image/skill loading and actual gameplay. Report that BAT has not been run on Windows if that remains true.
+- `npm run dev`: development server at port 3000.
+- `npm run build:offline`: standalone HTML plus an ignored native WebView bundle.
+- `npm run build:web`: rebuilds the offline bundle and the complete GitHub Pages site, including integrity metadata and the service worker.
+- `python3 package-windows.py`: replaces the single current desktop ZIP.
 
-Current delivery: Thien-Menh-Windows.zip only. Remove superseded packages and unused assets from the current tree on each release; retain history. Native APKs and iOS project ZIPs are local build outputs and must not be advertised as current unless rebuilt and verified. No Node/Python is needed for direct HTML play; Python launcher uses only the standard library. Regenerate delivery whenever source/UI/art/instructions change. GitHub publication requires session authorization. The user authorized the current completed release, including repository cleanup, to be promoted to main in Corgi-coder99/Game-studio. Continue future development on codex/thien-menh-offline. Local implementation/packaging remains authorized.
+Keep `assets/` as the editable source assets and `docs/` as the generated hosting output. Both are required for the current source-and-Pages workflow. Tests, build scripts, launchers, and system design notes support maintenance and save compatibility.
 
-UI v7: read docs/v7-interface.md. Native 1920×1080 frame scales uniformly; do not scale individual text panels. gallery-ui.mjs owns fixed bag/pet/campaign scenes and description dialogs; recommendations.mjs provides owned-only heuristic formations. New reports are restricted to mode bot; secret reward parcels remain mandatory.
+## Native mobile projects
 
-squads.mjs owns exactly three saved presets and real reserve allocation; army-ui.mjs owns preset, allocation and two-side report scenes. Preserve troop conservation and import validation. `squads.autoFill` defaults false for old 60-unit behavior; explicit auto-fill uses actual reserves and level capacity.
+Android and iOS source projects remain under [`mobile/`](mobile/README.md). Outdated APK and iOS project ZIP downloads have been removed. Rebuild from current sources before distributing a native app. iOS installation requires Apple signing and an appropriate build/distribution workflow; the repository is not an installable IPA. See [iPhone distribution options](mobile/IOS-DISTRIBUTION.md) for Home Screen installation, TestFlight, and hosted macOS builds.
 
-Current rules v8: read docs/v8-update.md. Player and enemy active formations cap at four; internal 9-slot coordinates remain only for backward compatibility. revision 8 imports enforce cap, older revisions migrate without asset loss. city-rules.mjs owns level100 and four concurrent training queues; preserve legacy training alias and total troop capacity. art-cache.mjs shares images; avoid remounting map panels or combat buttons each simulation tick. sandbox.mjs debug grants are local only and repeatable without gear duplication.
+## Validation and limitations
 
-UI v9: read docs/v9-update.md. technology.mjs owns six persistent material-funded research nodes; systems-ui.mjs owns native mission/technology/rune scenes. world-art.mjs shares five world site sprites. Keep the mailbox available through the HUD; campaign opens through the city tower.
+320 automated gameplay, developer-tool, localization and web-cache checks plus four online authority/authentication tests passed. Touch layouts were exercised in Chromium mobile emulation in landscape and portrait; desktop, offline launch, cache repair, and restart persistence were also checked. Physical iPhone Safari and Bluetooth hardware have not been validated. Windows BAT launchers have not been run on Windows; the iOS project has not been compiled with Xcode.
 
-Rules/UI v10: read docs/v10-update.md. operations.mjs owns three parallel deployments plus the separate tower battle; durable saves refund all survivors once and clear transient battles. Keep the legacy expedition alias without double-counting. Turn-based new battles queue manual skills; resolveTacticsSkill is the action resolver for effect-level tests. elements.mjs/long-ui.mjs own seven innate elements and exactly one equipped dragon per team. VIP13/14 claim gates Light/Dark dragons; shop.mjs owns paid boxes and fragment purchases. Twenty-six embedded PNGs include tiered equipment/weapons, city life, temple, seven dragons and element badges.
+## Repository policy
 
-Rules/UI v11: read docs/v11-update.md. civic.mjs owns manual production, population and wounded/healing; no passive player resource generation. wildlife.mjs/hunting.mjs own three animated species per region, reservations and food-only hunt rewards. Production snapshots persist until explicit collection, healing refunds once. Include wounded + training + deployments in 1,000 troop capacity. city-layout.mjs shares gate and site positions. scene-art.mjs/city-life.mjs use actual atlas frames for dragons and civilians. Keep all new module/asset whitelists in server/builder; embed only active atlases to keep standalone HTML below GitHub's limit.
-
-Rules/UI v12: read docs/v12-update.md and mobile/README.md. commerce.mjs owns gold/material rates and tradable assets; relocation.mjs owns durable travel, destination ghosts and foreign invasions. room.mjs is authoritative for four peers, escrow, COD, armies and PvP; room-client.mjs uses compressed diffs with BroadcastChannel tests and native BLE. Never claim desktop tests verify radio hardware. Solo simulation pauses during a room; keep room cache and reconnect recovery. mobile/android Java and mobile/ios Swift share GATT UUIDs/framing. Native bundles load local PNGs separately; keep all module/assets in server/builder. Android APK is a self-signed test build, iOS Xcode project is not a signed IPA. Preserve signing keys outside Git and clearly report missing physical/iOS build verification.
-
-Safari/PWA: read docs/safari-pwa.md. `npm run build:web` produces the complete static Pages site under docs/ from the native bundle, with no gameplay rule changes. web/sw-template.js owns verified precache, resumable install, missing-entry repair and scoped version caches. Keep web-build.json hashes consistent; test gzip and project-prefix paths. Do not claim GitHub Pages is live before checking/enabling its settings. Publish to main only with explicit session authorization; Pages source for completed releases is main /docs. No Bluetooth capability is promised on Safari.
-
-User-authorized five-hero update: progression revision 9 supports five active heroes in each world/tower formation. This explicitly supersedes earlier four-hero limits. Keep three disjoint world squads and a separate tower snapshot; preserve old saves and ownership. Internal nine-slot coordinates remain. Elemental damage coefficients stay unchanged; follow the user's priority auction → titles → world boss → strongholds → elemental synergy.
-
-Current release modules: config/*.json is the editable source; sync-auction-config.mjs generates the browser modules. Auction, titles, world-boss, strongholds, team-synergy, formation-advisor and FeedbackManager extend the existing engines. Stronghold marches are an explicit durable-save exception: troop reservations and combat snapshots persist, and offline catch-up uses actual combat before returning survivors and inbox rewards. Other transient armies still refund once. All live PNGs must remain in both server and builder whitelists. Offline assets use tested Z85 encoding to remain below GitHub's 100 MiB limit. WebAudio motifs are original procedural audio; no third-party audio is bundled.
-
-Developer separation revision: production runtimeModules excludes sandbox and all admin code. admin/ is a separate local test workspace; never add its bridge or grant controls to player bundles. Settings owns backup/restore, story-ui owns the progress-derived five-act journal. build-manifest.mjs is the shared production list; tools/art-pipeline.mjs validates atlas replacements. Keep one current player ZIP and one separate developer-tool ZIP.
-
-Offline paid-edition revision 13: story.mjs owns fourteen ordered objectives and seen dialogue IDs; validate them through validStory and preserve legacy saves. Story rewards enter auction.inbox exactly once; never grant them directly into a full wallet. Legacy is the earned VIP presentation label. Spirit Supplies explicitly supersedes gift-only pet points: one point costs 2,000 earned Gold; ten fruit cost 300 Gold; points remain non-tradable. Scheduled boss raids remain unchanged; an additional Offline Hunt reserves one attempt per boss per local day. Product metadata is a business-model proposal, not a purchase receipt or activated store price. Unsigned AABs are local ignored outputs, never claim they are signed or accepted by a store.
-
-Online/attendance revision: the user explicitly requested Internet accounts and server-owned shared worlds, superseding the old no-accounts/offline-only product constraint for this separate online mode. online/ owns server-only SQLite credentials, HttpOnly sessions and authoritative commands; never add server modules or secrets to runtimeModules. Online wallets are separate from solo saves. Player EXP no longer grants Legacy Points; daily-rewards.mjs owns once-per-day attendance and safe inbox rewards, preserving existing Legacy balances. Nearby rooms remain four peers; serverWorld is a server-created 64-account preview shard. Do not claim a production deployment, domain purchase, native Internet build, shared boss, or capacity/load certification without actual evidence.
+Use `main` for the completed release and `codex/thien-menh-offline` for ongoing work. Update `main` only when the user authorizes a release. Maintain one current player download and one current developer-tool download, remove obsolete generated packages and unused files, and keep README links aligned with the current tree. Use English for player-facing copy and new documentation. Never commit signing keys, credentials, saves, or local build caches.

@@ -88,7 +88,7 @@
       "durationMs": 750,
       "particles": 3,
       "shake": 0,
-      "hitStopMs": 0,
+      "hitStopMs": 60,
       "tierByCondition": [
         {
           "when": "isCrit",
@@ -132,7 +132,7 @@
       "durationMs": 750,
       "particles": 8,
       "shake": 2,
-      "hitStopMs": 50
+      "hitStopMs": 100
     },
     "dodge": {
       "tier": 1,
@@ -161,8 +161,8 @@
       },
       "durationMs": 750,
       "particles": 18,
-      "shake": 5,
-      "hitStopMs": 150
+      "shake": 4,
+      "hitStopMs": 0
     },
     "boss_phase_change": {
       "tier": 4,
@@ -176,8 +176,8 @@
       },
       "durationMs": 750,
       "particles": 30,
-      "shake": 10,
-      "hitStopMs": 200
+      "shake": 4,
+      "hitStopMs": 120
     },
     "boss_killed": {
       "tier": 4,
@@ -193,8 +193,8 @@
       },
       "durationMs": 750,
       "particles": 30,
-      "shake": 10,
-      "hitStopMs": 200
+      "shake": 4,
+      "hitStopMs": 120
     },
     "victory": {
       "tier": 3,
@@ -210,8 +210,8 @@
       },
       "durationMs": 750,
       "particles": 18,
-      "shake": 5,
-      "hitStopMs": 150
+      "shake": 4,
+      "hitStopMs": 120
     },
     "defeat": {
       "tier": 2,
@@ -314,8 +314,8 @@
       },
       "durationMs": 750,
       "particles": 18,
-      "shake": 5,
-      "hitStopMs": 150
+      "shake": 4,
+      "hitStopMs": 120
     },
     "auction_bid": {
       "tier": 1,
@@ -359,8 +359,8 @@
       },
       "durationMs": 750,
       "particles": 18,
-      "shake": 5,
-      "hitStopMs": 150
+      "shake": 4,
+      "hitStopMs": 120
     },
     "auction_sold": {
       "tier": 2,
@@ -391,8 +391,8 @@
       },
       "durationMs": 750,
       "particles": 18,
-      "shake": 5,
-      "hitStopMs": 150
+      "shake": 4,
+      "hitStopMs": 120
     },
     "level_up": {
       "tier": 3,
@@ -406,8 +406,8 @@
       },
       "durationMs": 750,
       "particles": 18,
-      "shake": 5,
-      "hitStopMs": 150
+      "shake": 4,
+      "hitStopMs": 120
     },
     "critical_hit": {
       "tier": 2,
@@ -490,37 +490,37 @@
   },
   "elementStyles": {
     "Kim": {
-      "color": "#cfd8dc",
+      "color": "#C3C8D8",
       "frequency": 880,
       "particle": "streak"
     },
-    "M\u1ed9c": {
-      "color": "#66bb6a",
+    "Mộc": {
+      "color": "#3E8E4A",
       "frequency": 660,
       "particle": "leaf"
     },
-    "Th\u1ee7y": {
-      "color": "#42a5f5",
+    "Thủy": {
+      "color": "#4C7BD6",
       "frequency": 550,
       "particle": "ripple"
     },
-    "H\u1ecfa": {
-      "color": "#ff7043",
+    "Hỏa": {
+      "color": "#E4572E",
       "frequency": 220,
       "particle": "ember"
     },
-    "Th\u1ed5": {
-      "color": "#c8a165",
+    "Thổ": {
+      "color": "#A8683A",
       "frequency": 110,
       "particle": "dust"
     },
-    "\u00c1nh s\u00e1ng": {
-      "color": "#fff1ad",
+    "Ánh sáng": {
+      "color": "#FFE9A0",
       "frequency": 1100,
       "particle": "streak"
     },
-    "B\u00f3ng t\u1ed1i": {
-      "color": "#c48bff",
+    "Bóng tối": {
+      "color": "#7A3FB0",
       "frequency": 165,
       "particle": "ember"
     }

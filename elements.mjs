@@ -1,5 +1,5 @@
 export const elementNames=['Hỏa','Thủy','Mộc','Thổ','Kim','Ánh sáng','Bóng tối'];
-export const elementColors=['#ff8655','#64d8ff','#74db8d','#d6ad65','#e8d98d','#fff1ad','#c48bff'];
+export const elementColors=["#E4572E", "#4C7BD6", "#3E8E4A", "#A8683A", "#C3C8D8", "#FFE9A0", "#7A3FB0"];
 export function elementIcon(element){const i=Math.max(0,elementNames.indexOf(element));return `<span class="element-icon" style="--element-x:${i*100/6}%" role="img" aria-label="${element}" title="Hệ ${element}"></span>`;}
 export function elementalMultiplier(a,b){return {Hỏa:'Kim',Kim:'Mộc',Mộc:'Thổ',Thổ:'Thủy',Thủy:'Hỏa','Ánh sáng':'Bóng tối','Bóng tối':'Ánh sáng'}[a]===b?1.25:1;}
 export const dragonCatalog=elementNames.map((element,i)=>({element,index:i,vip:i===5?13:i===6?14:0,name:element+' Long',text:['Phun hỏa tức gây sát thương phép toàn địch.','Thủy tức hồi sinh lực toàn đội.','Mộc linh tạo khiên bảo vệ toàn đội.','Địa mạch tạo khiên, tăng phòng thủ trong 4 giây.','Kim vũ gây sát thương vật lý và phá giáp tiền tuyến.','Quang long hồi máu, thanh tẩy hiệu ứng xấu và hộ thể 1 giây.','Ám long gây sát thương phép và phong linh toàn địch 3 giây.'][i]}));

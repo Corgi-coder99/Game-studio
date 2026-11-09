@@ -1,15 +1,15 @@
 {
   "verifiedOn": "2026-11-09",
-  "sourceWebBuild": "v12-2d32398ec763",
+  "sourceWebBuild": "v12-e56d34a20246",
   "android": {
     "artifact": "mobile/release-output/Heavenly-Mandate-unsigned.aab",
-    "sha256": "bbc2b188e937f27856055d318489061613edb816171969b3723f29eb1c2c5e5b",
+    "sha256": "2e2339f9ccb4557d9fd69f41d0c0c80b2a986e91899001b9523c3795cd714ca0",
     "bundletool": "1.18.3",
     "validation": "passed",
     "signed": false,
     "uploaded": false,
     "applicationId": "vn.thienmenh.game",
-    "versionCode": 14,
+    "versionCode": 15,
     "targetSdk": 36,
     "compiledAgainstSdk": 35,
     "physicalDeviceTested": false
@@ -20,7 +20,7 @@
     "signed": false,
     "physicalDeviceTested": false
   },
-  "automatedTests": 324,
+  "automatedTests": 330,
   "businessModel": {
     "proposal": "one-time purchase",
     "suggestedUSD": 4.99,
@@ -37,5 +37,16 @@
     "domainPurchased": false,
     "dockerDeploymentTested": false,
     "concurrencyLoadTested": false
+  },
+  "styleBible": {
+    "version": "1.0",
+    "paletteColors": 47,
+    "font": "VT323",
+    "vietnameseGlyphsVerified": true,
+    "worldNativeHeight": 360,
+    "gpuAndCPUFallbackVerified": true,
+    "wholeDOMPixelLock": false,
+    "godotMigrationCompleted": false,
+    "sourceAtlasesHandRedrawn": false
   }
 }

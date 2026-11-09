@@ -7,8 +7,8 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "landscape",
-  "background_color": "#0c2029",
-  "theme_color": "#102d35",
+  "background_color": "#0E1024",
+  "theme_color": "#1B1F3B",
   "description": "Offline pixel city-building and formation strategy.",
   "icons": [
     {

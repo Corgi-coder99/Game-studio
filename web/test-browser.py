@@ -35,6 +35,7 @@ with tempfile.TemporaryDirectory(prefix='Thien Menh Safari PWA ') as profile,syn
  # Complete first-run setup and import a funded test backup through the real player flow.
  page.locator('[data-confirm-realm]').tap()
  if page.locator('[data-story-ack]').count():page.locator('[data-story-ack]').tap()
+ if page.locator('[data-guide-close]').count():page.locator('[data-guide-close]').tap()
  fixture=json.loads(page.evaluate('localStorage.getItem("thien-menh-kingdom-v2")'));fixture['coins']=100000
  page.locator('.game-nav [data-view="settings"]').tap();page.locator('[data-view="saves"]').last.tap()
  page.once('dialog',lambda dialog:dialog.accept())

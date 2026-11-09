@@ -1,5 +1,15 @@
 # Current release
 
+## Version 15: Golden Warring Kingdoms style
+
+- Applies the supplied Style Bible v1.0 palette and UI roles: 47 approved colors, pixel font, Ink/Royal Blue panels, Parchment text, Gold primary actions and Crimson danger actions.
+- Separates natural-element effects from grade/title frame colors. Preserves all game/save rules.
+- Adds lazy palette-mapped artwork, opaque/binary alpha, a restricted terrain ramp and a final 360-pixel world-canvas palette pass with integer presentation and corrected input/feedback coordinates. Software fallback is included.
+- Settings contains a 640×360 style lineup for side-by-side visual review. VT323 is bundled locally with its OFL license and Vietnamese glyph coverage.
+- Canonicalizes zero-valued spawn coordinates so JSON room messages do not change negative zero into a different numeric representation. No location or combat formula changes.
+- Existing DOM layouts remain responsive; full native UI pixel locking, new hand-cleaned animation sets and the document’s Godot migration stages are not claimed as completed. See [implementation scope](style-bible-implementation.md).
+
+
 ## Version 14: guided play and shared-world preview
 
 - Recommend is visible from formations and each of the three army cards. Mobile army pages scroll complete cards with five equal slots, including empty slots. The player profile uses one continuous overview rather than automatic multi-page splitting.
@@ -11,7 +21,7 @@
 
 
 
-## Unified interface presentation
+## Earlier interface baseline (superseded by the Golden theme)
 
 - Shared jade, cream and antique-gold theme tokens now coordinate windows, cards, headers, action buttons, inputs, HUD resources and navigation frames. Selected tabs use gold with dark text; keyboard focus remains visible.
 - Lower-grade shard boxes clip stray pixels from the adjacent atlas row without replacing the original artwork.

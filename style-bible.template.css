@@ -1,0 +1,121 @@
+/* Golden Warring Kingdoms: Style Bible v1.0. Geometry stays in the existing layout sheets. */
+:root {
+ --ui-ink:var(--parchment-5);--ui-muted:var(--parchment-4);--ui-gold:var(--gold-3);--ui-gold-bright:var(--gold-4);
+ --ui-edge:var(--ink-4);--ui-deep:var(--ink-1);--ui-panel:var(--ink-2);--ui-raised:var(--ink-3);
+ --ui-font:"Mandate Pixel",monospace;--ui-heading:"Mandate Pixel",monospace;
+ --gold:var(--gold-3);--muted:var(--parchment-4);--panel:var(--ink-2);--ink:var(--ink-1);
+}
+html,body,body.immersive {background:var(--ink-1)!important;color:var(--parchment-5);}
+#app,#app button,#app input,#app select,#app textarea,#app h1,#app h2,#app h3,#app small,#toast {font-family:var(--ui-font)!important;font-synthesis:none;}
+#app h1,#app h2,#app h3 {font-weight:400;letter-spacing:0;text-shadow:1px 1px var(--ink-1);}
+#app button:where(:not(.box-preview):not(.formation-cell):not(.summon-card):not(.inventory-tile)) {background:var(--royal-1)!important;color:var(--parchment-5)!important;filter:none!important;}
+#app button:is(.gold-button,.primary,.selected,.current,.active,[aria-selected=true]) {background:var(--gold-3)!important;color:var(--ink-1)!important;text-shadow:none;}
+#app button {border-radius:0!important;text-shadow:1px 1px var(--ink-1);transition:none;}
+#app :is(.fixed-screen,.paper-panel,.detail-panel,.description-dialog,.market-bid-dialog,.story-dialogue-curtain>section,.beginner-coach,.gear-picker) {
+ color:var(--parchment-5);background-color:var(--ink-2);border:3px solid var(--gold-3);border-radius:0;
+ box-shadow:-2px -2px 0 var(--gold-4),2px 2px 0 var(--gold-1),inset 2px 2px 0 var(--gold-4),inset -2px -2px 0 var(--ink-1);
+ background-image:conic-gradient(from 90deg,var(--ink-3) 25%,var(--ink-2) 0);background-size:6px 6px;
+}
+#app :is(.gallery-heading,.gallery-footer,.market-tabs,.account-tabs,.doll-title,.doll-information,.comparison-verdict,.story-objective) {
+ background:var(--ink-2);color:var(--parchment-5);border-color:var(--gold-1);box-shadow:none;
+}
+#app :is(.market-listing,.market-history article,.market-forge article,.market-item-library article,.market-inbox article,.market-sell>section,.market-sell>aside,.story-chapters article,.product-sections section,.battle-report-side,.report-unit-card,.combat-result,.squad-preset,.settings-grid>section,.online-cards>article,.online-cards>section,.online-world-layout>aside,.daily-cell) {
+ background:var(--ink-2);color:var(--parchment-5);border-radius:0;box-shadow:inset 2px 2px var(--ink-3),inset -2px -2px var(--ink-1);border-color:var(--gold-1);
+}
+#app :is(.fixed-screen,.description-curtain,.story-dialogue-curtain,.combat-options,.game-header,.game-nav,.beginner-coach,.profile-scroll) button:where(:not(.formation-cell):not(.summon-card):not(.inventory-tile):not(.hero-card):not(.hero-carousel-card):not(.box-preview)) {
+ background:var(--royal-1);color:var(--parchment-5);border:2px solid var(--royal-3);box-shadow:inset 2px 2px var(--royal-2),2px 2px var(--ink-1);
+}
+#app :is(.fixed-screen,.description-curtain,.story-dialogue-curtain,.combat-options,.game-nav,.beginner-coach,.profile-scroll) button:is(.primary,.gold-button,.selected,.current,.active,[aria-selected=true]) {
+ background:var(--gold-3)!important;color:var(--ink-1)!important;border-color:var(--gold-1);box-shadow:inset 2px 2px var(--gold-4),2px 2px var(--gold-1);text-shadow:none;
+}
+#app button:is(.danger,.danger-button,[data-room-close],[data-reset],[data-reset-save],[data-cancel-production],[data-campaign-stop],[data-online-logout]) {
+ background:var(--crimson-2)!important;color:var(--parchment-5)!important;border-color:var(--crimson-3)!important;box-shadow:inset 2px 2px var(--crimson-3),2px 2px var(--crimson-1)!important;
+}
+#app button:disabled {opacity:1!important;filter:none!important;background:var(--ink-4)!important;color:var(--ink-5)!important;border-color:var(--ink-3)!important;box-shadow:none!important;text-shadow:none;}
+#app button:active:not(:disabled) {scale:1;translate:0 1px;filter:none;box-shadow:inset 1px 1px var(--gold-4);}
+@media(hover:hover){#app button:hover:not(:disabled) {filter:none;border-color:var(--gold-4);}}
+#app :is(button,input,select,summary):focus-visible {outline:2px solid var(--gold-5);outline-offset:3px;}
+#app :is(input:not([type=range]):not([type=checkbox]),textarea,select) {background:var(--ink-1);color:var(--parchment-5);border:2px solid var(--ink-4);border-radius:0;}
+#app option {background:var(--ink-1);color:var(--parchment-5);}
+#app input::placeholder,#app textarea::placeholder {color:var(--ink-5);}
+#app :is(.resource,.kingdom-brand,.quest-panel,.queue-item,.resource-strip,.scene-controls) {background:var(--ink-2);border-color:var(--gold-1);border-radius:0;box-shadow:inset 1px 1px var(--gold-3);}
+#app .resource b {color:var(--parchment-5);}
+#app .resource small,#app .battle-report-side header small,#app .battle-comparison .gallery-footer,#app .battle-comparison .gallery-footer>span {color:var(--parchment-4);}
+#app .game-nav button>span {border:2px solid var(--gold-3);border-radius:0;background-color:var(--ink-2);box-shadow:inset 1px 1px var(--gold-4),2px 2px var(--gold-1);}
+#app .game-nav button.current>span {border-color:var(--gold-5);box-shadow:inset 1px 1px var(--gold-4),2px 2px var(--gold-1);}
+#app .game-nav button small {color:var(--parchment-5);font-weight:400;}
+#app .settings-gear {color:var(--gold-4);}
+#app :is(.hero-art,.item-picture,.equipment-picture,.skill-icon,.element-icon,.elemental-dragon-art,.character-splash-art,.world-boss-art,.pet-art,.city-building-picture,.navigation-art,.mystery-box) {image-rendering:pixelated;filter:none!important;}
+#app :is(.hero-result-card,.carousel-hero,.inventory-tile,.summon-card,.title-frame,.market-listing) {border-radius:0;box-shadow:none;}
+#app [class*="grade-"] {--grade-color:var(--rarity-color);}
+#app :is(.grade-D,.rarity-D){--rarity-color:var(--silver-2);}
+#app :is(.grade-C,.rarity-C){--rarity-color:var(--silver-3);}
+#app :is(.grade-B,.rarity-B){--rarity-color:var(--royal-2);}
+#app :is(.grade-A,.rarity-A){--rarity-color:var(--royal-3);}
+#app :is(.grade-S,.rarity-S){--rarity-color:var(--void-2);}
+#app :is(.grade-SS,.rarity-SS){--rarity-color:var(--void-3);}
+#app :is(.grade-SSS,.rarity-SSS){--rarity-color:var(--gold-3);}
+#app :is(.grade-SSR,.rarity-SSR){--rarity-color:var(--crimson-3);}
+#app :is(.hero-result-card,.carousel-hero,.inventory-tile,.summon-card)[class*="grade-"] {border:2px solid var(--rarity-color);background:var(--ink-2);color:var(--parchment-5);}
+#app :is(.hero-result-card,.carousel-hero,.inventory-tile,.summon-card).grade-SSR {outline:2px solid var(--gold-3);outline-offset:1px;}
+#app :is(.hero-result-card,.carousel-hero,.summon-card) :is(b,strong,small,h3),#app .shop-box>b {color:var(--parchment-5)!important;}
+#app .summon-card {border-color:var(--rarity-color);box-shadow:none!important;}
+#app .summon-card::after {display:none;}
+#app .pixel-tv-flash {background:var(--silver-4)!important;}
+#app .shop-box {background:var(--ink-2);box-shadow:inset 2px 2px var(--ink-3);}
+#app .comparison-verdict>b {color:var(--green-4);}
+#app .comparison-verdict.enemy>b {color:var(--crimson-4);}
+#app :is(.hp-track,.hp-bar,.report-hp-bar,.boss-health) {background:var(--ink-1);border-color:var(--ink-4);border-radius:0;}
+#app :is(.hp-track,.hp-bar,.report-hp-bar)>span,#app .boss-health>div {background:var(--green-3);}
+#app .enemies .report-hp-bar>span,#app .boss-health>div {background:var(--crimson-3);}
+#app progress {accent-color:var(--royal-3);background:var(--ink-1);border-radius:0;}
+#app .danger-zone {background:var(--crimson-1);box-shadow:inset 0 0 0 3px var(--crimson-3);animation:golden-telegraph 250ms steps(1) infinite;}
+@keyframes golden-telegraph {50%{outline:2px solid var(--crimson-4);outline-offset:-5px;}}
+#app [class*="earned-title-frame"] {border-image:none!important;border-color:var(--gold-3)!important;filter:none!important;}
+#app .title-rarity-1{border-color:var(--silver-3)!important;}
+#app .title-rarity-2{border-color:var(--royal-3)!important;}
+#app .title-rarity-3{border-color:var(--void-2)!important;}
+#app .title-rarity-4{border-color:var(--gold-3)!important;}
+#app .title-rarity-5{border-color:var(--crimson-3)!important;outline:2px solid var(--gold-3);}
+#app .title-rarity-5::after {content:"";position:absolute;pointer-events:none;width:3px;height:3px;top:0;left:0;background:var(--gold-5);box-shadow:3px 0 var(--gold-4),0 3px var(--gold-4);animation:golden-corner-spark 664ms steps(1) infinite;}
+@keyframes golden-corner-spark {25%{left:auto;right:0;top:0}50%{left:auto;right:0;top:auto;bottom:0}75%{left:0;right:auto;top:auto;bottom:0}}
+#app :is(.story-dialogue-curtain,.description-curtain,.gear-curtain) {background:var(--ink-1);}
+#app .daily-cell.today {border-color:var(--gold-4);}
+#app .daily-cell.claimed {background:var(--green-1);}
+#toast {background:var(--ink-2);color:var(--parchment-5);border:2px solid var(--gold-3);border-radius:0;box-shadow:2px 2px var(--gold-1);}
+#toast.show {animation:golden-notice 150ms ease-out;}
+@keyframes golden-notice {from{translate:0 9px}to{translate:0 0}}
+#app .summon-card {animation:golden-card 650ms steps(8,end) both;animation-delay:var(--reveal-delay);}
+@keyframes golden-card {0%{transform:translateY(24px) rotateY(90deg);opacity:1;filter:none}40%{transform:translateY(12px) rotateY(50deg)}70%{transform:translateY(0) rotateY(-10deg)}100%{transform:none}}
+#app .beginner-coach {animation:golden-notice 150ms ease-out;}
+#app .plaza-motes {color:var(--gold-4);text-shadow:none;}
+body.reduce-motion #app *,body.effects-minimal #app .title-rarity-5::after {animation:none!important;}
+@media(prefers-reduced-motion:reduce){#app .summon-card,#app .title-rarity-5::after,#toast.show {animation:none!important;}}
+#app .style-lineup-curtain {position:absolute;inset:0;z-index:140;background:var(--ink-1);display:flex;align-items:center;justify-content:center;overflow:auto;}
+#app .style-lineup-curtain>button {position:absolute;right:10px;top:10px;z-index:2;padding:8px 16px;}
+#app .style-lineup-canvas {image-rendering:pixelated;flex:none;}
+
+#app .realm-setup{background:var(--ink-1);}
+#app .realm-setup>section{background:var(--ink-2);border:3px solid var(--gold-3);box-shadow:inset 2px 2px var(--gold-4);}
+#app .realm-card{box-shadow:none!important;border-color:var(--royal-3)!important;}
+#app .lord-profile,#app .profile-shell,#app .vip-palace{background:var(--ink-2);color:var(--parchment-5);}
+/* VT323 has a smaller cap height; compensate without shrinking touch targets. */
+#app button,#app input,#app select {font-size:22px!important;line-height:1.1;}
+#app :is(.fixed-screen,.paper-panel,.description-dialog,.beginner-coach) p {font-size:24px!important;line-height:1.3;}
+#app .resource small {font-size:16px!important;}
+#app .resource b {font-size:23px!important;}
+#app .game-nav button small {font-size:18px!important;}
+#app .queue-item b,#app .queue-item small {font-size:18px!important;line-height:1.15;}
+#app .kingdom-brand div>b {font-size:26px!important;}
+#app .kingdom-brand small {font-size:18px!important;}
+#app .carousel-hero b,#app .carousel-hero small {font-size:18px!important;}
+#app .gallery-heading>h1,#app .gallery-heading>h2 {font-size:36px!important;}
+#app :is(.doll-slot,.gear-choice,.hero-card,.hero-result-card,.carousel-hero,.inventory-tile,.summon-card,.shop-box)[class*="grade-"] {border-color:var(--rarity-color)!important;}
+#app :is(.doll-slot,.gear-choice,.hero-card,.hero-result-card,.carousel-hero,.inventory-tile,.summon-card,.shop-box).grade-SSR {outline:2px solid var(--gold-3);outline-offset:1px;}
+#app .title-frame.rarity-1 {border-color:var(--silver-3);}
+#app .title-frame.rarity-2 {border-color:var(--royal-3);}
+#app .title-frame.rarity-3 {border-color:var(--void-2);}
+#app .title-frame.rarity-4 {border-color:var(--gold-3);}
+#app .title-frame.rarity-5,#app .boss-lobby-grid>article {border:2px solid var(--crimson-3);outline:1px solid var(--gold-3);}
+
+#app .lord-banner {background:var(--ink-3);border-color:var(--gold-3);color:var(--parchment-5);}

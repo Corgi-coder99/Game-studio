@@ -1,7 +1,7 @@
 export const realmFactions={
- wei:{name:'Tào Ngụy',color:'#d65c63',troop:'cavalry',troopName:'Kỵ binh',capital:'xuchang',text:'+15% HP và công vật lý Kỵ binh trong trận.'},
- shu:{name:'Thục Hán',color:'#578fdf',troop:'spear',troopName:'Thương binh',capital:'chengdu',text:'+15% HP và công vật lý Thương binh trong trận.'},
- wu:{name:'Đông Ngô',color:'#68bd7c',troop:'bow',troopName:'Cung binh',capital:'jianye',text:'+15% HP và công vật lý Cung binh trong trận.'},
+ wei:{name:'Tào Ngụy',color:'#D08F55',troop:'cavalry',troopName:'Kỵ binh',capital:'xuchang',text:'+15% HP và công vật lý Kỵ binh trong trận.'},
+ shu:{name:'Thục Hán',color:'#4C7BD6',troop:'spear',troopName:'Thương binh',capital:'chengdu',text:'+15% HP và công vật lý Thương binh trong trận.'},
+ wu:{name:'Đông Ngô',color:'#7BC25F',troop:'bow',troopName:'Cung binh',capital:'jianye',text:'+15% HP và công vật lý Cung binh trong trận.'},
 };
 export const realmCities=[
  {id:'ye',name:'Nghiệp Thành',faction:'wei',x:640,y:160,node:'camp1'},

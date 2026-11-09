@@ -1,6 +1,6 @@
 # Heavenly Mandate art direction
 
-The visual identity is original mythic pixel art: jade and deep teal panels, restrained gold borders, cream text, and distinct elemental accents. Historical and literary heroes share a fractured celestial world explained by The Broken Mandate story journal.
+The current visual identity follows Golden Warring Kingdoms (Style Bible v1.0): Ink/Royal Blue surfaces, Parchment content, Gold/Crimson accents and distinct natural-element ramps. The prior jade theme is superseded. See [implementation and acceptance scope](style-bible-implementation.md). Historical and literary heroes share a fractured celestial world explained by The Broken Mandate story journal.
 
 - Use the existing atlas cells and transparent margins. Export atlases at their approved dimensions; do not replace an atlas with a single illustration.
 - Heroes, dragons, equipment and icons use nearest-neighbor sampling. Keep one icon silhouette per function. Do not use generic currency/chest art for unrelated navigation.
@@ -13,10 +13,12 @@ The visual identity is original mythic pixel art: jade and deep teal panels, res
 
 ## Shared interface theme
 
-The final shared theme in `design.css` owns `--ui-*` tokens: deep jade surfaces, cream text, muted blue-gray secondary text and antique gold borders. Legacy theme variables alias these tokens. Body controls use the same system font stack; major scene headings use Georgia. Geometry, uniform viewport scaling, map bounds and touch targets remain owned by the existing layout rules.
+The legacy layout theme in `design.css` originally owned `--ui-*` tokens: deep jade surfaces, cream text, muted blue-gray secondary text and antique gold borders. Legacy theme variables alias these tokens. Body controls use the same system font stack; major scene headings use Georgia. Geometry, uniform viewport scaling, map bounds and touch targets remain owned by the existing layout rules.
 
 Buttons share a raised jade surface; selected tabs and primary actions use gold with dark text. Disabled actions dim, keyboard focus uses a cyan outline, and hover never becomes necessary to understand an action. Reports use jade panels rather than the previous pale parchment, with distinct allied/enemy HP and victory/defeat colors. Existing navigation atlas images are preserved; theme rules must not replace their background images or sprite coordinates. Item rarity and elemental colors remain independent semantic accents.
 
 This standardizes interface chrome, not the anatomy or animation of every hero, dragon or environment. Atlas replacement still follows the technical contract above.
 
 The Three Realms overview uses a cached original procedural pixel landscape with rivers, forests and existing castle/portal atlas cells. The regional map keeps descriptions in the tap drawer rather than painting labels across resources and cities. Daily Legacy badges are original crisp-edge SVG pixel medals, winged medals, coronets and a final level-15 crown. Summon controls use ticket/Jade icons and a shared count selector; result cards flip and shimmer once, with immediate reward ownership and reduced-motion alternatives.
+
+The authoritative visual tokens now live in `config/style-bible.json` and the generated final `style-bible.css`; maintain layout and touch rules in the existing sheets. Source PNG fingerprints remain technical contracts. The renderer maps visible assets and the world canvas to the display palette without pretending the original drawings have been hand-cleaned.

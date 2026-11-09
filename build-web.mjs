@@ -12,7 +12,7 @@ webGame=webGame.replace('</body>','<script>if("serviceWorker" in navigator){navi
 await writeFile(new URL('game.html',webDest),webGame);
 await writeFile(new URL('.nojekyll',webDest),'');
 const appIconBytes=await readFile(new URL('assets/safari-app-icon.png',webRoot)),appIconSize=appIconBytes.readUInt32BE(16)+'x'+appIconBytes.readUInt32BE(20);
-const webManifest={id:'./',name:'Heavenly Mandate · Pixel Kingdom',short_name:'Heavenly Mandate',lang:'en',start_url:'./',scope:'./',display:'standalone',orientation:'landscape',background_color:'#0c2029',theme_color:'#102d35',description:'Offline pixel city-building and formation strategy.',icons:[{src:'./app-icon.png',sizes:appIconSize,type:'image/png',purpose:'any'}]};
+const webManifest={id:'./',name:'Heavenly Mandate · Pixel Kingdom',short_name:'Heavenly Mandate',lang:'en',start_url:'./',scope:'./',display:'standalone',orientation:'landscape',background_color:'#0E1024',theme_color:'#1B1F3B',description:'Offline pixel city-building and formation strategy.',icons:[{src:'./app-icon.png',sizes:appIconSize,type:'image/png',purpose:'any'}]};
 await writeFile(new URL('manifest.webmanifest',webDest),JSON.stringify(webManifest,null,2));
 const imageFiles=(await readdir(new URL('mobile/bundle/assets/',webRoot))).filter(f=>f.endsWith('.png')).sort();
 for(const name of await readdir(new URL('assets/',webDest)))if(name.endsWith('.png')&&!imageFiles.includes(name))await unlink(new URL('assets/'+name,webDest));
