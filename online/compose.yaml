@@ -1,0 +1,29 @@
+services:
+  game:
+    build:
+      context: ..
+      dockerfile: online/Dockerfile
+    environment:
+      REGISTRATION_CODE: ${REGISTRATION_CODE:?Set a private invitation code}
+      PUBLIC_ORIGIN: https://${GAME_DOMAIN:?Set GAME_DOMAIN to your owned .com domain}
+    volumes:
+      - game_data:/data
+    restart: unless-stopped
+    expose:
+      - "3000"
+  proxy:
+    image: caddy:2.10
+    environment:
+      GAME_DOMAIN: ${GAME_DOMAIN}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+volumes:
+  game_data:
+  caddy_data:
+  caddy_config:

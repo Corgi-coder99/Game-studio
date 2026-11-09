@@ -1,0 +1,12 @@
+.git
+node_modules
+*.zip
+offline
+mobile
+admin
+docs
+online/data
+*.sqlite*
+*.test.mjs
+web
+/tmp

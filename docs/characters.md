@@ -633,3 +633,7 @@ THẦN Bóng tối — Tru Tiên Kiếm Trận · Diệt Thế Ám Vực
 5. **Thiên Mệnh Đế Uy (bị động)** — +10% HP tối đa và +15% công vật lý.
 
 THẦN Ánh sáng — Thiên Đình Ngự Lệnh · Vĩnh Hằng Quang Vực
+
+## Formation presentation and Legacy acquisition
+
+Recommend remains owned-only and respects deployed heroes and the three disjoint world squads. The mobile Three Armies scene displays five equal slots per army, including empty slots, and scrolls the page instead of squeezing cards. Daily Attendance now grants Legacy Points; hero rank gifts and existing Light/Dark ownership are preserved.

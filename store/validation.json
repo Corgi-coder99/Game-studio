@@ -1,15 +1,15 @@
 {
-  "verifiedOn": "2026-11-08",
-  "sourceWebBuild": "v12-0e49be414c27",
+  "verifiedOn": "2026-11-09",
+  "sourceWebBuild": "v12-2d32398ec763",
   "android": {
     "artifact": "mobile/release-output/Heavenly-Mandate-unsigned.aab",
-    "sha256": "45c574697ad6871231c7e2129353c749349232228b488fe06bccc33b2439fe46",
+    "sha256": "bbc2b188e937f27856055d318489061613edb816171969b3723f29eb1c2c5e5b",
     "bundletool": "1.18.3",
     "validation": "passed",
     "signed": false,
     "uploaded": false,
     "applicationId": "vn.thienmenh.game",
-    "versionCode": 13,
+    "versionCode": 14,
     "targetSdk": 36,
     "compiledAgainstSdk": 35,
     "physicalDeviceTested": false
@@ -20,7 +20,7 @@
     "signed": false,
     "physicalDeviceTested": false
   },
-  "automatedTests": 316,
+  "automatedTests": 324,
   "businessModel": {
     "proposal": "one-time purchase",
     "suggestedUSD": 4.99,
@@ -29,5 +29,13 @@
     "ads": false,
     "subscriptions": false
   },
-  "browserValidation": "Chromium desktop and mobile emulation; physical Safari is unverified"
+  "browserValidation": "Chromium desktop and mobile emulation; physical Safari is unverified",
+  "online": {
+    "localAccountsVerified": true,
+    "serverPersistenceVerified": true,
+    "publiclyDeployed": false,
+    "domainPurchased": false,
+    "dockerDeploymentTested": false,
+    "concurrencyLoadTested": false
+  }
 }

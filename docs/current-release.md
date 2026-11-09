@@ -1,5 +1,16 @@
 # Current release
 
+## Version 14: guided play and shared-world preview
+
+- Recommend is visible from formations and each of the three army cards. Mobile army pages scroll complete cards with five equal slots, including empty slots. The player profile uses one continuous overview rather than automatic multi-page splitting.
+- An eight-lesson beginner guide explains buildings, production, recommendation, parallel armies, summoning, the world, story and saves. It can be closed and replayed in Settings.
+- Daily Attendance has a monthly calendar, once-per-day Legacy Points and resource/ticket rewards delivered safely to the Reward Inbox. Existing Legacy balances are preserved. Player EXP no longer grants Legacy Points. Pixel Legacy badges progress from medals to the level-15 crown.
+- Summon controls use two ticket/Jade icons and a 1/10/100 selector. Batch results use a brief card flip and light sweep, with immediate ownership and reduced-motion alternatives.
+- The strategic map now uses cached procedural pixel terrain, river banks, forest/mountain details and castle artwork. The regional map opens information on tap instead of covering sites with text. System mailbox notices translate their original phrases before generic name translation, including historical relocation notices.
+- `online/` provides a runnable server-owned shared-world preview with accounts, persistent SQLite saves, server-side commands, player cities, movement, attacks, escrow trading and attendance. Two independent browser accounts and persistence/security tests have been exercised. It is not deployed publicly and no domain or paid service has been purchased. GitHub Pages remains the solo preview. Detailed scope and remaining launch work are in `online/README.md`; budget estimates are in `docs/online-budget.md`.
+
+
+
 ## Unified interface presentation
 
 - Shared jade, cream and antique-gold theme tokens now coordinate windows, cards, headers, action buttons, inputs, HUD resources and navigation frames. Selected tabs use gold with dark text; keyboard focus remains visible.

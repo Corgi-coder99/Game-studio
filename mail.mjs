@@ -1,8 +1,9 @@
+import {mailNoticeText} from './mail-copy.mjs';
 import {inheritanceManuals,secretRealms} from './inheritance-data.mjs';
 import {itemById} from './progression.mjs';
 import {characterById} from './characters.mjs';
 export function initMailbox(s){s.mailbox??={nextId:1,reports:[],notices:[],parcels:[]};s.mailbox.parcels??=[];return s;}
-export function pushMailNotice(s,title,text){initMailbox(s);s.mailbox.notices.unshift({id:s.mailbox.nextId++,title,text,read:false});s.mailbox.notices=s.mailbox.notices.slice(0,40);return s;}
+export function pushMailNotice(s,title,text){initMailbox(s);s.mailbox.notices.unshift({id:s.mailbox.nextId++,title:mailNoticeText(title),text:mailNoticeText(text),read:false});s.mailbox.notices=s.mailbox.notices.slice(0,40);return s;}
 function mailUnit(u){const n=k=>Math.round((u[k]||0)*10)/10;return{id:u.id,name:u.name,abilityNames:(u.abilities||characterById[u.id].skills).map(a=>a.name),slot:u.slot,hp:Math.max(0,n('hp')),maxHp:n('maxHp'),damage:n('damageDealt'),healing:n('healingDone'),taken:n('damageTaken'),absorbed:n('absorbedDamage'),blocked:n('blockedDamage'),shieldCreated:n('shieldCreated'),criticals:n('criticalHits'),revives:n('reviveCount'),deaths:n('deaths'),activeSeconds:n('activeSeconds'),debuffs:n('controlApplications'),casts:n('casts'),divine:n('divineActivations'),resourceSpent:n('resourceSpent'),abilityCasts:(u.abilities||characterById[u.id].skills).map((_,i)=>u.abilityCasts?.[i]||0),damageTypes:{physical:u.damageByType?.physical||0,magic:u.damageByType?.magic||0,pure:u.damageByType?.pure||0}};}
 export function reportAnalysis(r){const a=r.allies,e=r.enemies,total=a.reduce((n,u)=>n+u.damage,0)+(r.dragonStats?.damage||0),incoming=e.reduce((n,u)=>n+u.damage,0),magic=e.reduce((n,u)=>n+u.damageTypes.magic,0),healing=a.reduce((n,u)=>n+u.healing,0)+(r.dragonStats?.healing||0),front=a.filter(u=>Math.floor(u.slot/3)===0),top=a.slice().sort((a,b)=>b.damage-a.damage)[0],tips=[];
  if(r.outcome==='enemy'&&front.some(u=>u.hp<=0))tips.push('Your front line fell. Improve helmets, armor or defensive runes, or use a tank hero.');

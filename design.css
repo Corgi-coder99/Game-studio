@@ -389,3 +389,117 @@ body.reduce-motion #app button { transition: none; }
 
 /* The top atlas row contains tips from row two inside its lower transparent margin. */
 #app .pixel-blind-box { clip-path: var(--box-clip,none); }
+
+/* Mobile armies scroll as complete equal-sized cards; five slots always exist. */
+#app .squad-hero-thumbs { grid-template-columns:repeat(5,minmax(0,1fr)); }
+#app .squad-hero-thumbs>button,#app .squad-empty { min-width:0; }
+#app .squad-hero-thumbs small { overflow:hidden;text-overflow:ellipsis;max-width:100%;white-space:nowrap; }
+.touch-game #app .squads-overview { overflow:hidden; }
+.touch-game #app .squad-preset-list { display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;gap:14px;padding:3px; }
+.touch-game #app .squad-preset { flex:none;min-height:248px;height:auto;display:flex;overflow:visible;padding:14px;gap:12px; }
+.touch-game #app .squad-preset>header { height:auto;min-height:48px;flex-wrap:wrap; }
+.touch-game #app .squad-preset>header>b { min-width:120px; }
+.touch-game #app .squad-preset>header>span { flex-basis:45%; }
+.touch-game #app .squad-preset .squad-preset-line { height:104px;flex:none; }
+.touch-game #app .squad-hero-thumbs { height:104px;grid-template-columns:repeat(5,minmax(0,1fr));grid-auto-rows:104px; }
+.touch-game #app .squad-hero-thumbs>button { height:104px;min-height:104px;padding:5px; }
+.touch-game #app .squad-hero-thumbs .hero-art { width:64px;height:64px;flex:none; }
+.touch-game #app .squad-dragon-thumb { width:94px; }
+.touch-game #app .squad-mission-status { flex-wrap:wrap;min-height:42px;height:auto; }
+.touch-game #app .squad-mission-status>b { flex:1 1 50%; }
+.touch-game #app .squads-overview .gallery-footer { height:auto;min-height:54px;flex-wrap:wrap; }
+.touch-game #app .carousel-formation .formation-upper { min-height:280px;flex:none; }
+.touch-game #app .carousel-formation .formation-stage { min-height:280px; }
+.touch-game #app .carousel-formation .formation-cell { min-height:112px;height:112px; }
+.touch-game #app .carousel-formation .hero-carousel-row { min-height:220px; }
+.touch-game #app .carousel-formation { overflow-y:auto;overscroll-behavior:contain; }
+.touch-game #app .doll-body { flex:none;min-height:410px; }
+.touch-game #app .doll-tab-content { overflow-y:auto;min-height:220px; }
+.touch-game #app .doll-hall { overflow-y:auto;overscroll-behavior:contain; }
+#app .formation-help { display:inline-block!important; }
+/* Gentle secondary motion complements existing multi-frame creature sprites. */
+@media(prefers-reduced-motion:no-preference){
+ body:not(.reduce-motion):not(.effects-minimal) #app .formation-dragon .elemental-dragon-art { animation:mandate-hover 3.2s ease-in-out infinite; }
+ body:not(.reduce-motion):not(.effects-minimal) #app .plaza-motes { animation:mandate-hover 4s ease-in-out infinite; }
+}
+@keyframes mandate-hover { 0%,100%{translate:0 0;rotate:-1deg}50%{translate:0 -7px;rotate:1deg} }
+#app .beginner-coach {position:absolute;z-index:19;right:24px;top:100px;width:440px;padding:18px;background:linear-gradient(145deg,#214754f7,#0d2532f7);border:2px solid var(--ui-gold);box-shadow:0 8px 30px #04131d88;border-radius:6px;animation:popup-appear .2s ease-out;}
+#app .beginner-coach header,#app .beginner-coach footer {display:flex;align-items:center;justify-content:space-between;gap:12px;}
+#app .beginner-coach h2 {font-size:25px;margin:8px 0;}
+#app .beginner-coach p {font-size:18px;line-height:1.55;color:var(--ui-ink);margin:8px 0 16px;}
+#app .beginner-coach button {padding:9px 14px;}
+#app .beginner-coach small {color:var(--ui-gold-bright);}
+.touch-game #app .beginner-coach {width:410px;max-height:calc(100% - 190px);overflow:auto;top:82px;right:14px;padding:14px;}
+.touch-game #app .beginner-coach button {min-height:46px;}
+body.reduce-motion #app .beginner-coach {animation:none;}
+#app .profile-scroll {flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:12px;}
+#app .profile-scroll .lord-profile {max-width:none;}
+#app .legacy-badge {width:52px;height:52px;vertical-align:middle;flex:none;}
+#app .daily-hud {width:46px;min-width:46px;font-size:28px;}
+#app .daily-screen {overflow:auto;}
+#app .daily-calendar {display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;padding:12px;}
+#app .daily-calendar>b {text-align:center;color:var(--ui-gold-bright);}
+#app .daily-cell {min-width:0;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid var(--ui-edge);background:var(--ui-panel);border-radius:5px;}
+#app .daily-cell small {font-size:14px!important;text-align:center;line-height:1.4;color:var(--ui-muted);}
+#app .daily-cell.today {border:2px solid var(--ui-gold-bright);}
+#app .daily-cell.claimed {background:#234b43;}
+#app .daily-cell strong {font-size:16px;}
+#app .compact-summon {display:flex;align-items:center;justify-content:center;gap:20px;bottom:28px;}
+#app .compact-summon>nav {display:flex;gap:8px;padding:12px;background:#0b2332df;border:1px solid var(--ui-gold);}
+#app .summon-seal {width:150px;height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:12px!important;position:relative;}
+#app .summon-seal .item-picture {width:76px;height:76px;}
+#app .summon-seal b {font-size:24px!important;}
+#app .summon-seal small {font-size:16px!important;}
+#app .summon-card-grid {perspective:1100px;}
+#app .summon-card {position:relative;overflow:hidden;animation:mandate-card-flip .75s cubic-bezier(.2,.65,.25,1) both;animation-delay:var(--reveal-delay);transform-origin:center;backface-visibility:hidden;}
+#app .summon-card::after {content:'';pointer-events:none;position:absolute;inset:-60% -80%;background:linear-gradient(115deg,transparent 40%,#fff8d775 50%,transparent 60%);animation:mandate-card-shine 1.1s ease-out both;animation-delay:var(--reveal-delay);}
+@keyframes mandate-card-flip {0%{opacity:.15;transform:translateY(55px) rotateY(100deg) scale(.82);filter:brightness(2)}60%{opacity:1;filter:brightness(1.3)}100%{transform:none;filter:none}}
+@keyframes mandate-card-shine {from{translate:-65% 0}to{translate:65% 0}}
+@media(prefers-reduced-motion:reduce){#app .summon-card,#app .summon-card::after{animation:none}}
+body.reduce-motion #app .summon-card,body.effects-minimal #app .summon-card,body.reduce-motion #app .summon-card::after,body.effects-minimal #app .summon-card::after{animation:none;}
+.touch-game #app .daily-calendar {gap:6px;}
+.touch-game #app .daily-cell {padding:6px;min-height:150px;}
+.touch-game #app .daily-cell .legacy-badge {width:38px;height:38px;}
+.touch-game #app .daily-cell small {font-size:12px!important;}
+.touch-game #app .summon-seal {width:120px;height:120px;}
+.touch-game #app .compact-summon {gap:12px;bottom:12px;}
+#app .online-screen {overflow:hidden;}
+#app .online-content {flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:12px;}
+#app .online-login {display:grid;place-items:start center;}
+#app .online-login>section {max-width:860px;padding:28px;line-height:1.6;}
+#app #online-auth {display:grid;gap:16px;max-width:560px;}
+#app .online-screen label {display:flex;flex-direction:column;gap:6px;margin:10px 0;}
+#app .online-screen input,#app .online-screen select {min-height:46px;padding:8px;max-width:100%;}
+#app .online-screen button {min-height:42px;padding:9px 14px;}
+#app .online-world-layout {display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:16px;}
+#app #online-map {width:100%;height:auto;image-rendering:pixelated;}
+#app .online-world-layout>aside {background:var(--ui-panel);padding:16px;}
+#app .online-cards {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+#app .online-cards article,#app .online-cards>section {padding:18px;background:var(--ui-panel);border:1px solid var(--ui-edge);}
+#app .online-cards button {margin:5px;}
+#app .online-hero-row {display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;}
+#app .online-hero-row>div {display:flex;flex-direction:column;align-items:center;min-width:0;}
+#app .online-hero-row .hero-art {width:74px;height:74px;display:block;}
+#app .online-summon {padding:28px;min-height:400px;background:linear-gradient(#102b3888,#102b38ee),url('/assets/summon-plaza-pixel.png') center/cover;}
+#app .online-summon .online-hero-row {margin-top:40px;}
+#app .online-warning {color:#ffd29a;}
+#app .online-content>.daily-screen {height:auto;overflow:visible;}
+.touch-game #app .online-cards {grid-template-columns:repeat(2,minmax(0,1fr));}
+.touch-game #app .online-world-layout {grid-template-columns:minmax(0,1fr) 320px;}
+.touch-game #app .online-screen button {min-height:48px;}
+#app .online-summon .compact-summon {position:static;margin:45px auto;}
+#app .online-summon .compact-summon>button {width:140px;height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid var(--ui-gold);border-radius:8px;}
+#app .online-summon .item-picture {width:70px;height:70px;}
+#app .vip-emblem .legacy-badge {width:64px;height:64px;}
+#app .vip-crest>.legacy-badge {width:90px;height:90px;}
+/* On short phones, scroll the army page itself rather than squeezing its list. */
+.touch-game #app .squads-overview {display:block;overflow-y:auto!important;overscroll-behavior:contain;}
+.touch-game #app .squads-overview>.gallery-heading {height:auto;min-height:62px;flex-wrap:wrap;margin-bottom:12px;}
+.touch-game #app .squad-preset-list {height:auto;overflow:visible;flex:none;}
+.touch-game #app .squads-overview>.gallery-footer {margin-top:12px;}
+.touch-game #app .online-world-layout {grid-template-columns:1fr;}
+#app .guide-mentor {display:flex;align-items:center;gap:14px;margin:6px 0;}
+#app .guide-mentor>.hero-art {display:block;width:60px;height:60px;flex:none;}
+#app .guide-mentor h2 {margin:0;}
+@media(prefers-reduced-motion:no-preference){body:not(.reduce-motion):not(.effects-minimal) #app .doll-figure .character-splash-art {animation:mandate-breathe 4.2s ease-in-out infinite;transform-origin:50% 90%;}}
+@keyframes mandate-breathe {0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(-2px) scaleY(1.012)}}

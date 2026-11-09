@@ -12,7 +12,9 @@ import {activeWorldCity,regionalResources,botCities} from './world-data.mjs';
 import {castleSkins} from './skins.mjs';
 export function drawRegionScene(ctx,state,time,cityArt,castleArt,viewScale=1,motionDelta=0){const hits=[],area=activeWorldCity(state),city=realmCities.find(c=>c.id===area),snow=city.faction==='wei';
  function box(x,y,w,h,color){ctx.fillStyle=color;ctx.fillRect(Math.round(x),Math.round(y),w,h);}
- function label(text,x,y,color='#fff0c4',size=13){ctx.textAlign='center';ctx.font=`600 ${Math.max(size,17/viewScale)}px system-ui`;const w=ctx.measureText(text).width,pad=5/viewScale;ctx.fillStyle='#102e40ec';ctx.fillRect(x-w/2-pad,y-18/viewScale,w+pad*2,23/viewScale);ctx.fillStyle='#fff2d5';ctx.fillText(text,x,y);}
+ // Site descriptions live in the tap drawer, never over the landscape.
+ function label(){}
+
  function building(index,x,y,size,skinIndex=null){if(skinIndex!==null)drawSkinAura(ctx,skinIndex,x,y,size,time);const image=skinIndex!==null&&castleArt.complete&&castleArt.naturalWidth?castleArt:cityArt,i=image===castleArt?skinIndex:index,cols=image===castleArt?5:3,rows=2;if(image.complete&&image.naturalWidth){ctx.drawImage(image,i%cols*image.naturalWidth/cols,Math.floor(i/cols)*image.naturalHeight/rows,image.naturalWidth/cols,image.naturalHeight/rows,x-size/2,y-size+35,size,size);}else{box(x-size*.3,y-size*.45,size*.6,size*.5,'#546b69');}}
  if(!regionGrounds.has(city.faction)){const layer=document.createElement('canvas');layer.width=3840;layer.height=2560;const oldContext=ctx;ctx=layer.getContext('2d');ctx.translate(1920,700);
  const terrain=snow?['#b4d8dd','#a6cbd3','#c0dfe2']:city.faction==='wu'?['#679b79','#5c8d73','#74a68a']:['#8da97a','#819d6d','#98b180'];

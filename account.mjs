@@ -1,3 +1,4 @@
+import {validDailyRewards} from './daily-rewards.mjs';
 import {initStory,validStory} from './story.mjs';
 import {initFeedback,validFeedback} from './feedback-data.mjs';
 import {initFormationSaves,validFormationSaves} from './formation-save.mjs';
@@ -71,7 +72,7 @@ export function validAccount(state){
  if(!validStory(state)||!validStrongholdMarches(state)||!validFeedback(state)||!validFormationSaves(state)||!validStrongholds(state)||!validWorldBoss(state)||!validTitles(state)||!validAuction(state)||!validCommerce(state)||!validRelocation(state)||!validCivic(state)||!validDragonSanctuary(state)||!validTechnology(state)||!validSquads(state)||!validChronicle(state)||!validWorld(state)||!validMailbox(state)||!validRunes(state)||!validInheritance(state))return false;
  if(state.campaign!==undefined){const c=state.campaign;if(!accountPlain(c)||!accountInt(c.cleared,0,999)||c.unlocked!==Math.min(999,c.cleared+1)||!accountInt(c.lastStage,1,c.unlocked)||!accountInt(c.runs,0,1000000000)||typeof c.autoAdvance!=='boolean'||typeof c.autoReplay!=='boolean'||c.formation!==undefined&&(!Array.isArray(c.formation)||c.formation.length!==9||c.formation.filter(Boolean).length<1||c.formation.filter(Boolean).length>5||new Set(c.formation.filter(Boolean)).size!==c.formation.filter(Boolean).length||!c.formation.every(id=>id===null||state.owned.includes(id)))||c.dragon!==undefined&&!canUseDragon(state,c.dragon))return false;}
  const a=state.account;if(a===undefined)return true;
- if(!accountPlain(a)||!accountText(a.name,24)||!state.owned.includes(a.avatar)||!accountInt(a.totalXP,0,totalXPAtLevel(100))||!accountInt(a.vipPoints,0,60000))return false;
+ if(!validDailyRewards(state)||!accountPlain(a)||!accountText(a.name,24)||!state.owned.includes(a.avatar)||!accountInt(a.totalXP,0,totalXPAtLevel(100))||!accountInt(a.vipPoints,0,60000))return false;
  if(a.realm!==undefined&&(!accountPlain(a.realm)||!(a.realm.faction===null&&a.realm.city===null||Object.hasOwn(realmFactions,a.realm.faction)&&realmCities.some(c=>c.id===a.realm.city&&c.faction===a.realm.faction))))return false;
 
  const p=playerProgress(state),v=vipLevel(state);
@@ -85,7 +86,7 @@ export function validAccount(state){
  return Array.isArray(a.messages)&&a.messages.length<=20&&a.messages.every(m=>accountPlain(m)&&accountText(m.text,180)&&cosmeticCatalog.some(c=>c.id===m.frame&&c.type==='chat'));
 }
 // Mutates only a newly cloned state or explicit simulation result.
-export function awardPlayerXP(state,amount){if(!Number.isInteger(amount)||amount<0)throw new Error('EXP không hợp lệ.');if(!state.account)state.account=normalizeAccount(state).account;const before=playerProgress(state).level;state.account.totalXP=Math.min(totalXPAtLevel(100),state.account.totalXP+amount);const after=playerProgress(state).level;for(let level=before+1;level<=after;level++)state.account.vipPoints=Math.min(60000,state.account.vipPoints+100+level*10);return state;}
+export function awardPlayerXP(state,amount){if(!Number.isInteger(amount)||amount<0)throw new Error('EXP không hợp lệ.');if(!state.account)state.account=normalizeAccount(state).account;const before=playerProgress(state).level;state.account.totalXP=Math.min(totalXPAtLevel(100),state.account.totalXP+amount);const after=playerProgress(state).level;return state;}
 export function milestoneReward(level){
  if(!accountInt(level,5,100)||level%5)throw new Error('Mốc cấp không hợp lệ.');
  const tier=level/5,high=level>=50;

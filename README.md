@@ -1,5 +1,9 @@
 # Thien Menh — Pixel Kingdom
 
+Version 14 adds visible formation recommendations, a replayable beginner guide, mobile army/profile layout repairs, icon-based summon controls with animated card reveals, Daily Attendance Legacy progression, cleaner map labels and a server-owned shared-world preview.
+
+Run `npm run start:online` for the local account server. See [online deployment and scope](online/README.md) and [planning budget](docs/online-budget.md). This server is not publicly deployed; GitHub Pages remains the solo preview. Native store packages are not signed or published.
+
 An offline-first pixel strategy game with city building, three independent world armies, turn-based combat, and a separate 999-floor Inferno Tower. Game names, new screens, repository documentation and new code comments use English. Player captions use an English presentation catalog; legacy save identifiers remain compatible.
 
 ## Offline edition for a one-time mobile purchase
@@ -61,7 +65,7 @@ Android and iOS source projects remain under [`mobile/`](mobile/README.md). Outd
 
 ## Validation and limitations
 
-316 automated gameplay, developer-tool, localization and web-cache checks passed for the current gameplay and web-cache contracts. Touch layouts were exercised in Chromium mobile emulation in landscape and portrait; desktop, offline launch, cache repair, and restart persistence were also checked. Physical iPhone Safari and Bluetooth hardware have not been validated. Windows BAT launchers have not been run on Windows; the iOS project has not been compiled with Xcode.
+320 automated gameplay, developer-tool, localization and web-cache checks plus four online authority/authentication tests passed. Touch layouts were exercised in Chromium mobile emulation in landscape and portrait; desktop, offline launch, cache repair, and restart persistence were also checked. Physical iPhone Safari and Bluetooth hardware have not been validated. Windows BAT launchers have not been run on Windows; the iOS project has not been compiled with Xcode.
 
 ## Repository policy
 

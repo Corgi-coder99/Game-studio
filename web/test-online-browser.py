@@ -1,0 +1,10 @@
+"""Run against a disposable online test database; creates two private test accounts."""
+from playwright.sync_api import sync_playwright
+import time,os
+with sync_playwright() as p:
+ b=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox']);contexts=[]
+ for i,(w,h,m) in enumerate([(1440,900,False),(926,428,True)]):
+  c=b.new_context(viewport={'width':w,'height':h},is_mobile=m,has_touch=m);contexts.append(c);page=c.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)));page.goto(os.environ.get('ONLINE_TEST_URL','http://127.0.0.1:3011'));page.wait_for_selector('#online-auth');name='browser_'+str(int(time.time()))+'_'+str(i);page.locator('[name=username]').fill(name);page.locator('[name=password]').fill('browser-safe-password-123');page.locator('[name=mode][value=register]').click();page.wait_for_selector('#online-map');assert page.locator('[data-online-logout]').count();page.locator('[data-online-tab="daily"]').click();page.locator('[data-daily-claim]').click();page.wait_for_function('document.querySelector("[data-daily-claim]").disabled');page.locator('[data-online-tab="armies"]').click();page.get_by_role('button',name='Recommend Balanced Team').click();page.wait_for_timeout(500);page.locator('[data-online-tab="summon"]').click();page.locator('[data-online-count="1"]').click();page.locator('.online-summon [data-online-command]').first.click();page.wait_for_selector('.summon-card');assert page.locator('.summon-card').count()==1;page.locator('[data-summon-skip]').click();page.locator('[data-online-tab="world"]').click();page.wait_for_selector('#online-map');page.screenshot(path=f'/tmp/new-online-{w}.png');page.reload();page.wait_for_selector('#online-map');assert not errors,errors;print('Online account, daily claim, server recommendation, summon and cookie resume verified',w,flush=True)
+ pages=[c.pages[0] for c in contexts];pages[0].reload();pages[0].wait_for_selector('#online-map');assert pages[0].locator('.online-world-layout aside').inner_text().count('reserve troops')>=1
+ for c in contexts:c.close()
+ b.close()

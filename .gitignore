@@ -22,3 +22,9 @@ offline/
 # Generated developer HTML is delivered only in its separate current tool ZIP.
 admin/Heavenly-Mandate-DevTools.html
 mobile/release-output/
+
+# Private server accounts, sessions and world snapshots.
+online/data/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm

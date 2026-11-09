@@ -122,3 +122,9 @@ Sáu hiệu ứng gốc trong inheritance-combat.mjs:
 - Hỗn Nguyên Quy Nhất: phân phối lại HP còn sống theo tỷ lệ, giữ tổng HP; liên kết6s chuyển15% tổn thất sang đồng minh khỏe nhất, không phản dây chuyền.
 
 Bản đồ/Thư viện/Túi Càn Khôn/Hộp thư đều chỉ cùng dữ liệu sở hữu; ô chiêu trong trận lưu snapshot bí kíp và tên chiêu để báo cáo cũ vẫn chính xác sau khi đổi trang bị.
+
+## Current attendance revision
+
+Player EXP no longer awards Legacy (formerly VIP) Points. Daily Attendance is the source of new Legacy Points; existing balances and claimed rank gifts are preserved. A reward for calendar day d grants 200 + 10d points, plus 600 on days divisible by seven. Resources and occasional summon tickets enter the existing safe Reward Inbox. A day can be claimed once; missed days carry no penalty and are not retroactively claimable. Solo dates follow the device clock. Online dates use the server clock in Europe/Paris; accounts cannot import solo wallets or change the server date.
+
+The shared-world server owns accounts, saves and commands. The local offline economy remains a compatibility preview; Internet accounts always start with a fresh server-created kingdom. Nearby rooms retain the four-device limit. The experimental Internet shard has a separate maximum of 64 registered accounts, not a tested concurrency guarantee. See online/README.md for scope and deployment.
